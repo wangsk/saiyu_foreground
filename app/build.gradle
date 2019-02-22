@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+def AAVersion = '4.4.0'
+
+android {
+
+    signingConfigs {
+        jingyeqian {
+            keyAlias 'saiyuforeground'
+            keyPassword 'YuSaisd1684&*(work77LIqia!'
+            storeFile file('D:/mykey/saiyuforeground.jks')
+            storePassword 'YuSaisd1684&*(work77LIqia!'
+        }
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
+
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+    defaultConfig {
+        applicationId "com.saiyu.foreground"
+        minSdkVersion 24
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库（不需要的删除即可）。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //结构嵌套
+    implementation 'me.yokeyword:fragmentation:1.3.6'
+    //注解框架
+    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
+    implementation "org.androidannotations:androidannotations-api:$AAVersion"
+    //网络请求框架//版本号使用 + 可以自动引用最新版
+    implementation 'com.zhy:okhttputils:2.6.2'
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14-RC1'
+    implementation 'io.reactivex:rxandroid:1.2.0'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.1@aar'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    implementation 'com.android.support:recyclerview-v7:27.0.0'
+    implementation 'com.yanzhenjie:recyclerview-swipe:1.0.4'
+    implementation 'com.android.support:design:27.+'
+    implementation files('libs/open_sdk_r5886_lite.jar')
+    //微信依赖
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
+    implementation 'com.android.support:recyclerview-v7:27.0.0-alpha1'
+
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/rl_title_bar"
+        layout="@layout/titlebar_layout" />
+    <LinearLayout
+        android:layout_below="@id/rl_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:text="恭喜您找回密码操作完成"
+            android:textColor="@color/blue"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="返回登录"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>
