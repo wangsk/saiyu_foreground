@@ -1,14 +1,20 @@
 package com.saiyu.foreground.ui.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.ApiRequest;
+import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
 import com.saiyu.foreground.utils.ButtonUtils;
@@ -29,6 +35,8 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
     Button btn_title_back, btn_next;
     @ViewById
     EditText et_account;
+    @ViewById
+    ProgressBar pb_loading;
     private String account;
 
     public static ForgotPswFragment newInstance(Bundle bundle) {
@@ -37,11 +45,20 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
         return fragment;
     }
 
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        CallbackUtils.setCallback(this);
+        if (loadingReciver == null) {
+            loadingReciver = new LoadingReciver();
+            IntentFilter filter = new IntentFilter("sy_close_progressbar");
+            mContext.registerReceiver(loadingReciver, filter);
+        }
+    }
+
     @AfterViews
     void afterView() {
         tv_title_content.setText("找回密码");
-
-        et_account.setText("space123");
 
     }
 
@@ -55,16 +72,25 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
             if (ret.getData() == null) {
                 return;
             }
+            pb_loading.setVisibility(View.GONE);
             if (ret.getData().isExist()) {
                 tv_response_msg.setVisibility(View.INVISIBLE);
-                Bundle bundle = new Bundle();
-                bundle.putString("account", account);
-                FindPswByLevelFragment findPswByLevelFragment = FindPswByLevelFragment.newInstance(bundle);
-                start(findPswByLevelFragment);
+                ApiRequest.getAccountInfoNoLogin(account, "ForgotPswFragment_getAccountInfoNoLogin");
+
             } else {
                 tv_response_msg.setText("*账号不存在");
             }
+        } else if (method.equals("ForgotPswFragment_getAccountInfoNoLogin")) {
+            AccountInfoNoLoginRet ret = (AccountInfoNoLoginRet) baseRet;
+            if (ret.getData() == null) {
+                return;
+            }
 
+            Bundle bundle = new Bundle();
+            bundle.putString("account", account);
+            bundle.putSerializable("AccountInfoNoLoginRet",ret);
+            FindPswByLevelFragment findPswByLevelFragment = FindPswByLevelFragment.newInstance(bundle);
+            start(findPswByLevelFragment);
         }
     }
 
@@ -82,7 +108,7 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
                         tv_response_msg.setText("*请输入账号");
                         return;
                     }
-                    CallbackUtils.setCallback(this);
+                    pb_loading.setVisibility(View.VISIBLE);
                     ApiRequest.isAccountExist(account, "ForgotPswFragment_isAccountExist");
 
                     break;
@@ -96,6 +122,32 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
             String text = s.toString();
             if (TextUtils.isEmpty(text)) {
                 tv_response_msg.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        if (loadingReciver != null) {
+            mContext.unregisterReceiver(loadingReciver);
+            loadingReciver = null;
+        }
+    }
+
+    private LoadingReciver loadingReciver;
+
+    private class LoadingReciver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context mContext, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case "sy_close_progressbar":
+                    if(pb_loading == null){
+                        return;
+                    }
+                    pb_loading.setVisibility(View.GONE);
+                    break;
             }
         }
     }

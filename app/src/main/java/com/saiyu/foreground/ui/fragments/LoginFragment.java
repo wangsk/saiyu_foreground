@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.interfaces.QQCallback;
 import com.saiyu.foreground.ui.activitys.ForgotPswActivity_;
+import com.saiyu.foreground.ui.activitys.MainActivity;
+import com.saiyu.foreground.ui.activitys.MainActivity_;
 import com.saiyu.foreground.ui.activitys.ProtocolActivity_;
 import com.saiyu.foreground.ui.activitys.RegistActivity_;
 import com.saiyu.foreground.utils.ButtonUtils;
@@ -69,6 +72,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     ImageView iv_psw,iv_account,iv_qq,iv_wechat;
     @ViewById
     LinearLayout ll_psw;
+    @ViewById
+    ProgressBar pb_loading;
     private static CountDownTimerUtils countDownTimerUtils;
     private static final int LOGIN_TYPE_PSW = 0;//账号登录
     private static final int LOGIN_TYPE_MSG = 1;//短信验证码登录
@@ -111,8 +116,10 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
         if (loadingReciver == null) {
             loadingReciver = new LoadingReciver();
             IntentFilter filter = new IntentFilter("sy_close_msg");
+            filter.addAction("sy_close_progressbar");
             mContext.registerReceiver(loadingReciver, filter);
         }
+
         et_account.setText("space111");//四级小于100  林华 身份证号 512501197506045175
 //        et_account.setText("space123");//一级
 //        et_account.setText("space112");//三级手机验证
@@ -131,14 +138,15 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             if(ret.getData() == null){
                 return;
             }
+            pb_loading.setVisibility(View.GONE);
 
             SPUtils.putString("accessToken", ret.getData().getAccessToken());
-            SPUtils.putString(ConstValue.AUTO_LOGIN_FLAG, ConstValue.PWD_LOGIN);
+            SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
-//            Intent intentlogin = new Intent(mContext,
-//                    MainActivity.class);
-//            mContext.startActivity(intentlogin);
-//            mContext.finish();
+            Intent intentlogin = new Intent(mContext,
+                    MainActivity_.class);
+            mContext.startActivity(intentlogin);
+            mContext.finish();
 
 
         }
@@ -163,7 +171,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 
                             return;
                         }
-
+                        pb_loading.setVisibility(View.VISIBLE);
                         ApiRequest.accountLogin(userName,userPassword,"login_accountLogin");
                     }else if(loginType == LOGIN_TYPE_MSG){
                         if(TextUtils.isEmpty(userName)){
@@ -176,7 +184,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                             tv_login_response_msg.setText("请输入验证码");
                             return;
                         }
-
+                        pb_loading.setVisibility(View.VISIBLE);
                         ApiRequest.loginMobile(userName,userPassword,"login_loginMobile");
                     }
 
@@ -261,6 +269,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         mTencent.login(this, "all", new IUiListener() {
                             @Override
                             public void onComplete(Object response) {
+                                pb_loading.setVisibility(View.VISIBLE);
                                 //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
                                 ApiRequest.getMessage(response, mTencent,getActivity());
                             }
@@ -305,7 +314,9 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     wechat_nickname = weChatBundle.getString("wechat_nickname");
                     if (!TextUtils.isEmpty(wechat_unionid)) {
                         LogUtils.print("wechat_unionid === " + wechat_unionid + " ;wechat_nickname ===  " + wechat_nickname + " ;wechat_img === " + wechat_img);
-//                        Login.isWechatBind(getActivity(), wechat_unionid, wechat_nickname, wechat_img);
+                        pb_loading.setVisibility(View.VISIBLE);
+                        ApiRequest.isUnionIdBind(wechat_unionid, "1",wechat_nickname,wechat_img,getActivity());
+
                     }
                 }
             }
@@ -330,6 +341,13 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     }
 
     @Override
+    public boolean onBackPressedSupport() {
+        CacheActivity.finishActivity();
+        System.exit(0);
+        return true;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (weChatReceiver != null) {
@@ -337,21 +355,9 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             weChatReceiver = null;
         }
         if (loadingReciver != null) {
-            try {
-                mContext.unregisterReceiver(loadingReciver);
-                loadingReciver = null;
-            } catch (Exception e){
-
-            }
-
+            mContext.unregisterReceiver(loadingReciver);
+            loadingReciver = null;
         }
-    }
-
-    @Override
-    public boolean onBackPressedSupport() {
-        CacheActivity.finishActivity();
-        System.exit(0);
-        return true;
     }
 
     private LoadingReciver loadingReciver;
@@ -363,6 +369,12 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             switch (action) {
                 case "sy_close_msg":
                     countDownTimerUtils.onFinish();
+                    break;
+                case "sy_close_progressbar":
+                    if(pb_loading == null){
+                        return;
+                    }
+                    pb_loading.setVisibility(View.GONE);
                     break;
             }
         }

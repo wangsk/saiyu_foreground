@@ -12,8 +12,10 @@ public class AccountInfoNoLoginRet extends BaseRet{
     }
 
     public static class DataBean {
-        private String mobile;
-        private int mobileBindStatus;
+        private String Mobile;
+        private String RealName;
+        private String IDNum;
+        private int MobileBindStatus;
         private int IsRealNameAuth;
         private int IsFaceAuth;
         private String QQOpenId;
@@ -23,14 +25,21 @@ public class AccountInfoNoLoginRet extends BaseRet{
         private int RiskLevel;
         private int TotalMoeney;
         private String RegTime;
-        private String UserId;
 
-        public String getUserId() {
-            return UserId;
+        public String getRealName() {
+            return RealName;
         }
 
-        public void setUserId(String userId) {
-            UserId = userId;
+        public void setRealName(String realName) {
+            RealName = realName;
+        }
+
+        public String getIDNum() {
+            return IDNum;
+        }
+
+        public void setIDNum(String IDNum) {
+            this.IDNum = IDNum;
         }
 
         public String getRegTime() {
@@ -42,19 +51,19 @@ public class AccountInfoNoLoginRet extends BaseRet{
         }
 
         public String getMobile() {
-            return mobile;
+            return Mobile;
         }
 
         public void setMobile(String mobile) {
-            this.mobile = mobile;
+            Mobile = mobile;
         }
 
         public int getMobileBindStatus() {
-            return mobileBindStatus;
+            return MobileBindStatus;
         }
 
         public void setMobileBindStatus(int mobileBindStatus) {
-            this.mobileBindStatus = mobileBindStatus;
+            MobileBindStatus = mobileBindStatus;
         }
 
         public int getIsRealNameAuth() {
@@ -121,20 +130,5 @@ public class AccountInfoNoLoginRet extends BaseRet{
             TotalMoeney = totalMoeney;
         }
 
-        @Override
-        public String toString() {
-            return "DataBean{" +
-                    "mobile='" + mobile + '\'' +
-                    ", mobileBindStatus=" + mobileBindStatus +
-                    ", IsRealNameAuth=" + IsRealNameAuth +
-                    ", IsFaceAuth=" + IsFaceAuth +
-                    ", QQOpenId='" + QQOpenId + '\'' +
-                    ", QQUnionid=" + QQUnionid +
-                    ", WXOpenId='" + WXOpenId + '\'' +
-                    ", WXUnionid=" + WXUnionid +
-                    ", RiskLevel=" + RiskLevel +
-                    ", TotalMoeney=" + TotalMoeney +
-                    '}';
-        }
     }
 }

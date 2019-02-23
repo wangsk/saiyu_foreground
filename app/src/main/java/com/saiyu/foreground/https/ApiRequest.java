@@ -20,6 +20,7 @@ import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.RegistRet;
 import com.saiyu.foreground.ui.activitys.LoginActivity_;
+import com.saiyu.foreground.ui.activitys.MainActivity;
 import com.saiyu.foreground.ui.activitys.MainActivity_;
 import com.saiyu.foreground.ui.activitys.RegistUnionIdActivity_;
 import com.saiyu.foreground.ui.fragments.LoginFragment;
@@ -77,6 +78,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -123,6 +127,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -251,6 +258,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -271,6 +281,7 @@ public class ApiRequest {
 
     //第三方用户注册
     public static void unionIDRegist(String account, String password, String oauthType, String openId,final String callBackKey) {
+        LogUtils.print("account === " + account + " ; password === " + password + " ; oauthType === " + oauthType + " ; openId == " + openId);
         RequestParams requestParams = new RequestParams();
         requestParams.put("account", account);
         requestParams.put("password", password);
@@ -292,6 +303,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -328,7 +342,10 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-//                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -364,11 +381,17 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-//                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
                     public void onNext(BooleanRet ret) {
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                         if (ret == null) {
                             return;
                         }
@@ -402,7 +425,10 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-//                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -439,7 +465,10 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-//                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -457,11 +486,11 @@ public class ApiRequest {
                 });
     }
 
-    public static void retsetPsw(String userId,String pwd,final String callBackKey) {
+    public static void retsetPsw(String account,String pwd,final String callBackKey) {
 
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
-        requestParams.put("userId", userId);
+        requestParams.put("account", account);
         requestParams.put("pwd", pwd);
 
         RequestBody body = requestParams.getBody();
@@ -477,6 +506,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -514,6 +546,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        App.getApp().sendBroadcast(closeProgressbar);
                     }
 
                     @Override
@@ -558,7 +593,7 @@ public class ApiRequest {
 
                 @Override
                 public void onResponse(String response, int id) {
-                    LogUtils.print(" WECHATresponse===================" + response);
+                    LogUtils.print(" QQ Response===================" + response);
                     if(TextUtils.isEmpty(response)){
                         return;
                     }
@@ -568,7 +603,7 @@ public class ApiRequest {
                         String str = "";
                         while (m.find()) {
                             str = m.group(0);
-                            LogUtils.print(" WECHATresponse===================" + m.group(0));
+                            LogUtils.print("QQ Response===================" + m.group(0));
                         }
                         if(TextUtils.isEmpty(str)){
                             return;
@@ -593,7 +628,7 @@ public class ApiRequest {
                                     String img = (String) jsonObject.get("figureurl_qq_2");
                                     LogUtils.print("qq信息 nickname == " + nickname + " ;img === " + img);
                                     //拿到唯一标示unionID判断是否此号已经绑定
-                                    isUnionIdBind(unionid, "1",nickname,img,activity);
+                                    isUnionIdBind(unionid, "0",nickname,img,activity);
 
                                     mTencent.logout(App.getApp());
                                 } catch (JSONException e) {
@@ -642,11 +677,16 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print(" onError =================== " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        activity.sendBroadcast(closeProgressbar);
                     }
 
                     @Override
                     public void onNext(IsAccountExistRet ret) {
-                        LogUtils.print(" onNext =================== ");
+                        Intent closeProgressbar = new Intent();
+                        closeProgressbar.setAction("sy_close_progressbar");
+                        activity.sendBroadcast(closeProgressbar);
                         if (ret == null) {
                             return;
                         }
@@ -709,11 +749,12 @@ public class ApiRequest {
                             return;
                         }
 
-                        LogUtils.print("第三方登录成功");
+                        SPUtils.putString("accessToken", ret.getData().getAccessToken());
+                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
-//                        Intent intent = new Intent(activity, MainActivity_.class);
-//                        activity.startActivity(intent);
-//                        activity.finish();
+                        Intent intent = new Intent(activity, MainActivity_.class);
+                        activity.startActivity(intent);
+                        activity.finish();
 
                     }
                 });

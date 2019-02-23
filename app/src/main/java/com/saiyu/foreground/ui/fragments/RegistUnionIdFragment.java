@@ -1,6 +1,9 @@
 package com.saiyu.foreground.ui.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -9,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +46,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     EditText et_account_new,et_password_new,et_password_confirm,et_account_old,et_password_old;
     @ViewById
     ImageView iv_psw;
+    @ViewById
+    ProgressBar pb_loading;
     String type,unionID;
 
     public static RegistUnionIdFragment newInstance(Bundle bundle) {
@@ -54,6 +60,11 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        if (loadingReciver == null) {
+            loadingReciver = new LoadingReciver();
+            IntentFilter filter = new IntentFilter("sy_close_progressbar");
+            mContext.registerReceiver(loadingReciver, filter);
+        }
     }
 
     @AfterViews
@@ -83,12 +94,14 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
             }
 
         } else if (method.equals("RegistUnionIdFragment_regist")) {
+            pb_loading.setVisibility(View.GONE);
             Bundle bundle = new Bundle();
             bundle.putBoolean("isRegist", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
             start(successFindPswFragment);
 
         } else if (method.equals("RegistUnionIdFragment_bind")) {
+            pb_loading.setVisibility(View.GONE);
             Bundle bundle = new Bundle();
             bundle.putBoolean("bind", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
@@ -183,6 +196,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         tv_regist_prompt_3.setText("*两次输入不一致");
                         return;
                     }
+                    pb_loading.setVisibility(View.VISIBLE);
 
                     ApiRequest.unionIDRegist(account, password, type,unionID,"RegistUnionIdFragment_regist");
                     break;
@@ -199,6 +213,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         tv_login_response_msg.setText("请输入密码");
                         return;
                     }
+                    pb_loading.setVisibility(View.VISIBLE);
                     ApiRequest.unionIDRegist(userName, userPassword, type,unionID,"RegistUnionIdFragment_bind");
 
                     break;
@@ -255,6 +270,11 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     return;
                 }
                 tv_regist_prompt_2.setText("*密码可用");
+                if(password.equals(et_password_confirm.getText().toString())){
+                    tv_regist_prompt_3.setText("*密码可用");
+                } else {
+                    tv_regist_prompt_3.setText("*两次输入不一致");
+                }
                 break;
             case R.id.et_password_confirm:
                 String password_confirm = et_password_confirm.getText().toString();
@@ -312,4 +332,31 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
             }
         }
     }
+
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        if (loadingReciver != null) {
+            mContext.unregisterReceiver(loadingReciver);
+            loadingReciver = null;
+        }
+    }
+
+    private LoadingReciver loadingReciver;
+
+    private class LoadingReciver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context mContext, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case "sy_close_progressbar":
+                    if(pb_loading == null){
+                        return;
+                    }
+                    pb_loading.setVisibility(View.GONE);
+                    break;
+            }
+        }
+    }
+
 }

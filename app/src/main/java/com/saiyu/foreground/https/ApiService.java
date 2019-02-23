@@ -25,7 +25,7 @@ public interface ApiService {
     Observable<LoginRet> loginMobile(@Body RequestBody body);
 
     //第三方登录
-    @POST("Login/Mobile")
+    @POST("Authorize/OauthLogin")
     Observable<LoginRet> unionIDLogin(@Body RequestBody body);
 
     //退出登录
@@ -37,7 +37,7 @@ public interface ApiService {
     Observable<RegistRet> regist(@Body RequestBody body);
 
     //第三方注册
-    @POST("reg/register")
+    @POST("Authorize/register")
     Observable<RegistRet> unionIDRegist(@Body RequestBody body);
 
     //发送验证码

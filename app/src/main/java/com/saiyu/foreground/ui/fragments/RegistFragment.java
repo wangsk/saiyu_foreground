@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,8 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
     EditText et_account, et_password, et_password_confirm;
     @ViewById
     ImageView iv_account_clear, iv_psw_clear, iv_psw, iv_psw_confirm_clear, iv_psw_confirm;
+    @ViewById
+    ProgressBar pb_loading;
 
     public static RegistFragment newInstance(Bundle bundle) {
         RegistFragment_ fragment = new RegistFragment_();
@@ -58,20 +61,17 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-    }
-
-    @AfterViews
-    void afterView() {
-
-        tv_title_content.setText("注册");
-        tv_title_right.setVisibility(View.VISIBLE);
-
         if (loadingReciver == null) {
             loadingReciver = new LoadingReciver();
             IntentFilter filter = new IntentFilter("sy_close_progressbar");
             mContext.registerReceiver(loadingReciver, filter);
         }
+    }
 
+    @AfterViews
+    void afterView() {
+        tv_title_content.setText("注册");
+        tv_title_right.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -80,6 +80,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
             return;
         }
         if (method.equals("RegistFragment_regist")) {
+            pb_loading.setVisibility(View.GONE);
             Bundle bundle = new Bundle();
             bundle.putBoolean("isRegist", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
@@ -166,6 +167,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                         tv_regist_prompt_3.setText("*两次输入不一致");
                         return;
                     }
+                    pb_loading.setVisibility(View.VISIBLE);
 
                     ApiRequest.regist(account, password, "RegistFragment_regist");
                     break;
@@ -283,6 +285,11 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     return;
                 }
                 tv_regist_prompt_2.setText("*密码可用");
+                if(password.equals(et_password_confirm.getText().toString())){
+                    tv_regist_prompt_3.setText("*密码可用");
+                } else {
+                    tv_regist_prompt_3.setText("*两次输入不一致");
+                }
                 break;
             case R.id.et_password_confirm:
                 String password_confirm = et_password_confirm.getText().toString();
@@ -301,16 +308,11 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
         if (loadingReciver != null) {
-            try {
-                mContext.unregisterReceiver(loadingReciver);
-                loadingReciver = null;
-            } catch (Exception e) {
-
-            }
-
+            mContext.unregisterReceiver(loadingReciver);
+            loadingReciver = null;
         }
     }
 
@@ -322,7 +324,10 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
             String action = intent.getAction();
             switch (action) {
                 case "sy_close_progressbar":
-
+                    if(pb_loading == null){
+                        return;
+                    }
+                    pb_loading.setVisibility(View.GONE);
                     break;
             }
         }

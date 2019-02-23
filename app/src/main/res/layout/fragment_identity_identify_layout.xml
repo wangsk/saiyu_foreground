@@ -74,7 +74,6 @@
             android:id="@+id/tv_name_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="*提示信息"
             android:textColor="@color/blue"
@@ -117,7 +116,6 @@
             android:id="@+id/tv_identity_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="*提示信息"
             android:textColor="@color/blue"
@@ -143,7 +141,7 @@
         style="@android:style/Widget.Material.ProgressBar.Small"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/blue"
         android:visibility="gone" />
 </RelativeLayout>

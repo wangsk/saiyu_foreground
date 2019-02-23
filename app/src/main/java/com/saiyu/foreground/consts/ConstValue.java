@@ -10,28 +10,22 @@ public class ConstValue {
     public static final String APPID = "SaiyuAndroidApp";
     public static final String APPSecret = "XdEUpQjvih5KC4ZiMkXwFvNfRvvMED38";
     public static String UserSecret;
+    public static final String ACCESS_TOKEN = "accessToken";
+    public static final String USER_KEY = "userKey";
+    //自动登录的标记
+    public static final String AUTO_LOGIN_FLAG = "autologinflag";
 
     /**
      * ==========================第三方登录=================================
      **/
     public static final String QQ_APP_ID = "101474081";
     public static final String QQ_APP_KEY = "8cff2cc1e9454a13746239fa104af37e";
-    //public static final String QQ_GROUP_KEY = "REatzMJBFoH6WBbcJmlEQatNhllphbiF";
-    //public static final String QQ_TEAMGROUP_KEY = "wKRogOYW0mwyWZnegMnLkrQMuZwHN5OW";
 
     public static final String WECHAT_APP_ID = "wxf5a0ce95a89ddf50";
     public static final String WECHAT_APP_SECRET = "b61a3de76c3da2b6995f2d0c13932456";
 
-    //自动登录的标记
-    public static final String AUTO_LOGIN_FLAG = "autologinflag";
-    public static final String PWD_LOGIN = "pwdlogin";
-
     public static final String QQ_UNIONID = "qqunionid";
     public static final String WECHAT_UNIONID = "wechatunionid";
-
-
-    public static final String ACCESS_TOKEN = "accessToken";
-    public static final String USER_KEY = "userKey";
 
     //    手机正则
     public static final String REGEX_PHONE = "^((1[0-9]{1})+\\d{9})$";

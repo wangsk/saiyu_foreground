@@ -17,17 +17,19 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LogUtils.print("token == " + SPUtils.getString(ConstValue.ACCESS_TOKEN,""));
-//        if(!TextUtils.isEmpty(SPUtils.getString(ConstValue.AUTO_LOGIN_FLAG,"")) && !TextUtils.isEmpty(SPUtils.getString(ConstValue.ACCESS_TOKEN,""))){
-//            Intent intentlogin = new Intent(SplashActivity.this,
-//                    MainActivity.class);
-//            SplashActivity.this.startActivity(intentlogin);
-//            SplashActivity.this.finish();
-//
-//        } else {
+        boolean autoLoginFlag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
+        String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
+        LogUtils.print("accessToken == " + accessToken);
+        if(autoLoginFlag && !TextUtils.isEmpty(accessToken)){
+            Intent intentlogin = new Intent(SplashActivity.this,
+                    MainActivity_.class);
+            SplashActivity.this.startActivity(intentlogin);
+            SplashActivity.this.finish();
+
+        } else {
             Intent intent = new Intent(SplashActivity.this,LoginActivity_.class);
             startActivity(intent);
             SplashActivity.this.finish();
-//        }
+        }
     }
 }

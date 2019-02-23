@@ -1,11 +1,17 @@
 package com.saiyu.foreground.ui.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,7 +31,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_findpsw_bylevel_layout)
-public class FindPswByLevelFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
+public class FindPswByLevelFragment extends BaseFragment {
 
     @ViewById
     TextView tv_title_content, tv_level_5_time, tv_level_5_count, tv_level_5_prompt;
@@ -37,6 +43,7 @@ public class FindPswByLevelFragment extends BaseFragment implements CallbackUtil
     RadioButton rb_mobile, rb_face, rb_identify;
     @ViewById
     RadioGroup rg_selector;
+
     private String account;
     private AccountInfoNoLoginRet accountInfoNoLoginRet;
 
@@ -46,39 +53,18 @@ public class FindPswByLevelFragment extends BaseFragment implements CallbackUtil
         return fragment;
     }
 
-    @Override
-    public void onSupportVisible() {
-        super.onSupportVisible();
-        CallbackUtils.setCallback(this);
-    }
-
     @AfterViews
     void afterView() {
-        btn_next.setClickable(false);
         tv_title_content.setText("找回密码");
         Bundle bundle = getArguments();
         if (bundle != null) {
             account = bundle.getString("account");
-        }
-        if (!TextUtils.isEmpty(account)) {
-            ApiRequest.getAccountInfoNoLogin(account, "FindPswByLevelFragment_getAccountInfoNoLogin");
+            accountInfoNoLoginRet = (AccountInfoNoLoginRet)bundle.getSerializable("AccountInfoNoLoginRet");
         }
 
-    }
-
-    @Override
-    public void setOnResponseCallback(String method, BaseRet baseRet) {
-        if (baseRet == null || TextUtils.isEmpty(method)) {
-            return;
-        }
-        if (method.equals("FindPswByLevelFragment_getAccountInfoNoLogin")) {
-            AccountInfoNoLoginRet ret = (AccountInfoNoLoginRet) baseRet;
-            if (ret.getData() == null) {
-                return;
-            }
-
-            int riskLevel = ret.getData().getRiskLevel();
-            int totalMoney = ret.getData().getTotalMoeney();
+        if (!TextUtils.isEmpty(account) && accountInfoNoLoginRet != null) {
+            int riskLevel = accountInfoNoLoginRet.getData().getRiskLevel();
+            int totalMoney = accountInfoNoLoginRet.getData().getTotalMoeney();
             switch (riskLevel) {
                 case 1:
                 case 2:
@@ -105,13 +91,12 @@ public class FindPswByLevelFragment extends BaseFragment implements CallbackUtil
                 case 5:
                     ll_level_top4.setVisibility(View.GONE);
                     ll_level_5.setVisibility(View.VISIBLE);
-                    tv_level_5_time.setText("注册时间: " + ret.getData().getRegTime());
+                    tv_level_5_time.setText("注册时间: " + accountInfoNoLoginRet.getData().getRegTime());
                     break;
             }
-            accountInfoNoLoginRet = ret;
-            btn_next.setClickable(true);
 
         }
+
     }
 
     @Click({R.id.btn_title_back, R.id.btn_level_5_back, R.id.btn_next, R.id.btn_level_5_regist})
@@ -125,6 +110,7 @@ public class FindPswByLevelFragment extends BaseFragment implements CallbackUtil
                 case R.id.btn_next:
                     Bundle bundle = new Bundle();
                     bundle.putString("account",account);
+                    bundle.putSerializable("AccountInfoNoLoginRet",accountInfoNoLoginRet);
                     if (rb_identify.isChecked()) {
                         IdentityIdentifyFragment identityIdentifyFragment = IdentityIdentifyFragment.newInstance(bundle);
                         start(identityIdentifyFragment);
@@ -134,7 +120,6 @@ public class FindPswByLevelFragment extends BaseFragment implements CallbackUtil
                         start(faceIdentifyFragment);
                     }
                     if (rb_mobile.isChecked()) {
-                        bundle.putString("mobile",accountInfoNoLoginRet.getData().getMobile());
                         PhoneIdentifyFragment phoneIdentifyFragment = PhoneIdentifyFragment.newInstance(bundle);
                         start(phoneIdentifyFragment);
                     }

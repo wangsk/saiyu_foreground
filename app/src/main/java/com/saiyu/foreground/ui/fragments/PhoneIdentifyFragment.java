@@ -8,15 +8,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.ApiRequest;
+import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
+import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -30,8 +33,11 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
     TextView tv_title_content, tv_phone, tv_msg_count, et_msg, tv_response_msg;
     @ViewById
     Button btn_title_back, btn_next;
+    @ViewById
+    ProgressBar pb_loading;
     private static CountDownTimerUtils countDownTimerUtils;
-    private String mobile,account;
+    private String account;
+    private AccountInfoNoLoginRet accountInfoNoLoginRet;
 
     public static PhoneIdentifyFragment newInstance(Bundle bundle) {
         PhoneIdentifyFragment_ fragment = new PhoneIdentifyFragment_();
@@ -43,6 +49,12 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        if (loadingReciver == null) {
+            loadingReciver = new LoadingReciver();
+            IntentFilter filter = new IntentFilter("sy_close_msg");
+            filter.addAction("sy_close_progressbar");
+            mContext.registerReceiver(loadingReciver, filter);
+        }
     }
 
     @AfterViews
@@ -52,15 +64,11 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            mobile = bundle.getString("mobile");
+            accountInfoNoLoginRet = (AccountInfoNoLoginRet)bundle.getSerializable("AccountInfoNoLoginRet");
             account = bundle.getString("account");
         }
-        tv_phone.setText("手机号码: " + mobile);
-
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_msg");
-            mContext.registerReceiver(loadingReciver, filter);
+        if(accountInfoNoLoginRet != null && accountInfoNoLoginRet.getData() != null){
+            tv_phone.setText("手机号码: " + accountInfoNoLoginRet.getData().getMobile());
         }
 
     }
@@ -75,11 +83,14 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
             if(ret.getData() == null){
                 return;
             }
+            pb_loading.setVisibility(View.GONE);
             if(ret.getData().isResult()){
                 Bundle bundle = new Bundle();
                 bundle.putString("account",account);
                 RevisePswFragment revisePswFragment = RevisePswFragment.newInstance(bundle);
                 start(revisePswFragment);
+            } else {
+                LogUtils.print("PhoneIdentifyFragment_searchPswMobile == ");
             }
         }
     }
@@ -96,13 +107,14 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
                     if(TextUtils.isEmpty(checkCode)){
                         return;
                     }
+                    pb_loading.setVisibility(View.VISIBLE);
                     ApiRequest.searchPswMobile(account,checkCode,"PhoneIdentifyFragment_searchPswMobile");
 
                     break;
                 case R.id.tv_msg_count:
-                    if(!TextUtils.isEmpty(mobile)){
+                    if(!TextUtils.isEmpty(accountInfoNoLoginRet.getData().getMobile())){
                         countDownTimerUtils.start();
-                        ApiRequest.sendVcode(mobile,"2");
+                        ApiRequest.sendVcode(accountInfoNoLoginRet.getData().getMobile(),"2");
                     }
                     break;
 
@@ -111,16 +123,11 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
         if (loadingReciver != null) {
-            try {
-                mContext.unregisterReceiver(loadingReciver);
-                loadingReciver = null;
-            } catch (Exception e){
-
-            }
-
+            mContext.unregisterReceiver(loadingReciver);
+            loadingReciver = null;
         }
     }
 
@@ -133,6 +140,12 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
             switch (action) {
                 case "sy_close_msg":
                     countDownTimerUtils.onFinish();
+                    break;
+                case "sy_close_progressbar":
+                    if(pb_loading == null){
+                        return;
+                    }
+                    pb_loading.setVisibility(View.GONE);
                     break;
             }
         }

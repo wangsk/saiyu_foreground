@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.BaseRet;
+import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.Utils;
@@ -27,10 +29,11 @@ import java.net.URLEncoder;
 @EFragment(R.layout.fragment_face_identify_layout)
 public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
     @ViewById
-    TextView tv_title_content,tv_account,tv_name,tv_identity;
+    TextView tv_title_content, tv_account, tv_name, tv_identity;
     @ViewById
-    Button btn_title_back,btn_next;
+    Button btn_title_back, btn_next;
     private String account;
+    private AccountInfoNoLoginRet accountInfoNoLoginRet;
 
     public static FaceIdentifyFragment newInstance(Bundle bundle) {
         FaceIdentifyFragment_ fragment = new FaceIdentifyFragment_();
@@ -45,13 +48,25 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
     }
 
     @AfterViews
-    void afterView(){
+    void afterView() {
         tv_title_content.setText("找回密码");
         Bundle bundle = getArguments();
         if (bundle != null) {
             account = bundle.getString("account");
+            accountInfoNoLoginRet = (AccountInfoNoLoginRet) bundle.getSerializable("AccountInfoNoLoginRet");
         }
         tv_account.setText(account);
+        if (accountInfoNoLoginRet != null && accountInfoNoLoginRet.getData() != null) {
+            tv_name.setText(accountInfoNoLoginRet.getData().getRealName());
+            String idNum = accountInfoNoLoginRet.getData().getIDNum();
+            if (!TextUtils.isEmpty(idNum)) {
+                try {
+                    tv_identity.setText(idNum.substring(0, 3) + "***********" + idNum.substring(idNum.length() - 4));
+                } catch (Exception e) {
+                    LogUtils.print("身份证号码截取错误");
+                }
+            }
+        }
 
     }
 
@@ -62,25 +77,28 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
         }
     }
 
-    @Click({R.id.btn_title_back,R.id.btn_next})
-    void onClick(View view){
-        switch (view.getId()){
-            case R.id.btn_title_back:
-                getFragmentManager().popBackStack();
-                break;
-            case R.id.btn_next:
-                String url ="";
-                doVerify(url);
+    @Click({R.id.btn_title_back, R.id.btn_next})
+    void onClick(View view) {
+        if (!ButtonUtils.isFastDoubleClick(view.getId())) {
+            switch (view.getId()) {
+                case R.id.btn_title_back:
+                    getFragmentManager().popBackStack();
+                    break;
+                case R.id.btn_next:
+                    String url = "";
+                    doVerify(url);
 
 //                RevisePswFragment revisePswFragment = RevisePswFragment.newInstance(null);
 //                start(revisePswFragment);
-                break;
+                    break;
 
+            }
         }
     }
 
     /**
      * 启动支付宝进行认证
+     *
      * @param url 开放平台返回的URL
      */
     private void doVerify(String url) {
