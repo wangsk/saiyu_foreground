@@ -113,13 +113,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             mContext.registerReceiver(weChatReceiver, weChat_loginFragment);
         }
 
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_msg");
-            filter.addAction("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
-
         et_account.setText("space111");//四级小于100  林华 身份证号 512501197506045175
 //        et_account.setText("space123");//一级
 //        et_account.setText("space112");//三级手机验证
@@ -138,7 +131,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             if(ret.getData() == null){
                 return;
             }
-            pb_loading.setVisibility(View.GONE);
 
             SPUtils.putString("accessToken", ret.getData().getAccessToken());
             SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
@@ -171,8 +163,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 
                             return;
                         }
-                        pb_loading.setVisibility(View.VISIBLE);
-                        ApiRequest.accountLogin(userName,userPassword,"login_accountLogin");
+
+                        ApiRequest.accountLogin(userName,userPassword,"login_accountLogin",pb_loading);
                     }else if(loginType == LOGIN_TYPE_MSG){
                         if(TextUtils.isEmpty(userName)){
                             tv_login_response_msg.setVisibility(View.VISIBLE);
@@ -184,8 +176,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                             tv_login_response_msg.setText("请输入验证码");
                             return;
                         }
-                        pb_loading.setVisibility(View.VISIBLE);
-                        ApiRequest.loginMobile(userName,userPassword,"login_loginMobile");
+
+                        ApiRequest.loginMobile(userName,userPassword,"login_loginMobile",pb_loading);
                     }
 
                     break;
@@ -199,7 +191,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         tv_login_response_msg.setVisibility(View.INVISIBLE);
                     }
                     countDownTimerUtils.start();
-                    ApiRequest.sendVcode(mobile,"");
+                    ApiRequest.sendVcode(mobile,"",countDownTimerUtils);
 
                     break;
                 case R.id.tv_forgot_psw:
@@ -269,9 +261,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         mTencent.login(this, "all", new IUiListener() {
                             @Override
                             public void onComplete(Object response) {
-                                pb_loading.setVisibility(View.VISIBLE);
                                 //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
-                                ApiRequest.getMessage(response, mTencent,getActivity());
+                                ApiRequest.getMessage(response, mTencent,getActivity(),pb_loading);
                             }
 
                             @Override
@@ -300,8 +291,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
         }
     }
 
-
-
     public class WeChatReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context mContext, Intent intent) {
@@ -314,8 +303,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     wechat_nickname = weChatBundle.getString("wechat_nickname");
                     if (!TextUtils.isEmpty(wechat_unionid)) {
                         LogUtils.print("wechat_unionid === " + wechat_unionid + " ;wechat_nickname ===  " + wechat_nickname + " ;wechat_img === " + wechat_img);
-                        pb_loading.setVisibility(View.VISIBLE);
-                        ApiRequest.isUnionIdBind(wechat_unionid, "1",wechat_nickname,wechat_img,getActivity());
+
+                        ApiRequest.isUnionIdBind(wechat_unionid, "1",wechat_nickname,wechat_img,getActivity(),pb_loading);
 
                     }
                 }
@@ -351,32 +340,15 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     public void onDestroyView() {
         super.onDestroyView();
         if (weChatReceiver != null) {
-            mContext.unregisterReceiver(weChatReceiver);
+            try {
+                mContext.unregisterReceiver(weChatReceiver);
+            }catch (Exception e){
+
+            }
+
             weChatReceiver = null;
         }
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
+
     }
 
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_msg":
-                    countDownTimerUtils.onFinish();
-                    break;
-                case "sy_close_progressbar":
-                    if(pb_loading == null){
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
-            }
-        }
-    }
 }

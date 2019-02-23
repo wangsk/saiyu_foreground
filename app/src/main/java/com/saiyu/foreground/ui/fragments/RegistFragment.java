@@ -50,6 +50,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
     ImageView iv_account_clear, iv_psw_clear, iv_psw, iv_psw_confirm_clear, iv_psw_confirm;
     @ViewById
     ProgressBar pb_loading;
+    private String accountExist = "*账号已存在";
 
     public static RegistFragment newInstance(Bundle bundle) {
         RegistFragment_ fragment = new RegistFragment_();
@@ -61,11 +62,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
+
     }
 
     @AfterViews
@@ -80,7 +77,6 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
             return;
         }
         if (method.equals("RegistFragment_regist")) {
-            pb_loading.setVisibility(View.GONE);
             Bundle bundle = new Bundle();
             bundle.putBoolean("isRegist", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
@@ -92,7 +88,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                 return;
             }
             if (ret.getData().isExist()) {
-                tv_regist_prompt_1.setText("*账号已存在");
+                tv_regist_prompt_1.setText(accountExist);
             } else {
                 tv_regist_prompt_1.setText("*账号可用");
             }
@@ -115,7 +111,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                         tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         return;
                     }
-                    if (account.equals("*账号已存在")) {
+                    if (accountExist.equals(tv_regist_prompt_1.getText().toString())) {
                         return;
                     }
                     boolean isOk = true;
@@ -167,9 +163,8 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                         tv_regist_prompt_3.setText("*两次输入不一致");
                         return;
                     }
-                    pb_loading.setVisibility(View.VISIBLE);
 
-                    ApiRequest.regist(account, password, "RegistFragment_regist");
+                    ApiRequest.regist(account, password, "RegistFragment_regist",pb_loading);
                     break;
                 case R.id.tv_protocol:
                     mContext.startActivity(new Intent(mContext, ProtocolActivity_.class));
@@ -307,29 +302,4 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
         }
     }
 
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
-    }
-
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_progressbar":
-                    if(pb_loading == null){
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
-            }
-        }
-    }
 }

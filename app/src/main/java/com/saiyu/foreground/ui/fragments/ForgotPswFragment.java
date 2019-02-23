@@ -49,11 +49,6 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
     }
 
     @AfterViews
@@ -72,10 +67,10 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
             if (ret.getData() == null) {
                 return;
             }
-            pb_loading.setVisibility(View.GONE);
+
             if (ret.getData().isExist()) {
                 tv_response_msg.setVisibility(View.INVISIBLE);
-                ApiRequest.getAccountInfoNoLogin(account, "ForgotPswFragment_getAccountInfoNoLogin");
+                ApiRequest.getAccountInfoNoLogin(account, "ForgotPswFragment_getAccountInfoNoLogin",pb_loading);
 
             } else {
                 tv_response_msg.setText("*账号不存在");
@@ -108,7 +103,7 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
                         tv_response_msg.setText("*请输入账号");
                         return;
                     }
-                    pb_loading.setVisibility(View.VISIBLE);
+
                     ApiRequest.isAccountExist(account, "ForgotPswFragment_isAccountExist");
 
                     break;
@@ -125,31 +120,4 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
             }
         }
     }
-
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
-    }
-
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_progressbar":
-                    if(pb_loading == null){
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
-            }
-        }
-    }
-
 }

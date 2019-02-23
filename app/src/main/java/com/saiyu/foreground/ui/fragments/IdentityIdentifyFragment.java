@@ -51,11 +51,6 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
     }
 
     @AfterViews
@@ -76,7 +71,6 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
             return;
         }
         if (method.equals("IdentityIdentifyFragment_searchPswIdCard")) {
-            pb_loading.setVisibility(View.GONE);
             BooleanRet ret = (BooleanRet)baseRet;
             if(ret.getData() == null){
                 return;
@@ -130,8 +124,7 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
                         }
                     }
 
-                    pb_loading.setVisibility(View.VISIBLE);
-                    ApiRequest.searchPswIdCard(account,name,identity,"IdentityIdentifyFragment_searchPswIdCard");
+                    ApiRequest.searchPswIdCard(account,name,identity,"IdentityIdentifyFragment_searchPswIdCard",pb_loading);
 
                     break;
 
@@ -170,32 +163,6 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
                     }
                 }
                 break;
-        }
-    }
-
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
-    }
-
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_progressbar":
-                    if(pb_loading == null){
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
-            }
         }
     }
 

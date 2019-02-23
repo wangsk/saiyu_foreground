@@ -48,11 +48,6 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
     }
 
     @AfterViews
@@ -72,7 +67,6 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
             return;
         }
         if (method.equals("RevisePswFragment_retsetPsw")) {
-            pb_loading.setVisibility(View.GONE);
             BooleanRet ret = (BooleanRet) baseRet;
             if (ret.getData() == null) {
                 return;
@@ -118,8 +112,8 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
                         tv_revisepsw_prompt_2.setText("*两次输入不一致");
                         return;
                     }
-                    pb_loading.setVisibility(View.VISIBLE);
-                    ApiRequest.retsetPsw(account, password, "RevisePswFragment_retsetPsw");
+
+                    ApiRequest.retsetPsw(account, password, "RevisePswFragment_retsetPsw",pb_loading);
                     break;
 
             }
@@ -164,32 +158,6 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
                     tv_revisepsw_prompt_2.setText("*两次输入不一致");
                 }
                 break;
-        }
-    }
-
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
-    }
-
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_progressbar":
-                    if (pb_loading == null) {
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
-            }
         }
     }
 

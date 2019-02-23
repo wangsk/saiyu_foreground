@@ -48,7 +48,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     ImageView iv_psw;
     @ViewById
     ProgressBar pb_loading;
-    String type,unionID;
+    private String type,unionID;
+    private String accountExist = "*账号已存在";
 
     public static RegistUnionIdFragment newInstance(Bundle bundle) {
         RegistUnionIdFragment_ fragment = new RegistUnionIdFragment_();
@@ -60,11 +61,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
     }
 
     @AfterViews
@@ -88,20 +84,18 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 return;
             }
             if (ret.getData().isExist()) {
-                tv_regist_prompt_1.setText("*账号已存在");
+                tv_regist_prompt_1.setText(accountExist);
             } else {
                 tv_regist_prompt_1.setText("*账号可用");
             }
 
         } else if (method.equals("RegistUnionIdFragment_regist")) {
-            pb_loading.setVisibility(View.GONE);
             Bundle bundle = new Bundle();
             bundle.putBoolean("isRegist", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
             start(successFindPswFragment);
 
         } else if (method.equals("RegistUnionIdFragment_bind")) {
-            pb_loading.setVisibility(View.GONE);
             Bundle bundle = new Bundle();
             bundle.putBoolean("bind", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
@@ -144,7 +138,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         return;
                     }
-                    if (account.equals("*账号已存在")) {
+                    if (accountExist.equals(tv_regist_prompt_1.getText().toString())) {
                         return;
                     }
                     boolean isOk = true;
@@ -196,9 +190,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         tv_regist_prompt_3.setText("*两次输入不一致");
                         return;
                     }
-                    pb_loading.setVisibility(View.VISIBLE);
 
-                    ApiRequest.unionIDRegist(account, password, type,unionID,"RegistUnionIdFragment_regist");
+                    ApiRequest.unionIDRegist(account, password, type,unionID,"RegistUnionIdFragment_regist",pb_loading);
                     break;
                 case R.id.btn_regist_old:
                     String userName = et_account_old.getText().toString().trim();
@@ -213,8 +206,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         tv_login_response_msg.setText("请输入密码");
                         return;
                     }
-                    pb_loading.setVisibility(View.VISIBLE);
-                    ApiRequest.unionIDRegist(userName, userPassword, type,unionID,"RegistUnionIdFragment_bind");
+
+                    ApiRequest.unionIDRegist(userName, userPassword, type,unionID,"RegistUnionIdFragment_bind",pb_loading);
 
                     break;
 
@@ -329,32 +322,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 ApiRequest.isAccountExist(account, "RegistUnionIdFragment_isAccountExist");
             } else {
                 tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
-            }
-        }
-    }
-
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
-    }
-
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_progressbar":
-                    if(pb_loading == null){
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
             }
         }
     }

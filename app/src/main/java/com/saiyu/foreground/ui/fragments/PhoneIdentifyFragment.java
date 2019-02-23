@@ -49,12 +49,7 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        if (loadingReciver == null) {
-            loadingReciver = new LoadingReciver();
-            IntentFilter filter = new IntentFilter("sy_close_msg");
-            filter.addAction("sy_close_progressbar");
-            mContext.registerReceiver(loadingReciver, filter);
-        }
+
     }
 
     @AfterViews
@@ -83,7 +78,7 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
             if(ret.getData() == null){
                 return;
             }
-            pb_loading.setVisibility(View.GONE);
+
             if(ret.getData().isResult()){
                 Bundle bundle = new Bundle();
                 bundle.putString("account",account);
@@ -107,46 +102,17 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
                     if(TextUtils.isEmpty(checkCode)){
                         return;
                     }
-                    pb_loading.setVisibility(View.VISIBLE);
-                    ApiRequest.searchPswMobile(account,checkCode,"PhoneIdentifyFragment_searchPswMobile");
+
+                    ApiRequest.searchPswMobile(account,checkCode,"PhoneIdentifyFragment_searchPswMobile",pb_loading);
 
                     break;
                 case R.id.tv_msg_count:
                     if(!TextUtils.isEmpty(accountInfoNoLoginRet.getData().getMobile())){
                         countDownTimerUtils.start();
-                        ApiRequest.sendVcode(accountInfoNoLoginRet.getData().getMobile(),"2");
+                        ApiRequest.sendVcode(accountInfoNoLoginRet.getData().getMobile(),"2",countDownTimerUtils);
                     }
                     break;
 
-            }
-        }
-    }
-
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        if (loadingReciver != null) {
-            mContext.unregisterReceiver(loadingReciver);
-            loadingReciver = null;
-        }
-    }
-
-    private LoadingReciver loadingReciver;
-
-    private class LoadingReciver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context mContext, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case "sy_close_msg":
-                    countDownTimerUtils.onFinish();
-                    break;
-                case "sy_close_progressbar":
-                    if(pb_loading == null){
-                        return;
-                    }
-                    pb_loading.setVisibility(View.GONE);
-                    break;
             }
         }
     }
