@@ -1,9 +1,5 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.FindPswFragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +12,7 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BooleanRet;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
@@ -24,6 +21,7 @@ import com.saiyu.foreground.utils.LogUtils;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_phone_identify_layout)
@@ -100,6 +98,8 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
                 case R.id.btn_next:
                     String checkCode = et_msg.getText().toString();
                     if(TextUtils.isEmpty(checkCode)){
+                        tv_response_msg.setText("*请输入验证码");
+                        tv_response_msg.setVisibility(View.VISIBLE);
                         return;
                     }
 
@@ -114,6 +114,17 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
                     break;
 
             }
+        }
+    }
+
+    @TextChange({R.id.et_msg})
+    void textChange(CharSequence s, TextView hello, int before, int start, int count) {
+        switch (hello.getId()){
+            case R.id.et_msg:
+                if(!TextUtils.isEmpty(s.toString())){
+                    tv_response_msg.setVisibility(View.INVISIBLE);
+                }
+                break;
         }
     }
 

@@ -68,11 +68,11 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
     @AfterViews
     void afterViews(){
         bottomBar = (BottomBar)findViewById(R.id.bottomBar);
-        bottomBar.addItem(new BottomBarTab(this, R.mipmap.ic_launcher, "行情"))
-                .addItem(new BottomBarTab(this, R.mipmap.ic_launcher, "大厅"))
-                .addItem(new BottomBarTab(this, R.mipmap.ic_launcher, "买家"))
-                .addItem(new BottomBarTab(this, R.mipmap.ic_launcher, "买家"))
-                .addItem(new BottomBarTab(this, R.mipmap.ic_launcher, "我的"));
+        bottomBar.addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "行情"))
+                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "大厅"))
+                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "买家"))
+                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "买家"))
+                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "我的"));
         bottomBar.setOnTabSelectedListener(this);
 
     }

@@ -25,11 +25,9 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.interfaces.QQCallback;
-import com.saiyu.foreground.ui.activitys.ForgotPswActivity_;
-import com.saiyu.foreground.ui.activitys.MainActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.activitys.MainActivity_;
-import com.saiyu.foreground.ui.activitys.ProtocolActivity_;
-import com.saiyu.foreground.ui.activitys.RegistActivity_;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
@@ -43,21 +41,12 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import okhttp3.Call;
 
 @EFragment(R.layout.fragment_login_layout)
 public class LoginFragment extends BaseFragment implements CallbackUtils.ResponseCallback{
@@ -195,7 +184,11 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 
                     break;
                 case R.id.tv_forgot_psw:
-                    mContext.startActivity(new Intent(mContext,ForgotPswActivity_.class));
+                    Bundle bundle_1 = new Bundle();
+                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    bundle_1.putInt(ContainerActivity.FragmentTag, ContainerActivity.ForgotPswFragmentTag);
+                    intent.putExtras(bundle_1);
+                    mContext.startActivity(intent);
                     break;
                 case R.id.tv_login_type:
                     if(loginType == LOGIN_TYPE_PSW){
@@ -226,10 +219,18 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     }
                     break;
                 case R.id.tv_regist:
-                    mContext.startActivity(new Intent(mContext,RegistActivity_.class));
+                    Bundle bundle_2 = new Bundle();
+                    Intent intent_2 = new Intent(mContext,ContainerActivity_.class);
+                    bundle_2.putInt(ContainerActivity.FragmentTag, ContainerActivity.RegistFragmentTag);
+                    intent_2.putExtras(bundle_2);
+                    mContext.startActivity(intent_2);
                     break;
                 case R.id.tv_protocol:
-                    mContext.startActivity(new Intent(mContext,ProtocolActivity_.class));
+                    Bundle bundle_3 = new Bundle();
+                    Intent intent_3 = new Intent(mContext,ContainerActivity_.class);
+                    bundle_3.putInt(ContainerActivity.FragmentTag, ContainerActivity.ProtocolFragmentTag);
+                    intent_3.putExtras(bundle_3);
+                    mContext.startActivity(intent_3);
                     break;
                 case R.id.iv_psw:
                     //从密码不可见模式变为密码可见模式

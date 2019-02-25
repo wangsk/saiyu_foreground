@@ -1,5 +1,6 @@
-package com.saiyu.foreground.ui.activitys;
+package com.saiyu.foreground.ui.fragments;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -8,15 +9,21 @@ import com.saiyu.foreground.R;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_protocol_layout)
-public class ProtocolActivity extends BaseActivity{
+@EFragment(R.layout.activity_protocol_layout)
+public class ProtocolFragment extends BaseFragment{
     @ViewById
     TextView tv_protocol_detail,tv_title_content;
     @ViewById
     Button btn_title_back;
+
+    public static ProtocolFragment newInstance(Bundle bundle) {
+        ProtocolFragment_ fragment = new ProtocolFragment_();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @AfterViews
     void afterViews(){
@@ -26,9 +33,7 @@ public class ProtocolActivity extends BaseActivity{
     @Click(R.id.btn_title_back)
     void onClick(View view){
         if(view.getId() == R.id.btn_title_back){
-            onBackPressedSupport();
+            getActivity().finish();
         }
     }
-
-
 }

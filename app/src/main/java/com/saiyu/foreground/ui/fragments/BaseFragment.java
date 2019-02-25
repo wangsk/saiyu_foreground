@@ -2,6 +2,8 @@ package com.saiyu.foreground.ui.fragments;
 
 import android.app.Activity;
 
+import java.io.Serializable;
+
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class BaseFragment extends SupportFragment{

@@ -46,24 +46,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activitys.LoginActivity_">
-
-        </activity>
         <activity android:name=".ui.activitys.MainActivity_">
 
         </activity>
-        <activity android:name=".ui.activitys.ProtocolActivity_">
+        <activity android:name=".ui.activitys.ContainerActivity_">
 
         </activity>
-        <activity android:name=".ui.activitys.ForgotPswActivity_">
 
-        </activity>
-        <activity android:name=".ui.activitys.RegistActivity_">
-
-        </activity>
-        <activity android:name=".ui.activitys.RegistUnionIdActivity_">
-
-        </activity>
         <activity android:name=".ui.activitys.ZhiFuBaoCallbackActivity_">
             <!--要想在别的App上能成功调起App，必须添加intent过滤器-->
             <intent-filter>

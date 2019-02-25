@@ -99,8 +99,8 @@ public class BottomBarTab extends FrameLayout{
         super.setSelected(selected);
         if (selected) {
 
-            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.yellow));
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.yellow));
+            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.blue));
+            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.blue));
         } else {
             mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.unEnabled));
             mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.unEnabled));

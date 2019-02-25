@@ -1,18 +1,14 @@
 package com.saiyu.foreground.https;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.saiyu.foreground.App;
-import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.request.RequestParams;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
@@ -20,11 +16,9 @@ import com.saiyu.foreground.https.response.IsAccountExistRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.RegistRet;
-import com.saiyu.foreground.ui.activitys.LoginActivity_;
-import com.saiyu.foreground.ui.activitys.MainActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.activitys.MainActivity_;
-import com.saiyu.foreground.ui.activitys.RegistUnionIdActivity_;
-import com.saiyu.foreground.ui.fragments.LoginFragment;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -168,46 +162,46 @@ public class ApiRequest {
                 });
     }
 
-    public static void unLogin(final Context mContext) {
-        RequestParams requestParams = new RequestParams();
-        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
-        apiService.unLogin(requestParams.getBody())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BooleanRet>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.print("onError == " + e.toString());
-                        SPUtils.putString("accessToken", "");
-                        SPUtils.putString( ConstValue.AUTO_LOGIN_FLAG, "");
-                        Intent intent = new Intent(mContext, LoginActivity_.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivity(intent);
-
-                    }
-
-                    @Override
-                    public void onNext(BooleanRet ret) {
-                        SPUtils.putString("accessToken", "");
-                        SPUtils.putString( ConstValue.AUTO_LOGIN_FLAG, "");
-                        Intent intent = new Intent(mContext, LoginActivity_.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivity(intent);
-                        if (ret == null) {
-                            return;
-                        }
-                        if (ret.getCode() != 200 || ret.getData() == null) {
-                            return;
-                        }
-
-                    }
-                });
-    }
+//    public static void unLogin(final Context mContext) {
+//        RequestParams requestParams = new RequestParams();
+//        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+//        apiService.unLogin(requestParams.getBody())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<BooleanRet>() {
+//                    @Override
+//                    public void onCompleted() {
+//                    }
+//
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogUtils.print("onError == " + e.toString());
+//                        SPUtils.putString("accessToken", "");
+//                        SPUtils.putString( ConstValue.AUTO_LOGIN_FLAG, "");
+//                        Intent intent = new Intent(mContext, ContainerActivity_.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        mContext.startActivity(intent);
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(BooleanRet ret) {
+//                        SPUtils.putString("accessToken", "");
+//                        SPUtils.putString( ConstValue.AUTO_LOGIN_FLAG, "");
+//                        Intent intent = new Intent(mContext, ContainerActivity_.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        mContext.startActivity(intent);
+//                        if (ret == null) {
+//                            return;
+//                        }
+//                        if (ret.getCode() != 200 || ret.getData() == null) {
+//                            return;
+//                        }
+//
+//                    }
+//                });
+//    }
 
     //
     /*
@@ -792,8 +786,10 @@ public class ApiRequest {
                         if (exist) {
                             unionIDLogin(type, unionID, activity,pb_loading);
                         } else {
-                            Intent intent = new Intent(activity, RegistUnionIdActivity_.class);
+
+                            Intent intent = new Intent(activity, ContainerActivity_.class);
                             Bundle bundle = new Bundle();
+                            bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.RegistUnionIdFragmentTag);
                             bundle.putString("type", type);
                             bundle.putString("unionID", unionID);
                             intent.putExtras(bundle);

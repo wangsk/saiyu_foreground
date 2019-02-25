@@ -1,11 +1,7 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.RegistFragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.view.View;
@@ -14,23 +10,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
-import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
-import com.saiyu.foreground.https.response.LoginRet;
-import com.saiyu.foreground.https.response.RegistRet;
-import com.saiyu.foreground.ui.activitys.ProtocolActivity_;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
-import com.saiyu.foreground.utils.LogUtils;
-import com.saiyu.foreground.utils.SPUtils;
 
-import org.androidannotations.annotations.AfterTextChange;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -167,7 +159,11 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     ApiRequest.regist(account, password, "RegistFragment_regist",pb_loading);
                     break;
                 case R.id.tv_protocol:
-                    mContext.startActivity(new Intent(mContext, ProtocolActivity_.class));
+                    Bundle bundle_2 = new Bundle();
+                    Intent intent_2 = new Intent(mContext,ContainerActivity_.class);
+                    bundle_2.putInt(ContainerActivity.FragmentTag, ContainerActivity.ProtocolFragmentTag);
+                    intent_2.putExtras(bundle_2);
+                    mContext.startActivity(intent_2);
                     break;
                 case R.id.iv_account_clear:
                     et_account.setText("");

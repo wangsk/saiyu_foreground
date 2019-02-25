@@ -1,4 +1,4 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.FindPswFragments;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 
 import org.androidannotations.annotations.AfterViews;

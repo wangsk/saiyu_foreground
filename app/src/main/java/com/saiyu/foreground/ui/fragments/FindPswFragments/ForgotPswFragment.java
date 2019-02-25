@@ -1,9 +1,5 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.FindPswFragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +13,7 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 

@@ -31,7 +31,7 @@ public class BaseRet implements Serializable {
             return true;
         } else if (code == 410 || code == 411 || code == 413) {
 //            CacheActivity.finishActivity();
-//            Intent intent = new Intent(App.getApp(), LoginActivity_.class);
+//            Intent intent = new Intent(App.getApp(), ContainerActivity_.class);
 //            App.getApp().startActivity(intent);
             return false;
         } else {

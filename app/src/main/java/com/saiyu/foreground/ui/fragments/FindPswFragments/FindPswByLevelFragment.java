@@ -1,29 +1,21 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.FindPswFragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
-import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
-import com.saiyu.foreground.https.response.BaseRet;
-import com.saiyu.foreground.ui.activitys.RegistActivity_;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
-import com.saiyu.foreground.utils.CallbackUtils;
-import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -126,7 +118,11 @@ public class FindPswByLevelFragment extends BaseFragment {
 
                     break;
                 case R.id.btn_level_5_regist:
-                    mContext.startActivity(new Intent(mContext,RegistActivity_.class));
+                    Bundle bundle_1 = new Bundle();
+                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    bundle_1.putInt(ContainerActivity.FragmentTag, ContainerActivity.RegistFragmentTag);
+                    intent.putExtras(bundle_1);
+                    mContext.startActivity(intent);
                     getActivity().finish();
 
                     break;

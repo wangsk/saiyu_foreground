@@ -1,4 +1,4 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.FindPswFragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.BaseRet;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -22,9 +23,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 @EFragment(R.layout.fragment_face_identify_layout)
 public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.ResponseCallback {

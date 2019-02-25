@@ -1,9 +1,6 @@
-package com.saiyu.foreground.ui.fragments;
+package com.saiyu.foreground.ui.fragments.RegistFragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -21,7 +18,10 @@ import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
-import com.saiyu.foreground.ui.activitys.ForgotPswActivity_;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
+import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 
@@ -113,7 +113,11 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     getActivity().finish();
                     break;
                 case R.id.tv_forgot_psw:
-                    mContext.startActivity(new Intent(mContext,ForgotPswActivity_.class));
+                    Bundle bundle_1 = new Bundle();
+                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    bundle_1.putInt(ContainerActivity.FragmentTag, ContainerActivity.ForgotPswFragmentTag);
+                    intent.putExtras(bundle_1);
+                    mContext.startActivity(intent);
                     break;
                 case R.id.iv_psw:
                     //从密码不可见模式变为密码可见模式

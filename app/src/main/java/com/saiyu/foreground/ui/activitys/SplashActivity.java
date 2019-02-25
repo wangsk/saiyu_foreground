@@ -27,8 +27,11 @@ public class SplashActivity extends BaseActivity {
             SplashActivity.this.finish();
 
         } else {
-            Intent intent = new Intent(SplashActivity.this,LoginActivity_.class);
-            startActivity(intent);
+            Bundle bundle_1 = new Bundle();
+            Intent intent = new Intent(mContext,ContainerActivity_.class);
+            bundle_1.putInt(ContainerActivity.FragmentTag, ContainerActivity.LoginFragmentTag);
+            intent.putExtras(bundle_1);
+            mContext.startActivity(intent);
             SplashActivity.this.finish();
         }
     }
