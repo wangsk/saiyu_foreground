@@ -34,8 +34,7 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
     @ViewById
     ProgressBar pb_loading;
     private static CountDownTimerUtils countDownTimerUtils;
-    private String account;
-    private AccountInfoNoLoginRet accountInfoNoLoginRet;
+    private String account,mobile;
 
     public static PhoneIdentifyFragment newInstance(Bundle bundle) {
         PhoneIdentifyFragment_ fragment = new PhoneIdentifyFragment_();
@@ -57,12 +56,10 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            accountInfoNoLoginRet = (AccountInfoNoLoginRet)bundle.getSerializable("AccountInfoNoLoginRet");
+            mobile = bundle.getString("mobile");
             account = bundle.getString("account");
         }
-        if(accountInfoNoLoginRet != null && accountInfoNoLoginRet.getData() != null){
-            tv_phone.setText("手机号码: " + accountInfoNoLoginRet.getData().getMobile());
-        }
+        tv_phone.setText("手机号码: " + mobile);
 
     }
 
@@ -103,13 +100,17 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
                         return;
                     }
 
-                    ApiRequest.searchPswMobile(account,checkCode,"PhoneIdentifyFragment_searchPswMobile",pb_loading);
+                    if(TextUtils.isEmpty(mobile)){
+                        return;
+                    }
+
+                    ApiRequest.searchPswMobile(mobile,checkCode,"PhoneIdentifyFragment_searchPswMobile",pb_loading);
 
                     break;
                 case R.id.tv_msg_count:
-                    if(!TextUtils.isEmpty(accountInfoNoLoginRet.getData().getMobile())){
+                    if(!TextUtils.isEmpty(mobile)){
                         countDownTimerUtils.start();
-                        ApiRequest.sendVcode(accountInfoNoLoginRet.getData().getMobile(),"2",countDownTimerUtils);
+                        ApiRequest.sendVcode(mobile,"2",countDownTimerUtils);
                     }
                     break;
 

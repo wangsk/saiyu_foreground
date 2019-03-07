@@ -20,6 +20,7 @@ import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment;
+import com.saiyu.foreground.ui.fragments.ProtocolFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 
@@ -159,11 +160,8 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     ApiRequest.regist(account, password, "RegistFragment_regist",pb_loading);
                     break;
                 case R.id.tv_protocol:
-                    Bundle bundle_2 = new Bundle();
-                    Intent intent_2 = new Intent(mContext,ContainerActivity_.class);
-                    bundle_2.putInt(ContainerActivity.FragmentTag, ContainerActivity.ProtocolFragmentTag);
-                    intent_2.putExtras(bundle_2);
-                    mContext.startActivity(intent_2);
+                    ProtocolFragment protocolFragment =  ProtocolFragment.newInstance(null);
+                    start(protocolFragment);
                     break;
                 case R.id.iv_account_clear:
                     et_account.setText("");

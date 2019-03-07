@@ -2,10 +2,9 @@ package com.saiyu.foreground.ui.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
@@ -18,6 +17,7 @@ import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragment;
 import com.saiyu.foreground.ui.views.BottomBar;
 import com.saiyu.foreground.ui.views.BottomBarTab;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,7 +26,7 @@ import org.androidannotations.annotations.EActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelectedListener,CallbackUtils.ResponseCallback{
+public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelectedListener,CallbackUtils.ResponseCallback,CallbackUtils.OnBottomSelectListener{
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
@@ -44,10 +44,10 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
         if (firstFragment == null) {
             mFragments[FIRST] = MarketFragment.newInstance(null);
             mFragments[SECOND] = HallFragment.newInstance(null);
-            mFragments[THIRD] = BuyerFragment.newInstance(null);
-            mFragments[FOURTH] = SellerFragment.newInstance(null);
+            mFragments[THIRD] = SellerFragment.newInstance(null);
+            mFragments[FOURTH] = BuyerFragment.newInstance(null);
             mFragments[FIVE] = PersonalFragment.newInstance(null);
-            loadMultipleRootFragment(R.id.main_container, FIRST,
+            loadMultipleRootFragment(R.id.main_container, SECOND,
                     mFragments[FIRST],
                     mFragments[SECOND],
                     mFragments[THIRD],
@@ -59,8 +59,8 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
             // 这里我们需要拿到mFragments的引用
             mFragments[FIRST] = firstFragment;
             mFragments[SECOND] = findFragment(HallFragment.class);
-            mFragments[THIRD] = findFragment(BuyerFragment.class);
-            mFragments[FOURTH] = findFragment(SellerFragment.class);
+            mFragments[THIRD] = findFragment(SellerFragment.class);
+            mFragments[FOURTH] = findFragment(BuyerFragment.class);
             mFragments[FIVE] = findFragment(PersonalFragment.class);
         }
     }
@@ -70,10 +70,23 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
         bottomBar = (BottomBar)findViewById(R.id.bottomBar);
         bottomBar.addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "行情"))
                 .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "大厅"))
-                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "买家"))
+                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "卖家"))
                 .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "买家"))
                 .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "我的"));
         bottomBar.setOnTabSelectedListener(this);
+        bottomBar.setCurrentItem(1);//默认选择大厅
+
+        int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
+        switch (type){
+            case 0://全部显示
+                break;
+            case 1://不显示买家
+                bottomBar.hide(3);
+                break;
+            case 2://不显示卖家
+                bottomBar.hide(2);
+                break;
+        }
 
     }
 
@@ -81,6 +94,7 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
     protected void onResume() {
         super.onResume();
         CallbackUtils.setCallback(this);
+        CallbackUtils.setOnBottomSelectListener(this);
     }
 
     @Override
@@ -95,7 +109,30 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
 
     @Override
     public void onTabSelected(int position, int prePosition) {
-        showHideFragment(mFragments[position], mFragments[prePosition]);
+        switch (position){
+            case 2://买家
+            case 3://卖家
+            case 4://我的
+                String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
+                boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
+                if(autologinflag && !TextUtils.isEmpty(accessToken)){
+                    showHideFragment(mFragments[position], mFragments[prePosition]);
+                } else {
+                    bottomBar.setCurrentItem(prePosition);
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.LoginFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                    //设置activity从底部弹出
+                    //overridePendingTransition(R.anim.from_bottom_to_top, R.anim.from_top_to_bottom);
+                }
+                break;
+                default:
+                    showHideFragment(mFragments[position], mFragments[prePosition]);
+                    break;
+        }
+
     }
 
     @Override
@@ -109,15 +146,22 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
     }
 
     @Override
-    public void onBackPressedSupport() {
-        super.onBackPressedSupport();
-        SPUtils.putString("accessToken", "");
-        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
-
-        Intent home = new Intent(Intent.ACTION_MAIN);
-        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        home.addCategory(Intent.CATEGORY_HOME);
-        startActivity(home);
-
+    public void setOnBottomSelectListener(int position) {
+        bottomBar.setCurrentItem(position);
     }
+
+    public BottomBar getBottomBar() {
+        return bottomBar;
+    }
+
+    //按返回键不销毁activity
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            moveTaskToBack(true);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

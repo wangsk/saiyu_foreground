@@ -30,10 +30,12 @@ public class ProtocolFragment extends BaseFragment{
         tv_title_content.setText("赛鱼网服务协议");
     }
 
-    @Click(R.id.btn_title_back)
+    @Click({R.id.btn_title_back})
     void onClick(View view){
-        if(view.getId() == R.id.btn_title_back){
-            getActivity().finish();
+        switch (view.getId()){
+            case R.id.btn_title_back:
+                getFragmentManager().popBackStack();
+                break;
         }
     }
 }

@@ -34,8 +34,7 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
     Button btn_title_back, btn_next;
     @ViewById
     ProgressBar pb_loading;
-    private String account;
-    private AccountInfoNoLoginRet accountInfoNoLoginRet;
+    private String account,RealName,IDNum;
 
     public static IdentityIdentifyFragment newInstance(Bundle bundle) {
         IdentityIdentifyFragment_ fragment = new IdentityIdentifyFragment_();
@@ -55,7 +54,8 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
         Bundle bundle = getArguments();
         if (bundle != null) {
             account = bundle.getString("account");
-            accountInfoNoLoginRet = (AccountInfoNoLoginRet)bundle.getSerializable("AccountInfoNoLoginRet");
+            RealName = bundle.getString("RealName","");
+            IDNum = bundle.getString("IDNum","");
         }
         tv_account.setText("赛鱼账号: "+account);
 
@@ -107,17 +107,15 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
                         return;
                     }
 
-                    if(accountInfoNoLoginRet != null && accountInfoNoLoginRet.getData() != null){
-                        if(!name.equals(accountInfoNoLoginRet.getData().getRealName())){
-                            tv_name_prompt.setVisibility(View.VISIBLE);
-                            tv_name_prompt.setText("*请输入您补填信息时的姓名");
-                            return;
-                        }
-                        if(!identity.equals(accountInfoNoLoginRet.getData().getIDNum())){
-                            tv_identity_prompt.setVisibility(View.VISIBLE);
-                            tv_identity_prompt.setText("*请输入您补填信息时的身份证号码");
-                            return;
-                        }
+                    if(!name.equals(RealName)){
+                        tv_name_prompt.setVisibility(View.VISIBLE);
+                        tv_name_prompt.setText("*请输入您补填信息时的姓名");
+                        return;
+                    }
+                    if(!identity.equals(IDNum)){
+                        tv_identity_prompt.setVisibility(View.VISIBLE);
+                        tv_identity_prompt.setText("*请输入您补填信息时的身份证号码");
+                        return;
                     }
 
                     ApiRequest.searchPswIdCard(account,name,identity,"IdentityIdentifyFragment_searchPswIdCard",pb_loading);
@@ -135,13 +133,11 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
                 if(TextUtils.isEmpty(s.toString())){
                     tv_name_prompt.setVisibility(View.INVISIBLE);
                 } else {
-                    if(accountInfoNoLoginRet != null && accountInfoNoLoginRet.getData() != null){
-                        if(!s.toString().equals(accountInfoNoLoginRet.getData().getRealName())){
-                            tv_name_prompt.setVisibility(View.VISIBLE);
-                            tv_name_prompt.setText("*请输入您补填信息时的姓名");
-                        } else {
-                            tv_name_prompt.setVisibility(View.INVISIBLE);
-                        }
+                    if(!s.toString().equals(RealName)){
+                        tv_name_prompt.setVisibility(View.VISIBLE);
+                        tv_name_prompt.setText("*请输入您补填信息时的姓名");
+                    } else {
+                        tv_name_prompt.setVisibility(View.INVISIBLE);
                     }
                 }
                 break;
@@ -149,13 +145,11 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
                 if(TextUtils.isEmpty(s.toString())){
                     tv_identity_prompt.setVisibility(View.INVISIBLE);
                 } else {
-                    if(accountInfoNoLoginRet != null && accountInfoNoLoginRet.getData() != null){
-                        if(!s.toString().equals(accountInfoNoLoginRet.getData().getIDNum())){
-                            tv_identity_prompt.setVisibility(View.VISIBLE);
-                            tv_identity_prompt.setText("*请输入您补填信息时的身份证号码");
-                        } else {
-                            tv_identity_prompt.setVisibility(View.INVISIBLE);
-                        }
+                    if(!s.toString().equals(IDNum)){
+                        tv_identity_prompt.setVisibility(View.VISIBLE);
+                        tv_identity_prompt.setText("*请输入您补填信息时的身份证号码");
+                    } else {
+                        tv_identity_prompt.setVisibility(View.INVISIBLE);
                     }
                 }
                 break;

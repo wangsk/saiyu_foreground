@@ -27,7 +27,6 @@ import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.interfaces.QQCallback;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
-import com.saiyu.foreground.ui.activitys.MainActivity_;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
@@ -71,8 +70,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     private Tencent mTencent;
     private QQCallback qqCallback;
     private IWXAPI wxapi;
-    private String wechat_img;
-    private String wechat_nickname;
     private WeChatReceiver weChatReceiver;
 
     public static LoginFragment newInstance(Bundle bundle) {
@@ -98,16 +95,16 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
         wxapi.registerApp(ConstValue.WECHAT_APP_ID);
         if (weChatReceiver == null) {
             weChatReceiver = new WeChatReceiver();
-            IntentFilter weChat_loginFragment = new IntentFilter("weChat_loginFragment");
+            IntentFilter weChat_loginFragment = new IntentFilter("Action_WeChat_UnionId");
             mContext.registerReceiver(weChatReceiver, weChat_loginFragment);
         }
 
-        et_account.setText("space111");//四级小于100  林华 身份证号 512501197506045175
+ //       et_account.setText("space111");//四级小于100  林华 身份证号 512501197506045175
 //        et_account.setText("space123");//一级
 //        et_account.setText("space112");//三级手机验证
 //        et_account.setText("space113");//二级风险 绑定手机
 //        et_account.setText("space114");//五级风险
-        et_password.setText("space123");
+//        et_password.setText("space123");
     }
 
     @Override
@@ -121,14 +118,10 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                 return;
             }
 
-            SPUtils.putString("accessToken", ret.getData().getAccessToken());
+            SPUtils.putString(ConstValue.ACCESS_TOKEN, ret.getData().getAccessToken());
             SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
-            Intent intentlogin = new Intent(mContext,
-                    MainActivity_.class);
-            mContext.startActivity(intentlogin);
-            mContext.finish();
-
+            getActivity().finish();
 
         }
     }
@@ -226,11 +219,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     mContext.startActivity(intent_2);
                     break;
                 case R.id.tv_protocol:
-                    Bundle bundle_3 = new Bundle();
-                    Intent intent_3 = new Intent(mContext,ContainerActivity_.class);
-                    bundle_3.putInt(ContainerActivity.FragmentTag, ContainerActivity.ProtocolFragmentTag);
-                    intent_3.putExtras(bundle_3);
-                    mContext.startActivity(intent_3);
+                    ProtocolFragment protocolFragment =  ProtocolFragment.newInstance(null);
+                    start(protocolFragment);
                     break;
                 case R.id.iv_psw:
                     //从密码不可见模式变为密码可见模式
@@ -263,7 +253,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                             @Override
                             public void onComplete(Object response) {
                                 //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
-                                ApiRequest.getMessage(response, mTencent,getActivity(),pb_loading);
+                                ApiRequest.getMessage(response, mTencent,getActivity(),pb_loading,true);
                             }
 
                             @Override
@@ -295,17 +285,16 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     public class WeChatReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context mContext, Intent intent) {
-            if (intent.getAction().equals("weChat_loginFragment")) {
+            if (intent.getAction().equals("Action_WeChat_UnionId")) {
                 //获取微信界面返回的数据
                 Bundle weChatBundle = intent.getExtras();
                 if (weChatBundle != null) {
                     String wechat_unionid = weChatBundle.getString("wechat_unionid");
-                    wechat_img = weChatBundle.getString("wechat_img");
-                    wechat_nickname = weChatBundle.getString("wechat_nickname");
+                    String openid = weChatBundle.getString("openid");
                     if (!TextUtils.isEmpty(wechat_unionid)) {
-                        LogUtils.print("wechat_unionid === " + wechat_unionid + " ;wechat_nickname ===  " + wechat_nickname + " ;wechat_img === " + wechat_img);
+                        LogUtils.print("wechat_unionid === " + wechat_unionid + "  openid == " + openid);
 
-                        ApiRequest.isUnionIdBind(wechat_unionid, "1",wechat_nickname,wechat_img,getActivity(),pb_loading);
+                        ApiRequest.isUnionIdBind(wechat_unionid, openid,"1",getActivity(),pb_loading,true);
 
                     }
                 }
@@ -331,25 +320,15 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     }
 
     @Override
-    public boolean onBackPressedSupport() {
-        CacheActivity.finishActivity();
-        System.exit(0);
-        return true;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         if (weChatReceiver != null) {
             try {
                 mContext.unregisterReceiver(weChatReceiver);
             }catch (Exception e){
-
             }
-
             weChatReceiver = null;
         }
-
     }
 
 }

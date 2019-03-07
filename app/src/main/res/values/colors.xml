@@ -6,6 +6,7 @@
 
     <color name="white">#ffffff</color>
     <color name="blue">#148cf1</color>
+    <color name="blue_60">#60148cf1</color>
     <color name="yellow">#fe8f62</color>
     <color name="grey">#8C8C8C</color>
     <color name="grey20">#208C8C8C</color>
@@ -22,5 +23,20 @@
     <color name="transparent">#00000000</color>
 
     <color name="unEnabled">#aeaeae</color>
+
+
+    <!--zxing-->
+    <color name="contents_text">#000000</color>
+    <color name="encode_view">#ffffff</color>
+    <color name="possible_result_points">#ffbd21</color>
+    <color name="result_minor_text">#c0c0c0</color>
+    <color name="result_points">#99cc00</color>
+    <color name="result_text">#ffffff</color>
+    <color name="result_view">#000000</color>
+    <color name="status_text">#ffffff</color>
+    <color name="viewfinder_mask">#50000000</color>
+    <color name="react">#ffffff</color>
+    <color name="scanLineColor">#ffffff</color>
+    <color name="defaultColor">#ffffff</color>
 
 </resources>

@@ -19,11 +19,11 @@ public class AccountInfoNoLoginRet extends BaseRet{
         private int IsRealNameAuth;
         private int IsFaceAuth;
         private String QQOpenId;
-        private int QQUnionid;
+        private String QQUnionid;
         private String WXOpenId;
-        private int WXUnionid;
+        private String WXUnionid;
         private int RiskLevel;
-        private int TotalMoeney;
+        private String TotalMoney;
         private String RegTime;
 
         public String getRealName() {
@@ -90,28 +90,12 @@ public class AccountInfoNoLoginRet extends BaseRet{
             this.QQOpenId = QQOpenId;
         }
 
-        public int getQQUnionid() {
-            return QQUnionid;
-        }
-
-        public void setQQUnionid(int QQUnionid) {
-            this.QQUnionid = QQUnionid;
-        }
-
         public String getWXOpenId() {
             return WXOpenId;
         }
 
         public void setWXOpenId(String WXOpenId) {
             this.WXOpenId = WXOpenId;
-        }
-
-        public int getWXUnionid() {
-            return WXUnionid;
-        }
-
-        public void setWXUnionid(int WXUnionid) {
-            this.WXUnionid = WXUnionid;
         }
 
         public int getRiskLevel() {
@@ -122,13 +106,28 @@ public class AccountInfoNoLoginRet extends BaseRet{
             RiskLevel = riskLevel;
         }
 
-        public int getTotalMoeney() {
-            return TotalMoeney;
+        public String getQQUnionid() {
+            return QQUnionid;
         }
 
-        public void setTotalMoeney(int totalMoeney) {
-            TotalMoeney = totalMoeney;
+        public void setQQUnionid(String QQUnionid) {
+            this.QQUnionid = QQUnionid;
         }
 
+        public String getWXUnionid() {
+            return WXUnionid;
+        }
+
+        public void setWXUnionid(String WXUnionid) {
+            this.WXUnionid = WXUnionid;
+        }
+
+        public String getTotalMoney() {
+            return TotalMoney;
+        }
+
+        public void setTotalMoney(String totalMoney) {
+            TotalMoney = totalMoney;
+        }
     }
 }

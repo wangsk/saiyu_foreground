@@ -1,19 +1,22 @@
 package com.saiyu.foreground.ui.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.FindPswFragments.FaceIdentifyFragment;
 import com.saiyu.foreground.ui.fragments.FindPswFragments.ForgotPswFragment;
 import com.saiyu.foreground.ui.fragments.LoginFragment;
-import com.saiyu.foreground.ui.fragments.ProtocolFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistUnionIdFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.ActiveBuyerFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.ActiveSellerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.BindPhoneStatusFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.BuyerInfoFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.CashChannelListFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.CashFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.CashRecordFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.InfoWadFragment;
@@ -24,6 +27,9 @@ import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.Sec
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.SellerInfoFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.SetingFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.UnionLoginFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.UploadIdentityFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.WebFragment;
+import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -59,11 +65,15 @@ public class ContainerActivity extends BaseActivity{
     public static final int SecurityManagerFragmentTag = 11;//安全管理
     public static final int SellerInfoFragmentTag = 12;//卖家资料
     public static final int UnionLoginFragmentTag = 13;//互联登陆
-    public static final int LoginFragmentTag = 14;
-    public static final int ForgotPswFragmentTag = 15;
-    public static final int RegistUnionIdFragmentTag = 16;
-    public static final int RegistFragmentTag = 17;
-    public static final int ProtocolFragmentTag = 18;
+    public static final int LoginFragmentTag = 14;//登录
+    public static final int ForgotPswFragmentTag = 15;//忘记密码
+    public static final int RegistUnionIdFragmentTag = 16;//第三方注册
+    public static final int RegistFragmentTag = 17;//注册
+    public static final int BindPhoneStatusFragmentTag = 18;//手机绑定or解绑
+    public static final int WebFragmentTag = 19;//网页
+    public static final int UploadIdentityFragmentTag = 20;//实名认证
+    public static final int FaceIdentifyFragmentTag = 21;//刷脸认证
+    public static final int CashChannelListFragmentTag = 212;//提现渠道
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -101,8 +111,16 @@ public class ContainerActivity extends BaseActivity{
                 return RegistUnionIdFragment.newInstance(bundle);
             case RegistFragmentTag:
                 return RegistFragment.newInstance(bundle);
-            case ProtocolFragmentTag:
-                return ProtocolFragment.newInstance(bundle);
+            case BindPhoneStatusFragmentTag:
+                return BindPhoneStatusFragment.newInstance(bundle);
+            case WebFragmentTag:
+                return WebFragment.newInstance(bundle);
+            case UploadIdentityFragmentTag:
+                return UploadIdentityFragment.newInstance(bundle);
+            case FaceIdentifyFragmentTag:
+                return FaceIdentifyFragment.newInstance(bundle);
+            case CashChannelListFragmentTag:
+                return CashChannelListFragment.newInstance(bundle);
                 default:
                     return null;
         }
@@ -125,5 +143,20 @@ public class ContainerActivity extends BaseActivity{
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        CallbackUtils.doResponseCallback(requestCode,resultCode,data);
+    }
+
+    //    @Override
+//    public void finish() {
+//        super.finish();
+//        if(isLogin){
+//            //设置antivity消失动画
+//            overridePendingTransition(R.anim.from_bottom_to_top, R.anim.from_top_to_bottom);
+//            isLogin = false;
+//        }
+//    }
 
 }

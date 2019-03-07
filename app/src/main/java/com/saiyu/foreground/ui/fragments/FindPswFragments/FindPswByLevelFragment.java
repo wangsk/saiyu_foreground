@@ -22,6 +22,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import java.math.BigDecimal;
+
 @EFragment(R.layout.fragment_findpsw_bylevel_layout)
 public class FindPswByLevelFragment extends BaseFragment {
 
@@ -36,8 +38,8 @@ public class FindPswByLevelFragment extends BaseFragment {
     @ViewById
     RadioGroup rg_selector;
 
-    private String account;
-    private AccountInfoNoLoginRet accountInfoNoLoginRet;
+    private String account,RealName,IDNum,mobile,RegTime,totalMoney;
+    private int riskLevel;
 
     public static FindPswByLevelFragment newInstance(Bundle bundle) {
         FindPswByLevelFragment_ fragment = new FindPswByLevelFragment_();
@@ -51,39 +53,56 @@ public class FindPswByLevelFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             account = bundle.getString("account");
-            accountInfoNoLoginRet = (AccountInfoNoLoginRet)bundle.getSerializable("AccountInfoNoLoginRet");
+            RealName = bundle.getString("RealName","");
+            IDNum = bundle.getString("IDNum","");
+            mobile = bundle.getString("mobile");
+            RegTime = bundle.getString("RegTime");
+            riskLevel = bundle.getInt("riskLevel");
+            totalMoney = bundle.getString("totalMoney");
         }
 
-        if (!TextUtils.isEmpty(account) && accountInfoNoLoginRet != null) {
-            int riskLevel = accountInfoNoLoginRet.getData().getRiskLevel();
-            int totalMoney = accountInfoNoLoginRet.getData().getTotalMoeney();
+        if (!TextUtils.isEmpty(account)) {
             switch (riskLevel) {
                 case 1:
                 case 2:
+                    //一级，二级 手机，刷脸二选一
                     rb_mobile.setVisibility(View.VISIBLE);
                     rb_face.setVisibility(View.VISIBLE);
                     rb_mobile.setChecked(true);
                     break;
                 case 3:
+                    //三级  手机验证
                     rb_mobile.setVisibility(View.VISIBLE);
                     rb_mobile.setChecked(true);
                     rb_mobile.setClickable(false);
                     break;
                 case 4:
-                    if (totalMoney > 100) {
-                        rb_face.setVisibility(View.VISIBLE);
-                        rb_face.setChecked(true);
-                        rb_face.setClickable(false);
-                    } else {
-                        rb_identify.setVisibility(View.VISIBLE);
-                        rb_identify.setChecked(true);
-                        rb_identify.setClickable(false);
+                    if(TextUtils.isEmpty(totalMoney)){
+                        return;
+                    }
+                    BigDecimal bigDecimal = new BigDecimal(totalMoney);
+                    BigDecimal bigDecimal_100 = new BigDecimal(100);
+                    switch (bigDecimal.compareTo(bigDecimal_100)){
+                        case -1://小于
+                        case 0://等于
+                            //四级 小于等于100 身份验证
+                            rb_identify.setVisibility(View.VISIBLE);
+                            rb_identify.setChecked(true);
+                            rb_identify.setClickable(false);
+                            break;
+                        case 1://大于
+                            //四级 大于100 刷脸验证
+                            rb_face.setVisibility(View.VISIBLE);
+                            rb_face.setChecked(true);
+                            rb_face.setClickable(false);
+                            break;
                     }
                     break;
                 case 5:
+                    //五级  无法验证找回
                     ll_level_top4.setVisibility(View.GONE);
                     ll_level_5.setVisibility(View.VISIBLE);
-                    tv_level_5_time.setText("注册时间: " + accountInfoNoLoginRet.getData().getRegTime());
+                    tv_level_5_time.setText("注册时间: " + RegTime);
                     break;
             }
 
@@ -100,18 +119,23 @@ public class FindPswByLevelFragment extends BaseFragment {
                     getFragmentManager().popBackStack();
                     break;
                 case R.id.btn_next:
+
                     Bundle bundle = new Bundle();
                     bundle.putString("account",account);
-                    bundle.putSerializable("AccountInfoNoLoginRet",accountInfoNoLoginRet);
                     if (rb_identify.isChecked()) {
+                        bundle.putString("RealName",RealName);
+                        bundle.putString("IDNum",IDNum);
                         IdentityIdentifyFragment identityIdentifyFragment = IdentityIdentifyFragment.newInstance(bundle);
                         start(identityIdentifyFragment);
                     }
                     if (rb_face.isChecked()) {
+                        bundle.putString("RealName",RealName);
+                        bundle.putString("IDNum",IDNum);
                         FaceIdentifyFragment faceIdentifyFragment = FaceIdentifyFragment.newInstance(bundle);
                         start(faceIdentifyFragment);
                     }
                     if (rb_mobile.isChecked()) {
+                        bundle.putString("mobile",mobile);
                         PhoneIdentifyFragment phoneIdentifyFragment = PhoneIdentifyFragment.newInstance(bundle);
                         start(phoneIdentifyFragment);
                     }

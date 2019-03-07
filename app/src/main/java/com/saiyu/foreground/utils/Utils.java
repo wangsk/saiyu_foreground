@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.saiyu.foreground.App;
 
@@ -35,5 +36,14 @@ public class Utils {
         action.setData(Uri.parse("alipays://"));
         List<ResolveInfo> list = manager.queryIntentActivities(action, PackageManager.GET_RESOLVED_FILTER);
         return list != null && list.size() > 0;
+    }
+
+    public static int getintVerName(String verName) {
+        verName = verName.replaceAll("\\.", "");
+        if (TextUtils.isEmpty(verName)) {
+            return 0;
+        } else {
+            return Integer.parseInt(verName);
+        }
     }
 }

@@ -13,6 +13,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
+import com.saiyu.foreground.utils.ButtonUtils;
+import com.saiyu.foreground.utils.LogUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +54,6 @@ public class BottomBar extends LinearLayout implements Serializable {
     private void init(Context context, AttributeSet attrs) {
         setOrientation(VERTICAL);
 
-//        ImageView shadowView = new ImageView(context);
-//        shadowView.setBackgroundResource(R.drawable.actionbar_shadow_up);
-//        addView(shadowView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
         mTabLayout = new LinearLayout(context);
         mTabLayout.setBackgroundColor(Color.WHITE);
         mTabLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -89,17 +88,18 @@ public class BottomBar extends LinearLayout implements Serializable {
         return this;
     }
 
-    public BottomBar delItem(final BottomBarTab tab){
-        mTabLayout.removeView(tab);
-        mTabs.remove(tab);
-        return this;
+    public void hide(final int position){
+        mTabs.get(position).setVisibility(GONE);
     }
 
-    public BottomBar delItem(final int position){
-        mTabLayout.removeView(mTabs.get(position));
-        mTabs.remove(position);
-        return this;
+    public void show(final int position){
+        mTabs.get(position).setVisibility(VISIBLE);
     }
+
+    public int checkStatus(final int position){
+        return mTabs.get(position).getVisibility();
+    }
+
 
     public void setOnTabSelectedListener(OnTabSelectedListener onTabSelectedListener) {
         mListener = onTabSelectedListener;
@@ -116,6 +116,10 @@ public class BottomBar extends LinearLayout implements Serializable {
 
     public int getCurrentItemPosition() {
         return mCurrentPosition;
+    }
+
+    public int getTotalCount(){
+        return mTabLayout.getChildCount();
     }
 
     /**

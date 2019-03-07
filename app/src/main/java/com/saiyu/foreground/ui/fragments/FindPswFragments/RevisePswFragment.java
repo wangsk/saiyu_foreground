@@ -32,7 +32,7 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
     EditText et_password, et_password_confirm;
     @ViewById
     ProgressBar pb_loading;
-    private String account, password;
+    private String account;
 
     public static RevisePswFragment newInstance(Bundle bundle) {
         RevisePswFragment_ fragment = new RevisePswFragment_();
@@ -84,7 +84,7 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
                     getFragmentManager().popBackStack();
                     break;
                 case R.id.btn_next:
-                    password = et_password.getText().toString();
+                    String password = et_password.getText().toString();
                     if (TextUtils.isEmpty(password)) {
                         tv_revisepsw_prompt_1.setText("*请输入密码");
                         return;

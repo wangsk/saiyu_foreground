@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.saiyu.foreground">
 
     <!-- 连接网络权限 --> <!-- 读取网络信息状态 -->
@@ -39,19 +40,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.activitys.SplashActivity_">
+
+        <activity android:name=".ui.activitys.MainActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.activitys.MainActivity_">
 
         </activity>
         <activity android:name=".ui.activitys.ContainerActivity_">
 
         </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.saiyu.foreground.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/myfile_paths_public"
+                tools:replace="android:resource" />
+        </provider>
+
+        <activity
+            android:name=".zxinglibrary.android.CaptureActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity android:name=".ui.activitys.ZhiFuBaoCallbackActivity_">
             <!--要想在别的App上能成功调起App，必须添加intent过滤器-->
@@ -93,6 +110,12 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+
+        <!--微信支付回调函数-->
+        <activity
+            android:name="com.saiyu.foreground.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
     </application>
 

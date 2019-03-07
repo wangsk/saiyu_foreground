@@ -113,7 +113,20 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                     String wechat_unionid = (String) obj.get("unionid");
                     LogUtils.print("WXEntryActivity_wechat_access_token ===================" + wechat_access_token);
 
-                    getUserInfo(wechat_access_token, wechat_openid,wechat_unionid);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("wechat_unionid",wechat_unionid);
+                    bundle.putString("openid",wechat_openid);
+
+                    Intent intent = new Intent();
+                    //这个ACTION在LoginFragment和UnionLoginFragment两个类中都有注册接收，所以这两个类不能同时存活
+                    intent.setAction("Action_WeChat_UnionId");
+                    intent.putExtras(bundle);
+                    sendBroadcast(intent);
+
+                    finish();
+
+                    //获取微信头像和昵称,赛鱼暂时不需要
+                    //getUserInfo(wechat_access_token, wechat_openid,wechat_unionid);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,7 +136,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
         });
     }
 
-    //因为access_token是有时效性的，所以需要用access_token去微信官方获取wechat_unionid以及其他用户信息
+    //获取微信头像和昵称,赛鱼暂时不需要
     private void getUserInfo(String wechat_access_token, String wechat_openid,final String wechat_unionid) {
         String url = "https://api.weixin.qq.com/sns/userinfo?access_token="+wechat_access_token+"&openid="+wechat_openid;
 
@@ -150,7 +163,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                     bundle.putString("wechat_nickname",wechat_nickname);
 
                     Intent intent = new Intent();
-                    intent.setAction("weChat_loginFragment");
+                    //这个ACTION在LoginFragment和UnionLoginFragment两个类中都有注册接收，所以这两个类不能同时存活
+                    intent.setAction("Action_WeChat_UnionId");
                     intent.putExtras(bundle);
                     sendBroadcast(intent);
 

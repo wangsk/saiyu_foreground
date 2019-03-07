@@ -3,8 +3,12 @@ package com.saiyu.foreground.ui.activitys;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.saiyu.foreground.cashe.CacheActivity;
+import com.saiyu.foreground.utils.ButtonUtils;
+import com.saiyu.foreground.utils.LogUtils;
 
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
@@ -65,5 +69,16 @@ public class BaseActivity extends SupportActivity{
 
     public boolean isForegroud() {
         return isForegroud;
+    }
+
+    //防止连续点击事件
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            if (ButtonUtils.isFastDoubleClick()) {
+                return true;
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

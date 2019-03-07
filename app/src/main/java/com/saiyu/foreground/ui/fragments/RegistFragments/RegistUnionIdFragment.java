@@ -48,7 +48,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     ImageView iv_psw;
     @ViewById
     ProgressBar pb_loading;
-    private String type,unionID;
+    private String type,unionId,openId;
     private String accountExist = "*账号已存在";
 
     public static RegistUnionIdFragment newInstance(Bundle bundle) {
@@ -69,7 +69,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
         Bundle bundle = getArguments();
         if (bundle != null) {
             type = bundle.getString("type");
-            unionID = bundle.getString("unionID");
+            unionId = bundle.getString("unionId");
+            openId = bundle.getString("openId");
         }
     }
 
@@ -195,7 +196,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         return;
                     }
 
-                    ApiRequest.unionIDRegist(account, password, type,unionID,"RegistUnionIdFragment_regist",pb_loading);
+                    ApiRequest.unionIDRegist(account, password, type,unionId,openId,"RegistUnionIdFragment_regist",pb_loading);
                     break;
                 case R.id.btn_regist_old:
                     String userName = et_account_old.getText().toString().trim();
@@ -211,7 +212,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         return;
                     }
 
-                    ApiRequest.unionIDRegist(userName, userPassword, type,unionID,"RegistUnionIdFragment_bind",pb_loading);
+                    ApiRequest.unionIDRegist(userName, userPassword, type,unionId,openId,"RegistUnionIdFragment_bind",pb_loading);
 
                     break;
 

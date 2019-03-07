@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
@@ -35,6 +36,7 @@ public class BuyerFragment extends BaseFragment implements CallbackUtils.Respons
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        ApiRequest.buyerInfo("",pb_loading);
     }
 
     @AfterViews

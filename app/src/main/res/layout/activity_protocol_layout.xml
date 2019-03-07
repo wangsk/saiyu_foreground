@@ -7,7 +7,7 @@
 
     <include layout="@layout/titlebar_layout" />
 
-    <ScrollView
+    <com.saiyu.foreground.ui.views.ReboundScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,5 +20,5 @@
             android:textSize="15sp"
             android:textColor="@color/black"
             android:text="@string/app_protocol"/>
-    </ScrollView>
+    </com.saiyu.foreground.ui.views.ReboundScrollView>
 </LinearLayout>

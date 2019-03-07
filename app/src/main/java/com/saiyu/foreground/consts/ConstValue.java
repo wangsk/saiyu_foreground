@@ -7,13 +7,19 @@ public class ConstValue {
     public static final String SERVR_URL = "http://192.168.1.147:66/";//测试地址
 //    public static final String SERVR_URL = "http://work.saiyu.com/manageApi/";//线上地址
     public static String MetaTypeJson = "application/json; charset=utf-8";
-    public static final String APPID = "SaiyuAndroidApp";
+    public static final String APPID = "SaiyuApp";
     public static final String APPSecret = "XdEUpQjvih5KC4ZiMkXwFvNfRvvMED38";
     public static String UserSecret;
     public static final String ACCESS_TOKEN = "accessToken";
     public static final String USER_KEY = "userKey";
     //自动登录的标记
     public static final String AUTO_LOGIN_FLAG = "autologinflag";
+
+    public static final int ACTION_PHOTOGRAPH = 201;//拍照的请求码
+    public static final int ACTION_TRIM_IMAGE = 202;//相册的请求码
+    public static final int ACTION_ALBUM = 203;//裁剪照片的请求码
+
+    public static final String MainBottomVisibleType = "mainBottomVisibleType";//主界面下面显示的item个数，（0：全部显示:1：不显示买家:2：不显示卖家）
 
     /**
      * ==========================第三方登录=================================
@@ -37,8 +43,8 @@ public class ConstValue {
     public static final String checkAccout_3 = "^[a-zA-Z]{5,20}$";
     public static final String checkAccout_4 = "^[0-9]+";
     //姓名验证
-    public static final String nameCheck = "[\\u4e00-\\u9fa5]+";
+   // public static final String nameCheck = "[\\u4e00-\\u9fa5]+";
     //身份证验证
-    public static final String identityCheck = "^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$";
+   // public static final String identityCheck = "^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$";
 
 }

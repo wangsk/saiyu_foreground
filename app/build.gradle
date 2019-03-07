@@ -4,7 +4,7 @@ def AAVersion = '4.4.0'
 android {
 
     signingConfigs {
-        jingyeqian {
+        saiyuforeground {
             keyAlias 'saiyuforeground'
             keyPassword 'YuSaisd1684&*(work77LIqia!'
             storeFile file('D:/mykey/saiyuforeground.jks')
@@ -37,6 +37,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.saiyuforeground
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+        }
+        debug {
+            signingConfig signingConfigs.saiyuforeground
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
         }
     }
 }
@@ -67,14 +80,21 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     implementation 'com.android.support:recyclerview-v7:27.0.0'
     implementation 'com.yanzhenjie:recyclerview-swipe:1.0.4'
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     implementation 'com.android.support:design:27.+'
     implementation files('libs/open_sdk_r5886_lite.jar')
     //微信依赖
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-
     implementation 'com.android.support:recyclerview-v7:27.0.0-alpha1'
-
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.1@aar'
+    //基础工具库
+    implementation 'com.github.vondear.RxTool:RxKit:v2.2.7'
+    //   UI库
+    //implementation "com.github.vondear.RxTool:RxUI:v2.2.7"
+    //图片剪裁
+    implementation 'com.github.yalantis:ucrop:2.2.2-native'
+    implementation files('libs/core-3.3.3.jar')
+    implementation files('libs/alipaySdk-20161222.jar')
 }

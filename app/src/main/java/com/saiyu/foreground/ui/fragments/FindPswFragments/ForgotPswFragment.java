@@ -70,6 +70,7 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
                 ApiRequest.getAccountInfoNoLogin(account, "ForgotPswFragment_getAccountInfoNoLogin",pb_loading);
 
             } else {
+                tv_response_msg.setVisibility(View.VISIBLE);
                 tv_response_msg.setText("*账号不存在");
             }
         } else if (method.equals("ForgotPswFragment_getAccountInfoNoLogin")) {
@@ -80,7 +81,12 @@ public class ForgotPswFragment extends BaseFragment implements CallbackUtils.Res
 
             Bundle bundle = new Bundle();
             bundle.putString("account", account);
-            bundle.putSerializable("AccountInfoNoLoginRet",ret);
+            bundle.putString("RealName",ret.getData().getRealName());
+            bundle.putString("IDNum",ret.getData().getIDNum());
+            bundle.putString("mobile",ret.getData().getMobile());
+            bundle.putString("RegTime",ret.getData().getRegTime());
+            bundle.putString("totalMoney",ret.getData().getTotalMoney());
+            bundle.putInt("riskLevel",ret.getData().getRiskLevel());
             FindPswByLevelFragment findPswByLevelFragment = FindPswByLevelFragment.newInstance(bundle);
             start(findPswByLevelFragment);
         }

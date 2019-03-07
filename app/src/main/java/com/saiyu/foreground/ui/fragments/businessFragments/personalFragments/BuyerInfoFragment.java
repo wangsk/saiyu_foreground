@@ -8,7 +8,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
+import com.saiyu.foreground.https.response.BuyerInfoRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
@@ -37,6 +39,7 @@ public class BuyerInfoFragment extends BaseFragment implements CallbackUtils.Res
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        ApiRequest.buyerInfo("BuyerInfoFragment_buyerInfo",pb_loading);
 
     }
 
@@ -49,6 +52,13 @@ public class BuyerInfoFragment extends BaseFragment implements CallbackUtils.Res
     public void setOnResponseCallback(String method, BaseRet baseRet) {
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
+        }
+        if(method.equals("BuyerInfoFragment_buyerInfo")){
+            BuyerInfoRet ret = (BuyerInfoRet)baseRet;
+            if(ret.getData() == null){
+                return;
+            }
+
         }
     }
 
