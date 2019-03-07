@@ -28,7 +28,6 @@ public class RewardRet extends BaseRet {
     }
 
     public static class DataBean {
-
         private String appid;
         private String partnerid;
         private String noncestr;

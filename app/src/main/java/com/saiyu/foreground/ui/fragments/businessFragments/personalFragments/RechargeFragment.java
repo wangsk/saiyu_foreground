@@ -16,8 +16,10 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.PayResult;
+import com.saiyu.foreground.https.response.RechargeRateRet;
 import com.saiyu.foreground.https.response.RewardRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
@@ -54,6 +56,8 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
 
     private IWXAPI api;
 
+    private String WechatServiceRate,AliServiceRate;
+
     public static RechargeFragment newInstance(Bundle bundle) {
         RechargeFragment_ fragment = new RechargeFragment_();
         fragment.setArguments(bundle);
@@ -64,6 +68,7 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        ApiRequest.getRechargeRate("RechargeFragment_getRechargeRate",pb_loading);
 
     }
 
@@ -78,6 +83,28 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
         }
+        if(method.equals("RechargeFragment_getRechargeRate")){
+            RechargeRateRet ret = (RechargeRateRet)baseRet;
+            if(ret.getData() == null){
+                return;
+            }
+            if(ret.getData().isResult()){
+                AliServiceRate = ret.getData().getAliServiceRate();
+                WechatServiceRate = ret.getData().getWechatServiceRate();
+            }
+        } else if(method.equals("RechargeFragment_submitRecharge")){
+            RewardRet ret = (RewardRet)baseRet;
+            if(ret.getData() == null){
+                return;
+            }
+
+            if(iv_wechat.getVisibility() == View.VISIBLE){
+                toWXPay(ret.getData());
+            } else if(iv_zhifubao.getVisibility() == View.VISIBLE){
+                toAliPay(ret.getData());
+            }
+
+        }
     }
 
     @Click({R.id.btn_title_back,R.id.ll_wechat,R.id.ll_zhifubao,R.id.btn_next})
@@ -89,24 +116,20 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
                     break;
                 case R.id.btn_next:
                     String money = et_count.getText().toString();
-                    if(!TextUtils.isEmpty(money)){
+                    if(TextUtils.isEmpty(money)){
                         Toast.makeText(mContext,"请输入充值金额",Toast.LENGTH_SHORT).show();
                         return;
                     }
+
+                    String payType = "";
+
                     RewardRet.DataBean dataBean = new RewardRet.DataBean();
                     if(iv_wechat.getVisibility() == View.VISIBLE){
-                        dataBean.setAppid("wx3e154e50aa6775d4");
-                        dataBean.setPartnerid("1514392241");
-                        dataBean.setPrepayid("wx0710153099512477286bb48a2321203222");
-                        dataBean.setPackage_1("Sign\\u003dWXPay");
-                        dataBean.setNoncestr("EpFOOfynKzAriAo");
-                        dataBean.setTimestamp("1551924930");
-                        dataBean.setSign("A70CAD593A16930A245CC81D8F4C4300");
-                        toWXPay(dataBean);
+                        payType = "2";
                     } else if(iv_zhifubao.getVisibility() == View.VISIBLE){
-                        dataBean.setOrderInfo("app_id\\u003d2018092661553453\\u0026biz_content\\u003d%7b%22body%22%3a%22%e6%89%93%e8%b5%8f5%e5%85%83%22%2c%22subject%22%3a%22%e6%95%ac%e4%b8%9a%e7%ad%be-%e6%89%93%e8%b5%8f%22%2c%22out_trade_no%22%3a%221040304543293771776%22%2c%22total_amount%22%3a%225.00%22%2c%22product_code%22%3a%22QUICK_MSECURITY_PAY%22%2c%22notify_url%22%3a%22https%3a%2f%2fmobile.jingyeqian.com%2fthirdNotice%2fgratuityJYQAlipay%22%7d\\u0026charset\\u003dutf-8\\u0026format\\u003djson\\u0026method\\u003dalipay.trade.app.pay\\u0026sign_type\\u003dRSA2\\u0026timestamp\\u003d2019-03-07+09%3a53%3a11\\u0026version\\u003d1.0\\u0026sign\\u003dSuf4sL2QcgTmVy8X1rqNltSXn%2fGe748QQDT%2fqclPU0DCBRO2uP%2bQVstFtddnK2JMUgDHU1FwKkFWGduuFFAu3bORXdzmiW57pt4sIN8CS4SEg64baSWdkzChScG9iw4L%2f9bEMasCrAmT6Tm4nmLonl%2fJnb7kK3rYnUBHbs%2blIIBjrTAV8%2fsepAF5L1ygGxZxSkYH0VfPxMkIFrygZRgtPajGPJayNr9JAAn2aGGlulyFlwe2JO%2f80pHKIoXLuofY2yO%2fuZYGwN5tgmKO36Vz1fBfhJ3m5O14mrKu7yP4kIiPsSTUvOs%2fYFyf6ktJ89vkXXzQDfVctZ%2fF17lbvKcjIA%3d%3d");
-                       toAliPay(dataBean);
+                        payType = "1";
                     }
+                    ApiRequest.submitRecharge(payType,money,"RechargeFragment_submitRecharge",pb_loading);
                     break;
                 case R.id.ll_wechat:
                     if(iv_wechat.getVisibility() == View.VISIBLE){
@@ -133,8 +156,8 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
      **/
     @Background
     void toWXPay(RewardRet.DataBean ret) {
-        api = WXAPIFactory.createWXAPI(mContext, "wx3e154e50aa6775d4"); //初始化微信api
-        api.registerApp("wx3e154e50aa6775d4");
+        api = WXAPIFactory.createWXAPI(mContext, ret.getAppid()); //初始化微信api
+        api.registerApp(ret.getAppid());
         if (!api.isWXAppInstalled()) {
             Toast.makeText(mContext,"请先安装微信应用",Toast.LENGTH_SHORT).show();
             return;
@@ -217,10 +240,14 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
         String money = s.toString();
         if(!TextUtils.isEmpty(money)){
             BigDecimal bigDecimal = new BigDecimal(money);
-            BigDecimal decimal = new BigDecimal(0.5);
-            BigDecimal decimal1 = bigDecimal.multiply(decimal).setScale(2,BigDecimal.ROUND_HALF_UP);//四舍五入，2.35变成2.4
-            tv_zhifubao.setText(decimal1+"");
+            BigDecimal decimal_wechat = new BigDecimal(WechatServiceRate);
+            BigDecimal decimal_w = bigDecimal.multiply(decimal_wechat).setScale(2,BigDecimal.ROUND_HALF_UP);//四舍五入，2.35变成2.4
+            tv_wechat.setText(decimal_w+"");
+            BigDecimal decimal_zhifubao = new BigDecimal(AliServiceRate);
+            BigDecimal decimal_z = bigDecimal.multiply(decimal_zhifubao).setScale(2,BigDecimal.ROUND_HALF_UP);//四舍五入，2.35变成2.4
+            tv_zhifubao.setText(decimal_z+"");
         } else {
+            tv_wechat.setText("手续费");
             tv_zhifubao.setText("手续费");
         }
 

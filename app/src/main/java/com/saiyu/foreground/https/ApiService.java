@@ -15,8 +15,10 @@ import com.saiyu.foreground.https.response.IsAccountExistRet;
 import com.saiyu.foreground.https.response.LoginRecordRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.https.response.RealNameStatusRet;
+import com.saiyu.foreground.https.response.RechargeRateRet;
 import com.saiyu.foreground.https.response.RechargeRecordRet;
 import com.saiyu.foreground.https.response.RegistRet;
+import com.saiyu.foreground.https.response.RewardRet;
 import com.saiyu.foreground.https.response.SellerInfoRet;
 import com.saiyu.foreground.https.response.FaceRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
@@ -202,6 +204,13 @@ public interface ApiService {
     //提交提现申请
     @POST("Finance/WithdrawReq")
     Observable<BooleanRet> submitCash(@Body RequestBody body);
+
+    //提交充值申请
+    @POST("Finance/RechargeReq")
+    Observable<RewardRet> submitRecharge(@Body RequestBody body);
+    //获取充值费率
+    @POST("Finance/Recharge")
+    Observable<RechargeRateRet> getRechargeRate(@Body RequestBody body);
 
     //上传图片
     @Multipart
