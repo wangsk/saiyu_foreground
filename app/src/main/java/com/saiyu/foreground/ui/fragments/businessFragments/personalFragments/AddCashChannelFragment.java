@@ -1,7 +1,10 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.personalFragments;
 
+import android.Manifest;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +22,17 @@ import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.Utils;
 import com.saiyu.foreground.zxinglibrary.encode.CodeCreator;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+
+import io.reactivex.disposables.Disposable;
+
 
 @EFragment(R.layout.fragment_add_cashchannel)
 public class AddCashChannelFragment extends BaseFragment  implements CallbackUtils.ResponseCallback{
@@ -91,9 +99,16 @@ public class AddCashChannelFragment extends BaseFragment  implements CallbackUti
                     ll_add.setVisibility(View.GONE);
 
                     if(!TextUtils.isEmpty(ImgUrl)){
-                        Bitmap bitmap = CodeCreator.createQRCode(ImgUrl, 400, 400, null);
+                        final Bitmap bitmap = CodeCreator.createQRCode(ImgUrl, 400, 400, null);
                         if (bitmap != null) {
                             iv_wechat.setImageBitmap(bitmap);
+                            iv_wechat.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    loadImage(bitmap);
+                                    return true;
+                                }
+                            });
                         }
                     }
 
@@ -151,4 +166,36 @@ public class AddCashChannelFragment extends BaseFragment  implements CallbackUti
                 break;
         }
     }
+
+    public static void loadImage(final Bitmap bitmap) {
+        RxPermissions rxPermissions = new RxPermissions(mContext);
+        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new io.reactivex.Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        if(!aBoolean){
+                            Toast.makeText(mContext,"请开启读写权限",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        Utils.saveBitmap(bitmap);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
 }
+
+

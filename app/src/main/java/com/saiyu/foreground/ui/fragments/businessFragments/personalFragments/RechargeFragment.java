@@ -197,7 +197,6 @@ public class RechargeFragment extends BaseFragment implements CallbackUtils.Resp
         payThread.start();
     }
 
-
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
