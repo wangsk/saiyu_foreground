@@ -5,13 +5,17 @@ import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.AppVersionRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.BuyerInfoRet;
+import com.saiyu.foreground.https.response.CancelOrderInfoRet;
 import com.saiyu.foreground.https.response.CashChannelRet;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.https.response.FaceStatusRet;
+import com.saiyu.foreground.https.response.HallDetailReceiveRet;
+import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
+import com.saiyu.foreground.https.response.IsCountDoRet;
 import com.saiyu.foreground.https.response.LoginRecordRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.https.response.RealNameStatusRet;
@@ -184,6 +188,29 @@ public interface ApiService {
     //大厅订单
     @POST("Hall/Index")
     Observable<HallRet> hallIndex(@Body RequestBody body);
+    //大厅订单详情
+    @POST("Hall/ReceiveInfo")
+    Observable<HallDetailRet> hallDetail(@Body RequestBody body);
+
+    //大厅订单详情(已接单)
+    @POST("Hall/Receive")
+    Observable<HallDetailReceiveRet> hallDetailReceive(@Body RequestBody body);
+
+    //完成充值后，提交审核
+    @POST("Hall/ReceiveSubmit")
+    Observable<BooleanRet> receiveSubmit(@Body RequestBody body);
+
+    //充值数量是否可用
+    @POST("Hall/UsableQBCountList")
+    Observable<IsCountDoRet> usableQBCountList(@Body RequestBody body);
+
+    //取消订单详情
+    @POST("Hall/ReceiveCancel")
+    Observable<CancelOrderInfoRet> receiveCancel(@Body RequestBody body);
+
+    //取消订单
+    @POST("Hall/ReceiveCancelSubmit")
+    Observable<BooleanRet> receiveCancelSubmit(@Body RequestBody body);
 
     //获取版本号
     @POST("Tool/GetAppVersion")

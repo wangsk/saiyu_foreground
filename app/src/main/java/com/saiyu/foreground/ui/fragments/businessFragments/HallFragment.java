@@ -1,9 +1,11 @@
 package com.saiyu.foreground.ui.fragments.businessFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -11,15 +13,20 @@ import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.HallAdapter;
-import com.saiyu.foreground.adapters.RechargeRecordAdapter;
+import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
+import com.saiyu.foreground.interfaces.OnTagFlowItemClickListener;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.PopWindowUtils;
+import com.saiyu.foreground.utils.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -35,22 +42,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EFragment(R.layout.fragment_hall)
-public class HallFragment extends BaseFragment implements CallbackUtils.ResponseCallback ,OnRefreshListener,OnLoadmoreListener, OnItemClickListener {
+public class HallFragment extends BaseFragment implements CallbackUtils.ResponseCallback, OnRefreshListener, OnLoadmoreListener, OnItemClickListener {
     @ViewById
     ProgressBar pb_loading;
     @ViewById
-    TextView tv_total_order,tv_total_qcount;
+    TextView tv_total_order, tv_total_qcount;
     @ViewById
-    LinearLayout ll_recharge_game,ll_selector;
+    LinearLayout ll_recharge_game, ll_selector;
+    @ViewById
+    ImageView iv_hall_selector,iv_hall_question;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
     SwipeMenuRecyclerView recyclerView;
     private HallAdapter hallAdapter;
     private List<HallRet.DatasBean.ItemsBean> mItems = new ArrayList<>();
+    private List<HallRet.DatasBean.ProductItemsBean> productItemsBeans = new ArrayList<>();
     private int page = 1;
-    private int pageSize = 10;
+    private int pageSize = 50;
     private int totalPage;
+    private String rQBCount = "",rDiscount = "",pId = "",extend = "",sort = "";
 
     public static HallFragment newInstance(Bundle bundle) {
         HallFragment_ fragment = new HallFragment_();
@@ -62,7 +73,6 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        ApiRequest.hallIndex("g",page+"",pageSize+"","HallFragment_hallIndex",pb_loading);
 
     }
 
@@ -75,6 +85,9 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
         refreshLayout.setOnLoadmoreListener(this);
         hallAdapter = new HallAdapter(mItems);
         recyclerView.setAdapter(hallAdapter);
+
+        CallbackUtils.setCallback(this);
+        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
     }
 
     @Override
@@ -83,16 +96,16 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
             return;
         }
         if (method.equals("HallFragment_hallIndex")) {
-            HallRet ret = (HallRet)baseRet;
-            if(ret.getData() == null){
+            HallRet ret = (HallRet) baseRet;
+            if (ret.getData() == null) {
                 return;
             }
-            tv_total_order.setText(ret.getData().getOrderCount()+"");
-            tv_total_qcount.setText(ret.getData().getTotalCount()+"");
+            tv_total_order.setText(ret.getData().getOrderCount() + "");
+            tv_total_qcount.setText(ret.getData().getTotalCount() + "");
 
-            int totalCount = ret.getData().getTotalCount();
+            int totalCount = ret.getData().getOrderCount();
 
-            totalPage = totalCount/pageSize + 1;
+            totalPage = totalCount / pageSize + 1;
             LogUtils.print("总数:" + totalCount + " ;总页码：" + totalPage);
 
             mItems.clear();
@@ -103,21 +116,57 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
             recyclerView.setAdapter(hallAdapter);
             hallAdapter.notifyDataSetChanged();
 
+            productItemsBeans.clear();
+
+            HallRet.DatasBean.ProductItemsBean productItemsBean = new HallRet.DatasBean.ProductItemsBean();
+            productItemsBean.setName("不限");
+            productItemsBeans.add(productItemsBean);
+
+            productItemsBeans.addAll(ret.getData().getProductList());
+
         }
     }
 
     @Override
     public void onItemClick(View view, int position) {
+        if(mItems == null || mItems.size() <= position || TextUtils.isEmpty(mItems.get(position).getOrderNum())){
+            LogUtils.print("点击异常");
+            return;
+        }
+
+        Intent intent = new Intent(mContext,ContainerActivity_.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("orderNum",mItems.get(position).getOrderNum());
+        bundle.putString("OrderTitle",mItems.get(position).getOrderTitle());
+        bundle.putString("ReserveTitle",mItems.get(position).getReserveTitle());
+        bundle.putBoolean("IsCustomerConfirmation",mItems.get(position).isCustomerConfirmation());
+        bundle.putBoolean("IsImgConfirmation",mItems.get(position).isImgConfirmation());
+        bundle.putBoolean("IsLessThanOriginalPrice",mItems.get(position).isLessThanOriginalPrice());
+        bundle.putBoolean("IsOrderPwd",mItems.get(position).isOrderPwd());
+        bundle.putBoolean("IsFriendLimit",mItems.get(position).isFriendLimit());
+        bundle.putBoolean("IsOnceMinCount",mItems.get(position).isOnceMinCount());
+        bundle.putString("OnceMinCount",mItems.get(position).getOnceMinCount());
+        bundle.putFloat("VipLevel",mItems.get(position).getVipLevel());
+        bundle.putString("AverageConfirmTime",mItems.get(position).getAverageConfirmTime());
+        bundle.putInt("ReserveDiscount",mItems.get(position).getReserveDiscount());
+        bundle.putString("RemainingAmount",mItems.get(position).getRemainingAmount());
+        bundle.putString("OrderRSettleTotalCount",mItems.get(position).getOrderRSettleTotalCount());
+        bundle.putString("OrderRSettleTotalMoney",mItems.get(position).getOrderRSettleTotalMoney());
+
+        bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.HallOrderDetailFragmentTag);
+        intent.putExtras(bundle);
+        mContext.startActivity(intent);
 
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        if(page < totalPage){
+        if (page < totalPage) {
             page++;
-            ApiRequest.hallIndex("g",page+"",pageSize+"","HallFragment_hallIndex",pb_loading);
+            ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
         } else {
-            Toast.makeText(mContext,"已经是最后一页",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "已经是最后一页", Toast.LENGTH_SHORT).show();
         }
         if (refreshLayout != null) {
             refreshlayout.finishLoadmore();
@@ -126,24 +175,71 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        if(page > 1){
+        if (page > 1) {
             page--;
-            ApiRequest.hallIndex("g",page+"",pageSize+"","HallFragment_hallIndex",pb_loading);
+            ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
         } else {
-            Toast.makeText(mContext,"已经是第一页",Toast.LENGTH_SHORT).show();
+            ApiRequest.hallIndex("g", "1", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+            Toast.makeText(mContext, "已经是第一页", Toast.LENGTH_SHORT).show();
         }
         if (refreshLayout != null) {
             refreshlayout.finishRefresh();
         }
     }
 
-    //    @Click({})
-//    void onClick(View view) {
-//        if (!ButtonUtils.isFastDoubleClick(view.getId())) {
-//            switch (view.getId()) {
-//
-//            }
-//        }
-//    }
+    @Click({R.id.iv_hall_selector, R.id.ll_recharge_game, R.id.ll_selector,R.id.iv_hall_question})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_hall_question:
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(mContext,ContainerActivity_.class);
+                bundle.putString("url", "https://www.saiyu.com/help/");
+                bundle.putString("type","帮助文档");//
+                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+                break;
+            case R.id.ll_recharge_game:
+                PopWindowUtils.initPopWindow_2(productItemsBeans, ll_recharge_game, new OnTagFlowItemClickListener() {
+                    @Override
+                    public void onTagFlowItemClick(String id,String id_2,String id_3) {
+                        LogUtils.print("_pId ==== " + pId + " id === " + id);
+                        if(TextUtils.isEmpty(id) && TextUtils.isEmpty(pId)){
+                            return;
+                        }
+                        pId = id;
+                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+                    }
+                });
+                break;
+            case R.id.ll_selector:
+                PopWindowUtils.initPopWindow_3(ll_selector, new OnTagFlowItemClickListener() {
+                    @Override
+                    public void onTagFlowItemClick(String id_1, String id_2, String id_3) {
+                        LogUtils.print("rQBCount ==== " + rQBCount + " id_1 === " + id_1 + " rDiscount ==== " + rDiscount + " id_2 === " + id_2 + " extend ==== " + extend + " id_3 === " + id_3);
+                        if(TextUtils.isEmpty(rQBCount) && TextUtils.isEmpty(id_1) && TextUtils.isEmpty(rDiscount) && TextUtils.isEmpty(id_2) && TextUtils.isEmpty(extend) && TextUtils.isEmpty(id_3)){
+                            return;
+                        }
+                        rQBCount = id_1;
+                        rDiscount = id_2;
+                        extend = id_3;
+                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+                    }
+                });
+
+                break;
+            case R.id.iv_hall_selector:
+                PopWindowUtils.initPopWindow_4(iv_hall_selector, new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        sort = position+"";
+                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+                        LogUtils.print("你点击了 ：" + position);
+                    }
+                });
+
+                break;
+        }
+    }
 
 }

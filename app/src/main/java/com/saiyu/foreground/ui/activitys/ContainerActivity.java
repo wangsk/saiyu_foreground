@@ -12,6 +12,7 @@ import com.saiyu.foreground.ui.fragments.FindPswFragments.ForgotPswFragment;
 import com.saiyu.foreground.ui.fragments.LoginFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistUnionIdFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.hallFragments.HallOrderDetailFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.ActiveBuyerFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.ActiveSellerFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.BindPhoneStatusFragment;
@@ -73,7 +74,8 @@ public class ContainerActivity extends BaseActivity{
     public static final int WebFragmentTag = 19;//网页
     public static final int UploadIdentityFragmentTag = 20;//实名认证
     public static final int FaceIdentifyFragmentTag = 21;//刷脸认证
-    public static final int CashChannelListFragmentTag = 212;//提现渠道
+    public static final int CashChannelListFragmentTag = 22;//提现渠道
+    public static final int HallOrderDetailFragmentTag = 23;//大厅订单详情
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -121,6 +123,8 @@ public class ContainerActivity extends BaseActivity{
                 return FaceIdentifyFragment.newInstance(bundle);
             case CashChannelListFragmentTag:
                 return CashChannelListFragment.newInstance(bundle);
+            case HallOrderDetailFragmentTag:
+                return HallOrderDetailFragment.newInstance(bundle);
                 default:
                     return null;
         }

@@ -119,7 +119,7 @@ public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
         myHolder.tv_line_3_1.setText(mItems.get(i).getRemainingAmount()+"Q币");
         myHolder.tv_line_3_2.setText("成交"+mItems.get(i).getOrderRSettleTotalCount()+"笔"+mItems.get(i).getOrderRSettleTotalMoney()+"元");
         myHolder.tv_zc.setText(mItems.get(i).getReserveDiscount()+"折");
-        myHolder.rb_mark.setRating(mItems.get(i).getVipLevel());
+        myHolder.rb_mark.setRating(mItems.get(i).getVipLevel()/2);
 
         myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override

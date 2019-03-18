@@ -172,6 +172,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                             Bundle bundle = new Bundle();
                             Intent intent = new Intent(mContext,ContainerActivity_.class);
                             bundle.putString("url", url);
+                            bundle.putString("type","系统通知");//
                             bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
                             intent.putExtras(bundle);
                             mContext.startActivity(intent);

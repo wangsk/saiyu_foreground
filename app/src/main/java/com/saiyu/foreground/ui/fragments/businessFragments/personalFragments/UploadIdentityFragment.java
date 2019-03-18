@@ -52,7 +52,7 @@ import io.reactivex.disposables.Disposable;
 
 
 @EFragment(R.layout.fragment_upload_identity)
-public class UploadIdentityFragment extends BaseFragment implements CallbackUtils.OnActivityCallBack ,CallbackUtils.ResponseCallback {
+public class UploadIdentityFragment extends BaseFragment implements CallbackUtils.OnActivityCallBack,CallbackUtils.ResponseCallback {
     @ViewById
     TextView tv_title_content;
     @ViewById

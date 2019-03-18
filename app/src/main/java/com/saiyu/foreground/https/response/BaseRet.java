@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by jiushubu on 2017/7/3.
  */
-public class BaseRet implements Serializable {
+public class BaseRet{
     int code;
     String msg;
 

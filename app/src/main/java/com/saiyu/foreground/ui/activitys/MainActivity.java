@@ -120,10 +120,10 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
                 } else {
                     bottomBar.setCurrentItem(prePosition);
                     Bundle bundle = new Bundle();
-                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    Intent intent = new Intent(MainActivity.this,ContainerActivity_.class);
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.LoginFragmentTag);
                     intent.putExtras(bundle);
-                    mContext.startActivity(intent);
+                    MainActivity.this.startActivity(intent);
                     //设置activity从底部弹出
                     //overridePendingTransition(R.anim.from_bottom_to_top, R.anim.from_top_to_bottom);
                 }

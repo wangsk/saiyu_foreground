@@ -151,16 +151,7 @@ public class RechargeRecordFragment extends BaseFragment implements CallbackUtil
 
     @Override
     public void onItemClick(View view, int position) {
-        PopWindowUtils.initPopWindow(getActivity(),1,null,mItems.get(position),null);
-    }
-
-    @Override
-    public boolean onBackPressedSupport() {
-        if(PopWindowUtils.isShowing()){
-            PopWindowUtils.hide(getActivity());
-            return true;
-        }
-        return super.onBackPressedSupport();
+        PopWindowUtils.initPopWindow_7(mItems.get(position));
     }
 
 }

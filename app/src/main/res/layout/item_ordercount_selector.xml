@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:textColor="@color/blue">
+    </TextView>
+
+</LinearLayout>

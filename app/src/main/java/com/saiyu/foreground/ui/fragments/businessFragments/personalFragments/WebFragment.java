@@ -42,9 +42,11 @@ public class WebFragment extends BaseFragment {
 
     @AfterViews
     void afterViews(){
-        tv_title_content.setText("系统通知");
         Bundle bundle = getArguments();
         if(bundle != null){
+            String type = bundle.getString("type");
+            tv_title_content.setText(type);
+
             String url = bundle.getString("url");
 
             baseweb_webview.getSettings().setJavaScriptEnabled(true);

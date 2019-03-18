@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fitsSystemWindows="true"
+    tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="450dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_tool"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/blue">
+
+            <TextView
+                android:id="@+id/tv_month_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="16dp"
+                android:textColor="#ffffff"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/tv_solar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_month_day"
+                android:layout_alignBaseline="@id/tv_month_day"
+                android:layout_marginLeft="20dp"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                tools:ignore="SmallSp" />
+
+
+        </RelativeLayout>
+
+        <com.saiyu.foreground.calenderview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_tool"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="0dp"
+            android:background="#fff"
+            app:current_month_lunar_text_color="#CFCFCF"
+            app:current_month_text_color="#333333"
+            app:day_text_size="16sp"
+            app:lunar_text_size="8sp"
+            app:min_year="2004"
+            app:month_view="com.saiyu.foreground.calenderview.IndexMonthView"
+            app:month_view_show_mode="mode_fix"
+            app:other_month_text_color="#e1e1e1"
+            app:scheme_text="假"
+            app:scheme_text_color="#333"
+            app:scheme_theme_color="#128c4b"
+            app:selected_lunar_text_color="#CFCFCF"
+            app:selected_text_color="#333"
+            app:selected_theme_color="#90cfcfcf"
+            app:week_background="#fff"
+            app:week_text_color="#111"
+            app:week_view="com.saiyu.foreground.calenderview.IndexWeekView"
+            app:year_view_day_text_color="#333333"
+            app:year_view_day_text_size="9sp"
+            app:year_view_month_text_color="#ff0000"
+            app:year_view_month_text_size="20sp"
+            app:year_view_scheme_color="#f17706" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_above="@id/ll_timeselect"
+            android:background="#30000000" />
+
+        <LinearLayout
+            android:id="@+id/ll_timeselect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <com.saiyu.foreground.calenderview.PickerView
+                    android:id="@+id/hour"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <com.saiyu.foreground.calenderview.PickerView
+                    android:id="@+id/minute"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tp_quxiao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/unEnabled"
+                    android:gravity="center"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:text="取消"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tp_queren"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:text="完成"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:background="@color/blue"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

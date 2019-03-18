@@ -121,6 +121,12 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             SPUtils.putString(ConstValue.ACCESS_TOKEN, ret.getData().getAccessToken());
             SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
+//            Intent intent = new Intent();
+//            Bundle bundle = new Bundle();
+//            bundle.putBoolean("isLogin",true);
+//            intent.putExtras(bundle);
+//            getActivity().setResult(RESULT_OK, intent);//给订单详情界面返回login
+
             getActivity().finish();
 
         }

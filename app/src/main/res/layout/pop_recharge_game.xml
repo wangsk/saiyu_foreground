@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/tools"
+    android:id="@+id/ll_pop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/grey20"
+    android:orientation="vertical">
+
+    <com.saiyu.foreground.ui.views.ReboundScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tfl_recharge_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
+
+    </com.saiyu.foreground.ui.views.ReboundScrollView>
+
+</LinearLayout>

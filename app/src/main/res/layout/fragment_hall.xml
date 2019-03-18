@@ -75,67 +75,63 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:background="@color/blue_60"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总单量: "
+                android:textColor="@color/black80"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tv_total_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 单     总需求数量: "
+                android:textColor="@color/black80"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tv_total_qcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Q币"
+                android:textColor="@color/black80"
+                android:textSize="13dp" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/blue" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="10dp">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="总单量"
-                    android:textColor="@color/black80"
-                    android:textSize="13dp" />
-
-                <TextView
-                    android:id="@+id/tv_total_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/blue"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="单 总需求数量"
-                    android:textColor="@color/black80"
-                    android:textSize="13dp" />
-
-                <TextView
-                    android:id="@+id/tv_total_qcount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/blue"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Q币"
-                    android:textColor="@color/black80"
-                    android:textSize="13dp" />
-
-            </LinearLayout>
+                android:text="预定订单"
+                android:textColor="@color/black80"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -161,6 +157,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:src="@mipmap/mem_info_icon" />
                 </LinearLayout>
 
@@ -169,6 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -181,6 +179,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:src="@mipmap/mem_info_icon" />
                 </LinearLayout>
 
@@ -188,7 +187,7 @@
                     android:id="@+id/iv_hall_selector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:src="@mipmap/mem_info_icon" />
 
             </LinearLayout>

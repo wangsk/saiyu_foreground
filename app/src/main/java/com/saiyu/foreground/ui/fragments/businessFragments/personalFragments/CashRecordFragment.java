@@ -151,15 +151,7 @@ public class CashRecordFragment extends BaseFragment implements CallbackUtils.Re
 
     @Override
     public void onItemClick(View view, int position) {
-        PopWindowUtils.initPopWindow(getActivity(),2,null,null,mItems.get(position));
+        PopWindowUtils.initPopWindow_6(mItems.get(position));
     }
 
-    @Override
-    public boolean onBackPressedSupport() {
-        if(PopWindowUtils.isShowing()){
-            PopWindowUtils.hide(getActivity());
-            return true;
-        }
-        return super.onBackPressedSupport();
-    }
 }

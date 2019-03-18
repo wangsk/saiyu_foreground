@@ -20,6 +20,15 @@ public class HallRet extends BaseRet {
         private int TotalCount;
         private QueryBean Query;
         private List<ItemsBean> OrderList;
+        private List<ProductItemsBean> ProductList;
+
+        public List<ProductItemsBean> getProductList() {
+            return ProductList;
+        }
+
+        public void setProductList(List<ProductItemsBean> productList) {
+            ProductList = productList;
+        }
 
         public String getProductTypeNameAlias() {
             return ProductTypeNameAlias;
@@ -144,6 +153,28 @@ public class HallRet extends BaseRet {
                 this.ordernum = ordernum;
             }
         }
+
+        public static class ProductItemsBean {
+            String Id;
+            String Name;
+
+            public String getId() {
+                return Id;
+            }
+
+            public void setId(String id) {
+                Id = id;
+            }
+
+            public String getName() {
+                return Name;
+            }
+
+            public void setName(String name) {
+                Name = name;
+            }
+        }
+
         public static class ItemsBean {
             private String Id;
             private String OrderNum;
@@ -159,7 +190,7 @@ public class HallRet extends BaseRet {
             private String RemainingAmount;
             private String OrderRSettleTotalCount;
             private String OrderRSettleTotalMoney;
-            private int VipLevel;
+            private float VipLevel;
             private String AverageConfirmTime;
             private int ReserveDiscount;
             private int IsLock;
@@ -285,11 +316,11 @@ public class HallRet extends BaseRet {
                 OrderRSettleTotalMoney = orderRSettleTotalMoney;
             }
 
-            public int getVipLevel() {
+            public float getVipLevel() {
                 return VipLevel;
             }
 
-            public void setVipLevel(int vipLevel) {
+            public void setVipLevel(float vipLevel) {
                 VipLevel = vipLevel;
             }
 

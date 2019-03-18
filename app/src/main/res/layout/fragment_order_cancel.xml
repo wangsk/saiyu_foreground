@@ -1,0 +1,202 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/titlebar_layout" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="取消原因:"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:text="个人原因，无法充值"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <ImageView
+                android:id="@+id/iv_1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/mem_info_icon"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:text="加不上买家QQ好友"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <ImageView
+                android:id="@+id/iv_2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/mem_info_icon"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:text="腾讯官方原因无法充值"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <ImageView
+                android:id="@+id/iv_3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/mem_info_icon"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="接单扣点:"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_order_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text=""
+                android:textSize="15sp"
+                android:textColor="@color/blue"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="超时扣点:"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_time_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text=""
+                android:textSize="15sp"
+                android:textColor="@color/blue"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="总计扣点:"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_total_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text=""
+                android:textSize="15sp"
+                android:textColor="@color/blue"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="确定取消"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="@android:style/Widget.Material.ProgressBar.Small"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone" />
+
+</RelativeLayout>

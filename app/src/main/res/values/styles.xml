@@ -39,4 +39,25 @@
         <!--使用方法： 在布局文件中给需要自定义控件中增加app:theme="@style/MySwitch"-->
     </style>
 
+    <style name="pop_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_show</item>
+        <item name="android:windowExitAnimation">@anim/pop_gone</item>
+    </style>
+
+    <style name="pop_animation_up" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_down_gone</item>
+        <item name="android:windowExitAnimation">@anim/pop_down_show</item>
+    </style>
+
+    <style name="dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
 </resources>

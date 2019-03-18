@@ -16,13 +16,17 @@ import com.saiyu.foreground.https.response.AccountInfoLoginRet;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.https.response.AppVersionRet;
 import com.saiyu.foreground.https.response.BuyerInfoRet;
+import com.saiyu.foreground.https.response.CancelOrderInfoRet;
 import com.saiyu.foreground.https.response.CashChannelRet;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.https.response.FaceStatusRet;
+import com.saiyu.foreground.https.response.HallDetailReceiveRet;
+import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
+import com.saiyu.foreground.https.response.IsCountDoRet;
 import com.saiyu.foreground.https.response.LoginRecordRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.https.response.BooleanRet;
@@ -378,12 +382,19 @@ public class ApiRequest {
                 });
     }
 
-    public static void hallIndex(String pType,String page, String pagesize, final String callBackKey,final ProgressBar pb_loading) {
+    public static void hallIndex(String pType,String page, String pagesize, String rQBCount,String rDiscount, String pId,String extend,String sort, final String callBackKey,final ProgressBar pb_loading) {
+        LogUtils.print("page : " + page + " pagesize : " + pagesize);
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("pType", pType);
         requestParams.put("page", page);
         requestParams.put("pagesize", pagesize);
+
+        requestParams.put("rQBCount", rQBCount);
+        requestParams.put("rDiscount", rDiscount);
+        requestParams.put("pId", pId);
+        requestParams.put("extend", extend);
+        requestParams.put("sort", sort);
 
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
 
@@ -409,6 +420,296 @@ public class ApiRequest {
 
                     @Override
                     public void onNext(HallRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void hallDetail(String orderNum, final String callBackKey,final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("orderNum", orderNum);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.hallDetail(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<HallDetailRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(HallDetailRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void hallDetailReceive(String orderId, String qbCount,String orderPwd,final String callBackKey,final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("orderId", orderId);
+        requestParams.put("qbCount", qbCount);
+        requestParams.put("orderPwd", orderPwd);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.hallDetailReceive(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<HallDetailReceiveRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(HallDetailReceiveRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void receiveSubmit(RequestParams requestParams,final String callBackKey,final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.receiveSubmit(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BooleanRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(BooleanRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void usableQBCountList(String orderNum, String num,final String callBackKey,final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("orderNum", orderNum);
+        requestParams.put("num", num);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.usableQBCountList(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<IsCountDoRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(IsCountDoRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void receiveCancel(String receiveId, final String callBackKey,final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("receiveId", receiveId);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.receiveCancel(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<CancelOrderInfoRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(CancelOrderInfoRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void receiveCancelSubmit(String receiveId, String cancelBType,final String callBackKey,final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("receiveId", receiveId);
+        requestParams.put("cancelBType", cancelBType);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.receiveCancelSubmit(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BooleanRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1){
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
                         } catch (Exception e1){

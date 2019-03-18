@@ -58,7 +58,7 @@ public class CallbackUtils {
         }
     }
 
-    public interface  OnPositionListener{
+    public interface OnPositionListener{
         void setOnPositionListener(int position);
     }
     public static OnPositionListener mOnPositionListener;
@@ -68,6 +68,19 @@ public class CallbackUtils {
     public static void doPositionCallback(int position){
         if(mOnPositionListener != null){
             mOnPositionListener.setOnPositionListener(position);
+        }
+    }
+
+    public interface OnContentListener{
+        void setOnContentListener(String content);
+    }
+    public static OnContentListener mOnContentListener;
+    public static void setOnContentListener(OnContentListener onContentListener){
+        mOnContentListener = onContentListener;
+    }
+    public static void doContentCallback(String content){
+        if(mOnContentListener != null){
+            mOnContentListener.setOnContentListener(content);
         }
     }
 }

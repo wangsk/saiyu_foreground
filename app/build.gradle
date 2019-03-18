@@ -20,7 +20,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.saiyu.foreground"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
         versionName "1.0.0"
@@ -97,4 +97,10 @@ dependencies {
     implementation 'com.github.yalantis:ucrop:2.2.2-native'
     implementation files('libs/core-3.3.3.jar')
     implementation files('libs/alipaySdk-20161222.jar')
+
+    //流式布局和adapter用于自定义日期界面
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.zhy:base-adapter:2.0.1'
+
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

@@ -16,13 +16,14 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class BaseActivity extends SupportActivity{
 
-    protected Activity mContext = this;
+    protected static BaseActivity baseActivity;
+    public static BaseActivity getBaseActivity(){return baseActivity;}
     private boolean isForegroud = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
+        baseActivity = this;
         CacheActivity.addActivity(this);
     }
 

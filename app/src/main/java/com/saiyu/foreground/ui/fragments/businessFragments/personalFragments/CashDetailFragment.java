@@ -139,7 +139,7 @@ public class CashDetailFragment extends BaseFragment implements CallbackUtils.Re
 
     @Override
     public void onItemClick(View view, int position) {
-        PopWindowUtils.initPopWindow(getActivity(),0,mItems.get(position),null,null);
+        PopWindowUtils.initPopWindow_5(mItems.get(position));
     }
 
     @Click(R.id.btn_title_back)
@@ -149,12 +149,4 @@ public class CashDetailFragment extends BaseFragment implements CallbackUtils.Re
         }
     }
 
-    @Override
-    public boolean onBackPressedSupport() {
-        if(PopWindowUtils.isShowing()){
-            PopWindowUtils.hide(getActivity());
-            return true;
-        }
-        return super.onBackPressedSupport();
-    }
 }
