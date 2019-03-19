@@ -598,7 +598,7 @@ public class PopWindowUtils {
                             if(TextUtils.isEmpty(extend)){
                                 extend = in+"";
                             } else {
-                                extend = extend + "|" + in+"";
+                                extend = extend + "o" + in+"";
                             }
                         }
                     }
