@@ -387,72 +387,24 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             tv_2_1.setText("单次数量不限制");
         }
 
-        int index = 0;
-        if (IsImgConfirmation) {
-            tv_2_2.setText("验图代确认");
-            tv_2_2.setVisibility(View.VISIBLE);
-            index++;
+        List<String> extraList = new ArrayList<>();
+        if(IsImgConfirmation){
+            extraList.add("验图代确认");
+        }
+        if(IsCustomerConfirmation){
+            extraList.add("客服代确认");
+        }
+        if(IsLessThanOriginalPrice){
+            extraList.add("少充按原价");
+        }
+        if(IsOrderPwd){
+            extraList.add("私密订单");
+        }
+        if(IsFriendLimit){
+            extraList.add("需加好友");
         }
 
-        if (IsCustomerConfirmation) {
-            if (index == 0) {
-                tv_2_2.setText("客服代确认");
-                tv_2_2.setVisibility(View.VISIBLE);
-            } else if (index == 1) {
-                tv_2_3.setText("客服代确认");
-                tv_2_3.setVisibility(View.VISIBLE);
-            }
-            index++;
-        }
-
-        if (IsLessThanOriginalPrice) {
-            if (index == 0) {
-                tv_2_2.setText("少充按原价");
-                tv_2_2.setVisibility(View.VISIBLE);
-            } else if (index == 1) {
-                tv_2_3.setText("少充按原价");
-                tv_2_3.setVisibility(View.VISIBLE);
-            } else if (index == 2) {
-                tv_2_4.setText("少充按原价");
-                tv_2_4.setVisibility(View.VISIBLE);
-            }
-            index++;
-        }
-        if (IsOrderPwd) {
-            if (index == 0) {
-                tv_2_2.setText("私密订单");
-                tv_2_2.setVisibility(View.VISIBLE);
-            } else if (index == 1) {
-                tv_2_3.setText("私密订单");
-                tv_2_3.setVisibility(View.VISIBLE);
-            } else if (index == 2) {
-                tv_2_4.setText("私密订单");
-                tv_2_4.setVisibility(View.VISIBLE);
-            } else if (index == 3) {
-                tv_2_5.setText("私密订单");
-                tv_2_5.setVisibility(View.VISIBLE);
-            }
-            index++;
-        }
-        if (IsFriendLimit) {
-            if (index == 0) {
-                tv_2_2.setText("需加好友");
-                tv_2_2.setVisibility(View.VISIBLE);
-            } else if (index == 1) {
-                tv_2_3.setText("需加好友");
-                tv_2_3.setVisibility(View.VISIBLE);
-            } else if (index == 2) {
-                tv_2_4.setText("需加好友");
-                tv_2_4.setVisibility(View.VISIBLE);
-            } else if (index == 3) {
-                tv_2_5.setText("需加好友");
-                tv_2_5.setVisibility(View.VISIBLE);
-            } else if (index == 4) {
-                tv_2_6.setText("需加好友");
-                tv_2_6.setVisibility(View.VISIBLE);
-            }
-            index++;
-        }
+        Utils.setExtraView(extraList,tv_2_2,tv_2_3,tv_2_4,tv_2_5,tv_2_6);
     }
 
     //计时器

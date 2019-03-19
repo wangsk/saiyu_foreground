@@ -47,6 +47,11 @@ public class LoginRecordAdapter extends RecyclerView.Adapter<LoginRecordAdapter.
         return mItems == null ? 0 : mItems.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void refreshData(List<LoginRecordRet.DatasBean.ItemsBean> list) {
         if (list != null) {
             mItems.clear();

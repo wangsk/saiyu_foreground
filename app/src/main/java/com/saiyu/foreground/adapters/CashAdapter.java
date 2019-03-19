@@ -26,7 +26,6 @@ import java.util.List;
 
 public class CashAdapter extends RecyclerView.Adapter<CashAdapter.MyHolder> {
 
-
     List<CashRet.DatasBean.ItemsBean> mItems;
 
     public OnItemClickListener mOnItemClickListener;
@@ -134,6 +133,11 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.MyHolder> {
     @Override
     public int getItemCount() {
         return mItems == null ? 0 : mItems.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     public void refreshData(List<CashRet.DatasBean.ItemsBean> list) {

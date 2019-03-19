@@ -76,6 +76,11 @@ public class RechargeRecordAdapter  extends RecyclerView.Adapter<RechargeRecordA
         return mItems == null ? 0 : mItems.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void refreshData(List<RechargeRecordRet.DatasBean.ItemsBean> list) {
         if (list != null) {
             mItems.clear();

@@ -60,6 +60,11 @@ public class SytemNotifyAdapter extends RecyclerView.Adapter<SytemNotifyAdapter.
         return mItems == null ? 0 : mItems.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void refreshData(List<AccountInfoLoginRet.DataBean.ItemsBean> list) {
         if (list != null) {
             mItems.clear();

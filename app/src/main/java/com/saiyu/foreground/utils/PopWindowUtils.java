@@ -97,7 +97,7 @@ public class PopWindowUtils {
 
         mPopupWindow_5.setAnimationStyle(R.style.pop_animation_up);
 
-        mPopupWindow_5.showAtLocation(mPopView, Gravity.BOTTOM, 0, 30);
+        mPopupWindow_5.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
         // 作为下拉视图显示
         // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
         backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
@@ -162,7 +162,7 @@ public class PopWindowUtils {
 
         mPopupWindow_6.setAnimationStyle(R.style.pop_animation_up);
 
-        mPopupWindow_6.showAtLocation(mPopView, Gravity.BOTTOM, 0, 30);
+        mPopupWindow_6.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
         // 作为下拉视图显示
         // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
         backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
@@ -238,7 +238,7 @@ public class PopWindowUtils {
 
         mPopupWindow_7.setAnimationStyle(R.style.pop_animation_up);
 
-        mPopupWindow_7.showAtLocation(mPopView, Gravity.BOTTOM, 0, 30);
+        mPopupWindow_7.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
         // 作为下拉视图显示
         // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
         backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);

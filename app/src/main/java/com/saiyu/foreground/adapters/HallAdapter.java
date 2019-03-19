@@ -1,5 +1,7 @@
 package com.saiyu.foreground.adapters;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
@@ -49,73 +54,26 @@ public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
         } else {
             myHolder.tv_2_1.setText("单次数量不限制");
         }
-        int index = 0;
+
+        List<String> extraList = new ArrayList<>();
         if(mItems.get(i).isImgConfirmation()){
-            myHolder.tv_2_2.setText("验图代确认");
-            myHolder.tv_2_2.setVisibility(View.VISIBLE);
-            index++;
+            extraList.add("验图代确认");
         }
-
         if(mItems.get(i).isCustomerConfirmation()){
-            if(index == 0){
-                myHolder.tv_2_2.setText("客服代确认");
-                myHolder.tv_2_2.setVisibility(View.VISIBLE);
-            } else if(index == 1){
-                myHolder.tv_2_3.setText("客服代确认");
-                myHolder.tv_2_3.setVisibility(View.VISIBLE);
-            }
-            index++;
+            extraList.add("客服代确认");
         }
-
         if(mItems.get(i).isLessThanOriginalPrice()){
-            if(index == 0){
-                myHolder.tv_2_2.setText("少充按原价");
-                myHolder.tv_2_2.setVisibility(View.VISIBLE);
-            } else if(index == 1){
-                myHolder.tv_2_3.setText("少充按原价");
-                myHolder.tv_2_3.setVisibility(View.VISIBLE);
-            } else if(index == 2){
-                myHolder.tv_2_4.setText("少充按原价");
-                myHolder.tv_2_4.setVisibility(View.VISIBLE);
-            }
-            index++;
+            extraList.add("少充按原价");
         }
         if(mItems.get(i).isOrderPwd()){
-            if(index == 0){
-                myHolder.tv_2_2.setText("私密订单");
-                myHolder.tv_2_2.setVisibility(View.VISIBLE);
-            } else if(index == 1){
-                myHolder.tv_2_3.setText("私密订单");
-                myHolder.tv_2_3.setVisibility(View.VISIBLE);
-            } else if(index == 2){
-                myHolder.tv_2_4.setText("私密订单");
-                myHolder.tv_2_4.setVisibility(View.VISIBLE);
-            }else if(index == 3){
-                myHolder.tv_2_5.setText("私密订单");
-                myHolder.tv_2_5.setVisibility(View.VISIBLE);
-            }
-            index++;
+            extraList.add("私密订单");
         }
         if(mItems.get(i).isFriendLimit()){
-            if(index == 0){
-                myHolder.tv_2_2.setText("需加好友");
-                myHolder.tv_2_2.setVisibility(View.VISIBLE);
-            } else if(index == 1){
-                myHolder.tv_2_3.setText("需加好友");
-                myHolder.tv_2_3.setVisibility(View.VISIBLE);
-            } else if(index == 2){
-                myHolder.tv_2_4.setText("需加好友");
-                myHolder.tv_2_4.setVisibility(View.VISIBLE);
-            }else if(index == 3){
-                myHolder.tv_2_5.setText("需加好友");
-                myHolder.tv_2_5.setVisibility(View.VISIBLE);
-            }
-            else if(index == 4){
-                myHolder.tv_2_6.setText("需加好友");
-                myHolder.tv_2_6.setVisibility(View.VISIBLE);
-            }
-            index++;
+            extraList.add("需加好友");
         }
+
+        Utils.setExtraView(extraList,myHolder.tv_2_2,myHolder.tv_2_3,myHolder.tv_2_4,myHolder.tv_2_5,myHolder.tv_2_6);
+
         myHolder.tv_line_3_1.setText(mItems.get(i).getRemainingAmount()+"Q币");
         myHolder.tv_line_3_2.setText("成交"+mItems.get(i).getOrderRSettleTotalCount()+"笔"+mItems.get(i).getOrderRSettleTotalMoney()+"元");
         myHolder.tv_zc.setText(mItems.get(i).getReserveDiscount()+"折");
@@ -130,12 +88,16 @@ public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
             }
         });
 
-
     }
 
     @Override
     public int getItemCount() {
         return mItems == null ? 0 : mItems.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     public void refreshData(List<HallRet.DatasBean.ItemsBean> list) {

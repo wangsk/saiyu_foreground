@@ -59,6 +59,11 @@ public class OrderCountSelectorAdapter extends RecyclerView.Adapter<OrderCountSe
         return mItems == null ? 0 : mItems.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void refreshData(List<String> list) {
         if (list != null) {
             mItems.clear();

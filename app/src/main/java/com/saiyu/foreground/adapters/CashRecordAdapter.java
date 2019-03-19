@@ -75,6 +75,11 @@ public class CashRecordAdapter  extends RecyclerView.Adapter<CashRecordAdapter.M
         return mItems == null ? 0 : mItems.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void refreshData(List<CashRecordRet.DatasBean.ItemsBean> list) {
         if (list != null) {
             mItems.clear();
