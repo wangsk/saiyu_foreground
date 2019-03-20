@@ -3,25 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
+    <FrameLayout
+        android:layout_width="280dp"
+        android:layout_height="450dp">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/pv_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/pv_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@null"
-        android:drawableLeft="@mipmap/guanbibai"
-        android:drawablePadding="10dp"
-        android:paddingLeft="10dp"
-        android:text="关闭"
-        android:textAlignment="textStart"
-        android:textColor="@color/grey_white" />
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:drawableLeft="@mipmap/guanbibai"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:text="关闭"
+            android:textAlignment="textStart"
+            android:textColor="@color/grey_white" />
+
+    </FrameLayout>
 
 </FrameLayout>

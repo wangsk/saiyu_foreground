@@ -47,16 +47,16 @@ public class PhotoViewDialog extends Dialog {
 
         setCanceledOnTouchOutside(true);
 
-        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay(); //获取屏幕宽高
-        Point point = new Point();
-        display.getSize(point);
-
-        Window window = getWindow();
-        WindowManager.LayoutParams layoutParams = window.getAttributes(); //获取当前对话框的参数值
-        layoutParams.width = (int) (point.x * 1); //宽度设置为屏幕宽度的0.5
-        layoutParams.height = (int) (point.y * 0.9); //高度设置为屏幕高度的0.5
-        window.setAttributes(layoutParams);
+//        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+//        Display display = wm.getDefaultDisplay(); //获取屏幕宽高
+//        Point point = new Point();
+//        display.getSize(point);
+//
+//        Window window = getWindow();
+//        WindowManager.LayoutParams layoutParams = window.getAttributes(); //获取当前对话框的参数值
+//        layoutParams.width = (int) (point.x * 1); //宽度设置为屏幕宽度的0.5
+//        layoutParams.height = (int) (point.y * 0.9); //高度设置为屏幕高度的0.5
+//        window.setAttributes(layoutParams);
 
         initView();
 

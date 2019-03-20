@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.HallAdapter;
+import com.saiyu.foreground.adapters.MyTagAdapter;
 import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
@@ -200,7 +201,8 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 mContext.startActivity(intent);
                 break;
             case R.id.ll_recharge_game:
-                PopWindowUtils.initPopWindow_2(productItemsBeans, ll_recharge_game, new OnTagFlowItemClickListener() {
+                MyTagAdapter myTagAdapter = new MyTagAdapter(productItemsBeans);
+                PopWindowUtils.initPopWindow_2(myTagAdapter, ll_recharge_game, new OnTagFlowItemClickListener() {
                     @Override
                     public void onTagFlowItemClick(String id,String id_2,String id_3) {
                         LogUtils.print("_pId ==== " + pId + " id === " + id);

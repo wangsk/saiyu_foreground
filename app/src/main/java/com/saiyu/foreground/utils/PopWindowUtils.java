@@ -283,7 +283,7 @@ public class PopWindowUtils {
 
     private static PopupWindow mPopupWindow_2;
     private static String gameSelected = "";
-    public static void initPopWindow_2(final List<HallRet.DatasBean.ProductItemsBean> mItems, View view, final OnTagFlowItemClickListener onTagFlowItemClickListener) {
+    public static void initPopWindow_2(final MyTagAdapter myTagAdapter, View view, final OnTagFlowItemClickListener onTagFlowItemClickListener) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.pop_recharge_game, null);
@@ -306,9 +306,8 @@ public class PopWindowUtils {
             }
         });
 
-        final TagFlowLayout tfl_recharge_game = (TagFlowLayout) mPopView.findViewById(R.id.tfl_recharge_game);
+        TagFlowLayout tfl_recharge_game = (TagFlowLayout) mPopView.findViewById(R.id.tfl_recharge_game);
 
-        final MyTagAdapter myTagAdapter = new MyTagAdapter(mItems);
         tfl_recharge_game.setAdapter(myTagAdapter);
 
         tfl_recharge_game.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
@@ -316,7 +315,7 @@ public class PopWindowUtils {
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 if(position == 0){
                     gameSelected = "";
-                    tfl_recharge_game.getAdapter().setSelectedList(0);
+                    myTagAdapter.setSelectedList(0);
                     return true;
                 }
                 return false;
@@ -335,16 +334,16 @@ public class PopWindowUtils {
                             if(selectPosSet.size() == 2){
                                 selectPosSet.remove(0);
                                 for(Integer in_2 : selectPosSet){
-                                    gameSelected = mItems.get(in_2).getId();
+                                    gameSelected = myTagAdapter.getItem(in_2).getId();
                                 }
-                                tfl_recharge_game.getAdapter().setSelectedList(selectPosSet);
+                                myTagAdapter.setSelectedList(selectPosSet);
                             }
                             break;
                         } else {
                             if(TextUtils.isEmpty(gameSelected)){
-                                gameSelected = mItems.get(in).getId();
+                                gameSelected = myTagAdapter.getItem(in).getId();
                             } else {
-                                gameSelected = gameSelected + "o" + mItems.get(in).getId();
+                                gameSelected = gameSelected + "o" + myTagAdapter.getItem(in).getId();
                             }
                         }
                     }
@@ -354,7 +353,7 @@ public class PopWindowUtils {
         });
 
         gameSelected = "";
-        tfl_recharge_game.getAdapter().setSelectedList(0);
+        myTagAdapter.setSelectedList(0);
 
         mPopupWindow_2.setAnimationStyle(R.style.pop_animation);
         // 作为下拉视图显示

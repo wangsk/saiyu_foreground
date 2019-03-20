@@ -26,8 +26,9 @@
 
                 <TextView
                     android:id="@+id/tv_1_1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_marginLeft="10dp"
                     android:text="订单内容: "
                     android:textColor="@color/black"
@@ -64,8 +65,9 @@
                 android:paddingBottom="5dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:text="附加选项: "
@@ -178,10 +180,10 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
                     android:text="订单号: "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -190,7 +192,6 @@
                     android:id="@+id/tv_orderName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -205,10 +206,10 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
                     android:text="订单进度: "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -229,7 +230,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:gravity="center_vertical"
                     android:text="0/0Q币"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -244,10 +244,10 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
                     android:text="买家等级: "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -325,10 +325,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
                     android:text="出售数量: "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -400,10 +400,10 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
                     android:text="接单点数: "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
