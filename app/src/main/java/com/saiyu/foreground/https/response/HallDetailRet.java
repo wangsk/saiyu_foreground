@@ -24,15 +24,14 @@ public class HallDetailRet extends BaseRet{
         private String ReserveTitle;
         private String ReserveQBCount;
         private String RechargeQBCount;
+        private String ReceiveQBCount;
         private boolean IsCustomerConfirmation;
         private boolean IsImgConfirmation;
         private boolean IsLessThanOriginalPrice;
         private boolean IsOrderPwd;
         private boolean IsFriendLimit;
-        private boolean IsOnceMinCount;
         private int OnceMinCount;
-        private String RemainingAmount;
-        private String ReceivePoint;
+        private float ReceivePoint;
         private String OrderRSettleTotalCount;
         private String OrderRSettleTotalMoney;
         private float VipLevel;
@@ -155,6 +154,14 @@ public class HallDetailRet extends BaseRet{
             RechargeQBCount = rechargeQBCount;
         }
 
+        public String getReceiveQBCount() {
+            return ReceiveQBCount;
+        }
+
+        public void setReceiveQBCount(String receiveQBCount) {
+            ReceiveQBCount = receiveQBCount;
+        }
+
         public boolean isCustomerConfirmation() {
             return IsCustomerConfirmation;
         }
@@ -195,14 +202,6 @@ public class HallDetailRet extends BaseRet{
             IsFriendLimit = friendLimit;
         }
 
-        public boolean isOnceMinCount() {
-            return IsOnceMinCount;
-        }
-
-        public void setOnceMinCount(boolean onceMinCount) {
-            IsOnceMinCount = onceMinCount;
-        }
-
         public int getOnceMinCount() {
             return OnceMinCount;
         }
@@ -211,19 +210,11 @@ public class HallDetailRet extends BaseRet{
             OnceMinCount = onceMinCount;
         }
 
-        public String getRemainingAmount() {
-            return RemainingAmount;
-        }
-
-        public void setRemainingAmount(String remainingAmount) {
-            RemainingAmount = remainingAmount;
-        }
-
-        public String getReceivePoint() {
+        public float getReceivePoint() {
             return ReceivePoint;
         }
 
-        public void setReceivePoint(String receivePoint) {
+        public void setReceivePoint(float receivePoint) {
             ReceivePoint = receivePoint;
         }
 

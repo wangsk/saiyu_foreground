@@ -137,24 +137,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
         Intent intent = new Intent(mContext,ContainerActivity_.class);
         Bundle bundle = new Bundle();
-
-        bundle.putString("orderNum",mItems.get(position).getOrderNum());
-        bundle.putString("OrderTitle",mItems.get(position).getOrderTitle());
-        bundle.putString("ReserveTitle",mItems.get(position).getReserveTitle());
-        bundle.putBoolean("IsCustomerConfirmation",mItems.get(position).isCustomerConfirmation());
-        bundle.putBoolean("IsImgConfirmation",mItems.get(position).isImgConfirmation());
-        bundle.putBoolean("IsLessThanOriginalPrice",mItems.get(position).isLessThanOriginalPrice());
-        bundle.putBoolean("IsOrderPwd",mItems.get(position).isOrderPwd());
-        bundle.putBoolean("IsFriendLimit",mItems.get(position).isFriendLimit());
-        bundle.putBoolean("IsOnceMinCount",mItems.get(position).isOnceMinCount());
-        bundle.putString("OnceMinCount",mItems.get(position).getOnceMinCount());
-        bundle.putFloat("VipLevel",mItems.get(position).getVipLevel());
-        bundle.putString("AverageConfirmTime",mItems.get(position).getAverageConfirmTime());
-        bundle.putInt("ReserveDiscount",mItems.get(position).getReserveDiscount());
-        bundle.putString("RemainingAmount",mItems.get(position).getRemainingAmount());
-        bundle.putString("OrderRSettleTotalCount",mItems.get(position).getOrderRSettleTotalCount());
-        bundle.putString("OrderRSettleTotalMoney",mItems.get(position).getOrderRSettleTotalMoney());
-
+        bundle.putString("orderId",mItems.get(position).getId());
         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.HallOrderDetailFragmentTag);
         intent.putExtras(bundle);
         mContext.startActivity(intent);

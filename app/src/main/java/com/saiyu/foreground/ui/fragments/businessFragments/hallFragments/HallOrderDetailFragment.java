@@ -55,7 +55,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @EFragment(R.layout.fragment_hallorder_detail)
-public class HallOrderDetailFragment extends BaseFragment implements CallbackUtils.ResponseCallback,OnItemClickListener {
+public class HallOrderDetailFragment extends BaseFragment implements CallbackUtils.ResponseCallback,OnItemClickListener{
 
     @ViewById
     TextView tv_title_content, tv_orderTitle, tv_reserveTitle, tv_2_1, tv_2_2, tv_2_3, tv_2_4, tv_zc, tv_2_5, tv_2_6, tv_orderName, tv_orderProgress, tv_orderCount,
@@ -85,27 +85,32 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     private OrderCountSelectorAdapter orderCountSelectorAdapter;
     private OrderTitleAdapter orderTitleAdapter;
     private List<String> mItems = new ArrayList<>();
-    private String orderNum,orderId,receiveId;
-    private boolean isReceive = false;
-    private boolean isLogin, IsCustomerConfirmation, IsImgConfirmation, IsLessThanOriginalPrice, IsOrderPwd, IsFriendLimit, IsOnceMinCount;
+    private String orderId,receiveId,orderNum;
+
+    private boolean isLogin, IsCustomerConfirmation, IsImgConfirmation, IsLessThanOriginalPrice, IsOrderPwd, IsFriendLimit;
 
     private final Timer timer = new Timer();
     private long surplusTime_20,surplusTime_40;
 
-    private int isLock,maxQBcount,OnceMinCount = 0;
-    private float maxOrderPoint;
+    private int isLock;
+    private float maxOrderPoint;//卖家剩余的最大接单点数
+    private float maxQBcount;//卖家能接的最大QB数量
+    private float OnceMinCount = 0;//最小充值QB数量
+    private float ReserveQBCount;//该订单最大QB数量
+    private float RechargeQBCount;//该订单被接过的QB数量
 
     private String OrderRechargePointsUrl,OrderFreePointsUrl;
     public static List<HallDetailRet.DataBean.YanBaoBean> selectorList = null;
 
+    //该方法是用于OrderSubmitChildFragment类中 修改实际Q币数量时spinner控件加载调用
     public static List<HallDetailRet.DataBean.YanBaoBean> getSelectorList() {
         return selectorList;
     }
 
-    private MyArrayAdapter yuanbaoAdapter;
-    private int type;
+    private MyArrayAdapter yuanbaoAdapter;//元宝spinner下拉数据绑定adapter
+    private int type;//区别普通商品 : 0 ，金元宝 : 1 ，银元宝 : 2
 
-    private String rechargeNum;
+    private String rechargeNum;//出售Q币数量
 
     public static HallOrderDetailFragment newInstance(Bundle bundle) {
         HallOrderDetailFragment_ fragment = new HallOrderDetailFragment_();
@@ -117,68 +122,42 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        isCanSubmit(false);
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            orderNum = bundle.getString("orderNum");
-        }
 
         String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
         boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
         if(autologinflag && !TextUtils.isEmpty(accessToken)){
-            isLogin = true;
-        } else {
-            isLogin = false;
-        }
 
-        if (isLogin) {
-            if (!TextUtils.isEmpty(orderNum)) {
-                ApiRequest.hallDetail(orderNum, "HallOrderDetailFragment_hallDetail", pb_loading);
+            if (!TextUtils.isEmpty(orderId)) {
+                //登录状态下，先请求该订单的状态（正常状态 / 已经被自己接单，但是未充值状态）
+                ApiRequest.hallDetail(orderId, "HallOrderDetailFragment_hallDetail", pb_loading);
             }
+
+            isLogin = true;
             btn_confirm.setText("确认接单");
+            isCanSubmit(false);//确认接单按钮置为不可点击
         } else {
+
+            if (!TextUtils.isEmpty(orderId)) {
+                //未登录状态
+                ApiRequest.hallDetailNoLogin(orderId, "HallOrderDetailFragment_hallDetailNoLogin", pb_loading);
+            }
+
+            isLogin = false;
+            btn_confirm.setText("登录");
             isCanSubmit(true);
 
-            btn_confirm.setText("登录");
+            sendHandlerMsg(1);
 
-            hall_order_1.setVisibility(View.VISIBLE);
-            hall_order_2.setVisibility(View.GONE);
-
-            tv_orderTitle.setText(bundle.getString("OrderTitle"));
-            tv_reserveTitle.setText(bundle.getString("ReserveTitle"));
-
-            tv_orderName.setText(orderNum);
-            String discount = bundle.getString("RemainingAmount");
-            tv_orderProgress.setText(discount + "Q币");
-
-            try {
-                String[] arg = discount.split("/");
-                float arg_1 = Float.parseFloat(arg[0]);
-                float arg_2 = Float.parseFloat(arg[1]);
-                float arg_3 = arg_1 / arg_2 * 100;
-                pb_order.setProgress((int) arg_3);
-            } catch (Exception e) {
-
-            }
-            rb_mark.setRating(bundle.getFloat("VipLevel")/2);
-            tv_orderCount.setText("成交" + bundle.getString("OrderRSettleTotalCount") + "笔" + bundle.getString("OrderRSettleTotalMoney") + "元");
-            tv_orderTime.setText(bundle.getString("AverageConfirmTime"));
-            tv_discount.setText(bundle.getInt("ReserveDiscount") + "折");
-
-            IsCustomerConfirmation = bundle.getBoolean("IsCustomerConfirmation");
-            IsImgConfirmation = bundle.getBoolean("IsImgConfirmation");
-            IsLessThanOriginalPrice = bundle.getBoolean("IsLessThanOriginalPrice");
-            IsOrderPwd = bundle.getBoolean("IsOrderPwd");
-            IsFriendLimit = bundle.getBoolean("IsFriendLimit");
-            IsOnceMinCount = bundle.getBoolean("IsOnceMinCount");
-            OnceMinCount = bundle.getInt("OnceMinCount");
-            setLimit(OnceMinCount);
         }
+
     }
 
     @AfterViews
     void afterViews() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            orderId = bundle.getString("orderId");
+        }
         tv_title_content.setText("订单详情");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,8);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -199,6 +178,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             if(ret.getData().isResult()){
                 tv_count_prompt.setText("必须使用一个QQ号码一次性充值完成，否则视为违约！将扣除5%违约金!");
                 isCanSubmit(true);
+                recyclerView.setVisibility(View.GONE);
             } else {
                 if(mItems == null){
                     mItems = new ArrayList<>();
@@ -208,19 +188,24 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 orderCountSelectorAdapter = new OrderCountSelectorAdapter(mItems);
                 orderCountSelectorAdapter.setOnItemClickListener(this);
                 recyclerView.setAdapter(orderCountSelectorAdapter);
-                tv_count_prompt.setText("数量 "+ et_count.getText().toString()+" 当日已被使用，你可以选择:");
+                tv_count_prompt.setText("数量 "+ rechargeNum+" 当日已被使用，你可以选择:");
                 recyclerView.setVisibility(View.VISIBLE);
                 Utils.hideInput();
             }
         } else if(method.equals("HallOrderDetailFragment_hallDetailReceive")){
-            //该订单已经被自己接过
+            //该订单已经被自己接过，但是未充值
             HallDetailReceiveRet ret = (HallDetailReceiveRet)baseRet;
             if(ret.getData() == null){
                 return;
             }
-
+            if(!ret.getData().isResult()){
+                LogUtils.print("确认接单失败！");
+                Toast.makeText(mContext,"确认接单失败！",Toast.LENGTH_SHORT).show();
+                return;
+            }
             if(orderTitleAdapter == null){
-                orderTitleAdapter = new OrderTitleAdapter(getChildFragmentManager(),ret,orderId,orderNum,type);
+                //加载两个子fragment (OrderInfoChildFragment/OrderSubmitChildFragment)
+                orderTitleAdapter = new OrderTitleAdapter(getChildFragmentManager(),ret);
             }
 
             view_pager.setAdapter(orderTitleAdapter);
@@ -230,69 +215,66 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
             String createTime = ret.getData().getCreateTime();
             setTime(createTime);
-            hall_order_1.setVisibility(View.GONE);
-            hall_order_2.setVisibility(View.VISIBLE);
 
-        } else if (method.equals("HallOrderDetailFragment_hallDetail")) {
+            sendHandlerMsg(2);
+
+        } else if (method.equals("HallOrderDetailFragment_hallDetail") || method.equals("HallOrderDetailFragment_hallDetailNoLogin")) {
             HallDetailRet ret = (HallDetailRet) baseRet;
             if (ret.getData() == null) {
                 return;
             }
 
-            isReceive = ret.getData().isReceive();
-            orderId = ret.getData().getId();
-
-            if (isReceive) {
-                //该订单已经被自己接过
-                ApiRequest.hallDetailReceive(ret.getData().getId(),ret.getData().getRechargeQBCount(),"","HallOrderDetailFragment_hallDetailReceive", pb_loading);
+            if (ret.getData().isReceive()) {
+                //该订单已经被自己接过,但是未充值
+                ApiRequest.hallDetailReceive(ret.getData().getId(),ret.getData().getReceiveQBCount(),"","HallOrderDetailFragment_hallDetailReceive", pb_loading);
 
             } else {
-               handler.sendEmptyMessage(3);
+                //正常订单
+                sendHandlerMsg(1);
 
-                OrderFreePointsUrl = ret.getData().getOrderFreePointsUrl();
-                OrderRechargePointsUrl = ret.getData().getOrderRechargePointsUrl();
+                OrderFreePointsUrl = ret.getData().getOrderFreePointsUrl();//获取免费点数的链接
+                OrderRechargePointsUrl = ret.getData().getOrderRechargePointsUrl();//充值点数链接
 
-                if(!TextUtils.isEmpty(ret.getData().getReceivePoint())){
-                    maxOrderPoint = Float.parseFloat(ret.getData().getReceivePoint());
+                maxOrderPoint = ret.getData().getReceivePoint();//最大接单点数，超过最大接单点数则不允许接单
+
+                isLock = ret.getData().getIsLock();//该字段表示订单是否被别人抢单，（截止3月20号版本该字段服务端保持false，也就是说服务端暂时允许多人接同一单,未来可能会启用作为一条订单只能同时被一个人接单）
+
+                tv_orderTitle.setText(ret.getData().getOrderTitle());//头标题
+                tv_reserveTitle.setText(ret.getData().getReserveTitle());//副标题
+
+                orderNum = ret.getData().getOrderNum();
+                tv_orderName.setText(orderNum);
+
+                if(!TextUtils.isEmpty(ret.getData().getReserveQBCount()) && !TextUtils.isEmpty(ret.getData().getRechargeQBCount())){
+                    ReserveQBCount = Float.parseFloat(ret.getData().getReserveQBCount());//买家发布的总QB数量
+                    RechargeQBCount = Float.parseFloat(ret.getData().getRechargeQBCount());//已经被接单的QB数量
                 }
 
-                isLock = ret.getData().getIsLock();
+                pb_order.setProgress((int)(RechargeQBCount/ReserveQBCount*100));
+                tv_orderProgress.setText(ret.getData().getRechargeQBCount() + "/" + ret.getData().getReserveQBCount() + "Q币");
 
-                tv_orderTitle.setText(ret.getData().getOrderTitle());
-                tv_reserveTitle.setText(ret.getData().getReserveTitle());
+                maxQBcount = ReserveQBCount - RechargeQBCount;
+                tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
 
-                IsOnceMinCount = ret.getData().isOnceMinCount();
-                OnceMinCount = ret.getData().getOnceMinCount();
+                rb_mark.setRating(ret.getData().getVipLevel()/2);
+                tv_orderCount.setText("成交" + ret.getData().getOrderRSettleTotalCount() + "笔" + ret.getData().getOrderRSettleTotalMoney() + "元");
+                tv_orderTime.setText(ret.getData().getAverageConfirmTime());
+                tv_discount.setText(ret.getData().getReserveDiscount() + "折");
+
+                OnceMinCount = ret.getData().getOnceMinCount();//最小充值Q币数，小于该数值不允许接单
                 IsImgConfirmation = ret.getData().isImgConfirmation();
                 IsCustomerConfirmation = ret.getData().isCustomerConfirmation();
                 IsLessThanOriginalPrice = ret.getData().isLessThanOriginalPrice();
                 IsOrderPwd = ret.getData().isOrderPwd();
                 IsFriendLimit = ret.getData().isFriendLimit();
 
-                setLimit(OnceMinCount);
+                setLimit();
 
-                tv_orderName.setText(ret.getData().getOrderNum());
-                String discount = ret.getData().getRemainingAmount();
-                tv_orderProgress.setText(discount + "Q币");
-                try {
-                    String[] arg = discount.split("/");
-                    float arg_1 = Float.parseFloat(arg[0]);
-                    float arg_2 = Float.parseFloat(arg[1]);
-                    float arg_3 = arg_1 / arg_2 * 100;
-                    pb_order.setProgress((int) arg_3);
-                    maxQBcount = (int)(arg_2 - arg_1);
-                    tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
-                } catch (Exception e) {
-
-                }
-                rb_mark.setRating(ret.getData().getVipLevel()/2);
-                tv_orderCount.setText("成交" + ret.getData().getOrderRSettleTotalCount() + "笔" + ret.getData().getOrderRSettleTotalMoney() + "元");
-                tv_orderTime.setText(ret.getData().getAverageConfirmTime());
-                tv_discount.setText(ret.getData().getReserveDiscount() + "折");
+                isCountAble();
 
             }
 
-           initYuanBaoList(ret);
+           initYuanBaoList(ret);//初始化元宝输入框列表
         }
     }
 
@@ -334,33 +316,32 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 start(protocolFragment);
                 break;
             case R.id.btn_confirm:
-                if (isLogin) {
-                    if(isLock == 1){
-                        Toast.makeText(mContext,"该订单目前有他人在充值，请稍等操作",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    if(IsOrderPwd){
-                        DialogUtils.showOrderPswDialog(getActivity(), orderNum, new DialogUtils.DialogClickCallbackListener() {
-                            @Override
-                            public void setOnDialogClickCallbackListener(String wayId, String account, String remarks, String accountId) {
-                                if(TextUtils.isEmpty(wayId)){
-                                    Toast.makeText(mContext,"请输入接单密码",Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                ApiRequest.hallDetailReceive(orderId,rechargeNum,wayId,"HallOrderDetailFragment_hallDetailReceive", pb_loading);
-                            }
-                        });
-                        return;
-                    }
-
-                    ApiRequest.hallDetailReceive(orderId,rechargeNum,"","HallOrderDetailFragment_hallDetailReceive", pb_loading);
-
-                } else {
+                if(!isLogin){
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.LoginFragmentTag);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
+                    return;
                 }
+                if(isLock == 1){
+                    Toast.makeText(mContext,"该订单目前有他人在充值，请稍等操作",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(IsOrderPwd){
+                    DialogUtils.showOrderPswDialog(getActivity(), orderNum, new DialogUtils.DialogClickCallbackListener() {
+                        @Override
+                        public void setOnDialogClickCallbackListener(String wayId, String account, String remarks, String accountId) {
+                            if(TextUtils.isEmpty(wayId)){
+                                Toast.makeText(mContext,"请输入接单密码",Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            ApiRequest.hallDetailReceive(orderId,rechargeNum,wayId,"HallOrderDetailFragment_hallDetailReceive", pb_loading);
+                        }
+                    });
+                    return;
+                }
+
+                ApiRequest.hallDetailReceive(orderId,rechargeNum,"","HallOrderDetailFragment_hallDetailReceive", pb_loading);
                 break;
             case R.id.btn_cancel:
                 bundle.putString("receiveId",receiveId);
@@ -380,12 +361,13 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     }
 
     //设置附加条件
-    private void setLimit(int OnceMinCount) {
-        if (IsOnceMinCount) {
+    private void setLimit() {
+        if (OnceMinCount > 0 ) {
             tv_2_1.setText("单次最低" + OnceMinCount + "Q币");
         } else {
             tv_2_1.setText("单次数量不限制");
         }
+        tv_2_1.setVisibility(View.VISIBLE);
 
         List<String> extraList = new ArrayList<>();
         if(IsImgConfirmation){
@@ -457,7 +439,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
                     break;
                 case 2:
-                    if(tv_time != null&&tv_prompt_1 != null&&tv_prompt_2 != null&&tv_prompt_3 != null&&tv_prompt_4 != null){
+                    if(tv_time != null && tv_prompt_1 != null && tv_prompt_2 != null && tv_prompt_3 != null && tv_prompt_4 != null){
                         tv_time.setText(msg.arg1 + "分" + msg.arg2 + "秒");
                         tv_prompt_1.setText("后将强制取消订单");
                         tv_prompt_2.setText("已扣除");
@@ -467,8 +449,13 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                     }
                     break;
                 case 3:
-                    hall_order_1.setVisibility(View.VISIBLE);
-                    hall_order_2.setVisibility(View.GONE);
+                    if(msg.arg1 == 1){
+                        hall_order_1.setVisibility(View.VISIBLE);
+                        hall_order_2.setVisibility(View.GONE);
+                    } else if(msg.arg1 == 2){
+                        hall_order_1.setVisibility(View.GONE);
+                        hall_order_2.setVisibility(View.VISIBLE);
+                    }
                     break;
             }
         }
@@ -588,22 +575,22 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             return;
         }
 
-        if(TextUtils.isEmpty(rechargeNum)){
+        LogUtils.print("rechargeNum === " + rechargeNum);
+
+        if(TextUtils.isEmpty(rechargeNum) || "0".equals(rechargeNum)){
             tv_orderPoint.setText("0点");
             return;
         }
 
         tv_orderPoint.setText(rechargeNum+"点");
         int qbCount = Integer.parseInt(rechargeNum);
-        if (IsOnceMinCount) {
-            if(qbCount < OnceMinCount){
-                //不可输入买家发布订单时所限制的单次充值最低数量
-                tv_count_prompt.setText("该订单最低充值"+OnceMinCount+ "Q币，请修改出售数量！");
-                isCanSubmit(false);
-                return;
-            } else {
-                tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
-            }
+        if(qbCount < OnceMinCount){
+            //不可输入买家发布订单时所限制的单次充值最低数量
+            tv_count_prompt.setText("该订单最低充值"+OnceMinCount+ "Q币，请修改出售数量！");
+            isCanSubmit(false);
+            return;
+        } else {
+            tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
         }
         if(qbCount > maxQBcount){
             //不得输入超过该订单需求的最大剩余数量
@@ -625,6 +612,14 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             ll_point.setVisibility(View.GONE);
         }
 
-        ApiRequest.usableQBCountList(orderNum,rechargeNum,"HallOrderDetailFragment_usableQBCountList",pb_loading);
+        ApiRequest.usableQBCountList(orderId,rechargeNum,"HallOrderDetailFragment_usableQBCountList",pb_loading);
+    }
+
+    //控制页面UI显示
+    private void sendHandlerMsg(int arg1){
+        Message message = new Message();
+        message.what = 3;
+        message.arg1 = arg1;
+        handler.sendMessage(message);
     }
 }

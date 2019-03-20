@@ -18,17 +18,11 @@ public class OrderTitleAdapter extends FragmentStatePagerAdapter {
     private FragmentManager fm;
     private List<String> tablist;
     private HallDetailReceiveRet hallDetailRet;
-    private String orderId;
-    private String orderNum;
-    private int type;
 
-    public OrderTitleAdapter(FragmentManager fm,HallDetailReceiveRet ret,String orderId,String orderNum,int type){
+    public OrderTitleAdapter(FragmentManager fm,HallDetailReceiveRet ret){
         super(fm);
         this.fm = fm;
         this.hallDetailRet = ret;
-        this.orderId = orderId;
-        this.orderNum = orderNum;
-        this.type = type;
 
         tablist = new ArrayList<>();
         tablist.add("订单信息");
@@ -56,15 +50,15 @@ public class OrderTitleAdapter extends FragmentStatePagerAdapter {
                 bundle.putInt("OnceMinCount",hallDetailRet.getData().getOnceMinCount());
                 bundle.putString("ReceiveQBCount",hallDetailRet.getData().getReceiveQBCount());
                 bundle.putFloat("LessChargeDiscount",hallDetailRet.getData().getLessChargeDiscount());
-                bundle.putInt("type",type);
+                bundle.putInt("type",hallDetailRet.getData().getType());
                 bundle.putString("ServiceRate",hallDetailRet.getData().getServiceRate());
 
                 fragment = OrderInfoChildFragment.newInstance(bundle);
                 break;
             case 1:
                 bundle.putBoolean("IsCustomerConfirmation",hallDetailRet.getData().isCustomerConfirmation());
-                bundle.putString("orderNum",orderNum);
-                bundle.putString("orderId",orderId);
+                bundle.putString("orderNum",hallDetailRet.getData().getOrderNum());
+                bundle.putString("orderId",hallDetailRet.getData().getOrderId());
                 bundle.putString("ReceiveId",hallDetailRet.getData().getReceiveId());
                 bundle.putString("AverageConfirmTime",hallDetailRet.getData().getAverageConfirmTime());
                 bundle.putString("ReceiveQBCount",hallDetailRet.getData().getReceiveQBCount());

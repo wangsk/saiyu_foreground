@@ -49,7 +49,7 @@ public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
         myHolder.tv_line_1.setText(mItems.get(i).getOrderTitle());
         myHolder.tv_line_1_2.setText(mItems.get(i).getReserveTitle());
 
-        if(mItems.get(i).isOnceMinCount()){
+        if(mItems.get(i).getOnceMinCount() > 0){
             myHolder.tv_2_1.setText("单次最低"+mItems.get(i).getOnceMinCount()+"Q币");
         } else {
             myHolder.tv_2_1.setText("单次数量不限制");
@@ -74,7 +74,7 @@ public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
 
         Utils.setExtraView(extraList,myHolder.tv_2_2,myHolder.tv_2_3,myHolder.tv_2_4,myHolder.tv_2_5,myHolder.tv_2_6);
 
-        myHolder.tv_line_3_1.setText(mItems.get(i).getRemainingAmount()+"Q币");
+        myHolder.tv_line_3_1.setText(mItems.get(i).getRechargeQBCount()+"/"+mItems.get(i).getReserveQBCount()+"Q币");
         myHolder.tv_line_3_2.setText("成交"+mItems.get(i).getOrderRSettleTotalCount()+"笔"+mItems.get(i).getOrderRSettleTotalMoney()+"元");
         myHolder.tv_zc.setText(mItems.get(i).getReserveDiscount()+"折");
         myHolder.rb_mark.setRating(mItems.get(i).getVipLevel()/2);

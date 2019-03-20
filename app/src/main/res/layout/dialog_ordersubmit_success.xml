@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:text="订单提交完成"/>
     </LinearLayout>
@@ -27,7 +27,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textColor="@color/black"
         android:text=""/>
     <TextView
@@ -45,9 +45,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textColor="@color/black"
-        android:text="    请保证所传图片的标准型和清晰度，预审失败后你需要在2小时内重新传图，否则订单自动取消"/>
+        android:text="请保证所传图片的标准型和清晰度，预审失败后你需要在2小时内重新传图，否则订单自动取消"/>
 
     <LinearLayout
         android:layout_width="match_parent"

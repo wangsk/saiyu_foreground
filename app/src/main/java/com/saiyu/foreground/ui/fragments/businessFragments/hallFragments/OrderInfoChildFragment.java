@@ -210,6 +210,7 @@ public class OrderInfoChildFragment extends BaseFragment {
 
     //初始化输入框
     private void initYuanBaoList(int type){
+        LogUtils.print("type === " + type);
         switch (type) {
             case 0:
                 et_count.setText(ReceiveQBCount);

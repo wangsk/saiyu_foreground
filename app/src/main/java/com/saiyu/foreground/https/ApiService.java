@@ -191,6 +191,9 @@ public interface ApiService {
     //大厅订单详情
     @POST("Hall/ReceiveInfo")
     Observable<HallDetailRet> hallDetail(@Body RequestBody body);
+    //大厅订单详情(未登录)
+    @POST("Hall/NoLoginReceiveInfo ")
+    Observable<HallDetailRet> hallDetailNoLogin(@Body RequestBody body);
 
     //大厅订单详情(已接单)
     @POST("Hall/Receive")

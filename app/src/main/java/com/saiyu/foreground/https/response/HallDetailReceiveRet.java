@@ -13,7 +13,11 @@ public class HallDetailReceiveRet extends BaseRet {
     }
 
     public static class DataBean {
+        private boolean result;
+        private String OrderId;
+        private String OrderNum;
         private String ReceiveId;
+        private int Type;
         private String AverageConfirmTime;
         private boolean IsCustomerConfirmation;
         private String CreateTime;
@@ -29,6 +33,8 @@ public class HallDetailReceiveRet extends BaseRet {
         private String ContactMobile;
         private String ContactQQ;
         private String ReserveQBCount;
+        private String RechargeQBCount;
+        private String ReceiveQBCount;
         private String RechargeNum;
         private boolean IsFriendLimit;
         private String ReserveDiscount;
@@ -38,10 +44,40 @@ public class HallDetailReceiveRet extends BaseRet {
         private String ConsumeRPoint;
         private String SuccessDian;
         private int OnceMinCount;
-        private String RechargeQBCount;
         private float LessChargeDiscount;
-        private String ReceiveQBCount;
         private String ServiceRate;
+
+        public boolean isResult() {
+            return result;
+        }
+
+        public void setResult(boolean result) {
+            this.result = result;
+        }
+
+        public String getOrderId() {
+            return OrderId;
+        }
+
+        public void setOrderId(String orderId) {
+            OrderId = orderId;
+        }
+
+        public String getOrderNum() {
+            return OrderNum;
+        }
+
+        public void setOrderNum(String orderNum) {
+            OrderNum = orderNum;
+        }
+
+        public int getType() {
+            return Type;
+        }
+
+        public void setType(int type) {
+            Type = type;
+        }
 
         public String getServiceRate() {
             return ServiceRate;

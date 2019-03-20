@@ -80,7 +80,7 @@ public class DialogUtils {
         Button btn_dialog_cancel = view.findViewById(R.id.btn_dialog_cancel);
         Button btn_dialog_confirm = view.findViewById(R.id.btn_dialog_confirm);
         TextView tv_dialog_title = view.findViewById(R.id.tv_content);
-        tv_dialog_title.setText("    您的出售订单"+title+"，已经提交完成，进入预审和确认流程，确认完毕后货款将转入你的赛鱼余额，请您耐心等待！");
+        tv_dialog_title.setText("您的出售订单"+title+"，已经提交完成，进入预审和确认流程，确认完毕后货款将转入你的赛鱼余额，请您耐心等待！");
 
         builder.setView(view);
         builder.setCancelable(false);

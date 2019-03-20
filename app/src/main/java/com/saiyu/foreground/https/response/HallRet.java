@@ -180,19 +180,18 @@ public class HallRet extends BaseRet {
             private String OrderNum;
             private String OrderTitle;
             private String ReserveQBCount;
+            private String RechargeQBCount;
             private boolean IsCustomerConfirmation;
             private boolean IsImgConfirmation;
             private boolean IsLessThanOriginalPrice;
             private boolean IsOrderPwd;
             private boolean IsFriendLimit;
-            private boolean IsOnceMinCount;
-            private String OnceMinCount;
-            private String RemainingAmount;
+            private int OnceMinCount;
             private String OrderRSettleTotalCount;
             private String OrderRSettleTotalMoney;
             private float VipLevel;
             private String AverageConfirmTime;
-            private int ReserveDiscount;
+            private String ReserveDiscount;
             private int IsLock;
             private String ReserveTitle;
 
@@ -204,11 +203,11 @@ public class HallRet extends BaseRet {
                 ReserveTitle = reserveTitle;
             }
 
-            public String getOnceMinCount() {
+            public int getOnceMinCount() {
                 return OnceMinCount;
             }
 
-            public void setOnceMinCount(String onceMinCount) {
+            public void setOnceMinCount(int onceMinCount) {
                 OnceMinCount = onceMinCount;
             }
 
@@ -242,6 +241,14 @@ public class HallRet extends BaseRet {
 
             public void setReserveQBCount(String reserveQBCount) {
                 ReserveQBCount = reserveQBCount;
+            }
+
+            public String getRechargeQBCount() {
+                return RechargeQBCount;
+            }
+
+            public void setRechargeQBCount(String rechargeQBCount) {
+                RechargeQBCount = rechargeQBCount;
             }
 
             public boolean isCustomerConfirmation() {
@@ -284,22 +291,6 @@ public class HallRet extends BaseRet {
                 IsFriendLimit = friendLimit;
             }
 
-            public boolean isOnceMinCount() {
-                return IsOnceMinCount;
-            }
-
-            public void setOnceMinCount(boolean onceMinCount) {
-                IsOnceMinCount = onceMinCount;
-            }
-
-            public String getRemainingAmount() {
-                return RemainingAmount;
-            }
-
-            public void setRemainingAmount(String remainingAmount) {
-                RemainingAmount = remainingAmount;
-            }
-
             public String getOrderRSettleTotalCount() {
                 return OrderRSettleTotalCount;
             }
@@ -332,11 +323,11 @@ public class HallRet extends BaseRet {
                 AverageConfirmTime = averageConfirmTime;
             }
 
-            public int getReserveDiscount() {
+            public String getReserveDiscount() {
                 return ReserveDiscount;
             }
 
-            public void setReserveDiscount(int reserveDiscount) {
+            public void setReserveDiscount(String reserveDiscount) {
                 ReserveDiscount = reserveDiscount;
             }
 
