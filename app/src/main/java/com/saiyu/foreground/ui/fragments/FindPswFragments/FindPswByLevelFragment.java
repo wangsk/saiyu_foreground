@@ -15,6 +15,7 @@ import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.FaceIdentifyFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -119,7 +120,6 @@ public class FindPswByLevelFragment extends BaseFragment {
                     getFragmentManager().popBackStack();
                     break;
                 case R.id.btn_next:
-
                     Bundle bundle = new Bundle();
                     bundle.putString("account",account);
                     if (rb_identify.isChecked()) {
@@ -131,6 +131,7 @@ public class FindPswByLevelFragment extends BaseFragment {
                     if (rb_face.isChecked()) {
                         bundle.putString("RealName",RealName);
                         bundle.putString("IDNum",IDNum);
+                        bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,2);
                         FaceIdentifyFragment faceIdentifyFragment = FaceIdentifyFragment.newInstance(bundle);
                         start(faceIdentifyFragment);
                     }

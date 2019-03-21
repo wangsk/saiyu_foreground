@@ -30,6 +30,7 @@ import com.saiyu.foreground.https.response.HallDetailReceiveRet;
 import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.IsCountDoRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
+import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
@@ -328,14 +329,17 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 }
 
                 if(IsOrderPwd){
-                    DialogUtils.showOrderPswDialog(getActivity(), orderNum, new DialogUtils.DialogClickCallbackListener() {
+                    DialogUtils.showOrderPswDialog(getActivity(), orderNum, new OnListCallbackListener() {
                         @Override
-                        public void setOnDialogClickCallbackListener(String wayId, String account, String remarks, String accountId) {
-                            if(TextUtils.isEmpty(wayId)){
+                        public void setOnListCallbackListener(List<String> callbackList) {
+                            if(callbackList == null || callbackList.size() < 1){
+                                return;
+                            }
+                            if(TextUtils.isEmpty(callbackList.get(0))){
                                 Toast.makeText(mContext,"请输入接单密码",Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            ApiRequest.hallDetailReceive(orderId,rechargeNum,wayId,"HallOrderDetailFragment_hallDetailReceive", pb_loading);
+                            ApiRequest.hallDetailReceive(orderId,rechargeNum,callbackList.get(0),"HallOrderDetailFragment_hallDetailReceive", pb_loading);
                         }
                     });
                     return;
@@ -345,8 +349,9 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 break;
             case R.id.btn_cancel:
                 bundle.putString("receiveId",receiveId);
-                OrderCancelFragment orderCancelFragment = OrderCancelFragment.newInstance(bundle);
-                start(orderCancelFragment);
+                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.OrderCancelFragmentTag);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
                 break;
         }
     }

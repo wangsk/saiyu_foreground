@@ -1,10 +1,8 @@
 package com.saiyu.foreground.utils;
 
 import android.app.Activity;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,15 +19,15 @@ import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.MyTagAdapter;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.CashRecordRet;
-import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.https.response.RechargeRecordRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
-import com.saiyu.foreground.interfaces.OnTagFlowItemClickListener;
+import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.activitys.BaseActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -283,7 +281,7 @@ public class PopWindowUtils {
 
     private static PopupWindow mPopupWindow_2;
     private static String gameSelected = "";
-    public static void initPopWindow_2(final MyTagAdapter myTagAdapter, View view, final OnTagFlowItemClickListener onTagFlowItemClickListener) {
+    public static void initPopWindow_2(final MyTagAdapter myTagAdapter, View view, final OnListCallbackListener listCallbackListener) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.pop_recharge_game, null);
@@ -299,8 +297,10 @@ public class PopWindowUtils {
         mPopupWindow_2.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                if(onTagFlowItemClickListener != null){
-                    onTagFlowItemClickListener.onTagFlowItemClick(gameSelected,"","");
+                if(listCallbackListener != null){
+                    List<String> callbackList = new ArrayList<>();
+                    callbackList.add(gameSelected);
+                    listCallbackListener.setOnListCallbackListener(callbackList);
                 }
                 backgroundAlpha(BaseActivity.getBaseActivity(), 1f);
             }
@@ -364,7 +364,7 @@ public class PopWindowUtils {
 
     private static PopupWindow mPopupWindow_3;
     private static String extend = "",rQBCount = "",rDiscount = "";
-    public static void initPopWindow_3( View view,final OnTagFlowItemClickListener onTagFlowItemClickListener) {
+    public static void initPopWindow_3( View view,final OnListCallbackListener listCallbackListener) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.pop_selector, null);
@@ -626,7 +626,7 @@ public class PopWindowUtils {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onTagFlowItemClickListener != null){
+                if(listCallbackListener != null){
                     String tv_1 = et_count_1.getText().toString();
                     String tv_2 = et_count_2.getText().toString();
                     String tv_3 = et_count_3.getText().toString();
@@ -653,7 +653,12 @@ public class PopWindowUtils {
                             rDiscount = tv_3 + "o" + tv_4;
                         }
                     }
-                    onTagFlowItemClickListener.onTagFlowItemClick(rQBCount,rDiscount,extend);
+                    List<String> callbackList = new ArrayList<>();
+                    callbackList.add(rQBCount);
+                    callbackList.add(rDiscount);
+                    callbackList.add(extend);
+                    listCallbackListener.setOnListCallbackListener(callbackList);
+
                     if (mPopupWindow_3.isShowing()) {
                         mPopupWindow_3.dismiss();
                     }

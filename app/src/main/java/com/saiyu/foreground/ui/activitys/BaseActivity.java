@@ -1,14 +1,10 @@
 package com.saiyu.foreground.ui.activitys;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import com.saiyu.foreground.cashe.CacheActivity;
 import com.saiyu.foreground.utils.ButtonUtils;
-import com.saiyu.foreground.utils.LogUtils;
 
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;

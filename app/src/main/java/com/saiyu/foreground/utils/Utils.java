@@ -1,5 +1,6 @@
 package com.saiyu.foreground.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.ui.activitys.BaseActivity;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -29,6 +31,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
@@ -77,6 +81,35 @@ public class Utils {
         if (null != v) {
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
+    }
+
+    public static void loadImage(final Bitmap bitmap) {
+        RxPermissions rxPermissions = new RxPermissions(BaseActivity.getBaseActivity());
+        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new io.reactivex.Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        if(!aBoolean){
+                            Toast.makeText(App.getApp(),"请开启读写权限",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        saveBitmap(bitmap);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 
     public static String saveBitmap(Bitmap bitmap) {

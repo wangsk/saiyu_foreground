@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
-import com.saiyu.foreground.cashe.CacheActivity;
 import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
@@ -63,9 +62,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     @ViewById
     ProgressBar pb_loading;
     private static CountDownTimerUtils countDownTimerUtils;
-    private static final int LOGIN_TYPE_PSW = 0;//账号登录
-    private static final int LOGIN_TYPE_MSG = 1;//短信验证码登录
-    private int loginType = 0;
+    private static final String LOGIN_TYPE_PSW = "账号密码登录";//账号登录
+    private static final String LOGIN_TYPE_MSG = "短信验证码登录";//短信验证码登录
 
     private Tencent mTencent;
     private QQCallback qqCallback;
@@ -81,11 +79,15 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
+        //回调的注册放在这里是因为之前遇到从其他页面跳转回来的时候，回调不执行了，所以每次页面显示的时候都注册一次
         CallbackUtils.setCallback(this);
     }
 
     @AfterViews
     void afterView(){
+
+        tv_login_type.setText(LOGIN_TYPE_MSG);
+
         countDownTimerUtils = new CountDownTimerUtils(tv_msg_count, 60000, 1000);
         countDownTimerUtils.setClickable(false);
         // QQ登录初始化
@@ -125,7 +127,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 //            Bundle bundle = new Bundle();
 //            bundle.putBoolean("isLogin",true);
 //            intent.putExtras(bundle);
-//            getActivity().setResult(RESULT_OK, intent);//给订单详情界面返回login
+//            getActivity().setResult(RESULT_OK, intent);//如果需要登录返回状态的时候可以用这段代码
 
             getActivity().finish();
 
@@ -136,10 +138,11 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     void onClick(View view){
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
             switch (view.getId()){
-                case R.id.btn_login:
+                case R.id.btn_login://点击登录按钮
                     String userName = et_account.getText().toString().trim();
                     String userPassword = et_password.getText().toString().trim();
-                    if(loginType == LOGIN_TYPE_PSW){
+                    if(LOGIN_TYPE_MSG.equals(tv_login_type.getText().toString())){
+                        //登录type文案为 短信验证码登录 的时候为 账号密码登录
                         if(TextUtils.isEmpty(userName)){
                             tv_login_response_msg.setVisibility(View.VISIBLE);
                             tv_login_response_msg.setText("请输入用户名");
@@ -148,12 +151,12 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         if(TextUtils.isEmpty(userPassword)){
                             tv_login_response_msg.setVisibility(View.VISIBLE);
                             tv_login_response_msg.setText("请输入密码");
-
                             return;
                         }
 
                         ApiRequest.accountLogin(userName,userPassword,"login_accountLogin",pb_loading);
-                    }else if(loginType == LOGIN_TYPE_MSG){
+                    } else if(LOGIN_TYPE_PSW.equals(tv_login_type.getText().toString())){
+                        //登录type文案为 账号密码登录 的时候为 短信验证码登录
                         if(TextUtils.isEmpty(userName)){
                             tv_login_response_msg.setVisibility(View.VISIBLE);
                             tv_login_response_msg.setText("请输入手机号");
@@ -169,7 +172,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     }
 
                     break;
-                case R.id.tv_msg_count:
+                case R.id.tv_msg_count://发送短信验证码
                     String mobile = et_account.getText().toString().trim();
                     if (!mobile.matches(ConstValue.REGEX_PHONE)) {
                         tv_login_response_msg.setVisibility(View.VISIBLE);
@@ -182,17 +185,18 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     ApiRequest.sendVcode(mobile,"",countDownTimerUtils);
 
                     break;
-                case R.id.tv_forgot_psw:
+                case R.id.tv_forgot_psw://点击忘记密码
                     Bundle bundle_1 = new Bundle();
                     Intent intent = new Intent(mContext,ContainerActivity_.class);
                     bundle_1.putInt(ContainerActivity.FragmentTag, ContainerActivity.ForgotPswFragmentTag);
                     intent.putExtras(bundle_1);
                     mContext.startActivity(intent);
                     break;
-                case R.id.tv_login_type:
-                    if(loginType == LOGIN_TYPE_PSW){
+                case R.id.tv_login_type://点击切换登录方式
+                    if(LOGIN_TYPE_MSG.equals(tv_login_type.getText().toString())){
+                        tv_login_type.setText(LOGIN_TYPE_PSW);
+
                         countDownTimerUtils.onFinish();
-                        tv_login_type.setText("账号密码登录");
                         et_account.setHint("请输入手机号");
                         et_account.setText("");
                         et_password.setHint("请输入验证码");
@@ -202,9 +206,9 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 
                         ll_psw.setVisibility(View.GONE);
                         tv_msg_count.setVisibility(View.VISIBLE);
-                        loginType = LOGIN_TYPE_MSG;
-                    } else if(loginType == LOGIN_TYPE_MSG){
-                        tv_login_type.setText("短信验证码登录");
+                    } else if(LOGIN_TYPE_PSW.equals(tv_login_type.getText().toString())){
+                        tv_login_type.setText(LOGIN_TYPE_MSG);
+
                         et_account.setHint("请输入用户名");
                         et_account.setText("");
                         et_password.setHint("请输入密码");
@@ -214,10 +218,9 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 
                         ll_psw.setVisibility(View.VISIBLE);
                         tv_msg_count.setVisibility(View.GONE);
-                        loginType = LOGIN_TYPE_PSW;
                     }
                     break;
-                case R.id.tv_regist:
+                case R.id.tv_regist://点击注册
                     Bundle bundle_2 = new Bundle();
                     Intent intent_2 = new Intent(mContext,ContainerActivity_.class);
                     bundle_2.putInt(ContainerActivity.FragmentTag, ContainerActivity.RegistFragmentTag);
@@ -236,11 +239,11 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         et_password.setSelection(et_password.getText().length());
                     }
                     break;
-                case R.id.iv_account:
+                case R.id.iv_account://清空输入框
                     et_account.setText("");
                     et_password.setText("");
                     break;
-                case R.id.iv_wechat:
+                case R.id.iv_wechat://点击微信登录
                     boolean weixinAvilible = Utils.isWeixinAvilible();
                     if (weixinAvilible) {
                         SendAuth.Req req = new SendAuth.Req();
@@ -251,14 +254,14 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         Toast.makeText(mContext, "请先安装微信", Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.iv_qq:
+                case R.id.iv_qq://点击QQ登录
                     qqCallback = new QQCallback();
                     //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
                     if (!mTencent.isSessionValid()) {
                         mTencent.login(this, "all", new IUiListener() {
                             @Override
                             public void onComplete(Object response) {
-                                //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
+                                //QQ登录返回结果
                                 ApiRequest.getMessage(response, mTencent,getActivity(),pb_loading,true);
                             }
 
@@ -280,14 +283,14 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 必须加这段代码,不然不会回调!
         LogUtils.print("onActivityResul--------------requestCode=" + requestCode);
-        //QQ登录必须加下面两句
+        //QQ登录必须加下面两句,不然会失败
         if (requestCode == Constants.REQUEST_LOGIN) {
             Tencent.onActivityResultData(requestCode, resultCode, data, qqCallback);
         }
     }
 
+    //微信登录结果接收广播
     public class WeChatReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context mContext, Intent intent) {

@@ -52,7 +52,7 @@
             android:gravity="center_vertical"
             android:hint="请输入提现账号"
             android:inputType="numberDecimal"
-            android:maxLength="15"
+            android:maxLength="20"
             android:maxLines="1"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
@@ -60,8 +60,33 @@
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="15sp" />
 
+        <LinearLayout
+            android:id="@+id/ll_wechat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:text="长按二维码保存图片"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_remark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

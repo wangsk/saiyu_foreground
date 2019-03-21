@@ -27,6 +27,7 @@ import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.activitys.MainActivity;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.FaceIdentifyFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
@@ -172,7 +173,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                             Bundle bundle = new Bundle();
                             Intent intent = new Intent(mContext,ContainerActivity_.class);
                             bundle.putString("url", url);
-                            bundle.putString("type","系统通知");//
+                            bundle.putString("type","系统通知");
                             bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
                             intent.putExtras(bundle);
                             mContext.startActivity(intent);
@@ -228,7 +229,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         Intent intent = new Intent(mContext,ContainerActivity_.class);
                         bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
                         bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
-                        bundle.putBoolean("isFaceIdentify",true);
+                        bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
                         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);

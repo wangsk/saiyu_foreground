@@ -25,7 +25,7 @@
 
                 <TextView
                     android:id="@+id/tv_1_1"
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginLeft="10dp"
@@ -64,7 +64,7 @@
                 android:paddingBottom="5dp">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_gravity="center_vertical"
@@ -205,7 +205,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginLeft="10dp"
@@ -243,7 +243,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginLeft="10dp"
@@ -324,7 +324,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginLeft="10dp"
@@ -399,7 +399,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginLeft="10dp"
@@ -489,14 +489,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我已仔细阅读并同意"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_protocol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《赛鱼网络虚拟货币交易平台服务协议》"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/blue"/>
 
         </LinearLayout>

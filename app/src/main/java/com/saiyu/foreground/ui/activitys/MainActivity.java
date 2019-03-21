@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
         bottomBar.setOnTabSelectedListener(this);
         bottomBar.setCurrentItem(1);//默认选择大厅
 
+        //产品要求，一旦买家或者卖家有一个被激活，主页面不再显示卖家或者买家（产品的意思是一个用户可能很长时间只是买家或者卖家，那么就把他另外一个身份页面（买家/卖家）隐藏）
         int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
         switch (type){
             case 0://全部显示
@@ -103,12 +104,13 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
             return;
         }
         if(method.equals("")){
-
+            //该页面暂时没有网络请求，所以这个接口实现暂时没用
         }
     }
 
     @Override
     public void onTabSelected(int position, int prePosition) {
+        //用户点击买家/卖家/我的页面的时候，必须是登录状态，否则弹出登录页面
         switch (position){
             case 2://买家
             case 3://卖家

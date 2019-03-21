@@ -79,7 +79,7 @@ public class OrderCancelFragment extends BaseFragment implements CallbackUtils.R
             }
             if(ret.getData().isResult()){
                 Toast.makeText(mContext,"订单取消成功",Toast.LENGTH_SHORT).show();
-                getFragmentManager().popBackStack();
+                getActivity().finish();
             }
         }
     }
@@ -101,7 +101,7 @@ public class OrderCancelFragment extends BaseFragment implements CallbackUtils.R
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_title_back:
-                getFragmentManager().popBackStack();
+                getActivity().finish();
                 break;
             case R.id.btn_confirm:
                 String cancelBType = "0";

@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,8 @@ import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.CashChannelRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.interfaces.OnClickListener;
+import com.saiyu.foreground.interfaces.OnListCallbackListener;
+import com.saiyu.foreground.zxinglibrary.encode.CodeCreator;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -114,7 +119,7 @@ public class DialogUtils {
         alertDialog.show();
     }
 
-    public static void showOrderPswDialog(Activity activity, String orderNum,final DialogClickCallbackListener dialogClickCallbackListener) {
+    public static void showOrderPswDialog(Activity activity, String orderNum,final OnListCallbackListener listCallbackListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_order_psw, null);
         Button btn_dialog_confirm = view.findViewById(R.id.btn_confirm);
@@ -136,8 +141,10 @@ public class DialogUtils {
         btn_dialog_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dialogClickCallbackListener != null){
-                    dialogClickCallbackListener.setOnDialogClickCallbackListener(et_psw.getText().toString(),"","","");
+                if(listCallbackListener != null){
+                    List<String> callbackList = new ArrayList<>();
+                    callbackList.add(et_psw.getText().toString());
+                    listCallbackListener.setOnListCallbackListener(callbackList);
                 }
                 alertDialog.dismiss();
             }
@@ -151,7 +158,7 @@ public class DialogUtils {
     private static List<Province> list = new ArrayList<Province>();
     private static ArrayAdapter<Province> arrayAdapter1;
     private static ArrayAdapter<City> arrayAdapter2;
-    public static void showOrderSubmitDialog(final Activity activity,final DialogClickCallbackListener dialogClickCallbackListener) {
+    public static void showOrderSubmitDialog(final Activity activity,final OnListCallbackListener listCallbackListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_order_submit, null);
         final EditText et_qq = view.findViewById(R.id.et_qq);
@@ -210,7 +217,7 @@ public class DialogUtils {
         btn_dialog_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dialogClickCallbackListener != null){
+                if(listCallbackListener != null){
                     String proName = "",cityName = "";
                     if(province != null){
                         proName = province.getName();
@@ -219,7 +226,12 @@ public class DialogUtils {
                         cityName = city.getName();
                     }
                     LogUtils.print("qq " + et_qq.getText().toString() + " psw " + et_psw.getText().toString() + " 省份 " + proName + " 城市 " + cityName);
-                    dialogClickCallbackListener.setOnDialogClickCallbackListener(et_qq.getText().toString(),et_psw.getText().toString(),proName,cityName);
+                    List<String> callbackList = new ArrayList<>();
+                    callbackList.add(et_qq.getText().toString());
+                    callbackList.add(et_psw.getText().toString());
+                    callbackList.add(proName);
+                    callbackList.add(cityName);
+                    listCallbackListener.setOnListCallbackListener(callbackList);
                 }
                 alertDialog.dismiss();
             }
@@ -229,10 +241,14 @@ public class DialogUtils {
     }
 
     private static String wayId,account,remarks,accountId;
-    public static void showCashChannelReviseDialog(final Activity activity, CashRet.DatasBean.ItemsBean itemsBean, final List<CashChannelRet.DatasBean.ItemsBean> mItems, final DialogClickCallbackListener dialogClickCallbackListener) {
+    private static int type;
+    public static void showCashChannelReviseDialog(final Activity activity, CashRet.DatasBean.ItemsBean itemsBean, final List<CashChannelRet.DatasBean.ItemsBean> mItems, final OnListCallbackListener listCallbackListener) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_revise_cashchannel, null);
+        final LinearLayout ll_remark = view.findViewById(R.id.ll_remark);
+        final LinearLayout ll_wechat = view.findViewById(R.id.ll_wechat);
+        final ImageView iv_wechat = view.findViewById(R.id.iv_wechat);
         Button btn_dialog_cancel = view.findViewById(R.id.btn_dialog_cancel);
         Button btn_dialog_confirm = view.findViewById(R.id.btn_dialog_confirm);
         final EditText et_count = view.findViewById(R.id.et_count);
@@ -263,6 +279,42 @@ public class DialogUtils {
         for(int i = 0; i < list.size(); i++){
             if(!TextUtils.isEmpty(mItems.get(i).getId()) && mItems.get(i).getId().equals(itemsBean.getWithdrawWayId())){
                 spinner.setSelection(i);
+                tv_charge.setText(mItems.get(i).getWithdrawWayConfigCharge()+"%");
+                tv_time.setText(mItems.get(i).getPayDateStr());
+                type = mItems.get(i).getType();
+                switch (type){
+                    case 0:
+                        ll_wechat.setVisibility(View.GONE);
+                        ll_remark.setVisibility(View.VISIBLE);
+                        et_count.setVisibility(View.VISIBLE);
+                        et_count.setHint("请输入银行卡号");
+                        break;
+                    case 1:
+                        ll_wechat.setVisibility(View.GONE);
+                        ll_remark.setVisibility(View.VISIBLE);
+                        et_count.setVisibility(View.VISIBLE);
+                        et_count.setHint("请输入支付宝账号");
+                        break;
+                    case 2:
+                        ll_wechat.setVisibility(View.VISIBLE);
+                        ll_remark.setVisibility(View.GONE);
+                        et_count.setVisibility(View.GONE);
+                        String ImgUrl = mItems.get(i).getImgUrl();
+                        if(!TextUtils.isEmpty(ImgUrl)){
+                            final Bitmap bitmap = CodeCreator.createQRCode(ImgUrl, 400, 400, null);
+                            if (bitmap != null) {
+                                iv_wechat.setImageBitmap(bitmap);
+                                iv_wechat.setOnLongClickListener(new View.OnLongClickListener() {
+                                    @Override
+                                    public boolean onLongClick(View v) {
+                                        Utils.loadImage(bitmap);
+                                        return true;
+                                    }
+                                });
+                            }
+                        }
+                        break;
+                }
                 break;
             }
         }
@@ -271,6 +323,41 @@ public class DialogUtils {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 wayId = mItems.get(position).getId();
+                type = mItems.get(position).getType();
+                switch (type){
+                    case 0:
+                        ll_wechat.setVisibility(View.GONE);
+                        ll_remark.setVisibility(View.VISIBLE);
+                        et_count.setVisibility(View.VISIBLE);
+                        et_count.setHint("请输入银行卡号");
+                        break;
+                    case 1:
+                        ll_wechat.setVisibility(View.GONE);
+                        ll_remark.setVisibility(View.VISIBLE);
+                        et_count.setVisibility(View.VISIBLE);
+                        et_count.setHint("请输入支付宝账号");
+                        break;
+                    case 2:
+                        ll_wechat.setVisibility(View.VISIBLE);
+                        ll_remark.setVisibility(View.GONE);
+                        et_count.setVisibility(View.GONE);
+                        String ImgUrl = mItems.get(position).getImgUrl();
+                        if(!TextUtils.isEmpty(ImgUrl)){
+                            final Bitmap bitmap = CodeCreator.createQRCode(ImgUrl, 400, 400, null);
+                            if (bitmap != null) {
+                                iv_wechat.setImageBitmap(bitmap);
+                                iv_wechat.setOnLongClickListener(new View.OnLongClickListener() {
+                                    @Override
+                                    public boolean onLongClick(View v) {
+                                        Utils.loadImage(bitmap);
+                                        return true;
+                                    }
+                                });
+                            }
+                        }
+                        break;
+
+                }
             }
 
             @Override
@@ -286,14 +373,16 @@ public class DialogUtils {
         btn_dialog_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dialogClickCallbackListener != null){
+                if(listCallbackListener != null){
                     account = et_count.getText().toString();
                     remarks = et_remark.getText().toString();
-                    if(TextUtils.isEmpty(account)){
-                        Toast.makeText(activity,"请输入账号",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    dialogClickCallbackListener.setOnDialogClickCallbackListener(wayId,account,remarks,accountId);
+                    List<String> callbackList = new ArrayList<>();
+                    callbackList.add(wayId);
+                    callbackList.add(account);
+                    callbackList.add(remarks);
+                    callbackList.add(accountId);
+                    callbackList.add(String.valueOf(type));
+                    listCallbackListener.setOnListCallbackListener(callbackList);
                 }
                 alertDialog.dismiss();
             }
@@ -306,10 +395,6 @@ public class DialogUtils {
         });
 
         alertDialog.show();
-    }
-
-    public interface DialogClickCallbackListener{
-        void setOnDialogClickCallbackListener(String wayId,String account,String remarks,String accountId);
     }
 
     public interface DialogDismissCallbackListener{

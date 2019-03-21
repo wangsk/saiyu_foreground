@@ -14,12 +14,11 @@ import android.widget.Toast;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.HallAdapter;
 import com.saiyu.foreground.adapters.MyTagAdapter;
-import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
-import com.saiyu.foreground.interfaces.OnTagFlowItemClickListener;
+import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
@@ -27,7 +26,6 @@ import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.PopWindowUtils;
-import com.saiyu.foreground.utils.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -60,7 +58,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     private List<HallRet.DatasBean.ItemsBean> mItems = new ArrayList<>();
     private List<HallRet.DatasBean.ProductItemsBean> productItemsBeans = new ArrayList<>();
     private int page = 1;
-    private int pageSize = 50;
+    private int pageSize = 30;
     private int totalPage;
     private String rQBCount = "",rDiscount = "",pId = "",extend = "",sort = "";
 
@@ -117,6 +115,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
             recyclerView.setAdapter(hallAdapter);
             hallAdapter.notifyDataSetChanged();
 
+            //游戏产品列表
             productItemsBeans.clear();
 
             HallRet.DatasBean.ProductItemsBean productItemsBean = new HallRet.DatasBean.ProductItemsBean();
@@ -185,29 +184,36 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 break;
             case R.id.ll_recharge_game:
                 MyTagAdapter myTagAdapter = new MyTagAdapter(productItemsBeans);
-                PopWindowUtils.initPopWindow_2(myTagAdapter, ll_recharge_game, new OnTagFlowItemClickListener() {
+                PopWindowUtils.initPopWindow_2(myTagAdapter, ll_recharge_game, new OnListCallbackListener() {
                     @Override
-                    public void onTagFlowItemClick(String id,String id_2,String id_3) {
-                        LogUtils.print("_pId ==== " + pId + " id === " + id);
-                        if(TextUtils.isEmpty(id) && TextUtils.isEmpty(pId)){
+                    public void setOnListCallbackListener(List<String> callbackList) {
+                        if(callbackList == null || callbackList.size() < 1){
                             return;
                         }
-                        pId = id;
+                        LogUtils.print("current _pId ==== " + pId + " newId === " + callbackList.get(0));
+                        if(TextUtils.isEmpty(callbackList.get(0)) && TextUtils.isEmpty(pId)){
+                            return;
+                        }
+                        pId = callbackList.get(0);
                         ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
                     }
                 });
                 break;
             case R.id.ll_selector:
-                PopWindowUtils.initPopWindow_3(ll_selector, new OnTagFlowItemClickListener() {
+
+                PopWindowUtils.initPopWindow_3(ll_selector, new OnListCallbackListener() {
                     @Override
-                    public void onTagFlowItemClick(String id_1, String id_2, String id_3) {
-                        LogUtils.print("rQBCount ==== " + rQBCount + " id_1 === " + id_1 + " rDiscount ==== " + rDiscount + " id_2 === " + id_2 + " extend ==== " + extend + " id_3 === " + id_3);
-                        if(TextUtils.isEmpty(rQBCount) && TextUtils.isEmpty(id_1) && TextUtils.isEmpty(rDiscount) && TextUtils.isEmpty(id_2) && TextUtils.isEmpty(extend) && TextUtils.isEmpty(id_3)){
+                    public void setOnListCallbackListener(List<String> callbackList) {
+                        if(callbackList == null || callbackList.size() < 3){
                             return;
                         }
-                        rQBCount = id_1;
-                        rDiscount = id_2;
-                        extend = id_3;
+                        LogUtils.print("old rQBCount ==== " + rQBCount + " new rQBCount === " + callbackList.get(0) + " old rDiscount ==== " + rDiscount + " new rDiscount === " + callbackList.get(1) + " old extend ==== " + extend + " new extend === " + callbackList.get(2));
+                        if(TextUtils.isEmpty(rQBCount) && TextUtils.isEmpty(callbackList.get(0)) && TextUtils.isEmpty(rDiscount) && TextUtils.isEmpty(callbackList.get(1)) && TextUtils.isEmpty(extend) && TextUtils.isEmpty(callbackList.get(2))){
+                            return;
+                        }
+                        rQBCount = callbackList.get(0);
+                        rDiscount = callbackList.get(1);
+                        extend = callbackList.get(2);
                         ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
                     }
                 });

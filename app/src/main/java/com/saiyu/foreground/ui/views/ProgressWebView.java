@@ -31,32 +31,17 @@ public class ProgressWebView extends WebView {
         progressbar.setProgressDrawable(drawable);
         addView(progressbar);
         setWebChromeClient(new WebChromeClient());
-//        getSettings().setJavaScriptEnabled(true); // 设置支持javascript脚本
-        // 设置可以支持缩放
-        getSettings().setSupportZoom(true);
-        // 设置出现缩放工具
-        getSettings().setBuiltInZoomControls(true);
-        //扩大比例的缩放
-        getSettings().setUseWideViewPort(true);
-        //自适应屏幕
-        getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        getSettings().setLoadWithOverviewMode(true);
 
+        WebSettings webSettings = getSettings();
+        webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setSupportZoom(true);// 设置可以支持缩放
+        webSettings.setBuiltInZoomControls(true);// 设置出现缩放工具
+        webSettings.setUseWideViewPort(true);//扩大比例的缩放
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//自适应屏幕
+        webSettings.setLoadWithOverviewMode(true);
 
-//        getSettings().setUseWideViewPort(true);
-//        //是否支持缩放
-//        getSettings().setSupportZoom(true);
-//        getSettings().setBuiltInZoomControls(false);
-
-//        WebSettings webSettings = getSettings();
-//        webSettings.setJavaScriptEnabled(true);
-//        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-//        webSettings.setUseWideViewPort(true);//关键点
-//
-//        webSettings.setDisplayZoomControls(false);
-//        webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
-//        webSettings.setBuiltInZoomControls(true); // 设置显示缩放按钮
-//        webSettings.setSupportZoom(true); // 支持缩放
+//        webSettings.setDisplayZoomControls(false);//控制缩放按钮
 
     }
 

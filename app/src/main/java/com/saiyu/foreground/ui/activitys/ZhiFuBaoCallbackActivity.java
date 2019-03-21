@@ -24,7 +24,7 @@ public class ZhiFuBaoCallbackActivity extends BaseActivity{
         if(uri != null){
             String sycallbackid = uri.getQueryParameter("sycallbackid");
             //sycallbackid 返回成功的结构：biz_content={"biz_no":"ZM201902283000000242400358519054","passed":"true"}
-            //返回失败的结构:biz_content={"biz_no":"ZM201902283000000464600357976834","failed_reason":"请返回重新认证","passed":"false"}
+            //sycallbackid 返回失败的结构:biz_content={"biz_no":"ZM201902283000000464600357976834","failed_reason":"请返回重新认证","passed":"false"}
             LogUtils.print("sycallbackid === " + sycallbackid);
             String[] array = sycallbackid.split("=");
             if(array != null && array.length >= 2 && !TextUtils.isEmpty(array[1])){

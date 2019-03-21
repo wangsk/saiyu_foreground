@@ -65,11 +65,11 @@ import rx.schedulers.Schedulers;
 public class ApiRequest {
 
     //用账号密码登陆
-    public static void accountLogin(String account, String password, final String callBackKey,final ProgressBar pb_loading) {
+    public static void accountLogin(String account, String password, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
 //        CloudPushService pushService = PushServiceFactory.getCloudPushService();
         String aliPushId = "";
-        LogUtils.print("aliPushId == "+aliPushId);
+        LogUtils.print("aliPushId == " + aliPushId);
 
         RequestParams requestParams = new RequestParams();
         requestParams.put("account", account);
@@ -77,7 +77,6 @@ public class ApiRequest {
 //        requestParams.put("codeType", codeType);
 //        requestParams.put("code", code);
 //        requestParams.put("aliPushId", aliPushId);
-
 
 
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
@@ -97,7 +96,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -106,7 +105,7 @@ public class ApiRequest {
                     public void onNext(LoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -124,11 +123,11 @@ public class ApiRequest {
     }
 
     //用手机验证码登陆
-    public static void loginMobile(String Phone, String code, final String callBackKey,final ProgressBar pb_loading) {
+    public static void loginMobile(String Phone, String code, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
 //        CloudPushService pushService = PushServiceFactory.getCloudPushService();
         String aliPushId = "";
-        LogUtils.print("aliPushId == "+aliPushId);
+        LogUtils.print("aliPushId == " + aliPushId);
 
         RequestParams requestParams = new RequestParams();
         requestParams.put("Phone", Phone);
@@ -155,7 +154,7 @@ public class ApiRequest {
 
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
 
@@ -165,7 +164,7 @@ public class ApiRequest {
                     public void onNext(LoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -197,8 +196,8 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
-                        SPUtils.putString(ConstValue.ACCESS_TOKEN,"");
+                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
+                        SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
                         Toast.makeText(activity, "退出登录成功", Toast.LENGTH_SHORT).show();
 
                         CallbackUtils.doBottomSelectCallback(1);
@@ -214,8 +213,8 @@ public class ApiRequest {
 
                     @Override
                     public void onNext(BooleanRet ret) {
-                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
-                        SPUtils.putString(ConstValue.ACCESS_TOKEN,"");
+                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
+                        SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
                         Toast.makeText(activity, "退出登录成功", Toast.LENGTH_SHORT).show();
 
                         CallbackUtils.doBottomSelectCallback(1);
@@ -235,7 +234,7 @@ public class ApiRequest {
     /*
      * 发送验证码
      * **/
-    public static void sendVcode(String mobile,String bizType,final CountDownTimerUtils countDownTimerUtils) {
+    public static void sendVcode(String mobile, String bizType, final CountDownTimerUtils countDownTimerUtils) {
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
         requestParams.put("mobile", mobile);
@@ -255,9 +254,9 @@ public class ApiRequest {
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
-                        try{
+                        try {
                             countDownTimerUtils.onFinish();
-                        }catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("countDownTimerUtils close Exception");
                         }
                     }
@@ -268,9 +267,9 @@ public class ApiRequest {
                             return;
                         }
                         if (ret.getCode() != 200) {
-                            try{
+                            try {
                                 countDownTimerUtils.onFinish();
-                            }catch (Exception e1){
+                            } catch (Exception e1) {
                                 LogUtils.print("countDownTimerUtils close Exception");
                             }
                             Intent intentshowShort = new Intent();
@@ -285,7 +284,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void checkVCode(String mobile,String code,final String callBackKey,final ProgressBar pb_loading) {
+    public static void checkVCode(String mobile, String code, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -307,7 +306,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -316,7 +315,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -333,7 +332,7 @@ public class ApiRequest {
     }
 
     //用户注册
-    public static void regist(String account, String password, final String callBackKey,final ProgressBar pb_loading) {
+    public static void regist(String account, String password, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("account", account);
@@ -356,7 +355,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -365,7 +364,7 @@ public class ApiRequest {
                     public void onNext(RegistRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -382,7 +381,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void hallIndex(String pType,String page, String pagesize, String rQBCount,String rDiscount, String pId,String extend,String sort, final String callBackKey,final ProgressBar pb_loading) {
+    public static void hallIndex(String pType, String page, String pagesize, String rQBCount, String rDiscount, String pId, String extend, String sort, final String callBackKey, final ProgressBar pb_loading) {
         LogUtils.print("page : " + page + " pagesize : " + pagesize);
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
@@ -413,7 +412,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -422,7 +421,7 @@ public class ApiRequest {
                     public void onNext(HallRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -439,7 +438,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void hallDetail(String orderId, final String callBackKey,final ProgressBar pb_loading) {
+    public static void hallDetail(String orderId, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("orderId", orderId);
@@ -461,7 +460,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -470,7 +469,7 @@ public class ApiRequest {
                     public void onNext(HallDetailRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -487,7 +486,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void hallDetailNoLogin(String orderId, final String callBackKey,final ProgressBar pb_loading) {
+    public static void hallDetailNoLogin(String orderId, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("orderId", orderId);
@@ -509,7 +508,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -518,7 +517,7 @@ public class ApiRequest {
                     public void onNext(HallDetailRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -535,7 +534,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void hallDetailReceive(String orderId, String qbCount,String orderPwd,final String callBackKey,final ProgressBar pb_loading) {
+    public static void hallDetailReceive(String orderId, String qbCount, String orderPwd, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("orderId", orderId);
@@ -559,7 +558,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -568,7 +567,7 @@ public class ApiRequest {
                     public void onNext(HallDetailReceiveRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -585,7 +584,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void receiveSubmit(RequestParams requestParams,final String callBackKey,final ProgressBar pb_loading) {
+    public static void receiveSubmit(RequestParams requestParams, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
 
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
@@ -605,7 +604,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -614,7 +613,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -631,7 +630,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void usableQBCountList(String orderId, String num,final String callBackKey,final ProgressBar pb_loading) {
+    public static void usableQBCountList(String orderId, String num, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("orderId", orderId);
@@ -654,7 +653,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -663,7 +662,7 @@ public class ApiRequest {
                     public void onNext(IsCountDoRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -680,7 +679,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void receiveCancel(String receiveId, final String callBackKey,final ProgressBar pb_loading) {
+    public static void receiveCancel(String receiveId, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("receiveId", receiveId);
@@ -702,7 +701,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -711,7 +710,7 @@ public class ApiRequest {
                     public void onNext(CancelOrderInfoRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -728,7 +727,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void receiveCancelSubmit(String receiveId, String cancelBType,final String callBackKey,final ProgressBar pb_loading) {
+    public static void receiveCancelSubmit(String receiveId, String cancelBType, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("receiveId", receiveId);
@@ -751,7 +750,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -760,7 +759,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -778,7 +777,7 @@ public class ApiRequest {
     }
 
 
-    public static void financeRecord(String Page, String PageSize, final String callBackKey,final ProgressBar pb_loading) {
+    public static void financeRecord(String Page, String PageSize, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("Page", Page);
@@ -801,7 +800,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -810,7 +809,7 @@ public class ApiRequest {
                     public void onNext(CashDetailRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -828,7 +827,7 @@ public class ApiRequest {
     }
 
 
-    public static void financeRechargeLog(String Page, String PageSize, final String callBackKey,final ProgressBar pb_loading) {
+    public static void financeRechargeLog(String Page, String PageSize, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("Page", Page);
@@ -851,7 +850,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -860,7 +859,7 @@ public class ApiRequest {
                     public void onNext(RechargeRecordRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -878,7 +877,7 @@ public class ApiRequest {
     }
 
 
-    public static void financeWithdrawLog(String Page, String PageSize, final String callBackKey,final ProgressBar pb_loading) {
+    public static void financeWithdrawLog(String Page, String PageSize, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("Page", Page);
@@ -901,7 +900,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -910,7 +909,7 @@ public class ApiRequest {
                     public void onNext(CashRecordRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -929,15 +928,15 @@ public class ApiRequest {
 
 
     //第三方用户注册
-    public static void unionIDRegist(String account, String password, String oauthType, String unionId,String openId,final String callBackKey,final ProgressBar pb_loading) {
-        LogUtils.print("account == " + account+" password == " + password + " oauthType == " + oauthType + " unionId == " + unionId + " openId == " + openId);
+    public static void unionIDRegist(String account, String password, String oauthType, String unionId, String openId, final String callBackKey, final ProgressBar pb_loading) {
+        LogUtils.print("account == " + account + " password == " + password + " oauthType == " + oauthType + " unionId == " + unionId + " openId == " + openId);
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("account", account);
         requestParams.put("password", password);
         requestParams.put("oauthType", oauthType);
         requestParams.put("openId", openId);
-        requestParams.put("unionId",unionId);
+        requestParams.put("unionId", unionId);
 
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
 
@@ -956,7 +955,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -965,7 +964,7 @@ public class ApiRequest {
                     public void onNext(RegistRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -982,7 +981,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void isAccountExist(String account,final String callBackKey) {
+    public static void isAccountExist(String account, final String callBackKey) {
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
         requestParams.put("account", account);
@@ -1017,7 +1016,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void mobileUnBindByFace(final String callBackKey,final ProgressBar pb_loading) {
+    public static void mobileUnBindByFace(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1037,7 +1036,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1046,7 +1045,7 @@ public class ApiRequest {
                     public void onNext(FaceRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1062,7 +1061,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void mobileUnBindByFaceSumbit(String faceStatus,String faceResult,final String callBackKey,final ProgressBar pb_loading) {
+    public static void mobileUnBindByFaceSumbit(String faceStatus, String faceResult, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1084,7 +1083,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1093,7 +1092,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1109,7 +1108,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void searchPswFace(String account,final String callBackKey,final ProgressBar pb_loading) {
+    public static void searchPswFace(String account, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1130,7 +1129,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1139,7 +1138,7 @@ public class ApiRequest {
                     public void onNext(FaceRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1155,7 +1154,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void faceSearchQuery(String account,String faceOrderNum,String faceStatus,String faceResult,final String callBackKey,final ProgressBar pb_loading) {
+    public static void faceSearchQuery(String account, String faceOrderNum, String faceStatus, String faceResult, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1179,7 +1178,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1188,7 +1187,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1204,7 +1203,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void searchPswIdCard(String account,String name,String IDCard,final String callBackKey,final ProgressBar pb_loading) {
+    public static void searchPswIdCard(String account, String name, String IDCard, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1227,7 +1226,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1236,7 +1235,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1252,7 +1251,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void searchPswMobile(String mobile,String checkCode,final String callBackKey,final ProgressBar pb_loading) {
+    public static void searchPswMobile(String mobile, String checkCode, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1274,7 +1273,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1283,7 +1282,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1316,7 +1315,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1325,7 +1324,7 @@ public class ApiRequest {
                     public void onNext(UploadIdentityRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1341,7 +1340,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void retsetPsw(String account,String pwd,final String callBackKey,final ProgressBar pb_loading) {
+    public static void retsetPsw(String account, String pwd, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1363,7 +1362,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1372,7 +1371,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1389,7 +1388,7 @@ public class ApiRequest {
     }
 
     //修改密码，在原密码知道的情况下
-    public static void revisePsw(String originalPwd,String pwd,final String callBackKey,final ProgressBar pb_loading) {
+    public static void revisePsw(String originalPwd, String pwd, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -1411,7 +1410,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1420,7 +1419,7 @@ public class ApiRequest {
                     public void onNext(LoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1437,7 +1436,7 @@ public class ApiRequest {
     }
 
     //不登录获取用户信息
-    public static void getAccountInfoNoLogin(String account, final String callBackKey,final ProgressBar pb_loading) {
+    public static void getAccountInfoNoLogin(String account, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("account", account);
@@ -1459,7 +1458,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1468,7 +1467,7 @@ public class ApiRequest {
                     public void onNext(AccountInfoNoLoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1486,7 +1485,7 @@ public class ApiRequest {
     }
 
     //登录获取用户信息
-    public static void getAccountInfoLogin(final String callBackKey,final ProgressBar pb_loading) {
+    public static void getAccountInfoLogin(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1507,7 +1506,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1516,7 +1515,7 @@ public class ApiRequest {
                     public void onNext(AccountInfoLoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1534,7 +1533,7 @@ public class ApiRequest {
     }
 
     //登录状态获取个别账号信息
-    public static void getSmallAccountInfoLogin(final String callBackKey,final ProgressBar pb_loading) {
+    public static void getSmallAccountInfoLogin(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1555,7 +1554,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1564,7 +1563,7 @@ public class ApiRequest {
                     public void onNext(AccountInfoLoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1581,7 +1580,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void getAppVersion(final String callBackKey,final ProgressBar pb_loading) {
+    public static void getAppVersion(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1602,7 +1601,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1611,7 +1610,7 @@ public class ApiRequest {
                     public void onNext(AppVersionRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1630,7 +1629,7 @@ public class ApiRequest {
 
 
     //信息补填
-    public static void wadInfo(String realName,String idNum,final String callBackKey,final ProgressBar pb_loading) {
+    public static void wadInfo(String realName, String idNum, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("realName", realName);
@@ -1653,7 +1652,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1662,7 +1661,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1680,7 +1679,7 @@ public class ApiRequest {
     }
 
     //查询实名认证状态
-    public static void realNameStatus(final String callBackKey,final ProgressBar pb_loading) {
+    public static void realNameStatus(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1701,7 +1700,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1710,7 +1709,7 @@ public class ApiRequest {
                     public void onNext(RealNameStatusRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1728,7 +1727,7 @@ public class ApiRequest {
     }
 
     //实名认证
-    public static void realNameSubmit(String realName,String idNum,String cardzmPic,String cardfmPic,final String callBackKey,final ProgressBar pb_loading) {
+    public static void realNameSubmit(String realName, String idNum, String cardzmPic, String cardfmPic, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("realName", realName);
@@ -1753,7 +1752,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1762,7 +1761,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1780,7 +1779,7 @@ public class ApiRequest {
     }
 
     //卖家激活
-    public static void activeSeller(final String callBackKey,final ProgressBar pb_loading) {
+    public static void activeSeller(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1801,7 +1800,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1810,7 +1809,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1828,7 +1827,7 @@ public class ApiRequest {
     }
 
     //买家激活
-    public static void activeBuyer(final String callBackKey,final ProgressBar pb_loading) {
+    public static void activeBuyer(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1849,7 +1848,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1858,7 +1857,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1876,7 +1875,7 @@ public class ApiRequest {
     }
 
     //查询刷脸认证状态
-    public static void faceStatus(final String callBackKey,final ProgressBar pb_loading) {
+    public static void faceStatus(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -1897,7 +1896,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1906,7 +1905,7 @@ public class ApiRequest {
                     public void onNext(FaceStatusRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1924,7 +1923,7 @@ public class ApiRequest {
     }
 
     //刷脸认证
-    public static void faceIdentify(String realName,String idNum,final String callBackKey,final ProgressBar pb_loading) {
+    public static void faceIdentify(String realName, String idNum, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("realName", realName);
@@ -1946,7 +1945,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -1955,7 +1954,7 @@ public class ApiRequest {
                     public void onNext(FaceRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -1973,7 +1972,7 @@ public class ApiRequest {
     }
 
     //提交刷脸认证结果
-    public static void faceQuery(String faceStatus,String faceResult,final String callBackKey,final ProgressBar pb_loading) {
+    public static void faceQuery(String faceStatus, String faceResult, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("faceStatus", faceStatus);
@@ -1996,7 +1995,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2005,7 +2004,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2022,7 +2021,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void cash(final String callBackKey,final ProgressBar pb_loading) {
+    public static void cash(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -2043,7 +2042,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2052,7 +2051,7 @@ public class ApiRequest {
                     public void onNext(CashRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2069,7 +2068,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void cashWays(final String callBackKey,final ProgressBar pb_loading) {
+    public static void cashWays(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -2090,7 +2089,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2099,7 +2098,7 @@ public class ApiRequest {
                     public void onNext(CashChannelRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2116,7 +2115,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void addCashAccount(String wayId,String account,String code,String remarks,String accountId,final String callBackKey,final ProgressBar pb_loading) {
+    public static void addCashAccount(String wayId, String account, String code, String remarks, String accountId, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("wayId", wayId);
@@ -2142,7 +2141,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2151,7 +2150,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2168,7 +2167,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void delCashAccount(String accountId,String code,final String callBackKey,final ProgressBar pb_loading) {
+    public static void delCashAccount(String accountId, String code, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("accountId", accountId);
@@ -2191,7 +2190,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2200,7 +2199,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2217,7 +2216,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void submitCash(String accountId,String money,String Code,final String callBackKey,final ProgressBar pb_loading) {
+    public static void submitCash(String accountId, String money, String Code, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("accountId", accountId);
@@ -2241,7 +2240,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2250,7 +2249,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2267,7 +2266,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void submitRecharge(String payType,String money,final String callBackKey,final ProgressBar pb_loading) {
+    public static void submitRecharge(String payType, String money, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("payType", payType);
@@ -2290,7 +2289,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2299,7 +2298,7 @@ public class ApiRequest {
                     public void onNext(RewardRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2316,7 +2315,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void getRechargeRate(final String callBackKey,final ProgressBar pb_loading) {
+    public static void getRechargeRate(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -2337,7 +2336,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2346,7 +2345,7 @@ public class ApiRequest {
                     public void onNext(RechargeRateRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2364,7 +2363,7 @@ public class ApiRequest {
     }
 
     //安全限制
-    public static void securitySet(String code,String orderMoney,String orderCount,final String callBackKey,final ProgressBar pb_loading) {
+    public static void securitySet(String code, String orderMoney, String orderCount, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("code", code);
@@ -2388,7 +2387,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2397,7 +2396,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2415,7 +2414,7 @@ public class ApiRequest {
     }
 
     //绑定手机
-    public static void bindMobile(String mobile,String code,final String callBackKey,final ProgressBar pb_loading) {
+    public static void bindMobile(String mobile, String code, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("mobile", mobile);
@@ -2438,7 +2437,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2447,7 +2446,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2465,7 +2464,7 @@ public class ApiRequest {
     }
 
     //解绑手机
-    public static void unBindMobile(String code,final String callBackKey,final ProgressBar pb_loading) {
+    public static void unBindMobile(String code, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("code", code);
@@ -2487,7 +2486,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2496,7 +2495,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2514,7 +2513,7 @@ public class ApiRequest {
     }
 
     //更换手机
-    public static void changeMobile(String mobile,String oldCode,String newCode,final String callBackKey,final ProgressBar pb_loading) {
+    public static void changeMobile(String mobile, String oldCode, String newCode, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("mobile", mobile);
@@ -2538,7 +2537,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2547,7 +2546,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2565,7 +2564,7 @@ public class ApiRequest {
     }
 
     //登录日志
-    public static void userRecord(String pageIndex,String pageSize,final String callBackKey,final ProgressBar pb_loading) {
+    public static void userRecord(String pageIndex, String pageSize, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("pageIndex", pageIndex);
@@ -2588,7 +2587,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2597,7 +2596,7 @@ public class ApiRequest {
                     public void onNext(LoginRecordRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2615,7 +2614,7 @@ public class ApiRequest {
     }
 
     //买家信息
-    public static void buyerInfo(final String callBackKey,final ProgressBar pb_loading) {
+    public static void buyerInfo(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -2636,7 +2635,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2645,7 +2644,7 @@ public class ApiRequest {
                     public void onNext(BuyerInfoRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2663,7 +2662,7 @@ public class ApiRequest {
     }
 
     //卖家信息
-    public static void sellerInfo(final String callBackKey,final ProgressBar pb_loading) {
+    public static void sellerInfo(final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
 
@@ -2684,7 +2683,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2693,7 +2692,7 @@ public class ApiRequest {
                     public void onNext(SellerInfoRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2711,7 +2710,7 @@ public class ApiRequest {
     }
 
     //解绑 0: qq; 1:wechat
-    public static void unBind(String IdentityType,final String callBackKey,final ProgressBar pb_loading) {
+    public static void unBind(String IdentityType, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("IdentityType", IdentityType);
@@ -2733,7 +2732,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2742,7 +2741,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2758,8 +2757,9 @@ public class ApiRequest {
                     }
                 });
     }
+
     //绑定 0: qq; 1:wechat
-    public static void bind(String IdentityType,String openId,String unionId,final String callBackKey,final ProgressBar pb_loading) {
+    public static void bind(String IdentityType, String openId, String unionId, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
         requestParams.put("IdentityType", IdentityType);
@@ -2783,7 +2783,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2792,7 +2792,7 @@ public class ApiRequest {
                     public void onNext(BooleanRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2809,7 +2809,7 @@ public class ApiRequest {
                 });
     }
 
-    public static void getMessage(Object response, final Tencent mTencent,final Activity activity,final ProgressBar pb_loading,final boolean isLogin) {
+    public static void getMessage(Object response, final Tencent mTencent, final Activity activity, final ProgressBar pb_loading, final boolean isLogin) {
         pb_loading.setVisibility(View.VISIBLE);
         try {
             //获取openid和access_token
@@ -2833,7 +2833,7 @@ public class ApiRequest {
                 public void onError(Call call, Exception e, int id) {
                     try {
                         pb_loading.setVisibility(View.GONE);
-                    } catch (Exception e1){
+                    } catch (Exception e1) {
                         LogUtils.print("pb_loading close Exception");
                     }
 
@@ -2842,7 +2842,7 @@ public class ApiRequest {
                 @Override
                 public void onResponse(String response, int id) {
                     LogUtils.print(" QQ Response===================" + response);
-                    if(TextUtils.isEmpty(response)){
+                    if (TextUtils.isEmpty(response)) {
                         return;
                     }
                     try {
@@ -2853,19 +2853,19 @@ public class ApiRequest {
                             str = m.group(0);
                             LogUtils.print("QQ Response===================" + m.group(0));
                         }
-                        if(TextUtils.isEmpty(str)){
+                        if (TextUtils.isEmpty(str)) {
                             return;
                         }
 
                         JSONObject obj = new JSONObject(str);
                         final String unionid = (String) obj.get("unionid");
                         LogUtils.print(" unionid =================== " + unionid);
-                        if(TextUtils.isEmpty(unionid)){
+                        if (TextUtils.isEmpty(unionid)) {
                             return;
                         }
 
                         //拿到唯一标示unionID判断是否此号已经绑定
-                        isUnionIdBind(unionid, openid,"0",activity,pb_loading,isLogin);
+                        isUnionIdBind(unionid, openid, "0", activity, pb_loading, isLogin);
 
                         mTencent.logout(App.getApp());
 
@@ -2881,7 +2881,7 @@ public class ApiRequest {
         }
     }
 
-    public static void isUnionIdBind(final String unionId,final String openId, final String type, final Activity activity,final ProgressBar pb_loading,final boolean isLogin){
+    public static void isUnionIdBind(final String unionId, final String openId, final String type, final Activity activity, final ProgressBar pb_loading, final boolean isLogin) {
         pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();
@@ -2903,7 +2903,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2912,7 +2912,7 @@ public class ApiRequest {
                     public void onNext(IsAccountExistRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -2927,20 +2927,20 @@ public class ApiRequest {
                         LogUtils.print(" exist =================== " + exist);
                         //如果为true即为绑定直接登录
                         if (exist) {
-                            if(isLogin){
+                            if (isLogin) {
                                 //LoginFragment界面操作
-                                unionIDLogin(type, unionId,openId, activity,pb_loading);
+                                unionIDLogin(type, unionId, openId, activity, pb_loading);
                             } else {
                                 //UnionLoginFragment界面操作
-                                if(type.equals("0")){
-                                    Toast.makeText(activity,"该QQ号已绑定",Toast.LENGTH_LONG).show();
-                                } else if(type.equals("1")){
-                                    Toast.makeText(activity,"该微信号已绑定",Toast.LENGTH_LONG).show();
+                                if (type.equals("0")) {
+                                    Toast.makeText(activity, "该QQ号已绑定", Toast.LENGTH_LONG).show();
+                                } else if (type.equals("1")) {
+                                    Toast.makeText(activity, "该微信号已绑定", Toast.LENGTH_LONG).show();
                                 }
                             }
 
                         } else {
-                            if(isLogin){
+                            if (isLogin) {
                                 //LoginFragment操作
                                 Intent intent = new Intent(activity, ContainerActivity_.class);
                                 Bundle bundle = new Bundle();
@@ -2952,7 +2952,7 @@ public class ApiRequest {
                                 activity.startActivity(intent);
                             } else {
                                 //UnionLoginFragment界面操作
-                                bind(type,openId,unionId,"UnionLoginFragment_Bind",pb_loading);
+                                bind(type, openId, unionId, "UnionLoginFragment_Bind", pb_loading);
                             }
                         }
                     }
@@ -2960,15 +2960,15 @@ public class ApiRequest {
     }
 
     //第三方登陆
-    public static void unionIDLogin(String type, String unionId,final String openId, final Activity activity,final ProgressBar pb_loading) {
+    public static void unionIDLogin(String type, String unionId, final String openId, final Activity activity, final ProgressBar pb_loading) {
 //        CloudPushService pushService = PushServiceFactory.getCloudPushService();
         String aliPushId = "";
-        LogUtils.print("aliPushId == "+aliPushId);
+        LogUtils.print("aliPushId == " + aliPushId);
 
         RequestParams requestParams = new RequestParams();
         requestParams.put("type", type);
         requestParams.put("openId", openId);
-        requestParams.put("unionId",unionId);
+        requestParams.put("unionId", unionId);
 
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
 
@@ -2987,7 +2987,7 @@ public class ApiRequest {
                         Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                     }
@@ -2996,7 +2996,7 @@ public class ApiRequest {
                     public void onNext(LoginRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1){
+                        } catch (Exception e1) {
                             LogUtils.print("pb_loading close Exception");
                         }
                         if (ret == null) {
@@ -3017,7 +3017,5 @@ public class ApiRequest {
                     }
                 });
     }
-
-
 
 }

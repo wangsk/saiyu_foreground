@@ -1,6 +1,5 @@
 package com.saiyu.foreground.ui.fragments.RegistFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -16,8 +15,6 @@ import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.IsAccountExistRet;
-import com.saiyu.foreground.ui.activitys.ContainerActivity;
-import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment;
 import com.saiyu.foreground.ui.fragments.ProtocolFragment;

@@ -1,4 +1,4 @@
-package com.saiyu.foreground.ui.fragments.FindPswFragments;
+package com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.ApiRequest;
@@ -15,7 +16,6 @@ import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
-import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -24,8 +24,7 @@ import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_phone_identify_layout)
-public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
-
+public class AddCashChannelWithSendMsgFragment extends BaseFragment implements CallbackUtils.ResponseCallback  {
     @ViewById
     TextView tv_title_content, tv_phone, tv_msg_count, et_msg, tv_response_msg;
     @ViewById
@@ -33,10 +32,10 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
     @ViewById
     ProgressBar pb_loading;
     private static CountDownTimerUtils countDownTimerUtils;
-    private String account,mobile;
+    private String account,Mobile,Id,accountId,remarks;
 
-    public static PhoneIdentifyFragment newInstance(Bundle bundle) {
-        PhoneIdentifyFragment_ fragment = new PhoneIdentifyFragment_();
+    public static AddCashChannelWithSendMsgFragment newInstance(Bundle bundle) {
+        AddCashChannelWithSendMsgFragment_ fragment = new AddCashChannelWithSendMsgFragment_();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -50,15 +49,25 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
 
     @AfterViews
     void afterView() {
-        tv_title_content.setText("找回密码");
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            Mobile = bundle.getString("Mobile");
+            account = bundle.getString("account");
+            Id = bundle.getString("Id");
+            accountId = bundle.getString("accountId","0");
+            remarks = bundle.getString("remarks","");
+        }
+        //添加银行卡的时候默认是没有accountId的，所以置为0代表添加,其他代表修改
+        if("0".equals(accountId)){
+            tv_title_content.setText("添加银行卡");
+        } else {
+            tv_title_content.setText("修改银行卡");
+        }
+
         countDownTimerUtils = new CountDownTimerUtils(tv_msg_count, 60000, 1000);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            mobile = bundle.getString("mobile");
-            account = bundle.getString("account");
-        }
-        tv_phone.setText("手机号码: " + mobile);
+        tv_phone.setText("手机号码: " + Mobile);
+        btn_next.setText("确定");
 
     }
 
@@ -67,19 +76,19 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
         }
-        if (method.equals("PhoneIdentifyFragment_searchPswMobile")) {
+        if(method.equals("AddCashChannelWithSendMsgFragment_addCashAccount")){
             BooleanRet ret = (BooleanRet)baseRet;
             if(ret.getData() == null){
                 return;
             }
-
             if(ret.getData().isResult()){
-                Bundle bundle = new Bundle();
-                bundle.putString("account",account);
-                RevisePswFragment revisePswFragment = RevisePswFragment.newInstance(bundle);
-                start(revisePswFragment);
-            } else {
-                LogUtils.print("PhoneIdentifyFragment_searchPswMobile == ");
+                if("0".equals(accountId)){
+                    Toast.makeText(mContext,"添加成功",Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(mContext,"修改成功",Toast.LENGTH_SHORT).show();
+                    getFragmentManager().popBackStack();
+                }
             }
         }
     }
@@ -99,17 +108,13 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
                         return;
                     }
 
-                    if(TextUtils.isEmpty(mobile)){
-                        return;
-                    }
-
-                    ApiRequest.searchPswMobile(mobile,checkCode,"PhoneIdentifyFragment_searchPswMobile",pb_loading);
+                    ApiRequest.addCashAccount(Id,account,checkCode,remarks,accountId,"AddCashChannelWithSendMsgFragment_addCashAccount",pb_loading);
 
                     break;
                 case R.id.tv_msg_count:
-                    if(!TextUtils.isEmpty(mobile)){
+                    if(!TextUtils.isEmpty(Mobile)){
                         countDownTimerUtils.start();
-                        ApiRequest.sendVcode(mobile,"2",countDownTimerUtils);
+                        ApiRequest.sendVcode(Mobile,"",countDownTimerUtils);
                     }
                     break;
 
@@ -119,13 +124,8 @@ public class PhoneIdentifyFragment extends BaseFragment implements CallbackUtils
 
     @TextChange({R.id.et_msg})
     void textChange(CharSequence s, TextView hello, int before, int start, int count) {
-        switch (hello.getId()){
-            case R.id.et_msg:
-                if(!TextUtils.isEmpty(s.toString())){
-                    tv_response_msg.setVisibility(View.INVISIBLE);
-                }
-                break;
+        if(!TextUtils.isEmpty(s.toString())){
+            tv_response_msg.setVisibility(View.INVISIBLE);
         }
     }
-
 }

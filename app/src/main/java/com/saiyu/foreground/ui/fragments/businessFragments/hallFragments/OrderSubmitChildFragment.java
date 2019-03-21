@@ -27,6 +27,7 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.interfaces.OnClickListener;
+import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
@@ -51,6 +52,7 @@ import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -218,18 +220,19 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     iv_2.setVisibility(View.VISIBLE);
                     iv_3.setVisibility(View.INVISIBLE);
                     ConfirmType = "2";
-
-                    DialogUtils.showOrderSubmitDialog(getActivity(), new DialogUtils.DialogClickCallbackListener() {
-                        @Override
-                        public void setOnDialogClickCallbackListener(String wayId, String account, String remarks, String accountId) {
-                            //接口回调的参数类型和个数一样，所以拿来直接用，参数名不重要
-                            BillQQNum = wayId;
-                            BillQQPwd = account;
-                            OftenLoginProvince = remarks;
-                            OftenLoginCity = accountId;
-                        }
-                    });
                 }
+                DialogUtils.showOrderSubmitDialog(getActivity(), new OnListCallbackListener() {
+                    @Override
+                    public void setOnListCallbackListener(List<String> callbackList) {
+                        if(callbackList == null || callbackList.size() < 4){
+                            return;
+                        }
+                        BillQQNum = callbackList.get(0);
+                        BillQQPwd = callbackList.get(1);
+                        OftenLoginProvince = callbackList.get(2);
+                        OftenLoginCity = callbackList.get(3);
+                    }
+                });
                 break;
             case R.id.btn_time:
                 String time = getTime(new Date(System.currentTimeMillis()));

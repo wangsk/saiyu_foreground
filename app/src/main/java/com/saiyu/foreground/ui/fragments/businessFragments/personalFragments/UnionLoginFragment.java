@@ -141,7 +141,6 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                     getActivity().finish();
                     break;
                 case R.id.rl_qq:
-
                     DialogUtils.showDialog(getActivity(), "提示", TextUtils.isEmpty(QQUnionid)?"需要绑定QQ吗？":"需要解绑QQ吗？", "取消", TextUtils.isEmpty(QQUnionid)?"绑定":"解绑", new OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -198,9 +197,8 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 必须加这段代码,不然不会回调!
         LogUtils.print("onActivityResul--------------requestCode=" + requestCode);
-        //QQ登录必须加下面两句
+        //QQ登录必须加下面两句,不然会失败
         if (requestCode == Constants.REQUEST_LOGIN) {
             Tencent.onActivityResultData(requestCode, resultCode, data, qqCallback);
         }
