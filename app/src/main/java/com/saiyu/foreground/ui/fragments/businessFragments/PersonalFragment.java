@@ -35,6 +35,8 @@ import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -48,7 +50,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 @EFragment(R.layout.fragment_personal)
-public class PersonalFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
+public class PersonalFragment extends BaseFragment implements CallbackUtils.ResponseCallback,OnRefreshListener {
     @ViewById
     ProgressBar pb_loading;
     @ViewById
@@ -88,7 +90,8 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
     @AfterViews
     void afterView() {
         refreshLayout.setEnableLoadmore(false);
-        refreshLayout.setEnableRefresh(false);
+        //refreshLayout.setEnableRefresh(false);
+        refreshLayout.setOnRefreshListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
@@ -441,4 +444,11 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
         }
     }
 
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
+        ApiRequest.getAccountInfoLogin("PersonalFragment_getAccountInfoLogin",pb_loading);
+        if (refreshLayout != null) {
+            refreshlayout.finishRefresh();
+        }
+    }
 }
