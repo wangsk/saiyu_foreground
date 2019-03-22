@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:zhy="http://schemas.android.com/tools"
-    android:id="@+id/ll_pop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:background="@color/grey20"
-    android:orientation="vertical">
+    android:background="@color/grey20">
 
-    <com.saiyu.foreground.ui.views.ReboundScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:orientation="vertical">
 
-        <com.zhy.view.flowlayout.TagFlowLayout
-            android:id="@+id/tfl_recharge_game"
+        <com.saiyu.foreground.ui.views.ReboundScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
+            android:layout_height="match_parent">
 
-    </com.saiyu.foreground.ui.views.ReboundScrollView>
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/tfl_recharge_game"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
+                zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 
-</LinearLayout>
+        </com.saiyu.foreground.ui.views.ReboundScrollView>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="@android:style/Widget.Material.ProgressBar.Small"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/blue" />
+
+</RelativeLayout>

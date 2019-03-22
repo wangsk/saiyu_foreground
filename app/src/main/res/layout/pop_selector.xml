@@ -1,231 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:zhy="http://schemas.android.com/tools"
-    android:id="@+id/ll_pop"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.saiyu.foreground.ui.views.ReboundScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey20">
+        android:layout_height="380dp"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.saiyu.foreground.ui.views.ReboundScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="出售数量:"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <com.zhy.view.flowlayout.TagFlowLayout
-                android:id="@+id/tfl_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
+            android:layout_height="wrap_content"
+            android:background="@color/grey20">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/et_count_1"
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="18dp"
-                    android:background="@drawable/border_colorline_radius"
-                    android:gravity="center_vertical"
-                    android:hint=""
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="15sp" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="1dp"
-                    android:background="@color/black60"
-                    android:layout_marginLeft="8dp"/>
-                <EditText
-                    android:id="@+id/et_count_2"
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/border_colorline_radius"
-                    android:gravity="center_vertical"
-                    android:hint=""
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="输入数量为0-20000"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="出售折扣:"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <com.zhy.view.flowlayout.TagFlowLayout
-                android:id="@+id/tfl_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/et_count_3"
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="18dp"
-                    android:background="@drawable/border_colorline_radius"
-                    android:gravity="center_vertical"
-                    android:hint=""
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="15sp" />
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="1dp"
-                    android:background="@color/black60"
-                    android:layout_marginLeft="8dp"/>
-                <EditText
-                    android:id="@+id/et_count_4"
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/border_colorline_radius"
-                    android:gravity="center_vertical"
-                    android:hint=""
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="输入数量0-100折，如90折就代表100Q币=90元"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="附加选项:"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <com.zhy.view.flowlayout.TagFlowLayout
-                android:id="@+id/tfl_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_reset"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_bg_blue"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="重置"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btn_confirm"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_bg_blue"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="确定"
-                    android:textColor="@color/white" />
+                    android:layout_marginTop="10dp"
+                    android:text="出售数量:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tfl_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_count_1"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="18dp"
+                        android:background="@drawable/border_colorline_radius"
+                        android:gravity="center_vertical"
+                        android:hint=""
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/black60" />
+
+                    <EditText
+                        android:id="@+id/et_count_2"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/border_colorline_radius"
+                        android:gravity="center_vertical"
+                        android:hint=""
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="输入数量为0-20000"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="出售折扣:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tfl_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_count_3"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="18dp"
+                        android:background="@drawable/border_colorline_radius"
+                        android:gravity="center_vertical"
+                        android:hint=""
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="8dp"
+                        android:background="@color/black60" />
+
+                    <EditText
+                        android:id="@+id/et_count_4"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/border_colorline_radius"
+                        android:gravity="center_vertical"
+                        android:hint=""
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="输入数量0-100折，如90折就代表100Q币=90元"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="附加选项:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tfl_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_reset"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_bg_blue"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="重置"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/btn_confirm"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_bg_blue"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="确定"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </com.saiyu.foreground.ui.views.ReboundScrollView>
+    </LinearLayout>
 
-    </com.saiyu.foreground.ui.views.ReboundScrollView>
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="@android:style/Widget.Material.ProgressBar.Small"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/blue" />
 
 
-</LinearLayout>
+</RelativeLayout>

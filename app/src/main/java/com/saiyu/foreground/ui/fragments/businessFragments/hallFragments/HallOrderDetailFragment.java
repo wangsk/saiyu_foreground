@@ -42,6 +42,9 @@ import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;
 import com.saiyu.foreground.utils.Utils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -56,7 +59,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @EFragment(R.layout.fragment_hallorder_detail)
-public class HallOrderDetailFragment extends BaseFragment implements CallbackUtils.ResponseCallback,OnItemClickListener{
+public class HallOrderDetailFragment extends BaseFragment implements CallbackUtils.ResponseCallback,OnItemClickListener,OnRefreshListener {
 
     @ViewById
     TextView tv_title_content, tv_orderTitle, tv_reserveTitle, tv_2_1, tv_2_2, tv_2_3, tv_2_4, tv_zc, tv_2_5, tv_2_6, tv_orderName, tv_orderProgress, tv_orderCount,
@@ -83,6 +86,8 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     SwipeMenuRecyclerView recyclerView;
     @ViewById
     Spinner sp_selector;
+    @ViewById
+    SmartRefreshLayout refreshLayout;
     private OrderCountSelectorAdapter orderCountSelectorAdapter;
     private OrderTitleAdapter orderTitleAdapter;
     private List<String> mItems = new ArrayList<>();
@@ -159,6 +164,9 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         if (bundle != null) {
             orderId = bundle.getString("orderId");
         }
+        refreshLayout.setEnableLoadmore(false);
+        //refreshLayout.setEnableRefresh(false);
+        refreshLayout.setOnRefreshListener(this);
         tv_title_content.setText("订单详情");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,8);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -626,5 +634,39 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         message.what = 3;
         message.arg1 = arg1;
         handler.sendMessage(message);
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
+        String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
+        boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
+        if(autologinflag && !TextUtils.isEmpty(accessToken)){
+
+            if (!TextUtils.isEmpty(orderId)) {
+                //登录状态下，先请求该订单的状态（正常状态 / 已经被自己接单，但是未充值状态）
+                ApiRequest.hallDetail(orderId, "HallOrderDetailFragment_hallDetail", pb_loading);
+            }
+
+            isLogin = true;
+            btn_confirm.setText("确认接单");
+            isCanSubmit(false);//确认接单按钮置为不可点击
+        } else {
+
+            if (!TextUtils.isEmpty(orderId)) {
+                //未登录状态
+                ApiRequest.hallDetailNoLogin(orderId, "HallOrderDetailFragment_hallDetailNoLogin", pb_loading);
+            }
+
+            isLogin = false;
+            btn_confirm.setText("登录");
+            isCanSubmit(true);
+
+            sendHandlerMsg(1);
+
+        }
+
+        if (refreshLayout != null) {
+            refreshlayout.finishRefresh();
+        }
     }
 }

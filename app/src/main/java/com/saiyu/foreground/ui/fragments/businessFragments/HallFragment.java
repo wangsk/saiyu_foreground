@@ -183,15 +183,15 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 mContext.startActivity(intent);
                 break;
             case R.id.ll_recharge_game:
-                MyTagAdapter myTagAdapter = new MyTagAdapter(productItemsBeans);
-                PopWindowUtils.initPopWindow_2(myTagAdapter, ll_recharge_game, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_2(productItemsBeans, ll_recharge_game, new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
                         if(callbackList == null || callbackList.size() < 1){
                             return;
                         }
-                        LogUtils.print("current _pId ==== " + pId + " newId === " + callbackList.get(0));
-                        if(TextUtils.isEmpty(callbackList.get(0)) && TextUtils.isEmpty(pId)){
+                        LogUtils.print("old _pId ==== " + pId + " newId === " + callbackList.get(0));
+
+                        if(TextUtils.equals(callbackList.get(0),pId)){
                             return;
                         }
                         pId = callbackList.get(0);
@@ -200,7 +200,6 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 });
                 break;
             case R.id.ll_selector:
-
                 PopWindowUtils.initPopWindow_3(ll_selector, new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
@@ -208,7 +207,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                             return;
                         }
                         LogUtils.print("old rQBCount ==== " + rQBCount + " new rQBCount === " + callbackList.get(0) + " old rDiscount ==== " + rDiscount + " new rDiscount === " + callbackList.get(1) + " old extend ==== " + extend + " new extend === " + callbackList.get(2));
-                        if(TextUtils.isEmpty(rQBCount) && TextUtils.isEmpty(callbackList.get(0)) && TextUtils.isEmpty(rDiscount) && TextUtils.isEmpty(callbackList.get(1)) && TextUtils.isEmpty(extend) && TextUtils.isEmpty(callbackList.get(2))){
+                        if(TextUtils.equals(rQBCount,callbackList.get(0)) && TextUtils.equals(rDiscount,callbackList.get(1)) && TextUtils.equals(extend,callbackList.get(2))){
                             return;
                         }
                         rQBCount = callbackList.get(0);
