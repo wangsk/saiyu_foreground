@@ -22,8 +22,10 @@ import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment;
+import com.saiyu.foreground.ui.views.DropdownLayout;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -48,6 +50,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     ImageView iv_psw;
     @ViewById
     ProgressBar pb_loading;
+    @ViewById
+    DropdownLayout dropdown_layout_new,dropdown_layout_old;
     private String type,unionId,openId;
     private String accountExist = "*账号已存在";
 
@@ -129,12 +133,20 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     }
                     break;
                 case R.id.rl_newaccount:
-                    ll_new.setVisibility(View.VISIBLE);
-                    ll_old.setVisibility(View.GONE);
+                    if(ll_new.getVisibility() == View.GONE){
+                        dropdown_layout_new.toggle(ll_new,true);
+                        dropdown_layout_old.toggle(ll_old,false);
+                    }
+//                    ll_new.setVisibility(View.VISIBLE);
+//                    ll_old.setVisibility(View.GONE);
                     break;
                 case R.id.rl_oldaccount:
-                    ll_new.setVisibility(View.GONE);
-                    ll_old.setVisibility(View.VISIBLE);
+                    if(ll_old.getVisibility() == View.GONE){
+                        dropdown_layout_old.toggle(ll_old,true);
+                        dropdown_layout_new.toggle(ll_new,false);
+                    }
+//                    ll_new.setVisibility(View.GONE);
+//                    ll_old.setVisibility(View.VISIBLE);
                     break;
                 case R.id.btn_regist_new:
                     String account = et_account_new.getText().toString();

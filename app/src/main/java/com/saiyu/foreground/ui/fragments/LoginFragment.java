@@ -21,6 +21,7 @@ import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
+import com.saiyu.foreground.https.response.ActiveStatusRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.LoginRet;
 import com.saiyu.foreground.interfaces.QQCallback;
@@ -129,8 +130,29 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 //            intent.putExtras(bundle);
 //            getActivity().setResult(RESULT_OK, intent);//如果需要登录返回状态的时候可以用这段代码
 
-            getActivity().finish();
+            ApiRequest.getUserStatus("LoginFragment_getUserStatus",pb_loading);
 
+
+        } else if(method.equals("LoginFragment_getUserStatus")){
+            ActiveStatusRet ret = (ActiveStatusRet)baseRet;
+            if(ret.getData() == null){
+                return;
+            }
+            boolean UserBuyerStatus = ret.getData().isUserBuyerStatus();
+            boolean UserSellerStatus = ret.getData().isUserSellerStatus();
+            if(!(UserBuyerStatus && UserSellerStatus) && !(!UserBuyerStatus && !UserSellerStatus)){
+                if(!UserBuyerStatus){//买家未激活卖家已激活情况
+                    SPUtils.putInt(ConstValue.MainBottomVisibleType,1);//不显示买家
+                }
+                if(!UserSellerStatus){//卖家未激活买家已激活情况
+                    SPUtils.putInt(ConstValue.MainBottomVisibleType,2);//不显示卖家
+                }
+            } else if(UserBuyerStatus && UserSellerStatus){
+                //买卖家都激活
+                SPUtils.putInt(ConstValue.MainBottomVisibleType,3);
+            }
+
+            getActivity().finish();
         }
     }
 

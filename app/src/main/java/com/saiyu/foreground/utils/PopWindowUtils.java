@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -24,7 +26,10 @@ import com.saiyu.foreground.adapters.MyTagAdapter;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.HallRet;
+import com.saiyu.foreground.https.response.ReceivePointRet;
 import com.saiyu.foreground.https.response.RechargeRecordRet;
+import com.saiyu.foreground.https.response.RechargeStreamRet;
+import com.saiyu.foreground.interfaces.OnClickListener;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
 import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.activitys.BaseActivity;
@@ -69,13 +74,12 @@ public class PopWindowUtils {
         return mPopView;
     }
 
-    private static PopupWindow mPopupWindow_5;
     public static void initPopWindow_5(CashDetailRet.DatasBean.ItemsBean itemsBean) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = getPopView();
         // 将转换的View放置到 新建一个popuwindow对象中
-        mPopupWindow_5 = new PopupWindow(mPopView,
+        final PopupWindow mPopupWindow_5 = new PopupWindow(mPopView,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -134,13 +138,12 @@ public class PopWindowUtils {
         rl_8.setVisibility(View.GONE);
     }
 
-    private static PopupWindow mPopupWindow_6;
     public static void initPopWindow_6(CashRecordRet.DatasBean.ItemsBean itemsBean) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = getPopView();
         // 将转换的View放置到 新建一个popuwindow对象中
-        mPopupWindow_6 = new PopupWindow(mPopView,
+        final PopupWindow mPopupWindow_6 = new PopupWindow(mPopView,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -210,13 +213,12 @@ public class PopWindowUtils {
         tv_8_2.setText(itemsBean.getCurrentMoney());
     }
 
-    private static PopupWindow mPopupWindow_7;
     public static void initPopWindow_7(RechargeRecordRet.DatasBean.ItemsBean itemsBean) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = getPopView();
         // 将转换的View放置到 新建一个popuwindow对象中
-        mPopupWindow_7 = new PopupWindow(mPopView,
+        final PopupWindow mPopupWindow_7 = new PopupWindow(mPopView,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -285,7 +287,6 @@ public class PopWindowUtils {
         rl_8.setVisibility(View.GONE);
     }
 
-    private static PopupWindow mPopupWindow_2;
     private static TagFlowLayout tfl_recharge_game;
     private static ProgressBar pb_loading;
     private static String gameSelected = "";
@@ -294,7 +295,7 @@ public class PopWindowUtils {
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.pop_recharge_game, null);
         // 将转换的View放置到 新建一个popuwindow对象中
-        mPopupWindow_2 = new PopupWindow(mPopView,
+        final PopupWindow mPopupWindow_2 = new PopupWindow(mPopView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -305,12 +306,22 @@ public class PopWindowUtils {
         mPopupWindow_2.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(), 1f);
+            }
+        });
+
+        Button btn_confirm = (Button)mPopView.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if(listCallbackListener != null){
                     List<String> callbackList = new ArrayList<>();
                     callbackList.add(gameSelected);
                     listCallbackListener.setOnListCallbackListener(callbackList);
                 }
-                backgroundAlpha(BaseActivity.getBaseActivity(), 1f);
+                if(mPopupWindow_2.isShowing()){
+                    mPopupWindow_2.dismiss();
+                }
             }
         });
 
@@ -331,7 +342,7 @@ public class PopWindowUtils {
 
     }
 
-    private static PopupWindow mPopupWindow_3;
+
     private static String extend = "",rQBCount = "",rDiscount = "";
     private static TagFlowLayout tfl_1,tfl_2,tfl_3;
     public static void initPopWindow_3( View view,final OnListCallbackListener listCallbackListener) {
@@ -339,7 +350,7 @@ public class PopWindowUtils {
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.pop_selector, null);
         // 将转换的View放置到 新建一个popuwindow对象中
-        mPopupWindow_3 = new PopupWindow(mPopView,
+        final PopupWindow mPopupWindow_3 = new PopupWindow(mPopView,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         // 点击popuwindow外让其消失
@@ -735,17 +746,15 @@ public class PopWindowUtils {
         }
     };
 
-    private static PopupWindow mPopupWindow_4;
+
     public static void initPopWindow_4(View view, final OnItemClickListener onItemClickListener) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.pop_sort, null);
         // 将转换的View放置到 新建一个popuwindow对象中
-        if(mPopupWindow_4 == null){
-            mPopupWindow_4 = new PopupWindow(mPopView,
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-        }
+        final PopupWindow mPopupWindow_4 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         // 点击popuwindow外让其消失
         mPopupWindow_4.setOutsideTouchable(true);
         mPopupWindow_4.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
@@ -861,6 +870,957 @@ public class PopWindowUtils {
         backgroundAlpha(BaseActivity.getBaseActivity(), 0.7f);
 
     }
+
+    public static void initPopWindow_8(int status,int status_2,final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(),1f);
+            }
+        });
+
+        switch (status){
+            case 0://未审核
+                tv_1.setText("订单详情");
+                tv_2.setText("取消订单");
+                rl_3.setVisibility(View.GONE);
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 1://审核通过
+                tv_1.setText("订单详情");
+                tv_2.setText("充值流水");
+                tv_3.setText("结算订单");
+                tv_4.setText("修改订单");
+                tv_5.setText("订单日志");
+                //订单状态 0未发布 1已发布 2暂停发布 3等待结算 4已结算 5手动取消
+                if(status_2 == 2){
+                    tv_6.setText("启动");
+                } else if(status_2 == 1){
+                    tv_6.setText("暂停");
+                } else {
+                    rl_6.setVisibility(View.GONE);
+                }
+
+                break;
+            case 2://审核失败
+                tv_1.setText("订单详情");
+                tv_2.setText("修改订单");
+                tv_3.setText("取消订单");
+                tv_4.setText("失败原因");
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+        }
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,3);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,4);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,5);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,6);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
+
+    }
+
+
+    public static void initPopWindow_9(final Activity activity,String gameName,final OnClickListener onClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = activity.getLayoutInflater().inflate(R.layout.pop_orderrelease, null);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_9 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        // 点击popuwindow外让其消失
+        mPopupWindow_9.setOutsideTouchable(true);
+        mPopupWindow_9.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_9.setFocusable(true);
+        mPopupWindow_9.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(activity, 1f);
+            }
+        });
+
+        final CheckBox cb_1 = (CheckBox)mPopView.findViewById(R.id.cb_1);
+        cb_1.setText("我今天没有充值相同数量的"+gameName+"点券");
+        final CheckBox cb_2 = (CheckBox)mPopView.findViewById(R.id.cb_2);
+        final CheckBox cb_3 = (CheckBox)mPopView.findViewById(R.id.cb_3);
+        final Button btn_confirm = (Button)mPopView.findViewById(R.id.btn_confirm);
+        cb_1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(cb_2.isChecked() && cb_3.isChecked()){
+                        Utils.setButtonClickable(btn_confirm,true);
+                    } else {
+                        Utils.setButtonClickable(btn_confirm,false);
+                    }
+                } else {
+                    Utils.setButtonClickable(btn_confirm,false);
+                }
+            }
+        });
+        cb_2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(cb_1.isChecked() && cb_3.isChecked()){
+                        Utils.setButtonClickable(btn_confirm,true);
+                    } else {
+                        Utils.setButtonClickable(btn_confirm,false);
+                    }
+                } else {
+                    Utils.setButtonClickable(btn_confirm,false);
+                }
+            }
+        });
+        cb_3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(cb_1.isChecked() && cb_2.isChecked()){
+                        Utils.setButtonClickable(btn_confirm,true);
+                    } else {
+                        Utils.setButtonClickable(btn_confirm,false);
+                    }
+                } else {
+                    Utils.setButtonClickable(btn_confirm,false);
+                }
+            }
+        });
+
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onClickListener != null){
+                    onClickListener.onClick(v);
+                }
+                if (mPopupWindow_9.isShowing()) {
+                    mPopupWindow_9.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_9.setAnimationStyle(R.style.pop_animation_up);
+        // 作为下拉视图显示
+        mPopupWindow_9.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        backgroundAlpha(activity, 0.7f);
+
+    }
+
+    public static void initPopWindow_10(RechargeStreamRet.DatasBean.ItemsBean itemsBean) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = getPopView();
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_6 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_6.setOutsideTouchable(true);
+        mPopupWindow_6.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_6.setFocusable(true);
+        mPopupWindow_6.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(),1f);
+            }
+        });
+
+        ll_pop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPopupWindow_6.isShowing()) {
+                    mPopupWindow_6.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_6.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_6.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
+
+        if(itemsBean == null){
+            return;
+        }
+
+        tv_1_1.setText("订单状态");
+        tv_1_2.setText(itemsBean.getReceiveOrderStatus());
+        tv_2_1.setText("充值订单号");
+        tv_2_2.setText(itemsBean.getReceiveOrderNum());
+        tv_3_1.setText("接单时间");
+        tv_3_2.setText(itemsBean.getCreateTime());
+        tv_4_1.setText("完成时间");
+        tv_4_2.setText(itemsBean.getOrderFinishTime());
+        tv_5_1.setText("充值时间");
+        tv_5_2.setText(itemsBean.getRechargeTime());
+        tv_6_1.setText("接单数量");
+        tv_6_2.setText(itemsBean.getReserveQBCount());
+        tv_7_1.setText("成功数量");
+        tv_7_2.setText(itemsBean.getSuccQBCount());
+        tv_8_1.setText("成功金额");
+        tv_8_2.setText(itemsBean.getSuccMoney()+"元");
+    }
+
+    public static void initPopWindow_11(final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(),1f);
+            }
+        });
+
+        rl_4.setVisibility(View.GONE);
+        rl_5.setVisibility(View.GONE);
+        rl_6.setVisibility(View.GONE);
+        tv_1.setText("订单详情");
+        tv_2.setText("充值流水");
+        tv_3.setText("订单日志");
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,0);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
+
+    }
+
+    public static void initPopWindow_12(int status,final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(),1f);
+            }
+        });
+
+        switch (status){
+            case 4://等待确认
+                tv_1.setText("订单详情");
+                tv_2.setText("确认收货");
+                tv_3.setText("发起维权");
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 6://维权中
+                tv_1.setText("订单详情");
+                tv_4.setText("响应维权");
+                rl_2.setVisibility(View.GONE);
+                rl_3.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+        }
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,3);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,4);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,5);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,6);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
+
+    }
+
+    public static void initPopWindow_13(int status,final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = BaseActivity.getBaseActivity().getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(),1f);
+            }
+        });
+
+        switch (status){
+            case 7://维权完结
+                tv_1.setText("订单详情");
+                tv_2.setText("查看维权");
+                rl_3.setVisibility(View.GONE);
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 8://已取消
+                tv_1.setText("订单详情");
+                tv_3.setText("取消原因");
+                rl_2.setVisibility(View.GONE);
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+        }
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,3);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,4);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,5);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,6);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
+
+    }
+
+    public static void initPopWindow_14(final Activity activity,int status,final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = activity.getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(activity,1f);
+            }
+        });
+
+        switch (status){
+            case 4://等待确认
+                tv_1.setText("订单详情");
+                tv_5.setText("申请验图确认");
+                rl_2.setVisibility(View.GONE);
+                rl_4.setVisibility(View.GONE);
+                rl_3.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 2://审核失败
+                tv_1.setText("订单详情");
+                tv_2.setText("重新传图");
+                tv_3.setText("取消订单");
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 6://维权中
+                tv_1.setText("订单详情");
+                tv_4.setText("响应维权");
+                rl_2.setVisibility(View.GONE);
+                rl_3.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+        }
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,3);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,4);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,5);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,6);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(activity,0.7f);
+
+    }
+
+    public static void initPopWindow_15(ReceivePointRet.DatasBean.ItemsBean itemsBean) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = getPopView();
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_5 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_5.setOutsideTouchable(true);
+        mPopupWindow_5.setBackgroundDrawable(BaseActivity.getBaseActivity().getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_5.setFocusable(true);
+        mPopupWindow_5.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(BaseActivity.getBaseActivity(),1f);
+            }
+        });
+
+        ll_pop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPopupWindow_5.isShowing()) {
+                    mPopupWindow_5.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_5.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_5.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(BaseActivity.getBaseActivity(),0.7f);
+
+        if(itemsBean == null){
+            return;
+        }
+
+        tv_1_1.setText("业务类型");
+        tv_1_2.setText(itemsBean.getBizNote());
+        tv_2_1.setText("项目类型");
+        tv_2_2.setText(itemsBean.getBizTypeStr());
+        tv_3_1.setText("时间");
+        tv_3_2.setText(itemsBean.getCreateTime());
+        tv_4_1.setText("相关单号");
+        tv_4_2.setText(itemsBean.getOrderNum());
+        tv_5_1.setText("点数");
+        int status = itemsBean.getType();//0 收入； 1 支出
+        String money = "";
+        if(status == 1){
+            money = "<font color = \"#fe8f62\">" +"-"+ itemsBean.getPoint() + "</font>";
+        } else if(status == 0){
+            money = "<font color = \"#148cf1\">" +"+"+ itemsBean.getPoint() + "</font>";
+        }
+        tv_5_2.setText(Html.fromHtml(money));
+        tv_6_1.setText("当前点数");
+        tv_6_2.setText(itemsBean.getCurrentPoint());
+
+        rl_7.setVisibility(View.GONE);
+        rl_8.setVisibility(View.GONE);
+    }
+
+    public static void initPopWindow_16(final Activity activity,int status,final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        View mPopView = activity.getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(activity,1f);
+            }
+        });
+
+        switch (status){
+            case 7://维权完结
+                tv_1.setText("订单详情");
+                tv_2.setText("查看维权");
+                rl_3.setVisibility(View.GONE);
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 8://已取消
+                tv_1.setText("订单详情");
+                tv_3.setText("取消原因");
+                rl_2.setVisibility(View.GONE);
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+        }
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,3);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,4);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,5);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,6);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        backgroundAlpha(activity,0.7f);
+
+    }
+
 
     public static void backgroundAlpha(Activity activity, float bgAlpha) {
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();

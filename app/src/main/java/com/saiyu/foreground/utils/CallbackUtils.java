@@ -1,6 +1,7 @@
 package com.saiyu.foreground.utils;
 
 import android.content.Intent;
+import android.view.MotionEvent;
 
 import com.saiyu.foreground.https.response.BaseRet;
 
@@ -38,6 +39,22 @@ public class CallbackUtils {
     public static void doResponseCallback(int requestCode, int resultCode, Intent data){
         if(mOnActivityCallBack != null){
             mOnActivityCallBack.onActivityResult(requestCode,resultCode,data);
+        }
+    }
+
+    public interface OnDispatchTouchEvent{
+        public void onDispatchTouchEvent(MotionEvent ev);
+    }
+
+    public static OnDispatchTouchEvent mOnDispatchTouchEvent;
+
+    public static void setOnDispatchTouchEvent(OnDispatchTouchEvent dispatchTouchEvent){
+        mOnDispatchTouchEvent = dispatchTouchEvent;
+    }
+
+    public static void doOnDispatchTouchEvent(MotionEvent ev){
+        if(mOnDispatchTouchEvent != null){
+            mOnDispatchTouchEvent.onDispatchTouchEvent(ev);
         }
     }
 

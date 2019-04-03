@@ -101,7 +101,7 @@ public class OrderCancelFragment extends BaseFragment implements CallbackUtils.R
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_title_back:
-                getActivity().finish();
+                getFragmentManager().popBackStack();
                 break;
             case R.id.btn_confirm:
                 String cancelBType = "0";

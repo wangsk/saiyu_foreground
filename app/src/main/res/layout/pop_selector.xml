@@ -6,12 +6,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="450dp"
         android:orientation="vertical">
 
         <com.saiyu.foreground.ui.views.ReboundScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@color/grey20">
 
             <LinearLayout
@@ -191,49 +192,48 @@
                     android:padding="5dp"
                     zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn_reset"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_bg_blue"
-                        android:gravity="center"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="重置"
-                        android:textColor="@color/white" />
-
-                    <Button
-                        android:id="@+id/btn_confirm"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_bg_blue"
-                        android:gravity="center"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="确定"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
-
             </LinearLayout>
 
         </com.saiyu.foreground.ui.views.ReboundScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_reset"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_blue"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="重置"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_blue"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="确定"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <ProgressBar

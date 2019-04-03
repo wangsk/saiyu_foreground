@@ -25,6 +25,11 @@
 
     <color name="unEnabled">#aeaeae</color>
 
+    <color name="color_498DFF">#00498DFF</color>
+    <color name="color_4E7FE0">#004E7FE0</color>
+    <color name="color_7C98ff">#7C98FF</color>
+    <color name="color_77b0ff">#77b0ff</color>
+
 
     <!--zxing-->
     <color name="contents_text">#000000</color>

@@ -39,8 +39,8 @@ public class SytemNotifyAdapter extends RecyclerView.Adapter<SytemNotifyAdapter.
             return;
         }
 
-        myHolder.tv_deal_3.setText(mItems.get(i).getNewsDetailTitle());
-        myHolder.tv_deal_4.setText(mItems.get(i).getReleaseTime());
+        myHolder.tv_deal_1.setText(mItems.get(i).getNewsDetailTitle());
+        myHolder.tv_deal_2.setText(mItems.get(i).getReleaseTime());
         LogUtils.print(mItems.get(i).getNewsDetailTitle() + "  " + mItems.get(i).getReleaseTime());
 
         myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +83,8 @@ public class SytemNotifyAdapter extends RecyclerView.Adapter<SytemNotifyAdapter.
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
-            tv_deal_1.setVisibility(View.GONE);
-            tv_deal_2.setVisibility(View.GONE);
+            tv_deal_3.setVisibility(View.GONE);
+            tv_deal_4.setVisibility(View.GONE);
         }
 
     }

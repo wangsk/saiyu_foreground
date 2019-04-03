@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey20">
@@ -36,6 +37,12 @@
                 android:src="@mipmap/ic_launcher" />
 
         </RelativeLayout>
+
+        <com.saiyu.foreground.ui.views.DropdownLayout
+            android:id="@+id/dropdown_layout_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dropSpeed="300">
 
         <LinearLayout
             android:id="@+id/ll_new"
@@ -224,6 +231,8 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
+        </com.saiyu.foreground.ui.views.DropdownLayout>
+
         <RelativeLayout
             android:id="@+id/rl_oldaccount"
             android:layout_width="match_parent"
@@ -249,6 +258,12 @@
                 android:src="@mipmap/ic_launcher" />
 
         </RelativeLayout>
+
+        <com.saiyu.foreground.ui.views.DropdownLayout
+            android:id="@+id/dropdown_layout_old"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dropSpeed="300">
 
         <LinearLayout
             android:id="@+id/ll_old"
@@ -394,6 +409,7 @@
                 android:text="账号绑定"
                 android:textColor="@color/white" />
         </LinearLayout>
+        </com.saiyu.foreground.ui.views.DropdownLayout>
     </LinearLayout>
 
     <ProgressBar

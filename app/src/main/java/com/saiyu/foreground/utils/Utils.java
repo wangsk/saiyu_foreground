@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -318,6 +319,22 @@ public class Utils {
                 tv_2_6.setVisibility(View.VISIBLE);
                 tv_2_6.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
                 break;
+        }
+    }
+
+
+    public static void setButtonClickable(Button button, boolean flag){
+        if(button == null){
+            return;
+        }
+        if(flag){
+            button.setClickable(true);
+            button.setFocusable(true);
+            button.setBackground(App.getApp().getResources().getDrawable(R.drawable.shape_bg_blue));
+        } else {
+            button.setClickable(false);
+            button.setFocusable(false);
+            button.setBackground(App.getApp().getResources().getDrawable(R.drawable.shape_bg_grey));
         }
     }
 

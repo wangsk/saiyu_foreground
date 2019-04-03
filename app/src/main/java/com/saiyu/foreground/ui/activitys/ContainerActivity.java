@@ -12,6 +12,26 @@ import com.saiyu.foreground.ui.fragments.FindPswFragments.ForgotPswFragment;
 import com.saiyu.foreground.ui.fragments.LoginFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistUnionIdFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderHistoryFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetBetweenTimeFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetOnlineTimeFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetOrderPswFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetPicReviewFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetRemarkFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderHistoryFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderManagerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.GameSelectorFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.SetMinRechargeFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.SetOrderEndTimeFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.SetOrderReplaceConfirmFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.OrderRechargeFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.PointManagerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.SellOrderManagerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.SellerOrderHistoryFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.SellerOrderPointStreamFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.SubmitPicReplaceConfirmFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.WaitingRechargeOrderFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.hallFragments.HallOrderDetailFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.hallFragments.OrderCancelFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.ActiveBuyerFragment;
@@ -39,7 +59,7 @@ import org.androidannotations.annotations.EActivity;
 * 大部分activity的容器，为了节约代码
 * **/
 @EActivity(R.layout.frame_base_container_layout)
-public class ContainerActivity extends BaseActivity{
+public class ContainerActivity extends BaseActivity {
 
     private Bundle bundle = null;
     public static final String FragmentTag = "FragmentTag";
@@ -77,6 +97,26 @@ public class ContainerActivity extends BaseActivity{
     public static final int UploadIdentityFragmentTag = 20;//实名认证
     public static final int FaceIdentifyFragmentTag = 21;//刷脸认证
     public static final int CashChannelListFragmentTag = 22;//提现渠道
+    public static final int GameSelectorFragmentTag = 23;//
+    public static final int PreOrderManagerFragmentTag = 24;//预定订单管理
+    public static final int PreOrderHistoryFragmentTag = 25;//预定订单历史
+    public static final int RechargeOrderManagerFragmentTag = 26;//充值订单管理
+    public static final int RechargeOrderHistoryFragmentTag = 27;//充值订单历史
+    public static final int SetOnlineTimeFragmentTag = 28;//设置在线时间
+    public static final int SetOrderEndTimeFragmentTag = 29;//设置订单到期时间
+    public static final int SetOrderPswFragmentTag = 30;//设置订单加密
+    public static final int SetMinRechargeFragmentTag = 31;//设置最低充值
+    public static final int SetBetweenTimeFragmentTag = 32;//接单间隔时间
+    public static final int SetOrderReplaceConfirmFragmentTag = 33;//接单支持客服代理
+    public static final int SetPicReviewFragmentTag = 34;//接单支持验图确认
+    public static final int SetRemarkFragmentTag = 35;//充值留言
+    public static final int WaitingRechargeOrderFragmentTag = 36;//待充值订单
+    public static final int OrderRechargeFragmentTag = 37;//待充值订单详情
+    public static final int SellOrderManagerFragmentTag = 38;//预定订单管理
+    public static final int SellerOrderHistoryFragmentTag = 39;//预定订单历史
+    public static final int SellerOrderPointStreamFragmentTag = 40;//卖家接单点数流水
+    public static final int SubmitPicReplaceConfirmFragmentTag = 41;//申请验图确认
+    public static final int PointManagerFragmentTag = 42;//点数管理
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -124,6 +164,46 @@ public class ContainerActivity extends BaseActivity{
                 return HallOrderDetailFragment.newInstance(bundle);
             case OrderCancelFragmentTag:
                 return OrderCancelFragment.newInstance(bundle);
+            case GameSelectorFragmentTag:
+                return GameSelectorFragment.newInstance(bundle);
+            case PreOrderManagerFragmentTag:
+                return PreOrderManagerFragment.newInstance(bundle);
+            case PreOrderHistoryFragmentTag:
+                return PreOrderHistoryFragment.newInstance(bundle);
+            case RechargeOrderManagerFragmentTag:
+                return RechargeOrderManagerFragment.newInstance(bundle);
+            case RechargeOrderHistoryFragmentTag:
+                return RechargeOrderHistoryFragment.newInstance(bundle);
+            case SetOnlineTimeFragmentTag:
+                return SetOnlineTimeFragment.newInstance(bundle);
+            case SetOrderEndTimeFragmentTag:
+                return SetOrderEndTimeFragment.newInstance(bundle);
+            case SetOrderPswFragmentTag:
+                return SetOrderPswFragment.newInstance(bundle);
+            case SetMinRechargeFragmentTag:
+                return SetMinRechargeFragment.newInstance(bundle);
+            case SetBetweenTimeFragmentTag:
+                return SetBetweenTimeFragment.newInstance(bundle);
+            case SetOrderReplaceConfirmFragmentTag:
+                return SetOrderReplaceConfirmFragment.newInstance(bundle);
+            case SetPicReviewFragmentTag:
+                return SetPicReviewFragment.newInstance(bundle);
+            case SetRemarkFragmentTag:
+                return SetRemarkFragment.newInstance(bundle);
+            case WaitingRechargeOrderFragmentTag:
+                return WaitingRechargeOrderFragment.newInstance(bundle);
+            case OrderRechargeFragmentTag:
+                return OrderRechargeFragment.newInstance(bundle);
+            case SellOrderManagerFragmentTag:
+                return SellOrderManagerFragment.newInstance(bundle);
+            case SellerOrderHistoryFragmentTag:
+                return SellerOrderHistoryFragment.newInstance(bundle);
+            case SellerOrderPointStreamFragmentTag:
+                return SellerOrderPointStreamFragment.newInstance(bundle);
+            case SubmitPicReplaceConfirmFragmentTag:
+                return SubmitPicReplaceConfirmFragment.newInstance(bundle);
+            case PointManagerFragmentTag:
+                return PointManagerFragment.newInstance(bundle);
                 default:
                     return null;
         }

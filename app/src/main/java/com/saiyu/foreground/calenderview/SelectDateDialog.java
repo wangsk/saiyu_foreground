@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
@@ -55,7 +53,7 @@ public class SelectDateDialog extends Dialog implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(mContext, R.layout.activity_dialogstyle, null);
+        View view = View.inflate(mContext, R.layout.dialog_selectdate, null);
         setContentView(view);
 
         setCanceledOnTouchOutside(false);

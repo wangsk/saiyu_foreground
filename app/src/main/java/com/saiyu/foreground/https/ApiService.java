@@ -2,9 +2,12 @@ package com.saiyu.foreground.https;
 
 import com.saiyu.foreground.https.response.AccountInfoLoginRet;
 import com.saiyu.foreground.https.response.AccountInfoNoLoginRet;
+import com.saiyu.foreground.https.response.ActiveStatusRet;
 import com.saiyu.foreground.https.response.AppVersionRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.BuyerInfoRet;
+import com.saiyu.foreground.https.response.BuyerOrderInfoRet;
+import com.saiyu.foreground.https.response.BuyerWebListRet;
 import com.saiyu.foreground.https.response.CancelOrderInfoRet;
 import com.saiyu.foreground.https.response.CashChannelRet;
 import com.saiyu.foreground.https.response.CashDetailRet;
@@ -18,14 +21,37 @@ import com.saiyu.foreground.https.response.IsAccountExistRet;
 import com.saiyu.foreground.https.response.IsCountDoRet;
 import com.saiyu.foreground.https.response.LoginRecordRet;
 import com.saiyu.foreground.https.response.LoginRet;
+import com.saiyu.foreground.https.response.OrderFailReasonRet;
+import com.saiyu.foreground.https.response.OrderLogRet;
+import com.saiyu.foreground.https.response.OrderNumRet;
+import com.saiyu.foreground.https.response.OrderPauseRet;
+import com.saiyu.foreground.https.response.OrderReceiveConfirmRet;
+import com.saiyu.foreground.https.response.OrderReceiveHistoryRet;
+import com.saiyu.foreground.https.response.OrderSettlementRet;
+import com.saiyu.foreground.https.response.PreOrderHistoryRet;
+import com.saiyu.foreground.https.response.PreOrderManagerRet;
+import com.saiyu.foreground.https.response.ProductListRet;
+import com.saiyu.foreground.https.response.ProductPropertyRet;
+import com.saiyu.foreground.https.response.QBListRet;
 import com.saiyu.foreground.https.response.RealNameStatusRet;
+import com.saiyu.foreground.https.response.ReceivePointRet;
+import com.saiyu.foreground.https.response.RechargeOrderInfoRet;
+import com.saiyu.foreground.https.response.RechargeOrderManageRet;
+import com.saiyu.foreground.https.response.RechargePointHistoryRet;
 import com.saiyu.foreground.https.response.RechargeRateRet;
 import com.saiyu.foreground.https.response.RechargeRecordRet;
+import com.saiyu.foreground.https.response.RechargeStreamRet;
 import com.saiyu.foreground.https.response.RegistRet;
 import com.saiyu.foreground.https.response.RewardRet;
 import com.saiyu.foreground.https.response.SellerInfoRet;
 import com.saiyu.foreground.https.response.FaceRet;
+import com.saiyu.foreground.https.response.SellerOrderHistoryRet;
+import com.saiyu.foreground.https.response.SellerOrderManagerRet;
+import com.saiyu.foreground.https.response.SellerOrderReceiveInfoRet;
+import com.saiyu.foreground.https.response.StartAppealInfoRet;
+import com.saiyu.foreground.https.response.StatisticsListRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
+import com.saiyu.foreground.https.response.WaitingRechargeOrderRet;
 
 
 import okhttp3.MultipartBody;
@@ -44,6 +70,10 @@ public interface ApiService {
     //退出登录
     @POST("Home/SignOut")
     Observable<BooleanRet> unLogin(@Body RequestBody body);
+
+    //买家/卖家激活状态
+    @POST("my/GetUserStatus")
+    Observable<ActiveStatusRet> getUserStatus(@Body RequestBody body);
 
     //手机验证码登录
     @POST("Login/Mobile")
@@ -248,7 +278,167 @@ public interface ApiService {
     Observable<UploadIdentityRet> uploadIdentity(@Part MultipartBody.Part imgs);
 
 
+    //游戏产品列表
+    @POST("ProductData/Product")
+    Observable<ProductListRet> getProductList(@Body RequestBody body);
 
+    //产品属性一
+    @POST("ProductData/ProductProperty1")
+    Observable<ProductPropertyRet> getProductProperty1(@Body RequestBody body);
+
+    //产品属性二
+    @POST("ProductData/ProductProperty2")
+    Observable<ProductPropertyRet> getProductProperty2(@Body RequestBody body);
+
+    //生成订单号
+    @POST("Buyer/GetOrderReady")
+    Observable<OrderNumRet> getOrderNum(@Body RequestBody body);
+
+    //检测QQ是否被限制使用
+    @POST("Buyer/CheckLimitQQ")
+    Observable<BooleanRet> checkLimitQQ(@Body RequestBody body);
+
+    //发布预定订单接口
+    @POST("Buyer/OrderPublish")
+    Observable<BooleanRet> orderPublish(@Body RequestBody body);
+
+    //预定订单管理
+    @POST("Buyer/OrderManage")
+    Observable<PreOrderManagerRet> orderManage(@Body RequestBody body);
+
+    //订单详情
+    @POST("Buyer/OrderInfo")
+    Observable<BuyerOrderInfoRet> orderInfo(@Body RequestBody body);
+
+    //取消订单
+    @POST("Buyer/OrderCancel")
+    Observable<BooleanRet> orderCancel(@Body RequestBody body);
+
+    //结算订单信息
+    @POST("Buyer/OrderSettlement")
+    Observable<OrderSettlementRet> orderSettlement(@Body RequestBody body);
+
+    //结算订单
+    @POST("Buyer/OrderSettlementP")
+    Observable<BooleanRet> orderSettlementP(@Body RequestBody body);
+
+    //充值流水
+    @POST("Buyer/OrderReceiveList")
+    Observable<RechargeStreamRet> orderReceiveList(@Body RequestBody body);
+
+    //订单日志
+    @POST("Buyer/OrderLog")
+    Observable<OrderLogRet> orderLog(@Body RequestBody body);
+
+    //暂停订单信息
+    @POST("Buyer/OrderStopInfo")
+    Observable<OrderPauseRet> orderStopInfo(@Body RequestBody body);
+
+    //暂停订单
+    @POST("Buyer/OrderStopP")
+    Observable<BooleanRet> orderStopP(@Body RequestBody body);
+
+    //启动订单信息
+    @POST("Buyer/OrderStartInfo")
+    Observable<OrderPauseRet> orderStartInfo(@Body RequestBody body);
+
+    //启动订单
+    @POST("Buyer/OrderStartP")
+    Observable<BooleanRet> orderStartP(@Body RequestBody body);
+
+    //修改订单
+    @POST("Buyer/OrderModify")
+    Observable<BooleanRet> orderModify(@Body RequestBody body);
+
+    //申请代理确认
+    @POST("Buyer/AgentConfirmApply")
+    Observable<BooleanRet> agentConfirmApply(@Body RequestBody body);
+
+    //取消代理确认
+    @POST("Buyer/AgentConfirmCancel")
+    Observable<BooleanRet> agentConfirmCancel(@Body RequestBody body);
+
+    //订单失败原因
+    @POST("Buyer/OrderFailRason")
+    Observable<OrderFailReasonRet> orderFailReason(@Body RequestBody body);
+
+    //申请维权
+    @POST("Buyer/StartAppeal")
+    Observable<BooleanRet> startAppeal(@Body RequestBody body);
+    //获取维权信息
+    @POST("Buyer/StartAppealInfo")
+    Observable<StartAppealInfoRet> startAppealInfo(@Body RequestBody body);
+
+    //预定订单历史
+    @POST("Buyer/OrderHistory")
+    Observable<PreOrderHistoryRet> orderHistory(@Body RequestBody body);
+    //充值订单管理
+    @POST("Buyer/OrderReceiveManage")
+    Observable<RechargeOrderManageRet> orderReceiveManage(@Body RequestBody body);
+
+    //充值订单历史
+    @POST("Buyer/OrderReceiveHistory")
+    Observable<OrderReceiveHistoryRet> orderReceiveHistory(@Body RequestBody body);
+
+    //充值订单信息
+    @POST("Buyer/OrderReceiveInfo")
+    Observable<RechargeOrderInfoRet> orderReceiveInfo(@Body RequestBody body);
+
+    //确认收货
+    @POST("Buyer/OrderReceiveConfirmP")
+    Observable<BooleanRet> orderReceiveConfirmP(@Body RequestBody body);
+
+    //确认收货信息
+    @POST("Buyer/OrderReceiveConfirm")
+    Observable<OrderReceiveConfirmRet> orderReceiveConfirm(@Body RequestBody body);
+
+    //点券充值网页url
+    @POST("Buyer/DQCZNews")
+    Observable<BuyerWebListRet> dQCZNews(@Body RequestBody body);
+
+    //待充值订单
+    @POST("Seller/WaitRechargeOrder")
+    Observable<WaitingRechargeOrderRet> waitRechargeOrder(@Body RequestBody body);
+
+    //出售订单管理
+    @POST("Seller/OrderReceiveManage")
+    Observable<SellerOrderManagerRet> orderReceiveManageSeller(@Body RequestBody body);
+
+    //卖家订单详情
+    @POST("Seller/OrderReceiveInfo")
+    Observable<SellerOrderReceiveInfoRet> orderReceiveInfoSeller(@Body RequestBody body);
+
+    //出售订单历史
+    @POST("Seller/OrderReceiveHistory")
+    Observable<SellerOrderHistoryRet> orderReceiveHistorySeller(@Body RequestBody body);
+
+    //接单点数流水
+    @POST("Finance/ReceivePoint")
+    Observable<ReceivePointRet> receivePoint(@Body RequestBody body);
+
+    //QB寄售列表
+    @POST("Seller/QBJSNews")
+    Observable<QBListRet> qBJSNews(@Body RequestBody body);
+
+    //申请验图确认
+    @POST("Seller/ApplyPicConfirm")
+    Observable<BooleanRet> applyPicConfirm(@Body RequestBody body);
+
+    //重新传图
+    @POST("Seller/OrderReceiveReSubmit")
+    Observable<BooleanRet> orderReceiveReSubmit(@Body RequestBody body);
+
+    //行情
+    @POST("Home/GetStatistics")
+    Observable<StatisticsListRet> statisticsList(@Body RequestBody body);
+
+    //点数充值
+    @POST("Seller/ReceivePoint")
+    Observable<BooleanRet> rechargePoint(@Body RequestBody body);
+
+    //点数充值历史
+    @POST("Seller/ReceivePointHistory")
+    Observable<RechargePointHistoryRet> receivePointHistory(@Body RequestBody body);
 
 //    @GET("orderAudit/history")
 //    Observable<HistoryRet> historyOrder(@Query("page") String page

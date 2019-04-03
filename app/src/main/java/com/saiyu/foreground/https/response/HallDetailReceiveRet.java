@@ -1,5 +1,7 @@
 package com.saiyu.foreground.https.response;
 
+import java.util.List;
+
 public class HallDetailReceiveRet extends BaseRet {
 
     private DataBean data;
@@ -17,7 +19,6 @@ public class HallDetailReceiveRet extends BaseRet {
         private String OrderId;
         private String OrderNum;
         private String ReceiveId;
-        private int Type;
         private String AverageConfirmTime;
         private boolean IsCustomerConfirmation;
         private String CreateTime;
@@ -46,6 +47,46 @@ public class HallDetailReceiveRet extends BaseRet {
         private int OnceMinCount;
         private float LessChargeDiscount;
         private String ServiceRate;
+        private int Type;
+        private List<HallDetailRet.DataBean.YanBaoBean> GoldList;
+        private List<HallDetailRet.DataBean.YanBaoBean> SilverList;
+        public static class YanBaoBean{
+
+            public  String ProName;
+            private String Value;
+
+            public String getProName() {
+                return ProName;
+            }
+
+            public void setProName(String proName) {
+                ProName = proName;
+            }
+
+            public String getValue() {
+                return Value;
+            }
+
+            public void setValue(String value) {
+                Value = value;
+            }
+        }
+
+        public List<HallDetailRet.DataBean.YanBaoBean> getGoldList() {
+            return GoldList;
+        }
+
+        public void setGoldList(List<HallDetailRet.DataBean.YanBaoBean> goldList) {
+            GoldList = goldList;
+        }
+
+        public List<HallDetailRet.DataBean.YanBaoBean> getSilverList() {
+            return SilverList;
+        }
+
+        public void setSilverList(List<HallDetailRet.DataBean.YanBaoBean> silverList) {
+            SilverList = silverList;
+        }
 
         public boolean isResult() {
             return result;

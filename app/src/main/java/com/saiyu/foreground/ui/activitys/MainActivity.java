@@ -5,9 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
+import com.saiyu.foreground.https.ApiRequest;
+import com.saiyu.foreground.https.response.ActiveStatusRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.HallFragment;
@@ -22,11 +26,12 @@ import com.saiyu.foreground.utils.SPUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelectedListener,CallbackUtils.ResponseCallback,CallbackUtils.OnBottomSelectListener{
+public class MainActivity extends BaseActivity implements BottomBar.OnTabSelectedListener,CallbackUtils.ResponseCallback,CallbackUtils.OnBottomSelectListener{
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
@@ -36,6 +41,9 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
 
     private BottomBar bottomBar;
     private SupportFragment[] mFragments = new SupportFragment[5];
+
+    @ViewById
+    ProgressBar pb_loading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,19 +84,6 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
         bottomBar.setOnTabSelectedListener(this);
         bottomBar.setCurrentItem(1);//默认选择大厅
 
-        //产品要求，一旦买家或者卖家有一个被激活，主页面不再显示卖家或者买家（产品的意思是一个用户可能很长时间只是买家或者卖家，那么就把他另外一个身份页面（买家/卖家）隐藏）
-        int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
-        switch (type){
-            case 0://全部显示
-                break;
-            case 1://不显示买家
-                bottomBar.hide(3);
-                break;
-            case 2://不显示卖家
-                bottomBar.hide(2);
-                break;
-        }
-
     }
 
     @Override
@@ -96,6 +91,22 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
         super.onResume();
         CallbackUtils.setCallback(this);
         CallbackUtils.setOnBottomSelectListener(this);
+
+        //产品要求，一旦买家或者卖家有一个被激活，主页面不再显示卖家或者买家（产品的意思是一个用户可能很长时间只是买家或者卖家，那么就把他另外一个身份页面（买家/卖家）隐藏）
+        int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
+        switch (type){
+            case 0://此账号未在该设备上登陆过，默认先全部显示，然后请求买卖家激活状态
+                break;
+            case 1://当前账号买家未激活，请求买卖家激活状态
+                bottomBar.hide(3);
+                break;
+            case 2://当前账号卖家未激活，请求买卖家激活状态
+                bottomBar.hide(2);
+                break;
+            case 3://当前账号买卖家都激活，不做处理
+                break;
+        }
+
     }
 
     @Override
@@ -105,6 +116,7 @@ public class MainActivity extends BaseActivity  implements BottomBar.OnTabSelect
         }
         if(method.equals("")){
             //该页面暂时没有网络请求，所以这个接口实现暂时没用
+
         }
     }
 

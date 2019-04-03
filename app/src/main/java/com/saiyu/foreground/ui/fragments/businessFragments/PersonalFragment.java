@@ -34,6 +34,7 @@ import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
+import com.saiyu.foreground.utils.TimeParseUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -121,10 +122,20 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
             boolean UserSellerStatus = ret.getData().isUserSellerStatus();
 
             if(UserBuyerStatus){
-                tv_buyer_time.setText("平均确认时间:" + ret.getData().getAverageConfirmTime());
-                tv_buyer_order_ing.setText("预定中的订单:" + ret.getData().getUserBuyerCount() + "单" + ret.getData().getUserBuyerMoney() + "元");
-                tv_buyer_order_wait.setText("待确认的订单:" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "单" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "元");
-                tv_buyer_order_totle.setText("累计成交订单:" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "单" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "元");
+                if(!TextUtils.isEmpty(ret.getData().getAverageConfirmTime())){
+                    long time = Long.parseLong(ret.getData().getAverageConfirmTime());
+                    long day = time/60/24;
+                    long hour = time/60;
+                    long minute = time - day*24*60 - hour*60;
+                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + day + "</font>" + "天" + "<font color = \"#148cf1\">" + hour + "</font>" + "小时"+ "<font color = \"#148cf1\">" + minute + "</font>" + "分钟"));
+                } else {
+                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + 0 + "</font>" + "天" + "<font color = \"#148cf1\">" + 0 + "</font>" + "小时"+ "<font color = \"#148cf1\">" + 0 + "</font>" + "分钟"));
+                }
+
+                tv_buyer_order_ing.setText(Html.fromHtml("预定中的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
+                tv_buyer_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
+                tv_buyer_order_totle.setText(Html.fromHtml("累计成交订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
+
                 tv_active_buyer.setVisibility(View.GONE);
                 ll_buyer_info.setVisibility(View.VISIBLE);
             } else {
@@ -132,10 +143,11 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                 ll_buyer_info.setVisibility(View.GONE);
             }
             if(UserSellerStatus){
-                tv_seller_wait_pay.setText("待充值订单:" + ret.getData().getUserSellerWaitRechargeOrdersCount() + "单" + ret.getData().getUserSellerWaitRechargeOrdersMoney() + "元");
-                tv_seller_order_ing.setText("审核中的订单:" + ret.getData().getUserSellerAuditOrdersCount() + "单" + ret.getData().getUserSellerAuditOrdersMoney() + "元");
-                tv_seller_order_wait.setText("待确认的订单:" + ret.getData().getUserSellerWaitConfirmOrdersCount() + "单" + ret.getData().getUserSellerWaitConfirmOrdersMoney() + "元");
-                tv_seller_order_totle.setText("累计出售订单:" + ret.getData().getUserSellerOrderRSettleTotalCount() + "单" + ret.getData().getUserSellerOrderRSettleTotalMoney() + "元");
+                tv_seller_wait_pay.setText(Html.fromHtml("待充值订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitRechargeOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitRechargeOrdersMoney() + "</font>" + "元"));
+                tv_seller_order_ing.setText(Html.fromHtml("审核中的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerAuditOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerAuditOrdersMoney() + "</font>" + "元"));
+                tv_seller_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitConfirmOrdersMoney() + "</font>" + "元"));
+                tv_seller_order_totle.setText(Html.fromHtml("累计出售订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerOrderRSettleTotalMoney() + "</font>" + "元"));
+
                 tv_active_seller.setVisibility(View.GONE);
                 ll_seller_info.setVisibility(View.VISIBLE);
             } else {
@@ -153,7 +165,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                     SPUtils.putInt(ConstValue.MainBottomVisibleType,2);//不显示卖家
                 }
             } else {
-                SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//全部显示
+                SPUtils.putInt(ConstValue.MainBottomVisibleType,3);//全部显示
                 if(((MainActivity) getActivity()).getBottomBar().checkStatus(3) == View.GONE){
                     ((MainActivity) getActivity()).getBottomBar().show(3);
                 }

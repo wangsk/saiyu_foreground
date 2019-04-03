@@ -7,25 +7,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="450dp"
         android:orientation="vertical">
 
         <com.saiyu.foreground.ui.views.ReboundScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/tfl_recharge_game"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:paddingLeft="10dp"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="20dp"
+                android:paddingBottom="5dp"
                 zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 
         </com.saiyu.foreground.ui.views.ReboundScrollView>
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
     </LinearLayout>
 
     <ProgressBar

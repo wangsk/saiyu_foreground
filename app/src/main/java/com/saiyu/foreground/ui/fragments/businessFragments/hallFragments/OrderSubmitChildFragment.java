@@ -35,6 +35,7 @@ import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;
+import com.saiyu.foreground.utils.Utils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.vondear.rxtool.RxPhotoTool;
 
@@ -135,9 +136,9 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
             ReceiveQBCount = bundle.getString("ReceiveQBCount","0");
             if("0".equals(ReceiveQBCount)){
                 //0代表无效
-                isCanSubmit(false);
+                Utils.setButtonClickable(btn_submit,false);
             } else {
-                isCanSubmit(true);
+                Utils.setButtonClickable(btn_submit,true);
             }
             if(bundle.getBoolean("IsCustomerConfirmation",false)){
                 ll_selector_3.setVisibility(View.VISIBLE);
@@ -436,24 +437,9 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
         LogUtils.print("ReceiveQBCount === " + ReceiveQBCount);
         if("0".equals(ReceiveQBCount)){
             //0代表无效
-            isCanSubmit(false);
+            Utils.setButtonClickable(btn_submit,false);
         } else {
-            isCanSubmit(true);
-        }
-    }
-
-    private void isCanSubmit(boolean flag){
-        if(btn_submit == null){
-            return;
-        }
-        if(flag){
-            btn_submit.setClickable(true);
-            btn_submit.setFocusable(true);
-            btn_submit.setBackground(mContext.getResources().getDrawable(R.drawable.shape_bg_blue));
-        } else {
-            btn_submit.setClickable(false);
-            btn_submit.setFocusable(false);
-            btn_submit.setBackground(mContext.getResources().getDrawable(R.drawable.shape_bg_grey));
+            Utils.setButtonClickable(btn_submit,true);
         }
     }
 }

@@ -140,7 +140,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
             isLogin = true;
             btn_confirm.setText("确认接单");
-            isCanSubmit(false);//确认接单按钮置为不可点击
+            Utils.setButtonClickable(btn_confirm,false);//确认接单按钮置为不可点击
         } else {
 
             if (!TextUtils.isEmpty(orderId)) {
@@ -150,7 +150,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
             isLogin = false;
             btn_confirm.setText("登录");
-            isCanSubmit(true);
+            Utils.setButtonClickable(btn_confirm,true);
 
             sendHandlerMsg(1);
 
@@ -165,8 +165,8 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             orderId = bundle.getString("orderId");
         }
         refreshLayout.setEnableLoadmore(false);
-        //refreshLayout.setEnableRefresh(false);
-        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setEnableRefresh(false);
+//        refreshLayout.setOnRefreshListener(this);
         tv_title_content.setText("订单详情");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,8);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -186,7 +186,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             }
             if(ret.getData().isResult()){
                 tv_count_prompt.setText("必须使用一个QQ号码一次性充值完成，否则视为违约！将扣除5%违约金!");
-                isCanSubmit(true);
+                Utils.setButtonClickable(btn_confirm,true);
                 recyclerView.setVisibility(View.GONE);
             } else {
                 if(mItems == null){
@@ -303,13 +303,10 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 onBackPressedSupport();
                 break;
             case R.id.tv_rechargePoint:
-                if(!TextUtils.isEmpty(OrderRechargePointsUrl)){
-                    bundle.putString("url", OrderRechargePointsUrl);
-                    bundle.putString("type","充值点数");//
-                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
-                }
+                bundle.putFloat("myPoint",maxOrderPoint);
+                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.PointManagerFragmentTag);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
                 break;
             case R.id.tv_freePoint:
                 if(!TextUtils.isEmpty(OrderFreePointsUrl)){
@@ -357,9 +354,8 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 break;
             case R.id.btn_cancel:
                 bundle.putString("receiveId",receiveId);
-                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.OrderCancelFragmentTag);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                OrderCancelFragment orderCancelFragment = OrderCancelFragment.newInstance(bundle);
+                start(orderCancelFragment);
                 break;
         }
     }
@@ -487,18 +483,6 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         return true;
     }
 
-    private void isCanSubmit(boolean flag){
-        if(flag){
-            btn_confirm.setClickable(true);
-            btn_confirm.setFocusable(true);
-            btn_confirm.setBackground(mContext.getResources().getDrawable(R.drawable.shape_bg_blue));
-        } else {
-            btn_confirm.setClickable(false);
-            btn_confirm.setFocusable(false);
-            btn_confirm.setBackground(mContext.getResources().getDrawable(R.drawable.shape_bg_grey));
-        }
-    }
-
     @Override
     public void onItemClick(View view, int position) {
         if(mItems == null || mItems.size() <= position){
@@ -600,7 +584,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         if(qbCount < OnceMinCount){
             //不可输入买家发布订单时所限制的单次充值最低数量
             tv_count_prompt.setText("该订单最低充值"+OnceMinCount+ "Q币，请修改出售数量！");
-            isCanSubmit(false);
+            Utils.setButtonClickable(btn_confirm,false);
             return;
         } else {
             tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
@@ -608,7 +592,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         if(qbCount > maxQBcount){
             //不得输入超过该订单需求的最大剩余数量
             tv_count_prompt.setText("超过订单最大需求量，请输入"+OnceMinCount+"-"+maxQBcount+ "之间任意数值");
-            isCanSubmit(false);
+            Utils.setButtonClickable(btn_confirm,false);
             return;
         } else {
             tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
@@ -618,7 +602,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             //不能大于接单点数
             tv_prompt.setText("接单点数不足，请更改数量或充值点数");
             ll_point.setVisibility(View.VISIBLE);
-            isCanSubmit(false);
+            Utils.setButtonClickable(btn_confirm,false);
             return;
         } else {
             tv_prompt.setText("接单时按1:1扣除接单点数，交易成功双倍返还，失败不退");
@@ -649,7 +633,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
             isLogin = true;
             btn_confirm.setText("确认接单");
-            isCanSubmit(false);//确认接单按钮置为不可点击
+            Utils.setButtonClickable(btn_confirm,false);//确认接单按钮置为不可点击
         } else {
 
             if (!TextUtils.isEmpty(orderId)) {
@@ -659,7 +643,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
             isLogin = false;
             btn_confirm.setText("登录");
-            isCanSubmit(true);
+            Utils.setButtonClickable(btn_confirm,true);
 
             sendHandlerMsg(1);
 

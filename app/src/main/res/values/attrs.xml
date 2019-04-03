@@ -118,4 +118,16 @@
         <attr name="calendar_content_view_id" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="DropdownLayout">
+         <attr format="integer" name="dropSpeed"/>
+    </declare-styleable>
+
+    <declare-styleable name="MyChartView">
+        <attr name="bargrapColor" format="color"/>
+        <attr name="selectRightColor" format="color"/>
+        <attr name="xyColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
+
 </resources>

@@ -22,6 +22,7 @@ import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.OrderRechargeFragment;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.Utils;
@@ -219,7 +220,16 @@ public class OrderInfoChildFragment extends BaseFragment {
                 break;
             case 1://金元宝
             case 2://银元宝
-                selectorList = ((HallOrderDetailFragment) getParentFragment()).getSelectorList();
+                Bundle bundle = ((ContainerActivity)getActivity()).getIntent().getExtras();
+                if(bundle != null){
+                    int fragmentTag = bundle.getInt(ContainerActivity.FragmentTag,0);
+                    if(fragmentTag == ContainerActivity.OrderRechargeFragmentTag){
+                        selectorList = ((OrderRechargeFragment) getParentFragment()).getSelectorList();
+                    } else if(fragmentTag == ContainerActivity.HallOrderDetailFragmentTag){
+                        selectorList = ((HallOrderDetailFragment) getParentFragment()).getSelectorList();
+                    }
+                }
+
                 et_count.setVisibility(View.GONE);
                 sp_selector.setVisibility(View.VISIBLE);
                 selectorAdapter = new MyArrayAdapter(selectorList);
