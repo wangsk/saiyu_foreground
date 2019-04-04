@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/line">
 
     <include
         android:id="@+id/rl_title_bar"
@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="姓名: "
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp"
                     android:visibility="visible" />
 
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="身份证号码: "
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp"
                     android:visibility="visible" />
 
@@ -116,7 +116,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="认证时可更改，认证通过后真是姓名永久不可修改"
-                android:textColor="@color/black80"
+                android:textColor="@color/black_light"
                 android:textSize="15sp"
                 android:visibility="visible" />
 
@@ -156,7 +156,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp"
                             android:text="点击拍摄/选择上传"/>
                         <TextView
@@ -208,7 +208,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp"
                             android:text="点击拍摄/选择上传"/>
                         <TextView
@@ -267,7 +267,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey20"
+                android:background="@color/line"
                 android:layout_gravity="bottom"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
@@ -279,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="实名认证可获得特权"
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="18sp"
                     android:visibility="visible" />
 
@@ -300,7 +300,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="账号法归属权"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <Button
@@ -313,7 +313,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="到账时间更快"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <Button
@@ -326,7 +326,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="账号更安全"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </LinearLayout>

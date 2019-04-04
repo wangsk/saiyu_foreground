@@ -14,6 +14,15 @@ public class ActiveStatusRet extends BaseRet{
     public static class DataBean {
         private boolean UserBuyerStatus;
         private boolean UserSellerStatus;
+        private boolean UserInfoStatus;
+
+        public boolean isUserInfoStatus() {
+            return UserInfoStatus;
+        }
+
+        public void setUserInfoStatus(boolean userInfoStatus) {
+            UserInfoStatus = userInfoStatus;
+        }
 
         public boolean isUserBuyerStatus() {
             return UserBuyerStatus;

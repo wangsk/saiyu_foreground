@@ -160,11 +160,10 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     public void onRefresh(RefreshLayout refreshlayout) {
         if (page > 1) {
             page--;
-            ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
         } else {
-            ApiRequest.hallIndex("g", "1", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
             Toast.makeText(mContext, "已经是第一页", Toast.LENGTH_SHORT).show();
         }
+        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
         if (refreshLayout != null) {
             refreshlayout.finishRefresh();
         }

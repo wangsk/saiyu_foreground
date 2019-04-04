@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:zhy="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,8 +13,7 @@
         <com.saiyu.foreground.ui.views.ReboundScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/grey20">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,21 +27,21 @@
                     android:layout_marginTop="10dp"
                     android:text="出售数量:"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/tfl_1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:padding="5dp"
                     zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
@@ -49,7 +49,6 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="18dp"
                         android:background="@drawable/border_colorline_radius"
                         android:gravity="center_vertical"
                         android:hint=""
@@ -66,7 +65,7 @@
                         android:layout_width="50dp"
                         android:layout_height="1dp"
                         android:layout_marginLeft="8dp"
-                        android:background="@color/black60" />
+                        android:background="@color/black_light" />
 
                     <EditText
                         android:id="@+id/et_count_2"
@@ -91,8 +90,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
                     android:text="输入数量为0-20000"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -104,21 +103,21 @@
                     android:layout_marginTop="10dp"
                     android:text="出售折扣:"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/tfl_2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:padding="5dp"
                     zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
@@ -126,7 +125,6 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="18dp"
                         android:background="@drawable/border_colorline_radius"
                         android:gravity="center_vertical"
                         android:hint=""
@@ -143,7 +141,7 @@
                         android:layout_width="50dp"
                         android:layout_height="1dp"
                         android:layout_marginLeft="8dp"
-                        android:background="@color/black60" />
+                        android:background="@color/black_light" />
 
                     <EditText
                         android:id="@+id/et_count_4"
@@ -168,8 +166,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:text="输入数量0-100折，如90折就代表100Q币=90元"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -181,14 +179,14 @@
                     android:layout_marginTop="10dp"
                     android:text="附加选项:"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/tfl_3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:padding="5dp"
                     zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 

@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <include
         android:id="@+id/title_layout"
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_layout"
-        android:background="@color/grey20"
         android:scrollbars="none">
 
         <LinearLayout
@@ -115,7 +115,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:text="手续费"
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -165,7 +165,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:text="手续费"
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView

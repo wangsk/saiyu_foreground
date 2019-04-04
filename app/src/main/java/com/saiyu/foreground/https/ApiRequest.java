@@ -225,6 +225,7 @@ public class ApiRequest {
                         SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
                         SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
                         SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
+                        SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
                         Toast.makeText(activity, "退出登录成功", Toast.LENGTH_SHORT).show();
 
                         CallbackUtils.doBottomSelectCallback(1);
@@ -243,6 +244,7 @@ public class ApiRequest {
                         SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
                         SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
                         SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
+                        SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
                         Toast.makeText(activity, "退出登录成功", Toast.LENGTH_SHORT).show();
 
                         CallbackUtils.doBottomSelectCallback(1);

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/hall_order_1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
@@ -23,7 +24,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey20"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -232,7 +232,7 @@
                         android:layout_marginLeft="5dp"
                         android:max="100"
                         android:progress="0"
-                        android:progressBackgroundTint="@color/grey20"
+                        android:progressBackgroundTint="@color/line"
                         android:progressTint="@color/blue" />
 
                     <TextView

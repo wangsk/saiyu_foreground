@@ -114,9 +114,9 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
             accountInfoLoginRet = ret;
             tv_account.setText(ret.getData().getAccount());
 
-            tv_remain.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getTotalMoney() + "</font>" + "元"));
-            tv_buyer_pre.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
-            tv_seller_order.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserSellerCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerMoney() + "</font>" + "元"));
+            tv_remain.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getTotalMoney() + "</font>" + "元"));
+            tv_buyer_pre.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
+            tv_seller_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerMoney() + "</font>" + "元"));
 
             boolean UserBuyerStatus = ret.getData().isUserBuyerStatus();
             boolean UserSellerStatus = ret.getData().isUserSellerStatus();
@@ -155,22 +155,33 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                 ll_seller_info.setVisibility(View.GONE);
             }
 
-            if(!(UserBuyerStatus && UserSellerStatus) && !(!UserBuyerStatus && !UserSellerStatus)){
-                if(!UserBuyerStatus){
-                    ((MainActivity) getActivity()).getBottomBar().hide(3);
-                    SPUtils.putInt(ConstValue.MainBottomVisibleType,1);//不显示买家
-                }
-                if(!UserSellerStatus){
-                    ((MainActivity) getActivity()).getBottomBar().hide(2);
-                    SPUtils.putInt(ConstValue.MainBottomVisibleType,2);//不显示卖家
-                }
-            } else {
-                SPUtils.putInt(ConstValue.MainBottomVisibleType,3);//全部显示
+            if(UserBuyerStatus && UserSellerStatus){
+                //全部激活
                 if(((MainActivity) getActivity()).getBottomBar().checkStatus(3) == View.GONE){
                     ((MainActivity) getActivity()).getBottomBar().show(3);
                 }
                 if(((MainActivity) getActivity()).getBottomBar().checkStatus(2) == View.GONE){
                     ((MainActivity) getActivity()).getBottomBar().show(2);
+                }
+                SPUtils.putInt(ConstValue.MainBottomVisibleType,3);//全部显示
+            }else if(!UserBuyerStatus && !UserSellerStatus){
+                //全部未激活
+                if(((MainActivity) getActivity()).getBottomBar().checkStatus(3) == View.GONE){
+                    ((MainActivity) getActivity()).getBottomBar().show(3);
+                }
+                if(((MainActivity) getActivity()).getBottomBar().checkStatus(2) == View.GONE){
+                    ((MainActivity) getActivity()).getBottomBar().show(2);
+                }
+                SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//全部显示
+            } else {
+                if(!UserBuyerStatus){
+                    //卖家激活，买家未激活
+                    ((MainActivity) getActivity()).getBottomBar().hide(3);
+                    SPUtils.putInt(ConstValue.MainBottomVisibleType,1);//不显示买家
+                } else if(!UserSellerStatus){
+                    //买家激活，卖家未激活
+                    ((MainActivity) getActivity()).getBottomBar().hide(2);
+                    SPUtils.putInt(ConstValue.MainBottomVisibleType,2);//不显示卖家
                 }
             }
 
@@ -315,18 +326,6 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         return;
                     }
 
-                    if(TextUtils.isEmpty(accountInfoLoginRet.getData().getRealName()) || TextUtils.isEmpty(accountInfoLoginRet.getData().getIDNum())){
-                        DialogUtils.showDialog(getActivity(),"提示", "激活卖家需要补填信息，是否补填信息", "取消", "补填信息", new OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.InfoWadFragmentTag);
-                                intent.putExtras(bundle);
-                                mContext.startActivity(intent);
-                            }
-                        });
-                        return;
-                    }
-
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ActiveSellerFragmentTag);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
@@ -339,18 +338,6 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
 
                     if(accountInfoLoginRet.getData().isUserBuyerStatus()){
                         CallbackUtils.doBottomSelectCallback(3);
-                        return;
-                    }
-
-                    if(TextUtils.isEmpty(accountInfoLoginRet.getData().getRealName()) || TextUtils.isEmpty(accountInfoLoginRet.getData().getIDNum())){
-                        DialogUtils.showDialog(getActivity(), "提示", "激活买家需要补填信息，是否补填信息", "取消", "补填信息", new OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.InfoWadFragmentTag);
-                                intent.putExtras(bundle);
-                                mContext.startActivity(intent);
-                            }
-                        });
                         return;
                     }
 

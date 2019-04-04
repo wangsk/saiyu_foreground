@@ -44,6 +44,9 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
 
     @ViewById
     ProgressBar pb_loading;
+    private int curPosition;
+    private String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
+    private boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,19 +95,37 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
         CallbackUtils.setCallback(this);
         CallbackUtils.setOnBottomSelectListener(this);
 
-        //产品要求，一旦买家或者卖家有一个被激活，主页面不再显示卖家或者买家（产品的意思是一个用户可能很长时间只是买家或者卖家，那么就把他另外一个身份页面（买家/卖家）隐藏）
-        int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
-        switch (type){
-            case 0://此账号未在该设备上登陆过，默认先全部显示，然后请求买卖家激活状态
-                break;
-            case 1://当前账号买家未激活，请求买卖家激活状态
-                bottomBar.hide(3);
-                break;
-            case 2://当前账号卖家未激活，请求买卖家激活状态
-                bottomBar.hide(2);
-                break;
-            case 3://当前账号买卖家都激活，不做处理
-                break;
+        accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
+        autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
+        if(autologinflag && !TextUtils.isEmpty(accessToken)){
+
+            //产品要求，一旦买家或者卖家有一个被激活，主页面不再显示卖家或者买家（产品的意思是一个用户可能很长时间只是买家或者卖家，那么就把他另外一个身份页面（买家/卖家）隐藏）
+            int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
+            switch (type){
+                case 0://此账号未在该设备上登陆过，默认先全部显示，然后请求买卖家激活状态
+                case 3://当前账号买卖家都激活，不做处理
+                    if(getBottomBar().checkStatus(3) == View.GONE){
+                        getBottomBar().show(3);
+                    }
+                    if(getBottomBar().checkStatus(2) == View.GONE){
+                        getBottomBar().show(2);
+                    }
+                    break;
+                case 1://当前账号买家未激活，请求买卖家激活状态
+                    bottomBar.hide(3);
+                    break;
+                case 2://当前账号卖家未激活，请求买卖家激活状态
+                    bottomBar.hide(2);
+                    break;
+            }
+
+        } else {
+            if(getBottomBar().checkStatus(3) == View.GONE){
+                getBottomBar().show(3);
+            }
+            if(getBottomBar().checkStatus(2) == View.GONE){
+                getBottomBar().show(2);
+            }
         }
 
     }
@@ -124,20 +145,67 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
     public void onTabSelected(int position, int prePosition) {
         //用户点击买家/卖家/我的页面的时候，必须是登录状态，否则弹出登录页面
         switch (position){
-            case 2://买家
-            case 3://卖家
+            case 2://卖家
+            case 3://买家
             case 4://我的
-                String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
-                boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
+                accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
+                autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
                 if(autologinflag && !TextUtils.isEmpty(accessToken)){
-                    showHideFragment(mFragments[position], mFragments[prePosition]);
+                    int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
+                    LogUtils.print("type === " + type);
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(MainActivity.this,ContainerActivity_.class);
+                    switch (type){
+                        case 0://此账号未在该设备上登陆过，默认先全部显示，然后请求买卖家激活状态
+                            if(position == 2){//点击卖家
+                                bottomBar.setCurrentItem(prePosition);
+                                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ActiveSellerFragmentTag);
+                                intent.putExtras(bundle);
+                                MainActivity.this.startActivityForResult(intent,ContainerActivity.ActiveSellerFragmentTag);
+                            } else if(position == 3){//点击买家
+                                bottomBar.setCurrentItem(prePosition);
+                                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ActiveBuyerFragmentTag);
+                                intent.putExtras(bundle);
+                                MainActivity.this.startActivityForResult(intent,ContainerActivity.ActiveBuyerFragmentTag);
+                            } else {
+                                showHideFragment(mFragments[position], mFragments[prePosition]);
+                            }
+                            break;
+                        case 1://当前账号买家未激活，请求买卖家激活状态
+                            if(position == 3){//点击买家
+                                bottomBar.setCurrentItem(prePosition);
+                                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ActiveBuyerFragmentTag);
+                                intent.putExtras(bundle);
+                                MainActivity.this.startActivityForResult(intent,ContainerActivity.ActiveBuyerFragmentTag);
+                            } else {
+                                showHideFragment(mFragments[position], mFragments[prePosition]);
+                            }
+                            break;
+                        case 2://当前账号卖家未激活，请求买卖家激活状态
+                            if(position == 2){//点击卖家
+                                bottomBar.setCurrentItem(prePosition);
+                                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ActiveSellerFragmentTag);
+                                intent.putExtras(bundle);
+                                MainActivity.this.startActivityForResult(intent,ContainerActivity.ActiveSellerFragmentTag);
+                            } else {
+                                showHideFragment(mFragments[position], mFragments[prePosition]);
+                            }
+                            break;
+                        case 3://当前账号买卖家都激活，不做处理
+                            showHideFragment(mFragments[position], mFragments[prePosition]);
+                            break;
+                        default:
+                            break;
+                    }
                 } else {
+                    curPosition = position;
+                    LogUtils.print("curPosition === " + curPosition);
                     bottomBar.setCurrentItem(prePosition);
                     Bundle bundle = new Bundle();
                     Intent intent = new Intent(MainActivity.this,ContainerActivity_.class);
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.LoginFragmentTag);
                     intent.putExtras(bundle);
-                    MainActivity.this.startActivity(intent);
+                    MainActivity.this.startActivityForResult(intent,ContainerActivity.LoginFragmentTag);
                     //设置activity从底部弹出
                     //overridePendingTransition(R.anim.from_bottom_to_top, R.anim.from_top_to_bottom);
                 }
@@ -176,6 +244,50 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtils.print("requestCode === " + requestCode);
+        if(resultCode == RESULT_OK){
+            Bundle bundle = data.getExtras();
+            int status;
+            switch (requestCode){
+                case ContainerActivity.ActiveBuyerFragmentTag:
+                    if(bundle == null){
+                        return;
+                    }
+                    status = bundle.getInt(ConstValue.MainBottomVisibleType,0);
+                    if(status == 1){
+                        bottomBar.setCurrentItem(3);
+                    }
+
+                    break;
+                case ContainerActivity.ActiveSellerFragmentTag:
+                    if(bundle == null){
+                        return;
+                    }
+                    status = bundle.getInt(ConstValue.MainBottomVisibleType,0);
+                    if(status == 1){
+                        bottomBar.setCurrentItem(2);
+                    }
+                    break;
+                case ContainerActivity.LoginFragmentTag:
+                    if(bundle == null){
+                        return;
+                    }
+                    boolean isLogin = bundle.getBoolean("isLogin",false);
+                    if(isLogin){
+                        LogUtils.print("curPosition === " + curPosition);
+                        bottomBar.setCurrentItem(curPosition);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 
 }

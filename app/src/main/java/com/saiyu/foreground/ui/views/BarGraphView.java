@@ -29,21 +29,17 @@ import java.util.List;
 import java.util.Map;
 
 public class BarGraphView extends View {
-    private Paint bg;
-    private Paint zhuBg;
+    private Paint blueBg;
+    private Paint blueLightBg;
     private Paint whiteBg;
+    private Paint yellowBg;
     private Paint mPaint;
 
-    private int textSize;//字体大小
-    private int textColor;//字体颜色
-    private Paint lineapaint;//折线的画笔
     private Paint dotPain;//圆点的画笔
     private Paint dotPain_2;//圆点边缘的画笔
-    private Paint dotPain_3;//字前边的远点
     private Paint textBgPain;//字背景
     private Rect mBound;
     private float mHeight, mSize;//屏幕宽度高度、柱状图宽度
-    private float textStartplace, textWidth;
     //x轴的原点坐标
     private int xOri;
     //y轴的原点坐标
@@ -116,11 +112,12 @@ public class BarGraphView extends View {
                 case R.styleable.MyChartView_xyColor:
                     break;
                 case R.styleable.MyChartView_textSize:
-                    textSize = array.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                    //xml的属性可以在这里设置
+//                    textSize = array.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
+//                            TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
                     break;
                 case R.styleable.MyChartView_textColor:
-                    textColor = array.getColor(attr, Color.YELLOW);
+//                    textColor = array.getColor(attr, Color.YELLOW);
                     break;
 
             }
@@ -134,27 +131,26 @@ public class BarGraphView extends View {
      * 初始化画笔
      */
     private void init() {
-        bg = new Paint();
-        bg.setAntiAlias(true);
-        bg.setColor(context.getResources().getColor(R.color.blue));
-        bg.setStyle(Paint.Style.FILL);
-        zhuBg = new Paint();
-        zhuBg.setAntiAlias(true);
-        zhuBg.setColor(Color.parseColor("#33a3dc"));
-        zhuBg.setStyle(Paint.Style.FILL);
+        blueBg = new Paint();
+        blueBg.setAntiAlias(true);
+        blueBg.setColor(context.getResources().getColor(R.color.blue));
+        blueBg.setStyle(Paint.Style.FILL);
+        blueLightBg = new Paint();
+        blueLightBg.setAntiAlias(true);
+        blueLightBg.setColor(Color.parseColor("#30ffffff"));
+        blueLightBg.setStyle(Paint.Style.FILL);
         whiteBg = new Paint();
         whiteBg.setAntiAlias(true);
         whiteBg.setColor(context.getResources().getColor(R.color.white));
+        yellowBg = new Paint();
+        yellowBg.setAntiAlias(true);
+        yellowBg.setColor(context.getResources().getColor(R.color.yellow));
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
 
-        //柱状体的画笔
+        //柱状体de形状
         mBound = new Rect();
-
-        //折线的画笔
-        lineapaint = new Paint();
-        lineapaint.setAntiAlias(true);
 
         //圆点的画笔
         dotPain = new Paint();
@@ -162,13 +158,10 @@ public class BarGraphView extends View {
         //圆点边缘的画笔
         dotPain_2 = new Paint();
         dotPain_2.setAntiAlias(true);
-        //字前边的圆点
-        dotPain_3 = new Paint();
-        dotPain_3.setAntiAlias(true);
         //字背景
         textBgPain = new Paint();
         textBgPain.setAntiAlias(true);
-        textBgPain.setColor(Color.parseColor("#d3c6a6"));
+        textBgPain.setColor(context.getResources().getColor(R.color.grey_white));
 
     }
 
@@ -211,8 +204,6 @@ public class BarGraphView extends View {
             ischangeFirst = false;
             mHeight = getHeight();
             mSize = getWidth() / valueSize;
-            textStartplace = getWidth() / valueSize;
-            textWidth = getWidth() / valueSize;
             linearStartX = mSize / 2;
             xOri = 0;
             yOri = getHeight();
@@ -232,7 +223,7 @@ public class BarGraphView extends View {
         //渐变
 //        gradient = new LinearGradient(0, 0, getWidth(), mHeight, context.getResources().getColor(R.color.color_7C98ff), context.getResources().getColor(R.color.color_77b0ff), Shader.TileMode.REPEAT);
 //        mbackgroundPaint.setShader(gradient);
-        canvas.drawRect(0, 0, getMeasuredWidth(), mHeight, bg);
+        canvas.drawRect(0, 0, getMeasuredWidth(), mHeight, blueBg);
         //画柱状图
         drawRect(canvas);
         //划地下月份
@@ -263,9 +254,9 @@ public class BarGraphView extends View {
             rectF.bottom = mHeight;
             rectF.top = (mHeight / 3);
             if (i % 2 != 0) {
-                canvas.drawRect(rectF, bg);
+                canvas.drawRect(rectF, blueBg);
             } else {
-                canvas.drawRect(rectF, zhuBg);
+                canvas.drawRect(rectF, blueLightBg);
             }
         }
         //保存图层
@@ -276,7 +267,7 @@ public class BarGraphView extends View {
     private void drawDate(Canvas canvas) {
         if (value == null || xValue == null || value.size() == 0 || xValue.size() == 0)
             return;
-        mPaint.setTextSize(textSize);
+
         mPaint.setTextAlign(Paint.Align.CENTER);
         int sizeCount = value.size();
         if (isMonthFirst) {
@@ -287,20 +278,19 @@ public class BarGraphView extends View {
             float tx = linearStartX + (mSize) * i;
             String text = xValue.get(i);
             mPaint.getTextBounds(text, 0, text.length(), mBound);
-            if (i + 1 <= posMonth) {
-                mPaint.setColor(context.getResources().getColor(R.color.white));//要写在draw里面不然画不出来
-                canvas.drawText(text, tx, mHeight - dpToPx(20), mPaint);
+            if (i == selectIndex - 1) {
+                mPaint.setTextSize(30);
+                mPaint.setColor(context.getResources().getColor(R.color.white));
             } else {
-                mPaint.setColor(context.getResources().getColor(R.color.white));//要写在draw里面不然画不出来
-                canvas.drawText(text, tx, mHeight - dpToPx(20), mPaint);
+                mPaint.setTextSize(27);
+                mPaint.setColor(context.getResources().getColor(R.color.grey_white));
             }
-
-            textStartplace += textWidth;
+            canvas.drawText(text, tx, mHeight - dpToPx(20), mPaint);
         }
     }
 
     /**
-     * 画折线图和圆点
+     * 画白色折线图和圆点
      *
      * @param canvas
      */
@@ -308,11 +298,11 @@ public class BarGraphView extends View {
         if (value == null || xValue == null || value.size() == 0 || xValue.size() == 0)
             return;
         int sizeCount = value.size();
-        lineapaint.setColor(Color.parseColor("#ffffff"));
-        lineapaint.setStrokeWidth(dpToPx(1));
-        lineapaint.setAntiAlias(true);
-        lineapaint.setStyle(Paint.Style.STROKE);
-        dotPain.setColor(Color.parseColor("#ffffff"));
+        whiteBg.setColor(context.getResources().getColor(R.color.white));
+        whiteBg.setStrokeWidth(dpToPx(1));
+        whiteBg.setAntiAlias(true);
+        whiteBg.setStyle(Paint.Style.STROKE);
+        dotPain.setColor(context.getResources().getColor(R.color.white));
         dotPain.setAntiAlias(true);
         dotPain_2.setColor(Color.parseColor("#80ffffff"));
         dotPain_2.setAntiAlias(true);
@@ -344,7 +334,7 @@ public class BarGraphView extends View {
             bcpath.lineTo(x, mHeight);
         }
         bcpath.close();
-        canvas.drawPath(path, lineapaint);
+        canvas.drawPath(path, whiteBg);
 
         //划圆点
         for (int i = 0; i < sizeCount; i++) {
@@ -371,13 +361,13 @@ public class BarGraphView extends View {
         if (value_2 == null || xValue == null || value_2.size() == 0 || xValue.size() == 0)
             return;
         int sizeCount = value_2.size();
-        lineapaint.setColor(Color.parseColor("#fe8f62"));
-        lineapaint.setStrokeWidth(dpToPx(1));
-        lineapaint.setAntiAlias(true);
-        lineapaint.setStyle(Paint.Style.STROKE);
-        dotPain.setColor(Color.parseColor("#fe8f62"));
+        yellowBg.setColor(context.getResources().getColor(R.color.yellow));
+        yellowBg.setStrokeWidth(dpToPx(1));
+        yellowBg.setAntiAlias(true);
+        yellowBg.setStyle(Paint.Style.STROKE);
+        dotPain.setColor(context.getResources().getColor(R.color.yellow));
         dotPain.setAntiAlias(true);
-        dotPain_2.setColor(Color.parseColor("#80fe8f62"));
+        dotPain_2.setColor(Color.parseColor("#80ffa800"));
         dotPain_2.setAntiAlias(true);
         //划折线
         Path path = new Path();
@@ -385,7 +375,7 @@ public class BarGraphView extends View {
         float x = linearStartX + (mSize) * 0;
         float y = yOri - yOri * value_2.get(xValue.get(0)) / yValue;
         path.moveTo(x, y);
-        bcpath.moveTo(x, mHeight / 3 * 2);
+        bcpath.moveTo(x, mHeight);
         bcpath.lineTo(x, y);
         int count = 0;//记录第几月份好用于计算出x的值
         boolean isSub = false;
@@ -402,12 +392,12 @@ public class BarGraphView extends View {
         }
         if (isSub) {
             x = linearStartX + (mSize) * count;
-            bcpath.lineTo(x, mHeight / 3 * 2);
+            bcpath.lineTo(x, mHeight);
         } else {
-            bcpath.lineTo(x, mHeight / 3 * 2);
+            bcpath.lineTo(x, mHeight);
         }
         bcpath.close();
-        canvas.drawPath(path, lineapaint);
+        canvas.drawPath(path, yellowBg);
 
         //划圆点
         for (int i = 0; i < sizeCount; i++) {
@@ -444,10 +434,6 @@ public class BarGraphView extends View {
         int dp60 = dpToPx(60);
         //p1
         Path path = new Path();
-        lineapaint.setColor(Color.parseColor("#ffffff"));
-        lineapaint.setStrokeWidth(dpToPx(1));
-        lineapaint.setAntiAlias(true);
-        lineapaint.setStyle(Paint.Style.FILL);
         float left = x - dp60;
         float top = y - dp50;
         float right = x + dp60;
@@ -471,15 +457,15 @@ public class BarGraphView extends View {
         //绘制三角形
         Path path1 = new Path();
         path1.moveTo(x, mHeight - dpToPx(15));
-        path1.lineTo(x - dpToPx(12), mHeight);
-        path1.lineTo(x + dpToPx(12), mHeight);
+        path1.lineTo(x - dpToPx(14), mHeight);
+        path1.lineTo(x + dpToPx(14), mHeight);
         path1.close();
+        mPaint.setColor(context.getResources().getColor(R.color.white));
         canvas.drawPath(path1, mPaint);
 
-
-        mPaint.setTextSize(textSize);
+        mPaint.setTextSize(30);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setColor(textColor);//要写在draw里面不然画不出来
+        mPaint.setColor(context.getResources().getColor(R.color.blue));//要写在draw里面不然画不出来
         mPaint.getTextBounds(text, 0, text.length(), mBound);
         if (pos == value.size() - 1) {
             float x_1 = x - dpToPx(40);
@@ -487,11 +473,11 @@ public class BarGraphView extends View {
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
-                    dotPain_3.setColor(Color.parseColor("#ffffff"));
+                    dotPain.setColor(context.getResources().getColor(R.color.white));
                 } else if(i == 1){
-                    dotPain_3.setColor(Color.parseColor("#fe8f62"));
+                    dotPain.setColor(context.getResources().getColor(R.color.yellow));
                 }
-                canvas.drawCircle(x_1 - dpToPx(45), y_1 - dpToPx(5), dpToPx(3), dotPain_3);
+                canvas.drawCircle(x_1 - 100, y_1 - 12, dpToPx(3), dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
@@ -501,11 +487,11 @@ public class BarGraphView extends View {
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
-                    dotPain_3.setColor(Color.parseColor("#ffffff"));
+                    dotPain.setColor(context.getResources().getColor(R.color.white));
                 } else if(i == 1){
-                    dotPain_3.setColor(Color.parseColor("#fe8f62"));
+                    dotPain.setColor(context.getResources().getColor(R.color.yellow));
                 }
-                canvas.drawCircle(x_1 - dpToPx(45), y_1 - dpToPx(5), dpToPx(3), dotPain_3);
+                canvas.drawCircle(x_1 - 100, y_1 - 12, dpToPx(3), dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
@@ -515,11 +501,11 @@ public class BarGraphView extends View {
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
-                    dotPain_3.setColor(Color.parseColor("#ffffff"));
+                    dotPain.setColor(context.getResources().getColor(R.color.white));
                 } else if(i == 1){
-                    dotPain_3.setColor(Color.parseColor("#fe8f62"));
+                    dotPain.setColor(context.getResources().getColor(R.color.yellow));
                 }
-                canvas.drawCircle(x_1 - dpToPx(45), y_1 - dpToPx(5), dpToPx(3), dotPain_3);
+                canvas.drawCircle(x_1 - 100, y_1 - 12, dpToPx(3), dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }

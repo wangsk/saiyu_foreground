@@ -1,9 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
@@ -15,11 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.saiyu.foreground.R;
-import com.saiyu.foreground.adapters.BuyerRechargeWebUrlAdapter;
 import com.saiyu.foreground.adapters.SellerWebUrlAdapter;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
-import com.saiyu.foreground.https.response.BuyerWebListRet;
 import com.saiyu.foreground.https.response.QBListRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
@@ -92,10 +87,10 @@ public class SellerFragment extends BaseFragment implements CallbackUtils.Respon
 
             OrderFreePointsUrl = ret.getData().getOrderFreePointsUrl();
 
-            tv_wait_recharge.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitRechargeOrdersCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitRechargeOrdersMoney() + "</font>" + "元"));
-            tv_review_order.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserSellerAuditOrdersCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerAuditOrdersMoney() + "</font>" + "元"));
-            tv_wait_confirm.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitConfirmOrdersCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitConfirmOrdersMoney() + "</font>" + "元"));
-            tv_total_order.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserSellerOrderRSettleTotalCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerOrderRSettleTotalMoney() + "</font>" + "元"));
+            tv_wait_recharge.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerWaitRechargeOrdersCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerWaitRechargeOrdersMoney() + "</font>" + "元"));
+            tv_review_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerAuditOrdersCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerAuditOrdersMoney() + "</font>" + "元"));
+            tv_wait_confirm.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerWaitConfirmOrdersCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerWaitConfirmOrdersMoney() + "</font>" + "元"));
+            tv_total_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerOrderRSettleTotalCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerOrderRSettleTotalMoney() + "</font>" + "元"));
 
             if(mItems == null){
                 mItems = new ArrayList<>();

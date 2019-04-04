@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey20">
+    android:background="@color/line">
 
     <include
         android:id="@+id/rl_title_bar"
@@ -21,7 +21,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="选择验证方式"
-            android:textColor="@color/black80"
+            android:textColor="@color/black_light"
             android:textSize="18sp" />
 
         <RadioGroup

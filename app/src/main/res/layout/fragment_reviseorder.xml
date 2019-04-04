@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey20">
+    android:background="@color/line">
 
     <include
         android:id="@+id/rl_title_bar"
@@ -221,7 +221,7 @@
                     android:layout_toRightOf="@id/tv_onlinetime_label"
                     android:gravity="center_vertical"
                     android:text="00:00:00-23:59:59"
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -320,7 +320,7 @@
                     android:layout_toRightOf="@id/tv_betweentime_label"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/black80"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView

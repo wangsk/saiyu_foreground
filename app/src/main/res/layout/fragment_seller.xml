@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/line">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue_60"
+            android:background="@color/blue"
             android:orientation="vertical">
 
             <TextView
@@ -22,7 +22,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:text="卖家中心"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -36,43 +36,44 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:text="我的接单点数: "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_orderpoint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textColor="@color/blue"
+                    android:textColor="@color/yellow"
                     android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_rechargepoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:text="充值点数"
                     android:textColor="@color/blue"
-                    android:textSize="12sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_free"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:text="免费获得"
                     android:textColor="@color/blue"
-                    android:textSize="12sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -86,17 +87,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="待充值订单"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:text="待充值订单: "
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_wait_recharge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0笔0元"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -109,17 +110,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="审核中的订单"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:text="审核中的订单: "
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_review_order"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0笔0元"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -141,17 +142,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="待确认订单:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:text="待确认订单: "
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_wait_confirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0笔0元"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -164,17 +165,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="累计出售订单:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:text="累计出售订单: "
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_total_order"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0笔0元"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -186,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:gravity="center">
 
             <Button
@@ -198,7 +199,7 @@
                 android:drawableLeft="@mipmap/mem_info_icon"
                 android:text="  前往大厅接单"
                 android:textAlignment="textStart"
-                android:textColor="@color/black80"
+                android:textColor="@color/black_light"
                 android:textSize="18sp"
                 android:focusable="false"
                 android:clickable="false"/>
@@ -234,7 +235,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="待充值订单"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </RelativeLayout>
@@ -257,7 +258,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="出售订单管理"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </RelativeLayout>
@@ -280,7 +281,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="出售订单历史"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </RelativeLayout>
@@ -311,7 +312,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="我收到的维权"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </RelativeLayout>
@@ -334,7 +335,7 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="接单点数流水"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </RelativeLayout>
@@ -357,26 +358,36 @@
                         android:drawableTop="@mipmap/mem_info_icon"
                         android:text="红包活动"
                         android:textAlignment="center"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </RelativeLayout>
             </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
             android:background="@drawable/shape_bg_white"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="Q币寄售"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/blue"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Q币寄售"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
         <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
             android:id="@+id/recyclerView"

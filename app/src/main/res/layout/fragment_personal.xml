@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey20"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey"
+            android:background="@color/blue"
             android:orientation="vertical">
 
             <ImageView
@@ -23,7 +23,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/mem_info_icon" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_marginLeft="20dp"
                     android:contentDescription="@null"
                     android:padding="2dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/mem_info_icon"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="0dp" />
 
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="实名认证"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="15sp" />
 
                         <ImageView
@@ -76,14 +76,14 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginLeft="5dp"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@mipmap/mem_info_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="刷脸认证"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="15sp" />
 
                         <ImageView
@@ -91,7 +91,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginLeft="5dp"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@mipmap/mem_info_icon" />
 
                     </LinearLayout>
 
@@ -119,14 +119,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="会员余额"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -143,14 +143,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="买家预定中"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -167,14 +167,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="卖家接单中"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -190,7 +190,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="0dp">
 
             <com.scwang.smartrefresh.layout.header.ClassicsHeader
                 android:layout_width="match_parent"
@@ -238,7 +238,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="会员资料"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -252,7 +252,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="资料补填"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -266,7 +266,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="安全管理"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -280,7 +280,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="互联登录"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -303,7 +303,7 @@
                             android:drawableLeft="@mipmap/mem_info_icon"
                             android:text="  我是卖家"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="18sp"
                             android:focusable="false"
                             android:clickable="false"/>
@@ -315,7 +315,7 @@
                             android:layout_weight="1"
                             android:layout_marginLeft="20dp"
                             android:text="未激活"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -325,6 +325,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:background="@drawable/shape_bg_white"
                         android:orientation="vertical"
                         android:visibility="gone">
@@ -341,7 +343,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="待充值订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                             <TextView
@@ -351,7 +353,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="审核中的订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                         </LinearLayout>
@@ -368,7 +370,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="待确认的订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                             <TextView
@@ -378,7 +380,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="累计出售订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                         </LinearLayout>
@@ -403,7 +405,7 @@
                             android:drawableLeft="@mipmap/mem_info_icon"
                             android:text="  我是买家"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="18sp"
                             android:focusable="false"
                             android:clickable="false"/>
@@ -415,7 +417,7 @@
                             android:layout_weight="1"
                             android:layout_marginLeft="20dp"
                             android:text="未激活"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -425,6 +427,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:background="@drawable/shape_bg_white"
                         android:orientation="vertical"
                         android:visibility="gone">
@@ -441,7 +445,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="平均确认时间"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                             <TextView
@@ -451,7 +455,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="预定中的订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                         </LinearLayout>
@@ -468,7 +472,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="待确认的订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                             <TextView
@@ -478,7 +482,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginLeft="10dp"
                                 android:text="累计成交订单"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
                         </LinearLayout>
@@ -533,7 +537,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="我要充值"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -547,7 +551,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="我要提现"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -561,7 +565,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="充值记录"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -575,7 +579,7 @@
                             android:drawableTop="@mipmap/mem_info_icon"
                             android:text="提现记录"
                             android:textAlignment="center"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -611,7 +615,7 @@
                             android:drawableLeft="@mipmap/mem_info_icon"
                             android:text="  实名认证"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <Button
@@ -624,7 +628,7 @@
                             android:drawableLeft="@mipmap/mem_info_icon"
                             android:text="  刷脸认证"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black80"
+                            android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                     </LinearLayout>

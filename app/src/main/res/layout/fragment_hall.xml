@@ -2,33 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey20"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_height="80dp"
+            android:background="@color/blue">
 
             <ImageView
                 android:id="@+id/iv_hall_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/mem_info_icon" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/iv_hall_logo"
                 android:orientation="vertical">
 
@@ -36,14 +35,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="赛鱼24小时服务热线"
-                    android:textColor="@color/black80"
-                    android:textSize="13dp" />
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0373-3030977"
-                    android:textColor="@color/black80"
+                    android:textColor="@color/white"
                     android:textSize="15dp" />
 
             </LinearLayout>
@@ -53,70 +52,69 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/iv_hall_mobile"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/mem_info_icon" />
 
                 <ImageView
                     android:id="@+id/iv_hall_question"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginLeft="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/mem_info_icon" />
             </LinearLayout>
 
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blue_60"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:layout_height="30dp"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="总单量: "
-                android:textColor="@color/black80"
-                android:textSize="13dp" />
+                android:textColor="@color/white"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_total_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/blue"
+                android:textColor="@color/yellow"
                 android:textSize="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 单     总需求数量: "
-                android:textColor="@color/black80"
-                android:textSize="13dp" />
+                android:textColor="@color/white"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_total_qcount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/blue"
+                android:textColor="@color/yellow"
                 android:textSize="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Q币"
-                android:textColor="@color/black80"
-                android:textSize="13dp" />
+                android:textColor="@color/white"
+                android:textSize="12dp" />
 
         </LinearLayout>
 
@@ -130,8 +128,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="预定订单"
-                android:textColor="@color/black80"
-                android:textSize="15sp" />
+                android:textColor="@color/black_light"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -151,8 +149,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="充值游戏"
-                        android:textColor="@color/black80"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -173,8 +171,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="筛选"
-                        android:textColor="@color/black80"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"

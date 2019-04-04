@@ -1,13 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            layout="@layout/titlebar_layout" />
+        <include layout="@layout/titlebar_layout" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,11 +21,12 @@
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:gravity="right"
                 android:layout_marginLeft="0dp"
+                android:gravity="right"
                 android:text="真实姓名:"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
             <EditText
                 android:id="@+id/et_realname"
                 android:layout_width="0dp"
@@ -37,9 +39,9 @@
                 android:inputType="text"
                 android:maxLength="8"
                 android:maxLines="1"
-                android:singleLine="true"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
                 android:textSize="15sp" />
 
@@ -56,8 +58,8 @@
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:gravity="right"
                 android:layout_marginLeft="0dp"
+                android:gravity="right"
                 android:text="身份证号码:"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -75,14 +77,15 @@
                 android:inputType="textVisiblePassword"
                 android:maxLength="20"
                 android:maxLines="1"
-                android:singleLine="true"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
                 android:textSize="15sp" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -95,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="此身份证对本账户的使用负有法律责任，填写后永久不可更改!"
-                android:textColor="@color/black80"
+                android:textColor="@color/black_light"
                 android:textSize="12sp" />
 
             <Button

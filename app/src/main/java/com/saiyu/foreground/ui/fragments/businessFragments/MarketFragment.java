@@ -45,8 +45,8 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
     SwipeMenuRecyclerView recyclerView;
     private MarketAdapter marketAdapter;
 
-    private List<StatisticsListRet.DatasBean.ItemsBean> mItem = new ArrayList<>();
-    private List<StatisticsListRet.DatasBean.ItemsBean_2> mItem_2 = new ArrayList<>();
+    private List<StatisticsListRet.DatasBean.ItemsBean> mItem = new ArrayList<>();//当天最高折扣列表
+    private List<StatisticsListRet.DatasBean.ItemsBean_2> mItem_2 = new ArrayList<>();//行情列表
 
     public static MarketFragment newInstance(Bundle bundle) {
         MarketFragment_ fragment = new MarketFragment_();
@@ -68,18 +68,6 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
         marketAdapter = new MarketAdapter(mItem);
         recyclerView.setAdapter(marketAdapter);
-
-//
-//        ArrayList<HorizontalBarView.HoBarEntity> hoBarEntities = new ArrayList<>();
-//        HorizontalBarView.HoBarEntity hoBarEntity = new HorizontalBarView.HoBarEntity();
-//        hoBarEntity.content = "";
-//        hoBarEntity.count = 88;
-//        hoBarEntities.add(hoBarEntity);
-//        HorizontalBarView.HoBarEntity hoBarEntity1 = new HorizontalBarView.HoBarEntity();
-//        hoBarEntity1.content = "";
-//        hoBarEntity1.count = 95;
-//        hoBarEntities.add(hoBarEntity1);
-//        horizontalbar.setHoBarData(hoBarEntities);
 
     }
 
@@ -120,11 +108,12 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             mItem.clear();
             mItem.addAll(ret.getData().getList());
 
-            List<String> dateList = new ArrayList<>();
-            Map<String, Integer> value_max = new HashMap<>();
-            Map<String, Integer> value_aver = new HashMap<>();
-            for (int i = 0; i < 7; i++) {
-                if(mItem.size() <= i){
+            List<String> dateList = new ArrayList<>();//日期
+            Map<String, Integer> value_max = new HashMap<>();//最高折扣列表
+            Map<String, Integer> value_aver = new HashMap<>();//平均折扣列表
+
+            for (int i = 0; i < 7; i++) {//取折扣列表的前七个显示折线图
+                if(mItem.size() <= i){//如果行情列表个数小于7，提前退出循环
                     break;
                 } else {
                     dateList.add(mItem.get(i).getDate());
@@ -138,7 +127,7 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
                 bar_view.setCurrentMonth(dateList.size());
             }
 
-
+            //月折扣行情列表
             marketAdapter = new MarketAdapter(mItem);
             recyclerView.setAdapter(marketAdapter);
             marketAdapter.notifyDataSetChanged();

@@ -5,31 +5,18 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="white">#ffffff</color>
-    <color name="blue">#148cf1</color>
-    <color name="blue_60">#60148cf1</color>
-    <color name="yellow">#fe8f62</color>
-    <color name="grey">#8C8C8C</color>
-    <color name="grey20">#208C8C8C</color>
+    <color name="blue">#5069d5</color>
+    <color name="blue_light">#99ccff</color>
+    <color name="yellow">#ffa800</color>
     <color name="grey_white">#c3c3c3</color>
+    <color name="line">#f0f0f0</color>
+    <color name="black">#363636</color>
+    <color name="grey">#aeaeae</color>
+    <color name="black_light">#666666</color>
     <color name="red">#dd6666</color>
-
-    <color name="black">#444444</color>
-    <color name="black20">#20000000</color>
-    <color name="black40">#40000000</color>
-    <color name="black60">#60000000</color>
-    <color name="black80">#99000000</color>
-    <color name="black99">#000000</color>
 
     <color name="background">#31373a</color>
     <color name="transparent">#00000000</color>
-
-    <color name="unEnabled">#aeaeae</color>
-
-    <color name="color_498DFF">#00498DFF</color>
-    <color name="color_4E7FE0">#004E7FE0</color>
-    <color name="color_7C98ff">#7C98FF</color>
-    <color name="color_77b0ff">#77b0ff</color>
-
 
     <!--zxing-->
     <color name="contents_text">#000000</color>

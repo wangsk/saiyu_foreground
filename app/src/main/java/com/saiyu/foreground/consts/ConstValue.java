@@ -21,6 +21,7 @@ public class ConstValue {
     public static final int ACTION_ALBUM = 203;//裁剪照片的请求码
 
     public static final String MainBottomVisibleType = "mainBottomVisibleType";//主界面下面显示的item个数，（0：全部显示:1：不显示买家:2：不显示卖家）
+    public static final String IdentifyInfo = "identifyInfo";//身份信息
 
     /**
      * ==========================第三方登录=================================

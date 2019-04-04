@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <include layout="@layout/titlebar_layout"
         android:id="@+id/rl_title_bar"/>
@@ -16,13 +17,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey20"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:gravity="right"
-                        android:text="充值大区: "
+                        android:text="大区: "
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -136,7 +136,7 @@
                     android:id="@+id/ll_role"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -173,7 +173,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -397,7 +397,7 @@
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
                         android:text="00:00:00-23:59:59"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <ImageView
@@ -411,7 +411,7 @@
                     android:id="@+id/rl_replace"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white">
 
                     <TextView
@@ -432,7 +432,7 @@
                         android:drawableLeft="@mipmap/mem_info_icon"
                         android:text="  客服代理确认"
                         android:textAlignment="textStart"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
@@ -471,7 +471,7 @@
                         android:drawableLeft="@mipmap/mem_info_icon"
                         android:text="  支持验图确认"
                         android:textAlignment="textStart"
-                        android:textColor="@color/black80"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
@@ -524,7 +524,7 @@
                                 android:drawableLeft="@mipmap/mem_info_icon"
                                 android:text="  到期时间"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -563,7 +563,7 @@
                                 android:drawableLeft="@mipmap/mem_info_icon"
                                 android:text="  订单加密"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -602,7 +602,7 @@
                                 android:drawableLeft="@mipmap/mem_info_icon"
                                 android:text="  单次充值最低"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -642,7 +642,7 @@
                                 android:drawableLeft="@mipmap/mem_info_icon"
                                 android:text="  接单间隔时间"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -657,7 +657,7 @@
                                 android:layout_toRightOf="@id/btn_betweentime_label"
                                 android:gravity="center_vertical"
                                 android:text=""
-                                android:textColor="@color/black80"
+                                android:textColor="@color/black_light"
                                 android:textSize="15sp" />
                             <ImageView
                                 android:layout_width="20dp"

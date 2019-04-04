@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/line">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/titlebar_layout"
-            android:id="@+id/rl_title_bar"/>
+        <include
+            android:id="@+id/rl_title_bar"
+            layout="@layout/titlebar_layout" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,6 +37,7 @@
                 android:text=""
                 android:textColor="@color/blue"
                 android:textSize="15sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,27 +125,28 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="20"
+                android:maxLines="1"
                 android:paddingLeft="2dp"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp"
-                android:maxLines="1"
-                android:maxLength="20"
-                android:inputType="number"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_msg_count"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/shape_bg_transparent"
                 android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="发送验证码"
                 android:textColor="@color/blue"
                 android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"

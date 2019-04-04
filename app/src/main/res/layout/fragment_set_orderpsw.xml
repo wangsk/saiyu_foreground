@@ -2,27 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/line">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <include layout="@layout/titlebar_layout" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:text="订单加密: "
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:text="订单加密: "/>
+                android:textSize="15sp" />
+
             <EditText
                 android:id="@+id/et_release_psw"
                 android:layout_width="match_parent"
@@ -47,40 +49,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="密码只能为4位纯数字，交易大厅中属于加密的订单会显示附加选项标签《私密订单》，卖家接单时输入被接受的数量后点击确定接单后弹窗显示密码输入框，密码正确才可以进入下一步；\n此功能常用于买卖双方已协商好的发单接单交易；"
             android:textColor="@color/black"
-            android:textSize="12sp"
-            android:text="密码只能为4位纯数字，交易大厅中属于加密的订单会显示附加选项标签《私密订单》，卖家接单时输入被接受的数量后点击确定接单后弹窗显示密码输入框，密码正确才可以进入下一步；\n此功能常用于买卖双方已协商好的发单接单交易；"/>
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_confirm"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="2dp"
+                android:layout_weight="1"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:text="确定保存"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
             <Button
                 android:id="@+id/btn_cancel"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp"
+                android:layout_weight="1"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:text="取消设置"

@@ -3,7 +3,7 @@
     xmlns:zhy="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey20">
+    android:background="@color/line">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,13 +16,10 @@
             android:layout_weight="1">
             <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/tfl_recharge_game"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp"
+                android:padding="10dp"
                 zhy:max_select="-1"></com.zhy.view.flowlayout.TagFlowLayout>
 
         </com.saiyu.foreground.ui.views.ReboundScrollView>

@@ -188,7 +188,7 @@ public class ResetPswFragment extends BaseFragment implements CallbackUtils.Resp
                     tv_revisepsw_prompt_3.setText("*密码不能大于32位");
                     return;
                 }
-                tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.black20));
+                tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.black_light));
                 tv_revisepsw_prompt_3.setText("*请输入原登录密码");
                 break;
         }

@@ -124,12 +124,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             SPUtils.putString(ConstValue.ACCESS_TOKEN, ret.getData().getAccessToken());
             SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
-//            Intent intent = new Intent();
-//            Bundle bundle = new Bundle();
-//            bundle.putBoolean("isLogin",true);
-//            intent.putExtras(bundle);
-//            getActivity().setResult(RESULT_OK, intent);//如果需要登录返回状态的时候可以用这段代码
-
             ApiRequest.getUserStatus("LoginFragment_getUserStatus",pb_loading);
 
 
@@ -138,19 +132,36 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             if(ret.getData() == null){
                 return;
             }
+            boolean UserInfoStatus = ret.getData().isUserInfoStatus();
+            if(UserInfoStatus){
+                SPUtils.putInt(ConstValue.IdentifyInfo,1);//已补填身份信息
+            } else {
+                SPUtils.putInt(ConstValue.IdentifyInfo,0);//未补填身份信息
+            }
             boolean UserBuyerStatus = ret.getData().isUserBuyerStatus();
             boolean UserSellerStatus = ret.getData().isUserSellerStatus();
-            if(!(UserBuyerStatus && UserSellerStatus) && !(!UserBuyerStatus && !UserSellerStatus)){
-                if(!UserBuyerStatus){//买家未激活卖家已激活情况
+
+            if(UserBuyerStatus && UserSellerStatus){
+                //全部激活
+                SPUtils.putInt(ConstValue.MainBottomVisibleType,3);//全部显示
+            }else if(!UserBuyerStatus && !UserSellerStatus){
+                //全部未激活
+                SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//全部显示
+            } else {
+                if(!UserBuyerStatus){
+                    //卖家激活，买家未激活
                     SPUtils.putInt(ConstValue.MainBottomVisibleType,1);//不显示买家
-                }
-                if(!UserSellerStatus){//卖家未激活买家已激活情况
+                } else if(!UserSellerStatus){
+                    //买家激活，卖家未激活
                     SPUtils.putInt(ConstValue.MainBottomVisibleType,2);//不显示卖家
                 }
-            } else if(UserBuyerStatus && UserSellerStatus){
-                //买卖家都激活
-                SPUtils.putInt(ConstValue.MainBottomVisibleType,3);
             }
+
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isLogin",true);
+            intent.putExtras(bundle);
+            getActivity().setResult(RESULT_OK, intent);//如果需要登录返回状态的时候可以用这段代码
 
             getActivity().finish();
         }

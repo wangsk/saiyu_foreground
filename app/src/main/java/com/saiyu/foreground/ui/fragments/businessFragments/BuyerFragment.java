@@ -97,14 +97,14 @@ public class BuyerFragment extends BaseFragment implements CallbackUtils.Respons
                 long day = time/60/24;
                 long hour = time/60;
                 long minute = time - day*24*60 - hour*60;
-                tv_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + day + "</font>" + "天" + "<font color = \"#148cf1\">" + hour + "</font>" + "小时"+ "<font color = \"#148cf1\">" + minute + "</font>" + "分钟"));
+                tv_time.setText(Html.fromHtml("<font color = \"#ffa800\">" + day + "</font>" + "天" + "<font color = \"#ffa800\">" + hour + "</font>" + "小时"+ "<font color = \"#ffa800\">" + minute + "</font>" + "分钟"));
             } else {
-                tv_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + 0 + "</font>" + "天" + "<font color = \"#148cf1\">" + 0 + "</font>" + "小时"+ "<font color = \"#148cf1\">" + 0 + "</font>" + "分钟"));
+                tv_time.setText(Html.fromHtml("<font color = \"#ffa800\">" + 0 + "</font>" + "天" + "<font color = \"#ffa800\">" + 0 + "</font>" + "小时"+ "<font color = \"#ffa800\">" + 0 + "</font>" + "分钟"));
             }
 
-            tv_last_order.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserBuyerCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
-            tv_wait_order.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
-            tv_total_order.setText(Html.fromHtml("<font color = \"#148cf1\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "笔" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
+            tv_last_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
+            tv_wait_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
+            tv_total_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
 
             if(mItems == null){
                 mItems = new ArrayList<>();

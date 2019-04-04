@@ -60,7 +60,7 @@ public class BottomBarTab extends FrameLayout{
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
         mIcon.setImageResource(icon);
         mIcon.setLayoutParams(params);
-        mIcon.setColorFilter(ContextCompat.getColor(context, R.color.unEnabled));
+        mIcon.setColorFilter(ContextCompat.getColor(context, R.color.grey));
         lLContainer.addView(mIcon);
 
         mTvTitle = new TextView(context);
@@ -102,8 +102,8 @@ public class BottomBarTab extends FrameLayout{
             mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.blue));
             mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.blue));
         } else {
-            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.unEnabled));
-            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.unEnabled));
+            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.grey));
+            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.grey));
         }
     }
 

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
     <include
         android:id="@+id/rl_title_bar"
         layout="@layout/titlebar_layout" />
+
     <LinearLayout
-        android:layout_below="@id/rl_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title_bar"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
@@ -19,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/et_account"
                 android:layout_width="0dp"
@@ -26,16 +29,16 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@null"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:gravity="center_vertical"
                 android:hint="*请输入赛鱼账号"
                 android:inputType="textVisiblePassword"
-                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:maxLength="30"
+                android:maxLines="1"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp"
-                android:maxLines="1"
-                android:maxLength="30"/>
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/iv_account_clear"
@@ -43,23 +46,25 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:src="@mipmap/ic_launcher"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blue"
-            android:layout_marginTop="-5dp"/>
+            android:layout_marginTop="-5dp"
+            android:background="@color/blue" />
+
         <TextView
             android:id="@+id/tv_regist_prompt_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*账号以字母开头，可包含数字，不区分大小写!"
+            android:textColor="@color/black_light"
             android:textSize="14sp"
-            android:textColor="@color/black20"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,12 +81,13 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="*请输入登录密码"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:maxLines="1"
                 android:paddingLeft="2dp"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp"
-                android:maxLines="1"
-                android:maxLength="20"
-                android:inputType="textPassword"/>
+                android:textSize="15sp" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,22 +99,24 @@
                     android:id="@+id/iv_psw"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_launcher" />
+
                 <ImageView
                     android:id="@+id/iv_psw_clear"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_launcher" />
 
             </LinearLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blue"
-            android:layout_marginTop="-5dp"/>
+            android:layout_marginTop="-5dp"
+            android:background="@color/blue" />
 
         <TextView
             android:id="@+id/tv_regist_prompt_2"
@@ -116,9 +124,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*密码由6-32位字符(字母区分大小写)组成"
+            android:textColor="@color/black_light"
             android:textSize="14sp"
-            android:textColor="@color/black20"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,12 +143,13 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="*确认登录密码"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:maxLines="1"
                 android:paddingLeft="2dp"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp"
-                android:maxLines="1"
-                android:maxLength="20"
-                android:inputType="textPassword"/>
+                android:textSize="15sp" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,22 +161,24 @@
                     android:id="@+id/iv_psw_confirm"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_launcher" />
+
                 <ImageView
                     android:id="@+id/iv_psw_confirm_clear"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_launcher" />
 
             </LinearLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blue"
-            android:layout_marginTop="-5dp"/>
+            android:layout_marginTop="-5dp"
+            android:background="@color/blue" />
 
         <TextView
             android:id="@+id/tv_regist_prompt_3"
@@ -175,9 +186,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*请再次输入登录密码"
+            android:textColor="@color/black_light"
             android:textSize="14sp"
-            android:textColor="@color/black20"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btn_next"
@@ -199,21 +210,23 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="我已看过并同意"
-                android:textSize="15sp"
-                android:textColor="@color/black20"/>
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/tv_protocol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="《赛鱼网服务协议》"
-                android:textSize="15sp"
-                android:textColor="@color/blue"/>
+                android:textColor="@color/blue"
+                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.saiyu.foreground.R;
 import com.saiyu.foreground.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -26,14 +27,13 @@ import java.util.ArrayList;
 
 public class HorizontalBarView extends View {
 
+    private Context context;
     private ArrayList<HoBarEntity> hoBarEntityList = new ArrayList<>();
     private float barStartX = 0f;//
     private Paint mbarPaint;
     private Paint mCountPaint;
     private float barHeight = dp2px(15); //bar的高度
     private float barInterval = dp2px(5);//bar之间的距离
-    private int mbarPaintColor = Color.parseColor("#fda33c");//bar的颜色
-    private int mCountPaintColor = Color.parseColor("#5e5e5e");//最右边文字的颜色
     private int countTextSize = 30;//最右边文字的大小
     private float topAndBottomInterval = dp2px(5);//上下边距的距离（上下线与bar的距离）
     private float rightInterval = dp2px(10);//最右侧文字和右边距离
@@ -52,6 +52,7 @@ public class HorizontalBarView extends View {
 
     public HorizontalBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         initPaints();
     }
 
@@ -61,14 +62,6 @@ public class HorizontalBarView extends View {
 
     public float getBarInterval() {
         return barInterval;
-    }
-
-    public int getMbarPaintColor() {
-        return mbarPaintColor;
-    }
-
-    public int getmCountPaintColor() {
-        return mCountPaintColor;
     }
 
     public int getCountTextSize() {
@@ -89,14 +82,13 @@ public class HorizontalBarView extends View {
         mbarPaint = new Paint();
         mbarPaint.setAntiAlias(true);
         mbarPaint.setStyle(Paint.Style.FILL);
-        mbarPaint.setColor(Color.parseColor("#fda33c"));
         mbarPaint.setStrokeCap(Paint.Cap.ROUND);
 
         mCountPaint = new Paint();
         mCountPaint.setAntiAlias(true);
         mCountPaint.setStyle(Paint.Style.FILL);
         mCountPaint.setTextSize(countTextSize);
-        mCountPaint.setColor(mCountPaintColor);
+        mCountPaint.setColor(context.getResources().getColor(R.color.black_light));
         mCountPaint.setStrokeCap(Paint.Cap.ROUND);
 
     }
@@ -143,7 +135,6 @@ public class HorizontalBarView extends View {
             }
             countMaxWidth = mCountPaint.measureText(maxCount + "");
             barStartX = getPaddingLeft();
-            LogUtils.print("    countMaxWidth===" + countMaxWidth);
         }
     }
 
@@ -165,11 +156,10 @@ public class HorizontalBarView extends View {
         for (int i = 0; i < hoBarEntityList.size(); i++) {
             barEndX = barStartX + perBarWidth * hoBarEntityList.get(i).count;
             barEndY = barStartY + barHeight;
-            LogUtils.print("barStartX-barEndX===" + (barStartX - barEndX));
             if(i == 0){
-                mbarPaint.setColor(Color.parseColor("#fda33c"));
+                mbarPaint.setColor(context.getResources().getColor(R.color.blue_light));
             } else {
-                mbarPaint.setColor(Color.parseColor("#148cf1"));
+                mbarPaint.setColor(context.getResources().getColor(R.color.yellow));
             }
             //绘制bar
             canvas.drawRect(barStartX, barStartY, barEndX, barEndY, mbarPaint);

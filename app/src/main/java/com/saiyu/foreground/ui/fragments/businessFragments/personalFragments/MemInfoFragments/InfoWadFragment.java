@@ -1,5 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.MemInfoFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.SPUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -78,7 +81,15 @@ public class InfoWadFragment extends BaseFragment implements CallbackUtils.Respo
                 return;
             }
             if(ret.getData().isResult()){
+                SPUtils.putInt(ConstValue.IdentifyInfo,1);//已补填身份信息
                 Toast.makeText(mContext,"资料补填成功",Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putInt(ConstValue.IdentifyInfo,1);
+                intent.putExtras(bundle);
+                getActivity().setResult(RESULT_OK, intent);
+
                 getActivity().finish();
             }
         }

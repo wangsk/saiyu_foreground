@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/line">
 
     <include
         android:id="@+id/rl_title_bar"
@@ -27,7 +27,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="right"
                 android:text="原登录密码:"
-                android:textColor="@color/black80"
+                android:textColor="@color/black_light"
                 android:textSize="15sp"
                 android:visibility="visible" />
             <EditText
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*请输入原登录密码"
-            android:textColor="@color/black20"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="visible" />
 
@@ -79,7 +79,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="right"
                 android:text="登录密码:"
-                android:textColor="@color/black80"
+                android:textColor="@color/black_light"
                 android:textSize="15sp"
                 android:visibility="visible" />
 
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*密码由6-32位字符(字母区分大小写)组成"
-            android:textColor="@color/black20"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="visible" />
 
@@ -132,7 +132,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="right"
                 android:text="确认登录密码:"
-                android:textColor="@color/black80"
+                android:textColor="@color/black_light"
                 android:textSize="15sp"
                 android:visibility="visible" />
 
@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*请再次输入登录密码"
-            android:textColor="@color/black20"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="visible" />
 

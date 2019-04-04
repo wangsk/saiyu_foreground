@@ -1,22 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
 
-    <include layout="@layout/titlebar_layout"
-        android:id="@+id/rl_title_bar"/>
+    <include
+        android:id="@+id/rl_title_bar"
+        layout="@layout/titlebar_layout" />
 
     <com.saiyu.foreground.ui.views.ReboundScrollView
         android:id="@+id/rs_complete"
-        android:layout_below="@id/rl_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title_bar"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey"
             android:orientation="vertical">
 
             <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView

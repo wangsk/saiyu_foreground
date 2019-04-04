@@ -1,14 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/line">
+
     <include
         android:id="@+id/title"
         layout="@layout/titlebar_layout" />
+
     <LinearLayout
         android:id="@+id/ll_body"
-        android:layout_below="@id/title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/title"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -16,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -33,15 +36,16 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -57,15 +61,16 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -81,15 +86,16 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -105,15 +111,16 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -129,15 +136,16 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -153,15 +161,16 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="110dp"
@@ -177,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/blue"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -191,35 +200,35 @@
                 android:id="@+id/btn_order_detail"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="订单详情"
                 android:textColor="@color/white"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btn_order_recharge"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="充值订单"
                 android:textColor="@color/white"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -254,13 +263,14 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/tv_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="12sp" />
@@ -275,7 +285,7 @@
         android:text="您当前没有待充值订单"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/pb_loading"
