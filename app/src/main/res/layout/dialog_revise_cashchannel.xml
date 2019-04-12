@@ -31,6 +31,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -63,30 +64,6 @@
             android:singleLine="true"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="15sp" />
-
-        <LinearLayout
-            android:id="@+id/ll_wechat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/iv_wechat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="长按二维码保存图片"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -130,7 +107,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -156,7 +133,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -180,6 +157,30 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_wechat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="长按二维码保存图片"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -189,26 +190,26 @@
         <Button
             android:id="@+id/btn_dialog_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_blue"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/shape_bg_blue_light"
             android:paddingLeft="40dp"
             android:paddingTop="5dp"
             android:paddingRight="40dp"
             android:paddingBottom="5dp"
             android:text="取消"
-            android:textColor="@color/white"
+            android:textColor="@color/blue"
             android:textSize="15sp" />
 
         <Button
             android:id="@+id/btn_dialog_confirm"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
             android:layout_marginLeft="10dp"
             android:background="@drawable/shape_bg_blue"
             android:paddingLeft="40dp"
-            android:paddingTop="5dp"
             android:paddingRight="40dp"
-            android:paddingBottom="5dp"
             android:text="确定"
             android:textColor="@color/white"
             android:textSize="15sp" />
@@ -221,7 +222,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:text="你最多可以添加5个渠道方式"
-        android:textColor="@color/black"
+        android:textColor="@color/black_light"
         android:textSize="15sp" />
 
 </LinearLayout>

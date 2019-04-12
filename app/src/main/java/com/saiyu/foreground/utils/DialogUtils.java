@@ -247,14 +247,15 @@ public class DialogUtils {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_revise_cashchannel, null);
         final LinearLayout ll_remark = view.findViewById(R.id.ll_remark);
+        final LinearLayout ll_account = view.findViewById(R.id.ll_account);
         final LinearLayout ll_wechat = view.findViewById(R.id.ll_wechat);
         final ImageView iv_wechat = view.findViewById(R.id.iv_wechat);
         Button btn_dialog_cancel = view.findViewById(R.id.btn_dialog_cancel);
-        Button btn_dialog_confirm = view.findViewById(R.id.btn_dialog_confirm);
+        final Button btn_dialog_confirm = view.findViewById(R.id.btn_dialog_confirm);
         final EditText et_count = view.findViewById(R.id.et_count);
         final EditText et_remark = view.findViewById(R.id.et_remark);
-        TextView tv_charge = view.findViewById(R.id.tv_charge);
-        TextView tv_time = view.findViewById(R.id.tv_time);
+        final TextView tv_charge = view.findViewById(R.id.tv_charge);
+        final TextView tv_time = view.findViewById(R.id.tv_time);
         Spinner spinner = view.findViewById(R.id.spinner);
         if(itemsBean != null){
             tv_charge.setText(itemsBean.getCharge()+"%");
@@ -266,7 +267,6 @@ public class DialogUtils {
         if(mItems == null || mItems.size() <= 0){
             return;
         }
-
 
         List<String> list = new ArrayList<String>();
         for(CashChannelRet.DatasBean.ItemsBean item : mItems){
@@ -286,19 +286,19 @@ public class DialogUtils {
                     case 0:
                         ll_wechat.setVisibility(View.GONE);
                         ll_remark.setVisibility(View.VISIBLE);
-                        et_count.setVisibility(View.VISIBLE);
+                        ll_account.setVisibility(View.VISIBLE);
                         et_count.setHint("请输入银行卡号");
                         break;
                     case 1:
                         ll_wechat.setVisibility(View.GONE);
                         ll_remark.setVisibility(View.VISIBLE);
-                        et_count.setVisibility(View.VISIBLE);
+                        ll_account.setVisibility(View.VISIBLE);
                         et_count.setHint("请输入支付宝账号");
                         break;
                     case 2:
                         ll_wechat.setVisibility(View.VISIBLE);
                         ll_remark.setVisibility(View.GONE);
-                        et_count.setVisibility(View.GONE);
+                        ll_account.setVisibility(View.GONE);
                         String ImgUrl = mItems.get(i).getImgUrl();
                         if(!TextUtils.isEmpty(ImgUrl)){
                             final Bitmap bitmap = CodeCreator.createQRCode(ImgUrl, 400, 400, null);
@@ -322,25 +322,27 @@ public class DialogUtils {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tv_charge.setText(mItems.get(position).getWithdrawWayConfigCharge()+"%");
+                tv_time.setText(mItems.get(position).getPayDateStr());
                 wayId = mItems.get(position).getId();
                 type = mItems.get(position).getType();
                 switch (type){
                     case 0:
                         ll_wechat.setVisibility(View.GONE);
                         ll_remark.setVisibility(View.VISIBLE);
-                        et_count.setVisibility(View.VISIBLE);
+                        ll_account.setVisibility(View.VISIBLE);
                         et_count.setHint("请输入银行卡号");
                         break;
                     case 1:
                         ll_wechat.setVisibility(View.GONE);
                         ll_remark.setVisibility(View.VISIBLE);
-                        et_count.setVisibility(View.VISIBLE);
+                        ll_account.setVisibility(View.VISIBLE);
                         et_count.setHint("请输入支付宝账号");
                         break;
                     case 2:
                         ll_wechat.setVisibility(View.VISIBLE);
                         ll_remark.setVisibility(View.GONE);
-                        et_count.setVisibility(View.GONE);
+                        ll_account.setVisibility(View.GONE);
                         String ImgUrl = mItems.get(position).getImgUrl();
                         if(!TextUtils.isEmpty(ImgUrl)){
                             final Bitmap bitmap = CodeCreator.createQRCode(ImgUrl, 400, 400, null);

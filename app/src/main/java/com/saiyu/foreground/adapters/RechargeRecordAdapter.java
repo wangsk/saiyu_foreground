@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
@@ -42,24 +43,24 @@ public class RechargeRecordAdapter  extends RecyclerView.Adapter<RechargeRecordA
 
         myHolder.tv_deal_1.setText(mItems.get(i).getPayTypeName());
         myHolder.tv_deal_2.setText(mItems.get(i).getCreateTime());
-        myHolder.tv_deal_3.setText("余额: "+mItems.get(i).getCurrentMoney());
+        myHolder.tv_deal_3.setText("余额: "+mItems.get(i).getCurrentMoney() + "元");
         int status = mItems.get(i).getStatus();//0充值中 1成功 2失败
         String money = "";
         switch (status){
             case 0:
-                money = "<font color = \"#8C8C8C\">" + mItems.get(i).getApplyMoney() + "</font>";
+                money = "<font color = \"#666666\">" + mItems.get(i).getApplyMoney() + "元" + "</font>";
                 break;
             case 1:
-                money = "<font color = \"#148cf1\">" +"+"+ mItems.get(i).getSuccMoney() + "</font>";
+                money = "<font color = \"#5069d5\">" +"+"+ mItems.get(i).getSuccMoney() + "元" + "</font>";
                 break;
             case 2:
-                money = "<font color = \"#fe8f62\">" +mItems.get(i).getApplyMoney() + "</font>";
+                money = "<font color = \"#fe8f62\">" +mItems.get(i).getApplyMoney() + "元" + "</font>";
                 break;
         }
 
         myHolder.tv_deal_4.setText(Html.fromHtml(money));
 
-        myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
+        myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mOnItemClickListener != null){
@@ -93,11 +94,11 @@ public class RechargeRecordAdapter  extends RecyclerView.Adapter<RechargeRecordA
 
     public class MyHolder extends RecyclerView.ViewHolder {
         public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4;
-        public LinearLayout ll_item_layout;
+        public RelativeLayout rl_item_layout;
 
         public MyHolder(View itemView) {
             super(itemView);
-            ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
+            rl_item_layout = itemView.findViewById(R.id.rl_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);

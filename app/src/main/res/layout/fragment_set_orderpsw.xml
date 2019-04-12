@@ -84,10 +84,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:text="取消设置"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="18sp" />
 
         </LinearLayout>

@@ -34,9 +34,7 @@ public class BuyerOrderDetailFragment extends BaseFragment implements CallbackUt
             tv_orderremark,tv_time_online,tv_orderlimit,tv_betweentime,tv_replaceconfirm,
             tv_contacttype,tv_rechargeremark,tv_releasetime,tv_latertime,tv_completnum,tv_confirmtype,tv_averagetime,
             tv_orderstatus,tv_reviewstatus,tv_completetime,tv_balancetime,tv_balancemoney,tv_penalty,tv_rechargeorders
-            ,tv_cancel,tv_canceltime,tv_refunds;
-    @ViewById
-    ImageView iv_orderPsw,iv_pic;
+            ,tv_cancel,tv_canceltime,tv_refunds,tv_orderPsw,tv_pic;
     private String orderId;
 
     public static BuyerOrderDetailFragment newInstance(Bundle bundle) {
@@ -82,21 +80,29 @@ public class BuyerOrderDetailFragment extends BaseFragment implements CallbackUt
             tv_orderprice.setText(ret.getData().getReservePrice() + "元");//预定出价
             tv_orderremark.setText(ret.getData().getReserveTitle());//预定附言
             tv_time_online.setText(ret.getData().getOnlineTime());//在线时间
-            if(TextUtils.isEmpty(ret.getData().getOrderPwd())){//订单加密
-                iv_orderPsw.setVisibility(View.GONE);
+            tv_orderPsw.setText(ret.getData().getOrderPwd());//订单加密
+            //单次限制
+            float LessChargeDiscount = ret.getData().getLessChargeDiscount();
+            float OnceMinCount = ret.getData().getOnceMinCount();
+            if(OnceMinCount == 0){
+                tv_orderlimit.setText("单次数量不限制");
             } else {
-                iv_orderPsw.setVisibility(View.VISIBLE);
+                if(LessChargeDiscount == 1){
+                    tv_orderlimit.setText(OnceMinCount+"Q币 少充按原价");
+                } else {
+                    tv_orderlimit.setText(OnceMinCount+"Q币 少充则=" + LessChargeDiscount*100 + "%");
+                }
             }
-            tv_orderlimit.setText(ret.getData().getOnceMinCount());//单次限制
+//            tv_orderlimit.setText(ret.getData().getOnceMinCount());//单次限制
             tv_betweentime.setText(ret.getData().getOrderInterval()+"分钟");//接单间隔时间
             if(ret.getData().getIsPicConfirm() == 0){//支持验图确认
-                iv_pic.setVisibility(View.GONE);
+                tv_pic.setText("否");
             } else {
-                iv_pic.setVisibility(View.VISIBLE);
+                tv_pic.setText("是");
             }
             tv_replaceconfirm.setText(ret.getData().getIsAgentConfirmStr());//客服代理确认
 
-            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";QQ"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
+            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";qq"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
 
             tv_rechargeremark.setText(ret.getData().getRemarks());//充值留言
             tv_releasetime.setText(ret.getData().getCreateTime());//发布时间

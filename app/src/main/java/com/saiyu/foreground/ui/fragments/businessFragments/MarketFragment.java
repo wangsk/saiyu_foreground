@@ -66,8 +66,6 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
-        marketAdapter = new MarketAdapter(mItem);
-        recyclerView.setAdapter(marketAdapter);
 
     }
 
@@ -123,7 +121,7 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             }
 
             if(dateList.size() > 0){
-                bar_view.setValue(value_aver,value_max, dateList, 220);
+                bar_view.setValue(value_aver,value_max, dateList, 250);
                 bar_view.setCurrentMonth(dateList.size());
             }
 

@@ -38,19 +38,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:text="个人原因，无法充值"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/iv_1"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="30dp"
-                android:src="@mipmap/mem_info_icon" />
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/xuanzhong" />
 
         </LinearLayout>
 
@@ -64,19 +65,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:text="加不上买家QQ好友"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/iv_2"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="30dp"
-                android:src="@mipmap/mem_info_icon"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/xuanzhong"
                 android:visibility="invisible" />
 
         </LinearLayout>
@@ -91,19 +93,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:text="腾讯官方原因无法充值"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/iv_3"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="30dp"
-                android:src="@mipmap/mem_info_icon"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/xuanzhong"
                 android:visibility="invisible" />
 
         </LinearLayout>
@@ -117,18 +120,19 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="接单扣点:"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_order_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
                 android:text=""
                 android:textColor="@color/blue"
                 android:textSize="15sp" />
@@ -144,18 +148,19 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="超时扣点:"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_time_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
                 android:text=""
                 android:textColor="@color/blue"
                 android:textSize="15sp" />
@@ -171,18 +176,19 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="总计扣点:"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_total_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
                 android:text=""
                 android:textColor="@color/blue"
                 android:textSize="15sp" />

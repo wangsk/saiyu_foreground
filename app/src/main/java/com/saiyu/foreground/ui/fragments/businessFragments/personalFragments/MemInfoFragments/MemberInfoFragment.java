@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +41,8 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
     Button btn_title_back;
     @ViewById
     RelativeLayout rl_realname,rl_identity,rl_identify,rl_face;
+    @ViewById
+    ImageView iv_jiantou_realname,iv_jiantou_identity,iv_jiantou_identify,iv_jiantou_face;
     private String account,RealName,IDNum,Mobile;
 
     public static MemberInfoFragment newInstance(Bundle bundle) {
@@ -134,28 +137,36 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
             if(!TextUtils.isEmpty(RealName)){
                 tv_realname.setText(RealName);
                 rl_realname.setClickable(false);
+                iv_jiantou_realname.setVisibility(View.GONE);
             } else {
-                tv_realname.setText("补填资料>");
+                tv_realname.setText("补填资料");
+                iv_jiantou_realname.setVisibility(View.VISIBLE);
             }
             if(!TextUtils.isEmpty(IDNum)){
                 tv_identity.setText(IDNum);
                 rl_identity.setClickable(false);
+                iv_jiantou_identity.setVisibility(View.GONE);
             } else {
-                tv_identity.setText("补填资料>");
+                tv_identity.setText("补填资料");
+                iv_jiantou_identity.setVisibility(View.VISIBLE);
             }
             if(IsRealNameAuth == 0){
                 //未实名
-                tv_identify.setText("未认证>");
+                tv_identify.setText("未认证");
+                iv_jiantou_identify.setVisibility(View.VISIBLE);
             } else if(IsRealNameAuth == 1){
                 tv_identify.setText("已认证");
                 rl_identify.setClickable(false);
+                iv_jiantou_identify.setVisibility(View.GONE);
             }
             if(IsFaceAuth == 0){
                 //未刷脸
-                tv_face.setText("未认证>");
+                tv_face.setText("未认证");
+                iv_jiantou_face.setVisibility(View.VISIBLE);
             } else if(IsFaceAuth == 1){
                 tv_face.setText("已认证");
                 rl_face.setClickable(false);
+                iv_jiantou_face.setVisibility(View.GONE);
             }
         }
     }

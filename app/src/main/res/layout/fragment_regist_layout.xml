@@ -42,11 +42,11 @@
 
             <ImageView
                 android:id="@+id/iv_account_clear"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_launcher"
-                android:visibility="visible" />
+                android:src="@mipmap/x_hei"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -99,14 +99,14 @@
                     android:id="@+id/iv_psw"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/yanjing" />
 
                 <ImageView
                     android:id="@+id/iv_psw_clear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/x_hei" />
 
             </LinearLayout>
 
@@ -161,14 +161,14 @@
                     android:id="@+id/iv_psw_confirm"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/yanjing" />
 
                 <ImageView
                     android:id="@+id/iv_psw_confirm_clear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/x_hei" />
 
             </LinearLayout>
 

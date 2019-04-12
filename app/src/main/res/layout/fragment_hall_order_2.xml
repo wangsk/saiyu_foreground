@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_prompt_1"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/blue"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_prompt_4"
@@ -93,7 +93,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@null"
         android:clickable="false"
-        android:drawableLeft="@mipmap/mem_info_icon"
+        android:drawableLeft="@mipmap/jg"
         android:focusable="false"
         android:text="  新老用户必看，否则容易出错！"
         android:textAlignment="center"

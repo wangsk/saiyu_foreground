@@ -8,10 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -27,10 +30,10 @@ public class SetMinRechargeFragment extends BaseFragment {
     @ViewById
     EditText et_release_num;
     @ViewById
-    LinearLayout ll_recharge_1,ll_recharge_2;
+    RadioButton rb_1,rb_2;
     @ViewById
-    ImageView iv_recharge_1,iv_recharge_2;
-    private String onceMinCount,lessChargeDiscount;
+    RadioGroup rg_selector;
+    private float onceMinCount,lessChargeDiscount;
 
     public static SetMinRechargeFragment newInstance(Bundle bundle) {
         SetMinRechargeFragment_ fragment = new SetMinRechargeFragment_();
@@ -41,40 +44,53 @@ public class SetMinRechargeFragment extends BaseFragment {
     @AfterViews
     void afterViews() {
         tv_title_content.setText("单次充值最低");
-        lessChargeDiscount = "1";//原价
-
+        lessChargeDiscount = 1f;//原价
+        rg_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rb_1:
+                        lessChargeDiscount = 1f;
+                        break;
+                    case R.id.rb_2:
+                        lessChargeDiscount = 0.05f;
+                        break;
+                }
+                LogUtils.print("lessChargeDiscount === " + lessChargeDiscount);
+            }
+        });
     }
 
-    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.ll_recharge_1,R.id.ll_recharge_2,R.id.btn_cancel})
+    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.btn_cancel})
     void onClick(View view) {
+        Intent intent = null;
+        Bundle bundle = null;
         switch (view.getId()){
             case R.id.btn_title_back:
-            case R.id.btn_cancel:
                 getActivity().finish();
                 break;
-            case R.id.btn_confirm:
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                onceMinCount = et_release_num.getText().toString();
-                bundle.putString("onceMinCount",onceMinCount);
-                bundle.putString("lessChargeDiscount",lessChargeDiscount);
+            case R.id.btn_cancel:
+                intent = new Intent();
+                bundle = new Bundle();
+                bundle.putFloat("onceMinCount",0f);
+                bundle.putFloat("lessChargeDiscount",1f);
                 intent.putExtras(bundle);
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
                 break;
-            case R.id.ll_recharge_1:
-                if(iv_recharge_1.getVisibility() == View.GONE){
-                    iv_recharge_1.setVisibility(View.VISIBLE);
-                    iv_recharge_2.setVisibility(View.GONE);
-                    lessChargeDiscount = "1";
+            case R.id.btn_confirm:
+                intent = new Intent();
+                bundle = new Bundle();
+                if(TextUtils.isEmpty(et_release_num.getText().toString().trim())){
+                    onceMinCount = 0f;
+                } else {
+                    onceMinCount = Float.parseFloat(et_release_num.getText().toString().trim());
                 }
-                break;
-            case R.id.ll_recharge_2:
-                if(iv_recharge_2.getVisibility() == View.GONE){
-                    iv_recharge_1.setVisibility(View.GONE);
-                    iv_recharge_2.setVisibility(View.VISIBLE);
-                    lessChargeDiscount = "0.05";
-                }
+                bundle.putFloat("onceMinCount",onceMinCount);
+                bundle.putFloat("lessChargeDiscount",lessChargeDiscount);
+                intent.putExtras(bundle);
+                getActivity().setResult(RESULT_OK, intent);
+                getActivity().finish();
                 break;
         }
     }

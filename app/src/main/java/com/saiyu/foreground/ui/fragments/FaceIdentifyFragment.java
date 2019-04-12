@@ -36,22 +36,22 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 /*
-* 支付宝刷脸的类，有3个功能需要调用该类：1.刷脸改密；2.刷脸认证；3.刷脸解绑手机
-* **/
+ * 支付宝刷脸的类，有3个功能需要调用该类：1.刷脸改密；2.刷脸认证；3.刷脸解绑手机
+ * **/
 @EFragment(R.layout.fragment_face_identify_layout)
 public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
     @ViewById
     TextView tv_title_content, tv_account;
     @ViewById
-    Button btn_title_back, btn_next,btn_last;
+    Button btn_title_back, btn_next, btn_last;
     @ViewById
     LinearLayout ll_account;
     @ViewById
-    EditText et_realname,et_identity;
+    EditText et_realname, et_identity;
     @ViewById
     ProgressBar pb_loading;
 
-    private String RealName,IDNum,faceOrderNum,account;
+    private String RealName, IDNum, faceOrderNum, account;
 
     public final static String FaceIdentifyFunctionType = "FaceIdentifyFunctionType";//bundle传值的key
     private int type;//0:刷脸认证；1：解绑手机；2：找回密码
@@ -70,7 +70,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
 
     @AfterViews
     void afterView() {
-        if(identifyReceiver == null){
+        if (identifyReceiver == null) {
             identifyReceiver = new IdentifyReceiver();
             IntentFilter intentFilter = new IntentFilter("Action_Identify_Callback");
             mContext.registerReceiver(identifyReceiver, intentFilter);
@@ -78,11 +78,11 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            RealName = bundle.getString("RealName","");
-            IDNum = bundle.getString("IDNum","");
+            RealName = bundle.getString("RealName", "");
+            IDNum = bundle.getString("IDNum", "");
 
-            type = bundle.getInt(FaceIdentifyFunctionType,0);
-            switch (type){
+            type = bundle.getInt(FaceIdentifyFunctionType, 0);
+            switch (type) {
                 case 0://刷脸认证
                     //只有在刷脸认证的时候才能修改姓名和身份证号码
                     ll_account.setVisibility(View.GONE);
@@ -132,27 +132,27 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
         }
-        if(method.equals("FaceIdentifyFragment_faceIdentify") || method.equals("FaceIdentifyFragment_mobileUnBindByFace") || method.equals("FaceIdentifyFragment_searchPswFace")){
-            FaceRet ret = (FaceRet)baseRet;
-            if(ret.getData() == null){
+        if (method.equals("FaceIdentifyFragment_faceIdentify") || method.equals("FaceIdentifyFragment_mobileUnBindByFace") || method.equals("FaceIdentifyFragment_searchPswFace")) {
+            FaceRet ret = (FaceRet) baseRet;
+            if (ret.getData() == null) {
                 return;
             }
             faceOrderNum = ret.getData().getFaceOrderNum();
             String url = ret.getData().getFaceurl();
             doVerify(url);
-        } else if(method.equals("FaceIdentifyFragment_faceQuery") || method.equals("FaceIdentifyFragment_faceSearchQuery")){
-            BooleanRet ret = (BooleanRet)baseRet;
-            if(ret.getData() == null){
+        } else if (method.equals("FaceIdentifyFragment_faceQuery") || method.equals("FaceIdentifyFragment_faceSearchQuery")) {
+            BooleanRet ret = (BooleanRet) baseRet;
+            if (ret.getData() == null) {
                 return;
             }
-            if(ret.getData().isResult()){
-                switch (type){
+            if (ret.getData().isResult()) {
+                switch (type) {
                     case 0://刷脸认证
-                        Toast.makeText(mContext,"刷脸认证成功",Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "刷脸认证成功", Toast.LENGTH_LONG).show();
                         getActivity().finish();
                         break;
                     case 1://解绑手机
-                        Intent intent = new Intent(mContext,ContainerActivity_.class);
+                        Intent intent = new Intent(mContext, ContainerActivity_.class);
                         Bundle bundle_3 = new Bundle();
                         bundle_3.putInt(ContainerActivity.FragmentTag, ContainerActivity.BindPhoneStatusFragmentTag);
                         intent.putExtras(bundle_3);
@@ -161,7 +161,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
                         break;
                     case 2://刷脸改密
                         Bundle bundle = new Bundle();
-                        bundle.putString("account",account);
+                        bundle.putString("account", account);
                         RevisePswFragment revisePswFragment = RevisePswFragment.newInstance(bundle);
                         start(revisePswFragment);
                         break;
@@ -170,46 +170,46 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
         }
     }
 
-    @Click({R.id.btn_title_back, R.id.btn_next,R.id.btn_last})
+    @Click({R.id.btn_title_back, R.id.btn_next, R.id.btn_last})
     void onClick(View view) {
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.btn_title_back:
                 case R.id.btn_last:
-                    switch (type){
+                    switch (type) {
                         case 0:
                             getActivity().finish();
                             break;
-                            default:
-                                getFragmentManager().popBackStack();
-                                break;
+                        default:
+                            getFragmentManager().popBackStack();
+                            break;
                     }
 
                     break;
                 case R.id.btn_next:
-                    switch (type){
+                    switch (type) {
                         case 0://刷脸认证
                             String realName = et_realname.getText().toString();
                             String identity = et_identity.getText().toString();
-                            if(TextUtils.isEmpty(realName)){
-                                Toast.makeText(mContext,"请输入真实姓名",Toast.LENGTH_SHORT).show();
+                            if (TextUtils.isEmpty(realName)) {
+                                Toast.makeText(mContext, "请输入真实姓名", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            if(TextUtils.isEmpty(identity)){
-                                Toast.makeText(mContext,"请输入身份证号",Toast.LENGTH_SHORT).show();
+                            if (TextUtils.isEmpty(identity)) {
+                                Toast.makeText(mContext, "请输入身份证号", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             //刷脸认证
-                            ApiRequest.faceIdentify(realName,identity,"FaceIdentifyFragment_faceIdentify",pb_loading);
+                            ApiRequest.faceIdentify(realName, identity, "FaceIdentifyFragment_faceIdentify", pb_loading);
                             break;
                         case 1://解绑手机
                             //刷脸认证解绑手机
-                            ApiRequest.mobileUnBindByFace("FaceIdentifyFragment_mobileUnBindByFace",pb_loading);
+                            ApiRequest.mobileUnBindByFace("FaceIdentifyFragment_mobileUnBindByFace", pb_loading);
                             break;
                         case 2://刷脸改密
-                            if(!TextUtils.isEmpty(account)){
+                            if (!TextUtils.isEmpty(account)) {
                                 //刷脸改密
-                                ApiRequest.searchPswFace(account,"FaceIdentifyFragment_searchPswFace",pb_loading);
+                                ApiRequest.searchPswFace(account, "FaceIdentifyFragment_searchPswFace", pb_loading);
                             }
                             break;
                     }
@@ -231,20 +231,20 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
                     int faceStatus = 1;//成功
                     String failed_reason = "阿里验证成功";
                     String result = bundle.getString("Action_Identify_Callback");
-                    if(!TextUtils.isEmpty(result)){
-                        if(result.equals("false")){
+                    if (!TextUtils.isEmpty(result)) {
+                        if (result.equals("false")) {
                             faceStatus = 0;//失败
-                            failed_reason = bundle.getString("failed_reason","");
+                            failed_reason = bundle.getString("failed_reason", "");
                         }
-                        switch (type){
+                        switch (type) {
                             case 0:
-                                ApiRequest.faceQuery(faceStatus+"",failed_reason,"FaceIdentifyFragment_faceQuery",pb_loading);
+                                ApiRequest.faceQuery(faceStatus + "", failed_reason, "FaceIdentifyFragment_faceQuery", pb_loading);
                                 break;
                             case 1:
-                                ApiRequest.mobileUnBindByFaceSumbit(faceStatus+"",failed_reason,"FaceIdentifyFragment_faceQuery",pb_loading);
+                                ApiRequest.mobileUnBindByFaceSumbit(faceStatus + "", failed_reason, "FaceIdentifyFragment_faceQuery", pb_loading);
                                 break;
                             case 2:
-                                ApiRequest.faceSearchQuery(account,faceOrderNum,faceStatus+"",failed_reason,"FaceIdentifyFragment_faceSearchQuery",pb_loading);
+                                ApiRequest.faceSearchQuery(account, faceOrderNum, faceStatus + "", failed_reason, "FaceIdentifyFragment_faceSearchQuery", pb_loading);
                                 break;
                         }
                     }
@@ -259,7 +259,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
         if (identifyReceiver != null) {
             try {
                 mContext.unregisterReceiver(identifyReceiver);
-            }catch (Exception e){
+            } catch (Exception e) {
             }
             identifyReceiver = null;
         }

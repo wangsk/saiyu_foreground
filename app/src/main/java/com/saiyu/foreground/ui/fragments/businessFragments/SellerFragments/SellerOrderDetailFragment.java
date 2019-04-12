@@ -83,15 +83,15 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
             tv_ordercount.setText(ret.getData().getReserveQBCount());//接单数量
             tv_successcount.setText(ret.getData().getSuccQBCount());//成功数量
             tv_successprice.setText(ret.getData().getSuccMoney()+"元");//成功金额
-            tv_money.setText(ret.getData().getPenaltyMoney());//违约金
-            iv_serviceprice.setText(ret.getData().getServiceMoney());//服务费
-            tv_total.setText(ret.getData().getTotalMoney());//贷款金额
+            tv_money.setText(ret.getData().getLiquidatedMoney()+"元");//违约金
+            iv_serviceprice.setText(ret.getData().getServiceMoney()+"元");//服务费
+            tv_total.setText(ret.getData().getTotalMoney()+"元");//贷款金额
             tv_recharge_product.setText(ret.getData().getProductName());
             tv_product_type.setText(ret.getData().getProductTypeName());
             tv_recharge_num.setText(ret.getData().getReserveAccount());
 
             float LessChargeDiscount = ret.getData().getLessChargeDiscount();
-            int OnceMinCount = ret.getData().getOnceMinCount();
+            float OnceMinCount = ret.getData().getOnceMinCount();
             if(OnceMinCount == 0){
                 tv_once_limit.setText("单次数量不限制");
             } else {
@@ -109,7 +109,7 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
             }
             tv_confirm_type.setText(ret.getData().getConfirmStr());
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
-            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";QQ"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
+            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";qq"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
             tv_rechargeremark.setText(ret.getData().getRemarks());//充值留言
 
             pic_success = ret.getData().getPic_RechargeSucc();

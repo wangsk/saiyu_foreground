@@ -13,55 +13,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue"
+            android:background="@mipmap/top_bg_seller"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="卖家中心"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="我的接单点数: "
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tv_orderpoint"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text=""
-                    android:textColor="@color/yellow"
-                    android:textSize="15sp" />
+                    android:layout_marginLeft="10dp"
+                    android:text="卖家中心"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_rechargepoint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:gravity="center"
+                    android:background="@drawable/border_yellow_radius"
                     android:text="充值点数"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_free"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:gravity="center"
+                    android:background="@drawable/border_colorline_radius"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="免费获得"
@@ -74,6 +61,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="我的接单点数  "
+                    android:textColor="@color/line"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_orderpoint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -88,8 +101,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="待充值订单: "
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textColor="@color/line"
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/tv_wait_recharge"
@@ -111,7 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="审核中的订单: "
-                        android:textColor="@color/white"
+                        android:textColor="@color/line"
                         android:textSize="12sp" />
 
                     <TextView
@@ -143,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="待确认订单: "
-                        android:textColor="@color/white"
+                        android:textColor="@color/line"
                         android:textSize="12sp" />
 
                     <TextView
@@ -166,7 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="累计出售订单: "
-                        android:textColor="@color/white"
+                        android:textColor="@color/line"
                         android:textSize="12sp" />
 
                     <TextView
@@ -196,10 +209,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:background="@null"
-                android:drawableLeft="@mipmap/mem_info_icon"
+                android:drawableLeft="@mipmap/icon_xzdt"
                 android:text="  前往大厅接单"
                 android:textAlignment="textStart"
-                android:textColor="@color/black_light"
+                android:textColor="@color/blue"
                 android:textSize="18sp"
                 android:focusable="false"
                 android:clickable="false"/>
@@ -232,7 +245,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@null"
-                        android:drawableTop="@mipmap/mem_info_icon"
+                        android:drawableTop="@mipmap/dczdd"
                         android:text="待充值订单"
                         android:textAlignment="center"
                         android:textColor="@color/black_light"
@@ -255,7 +268,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@null"
-                        android:drawableTop="@mipmap/mem_info_icon"
+                        android:drawableTop="@mipmap/csddgl"
                         android:text="出售订单管理"
                         android:textAlignment="center"
                         android:textColor="@color/black_light"
@@ -278,7 +291,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@null"
-                        android:drawableTop="@mipmap/mem_info_icon"
+                        android:drawableTop="@mipmap/csddls"
                         android:text="出售订单历史"
                         android:textAlignment="center"
                         android:textColor="@color/black_light"
@@ -309,7 +322,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@null"
-                        android:drawableTop="@mipmap/mem_info_icon"
+                        android:drawableTop="@mipmap/wq"
                         android:text="我收到的维权"
                         android:textAlignment="center"
                         android:textColor="@color/black_light"
@@ -332,7 +345,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@null"
-                        android:drawableTop="@mipmap/mem_info_icon"
+                        android:drawableTop="@mipmap/jddsls"
                         android:text="接单点数流水"
                         android:textAlignment="center"
                         android:textColor="@color/black_light"
@@ -355,7 +368,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@null"
-                        android:drawableTop="@mipmap/mem_info_icon"
+                        android:drawableTop="@mipmap/hbhd"
                         android:text="红包活动"
                         android:textAlignment="center"
                         android:textColor="@color/black_light"

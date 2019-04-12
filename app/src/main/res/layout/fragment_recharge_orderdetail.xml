@@ -29,11 +29,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="充值订单号: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="充值订单号"
                     android:textSize="15sp" />
 
                 <TextView
@@ -41,7 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -54,11 +56,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="预定订单号: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="预定订单号"
                     android:textSize="15sp" />
 
                 <TextView
@@ -66,7 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -79,11 +83,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="接单时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="接单时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -91,7 +96,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -104,11 +110,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="完成时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="完成时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -116,7 +123,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -129,11 +137,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="充值时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="充值时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -141,7 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -154,11 +164,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="自动确认时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="自动确认时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -166,7 +177,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -179,11 +191,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="接单数量: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="接单数量"
                     android:textSize="15sp" />
 
                 <TextView
@@ -191,7 +204,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -204,11 +218,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="成功数量: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="成功数量"
                     android:textSize="15sp" />
 
                 <TextView
@@ -216,7 +231,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -229,11 +245,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="成功金额: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="成功金额"
                     android:textSize="15sp" />
 
                 <TextView
@@ -241,7 +258,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -254,11 +272,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="确认方式: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="确认方式"
                     android:textSize="15sp" />
 
                 <TextView
@@ -266,7 +285,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -279,11 +299,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="平均确认时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="平均确认时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -291,7 +312,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -304,11 +326,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="订单状态: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="订单状态"
                     android:textSize="15sp" />
 
                 <TextView
@@ -316,7 +339,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -329,11 +353,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="充值产品: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="充值产品"
                     android:textSize="15sp" />
 
                 <TextView
@@ -341,7 +366,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -354,11 +380,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="产品类型: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="产品类型"
                     android:textSize="15sp" />
 
                 <TextView
@@ -366,7 +393,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -379,11 +407,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="充值号码: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="充值号码"
                     android:textSize="15sp" />
 
                 <TextView
@@ -391,7 +420,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -404,11 +434,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="在线时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="在线时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -416,7 +447,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -429,12 +461,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="right"
-                    android:text="订单加密: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="订单加密"
                     android:textSize="15sp" />
 
                 <TextView
@@ -442,7 +474,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -456,11 +489,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="单次限制: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="单次限制"
                     android:textSize="15sp" />
 
                 <TextView
@@ -468,7 +502,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -481,11 +516,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="接单间隔时间: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="接单间隔时间"
                     android:textSize="15sp" />
 
                 <TextView
@@ -493,7 +529,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -506,12 +543,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="right"
-                    android:text="支持验图确认: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="支持验图确认"
                     android:textSize="15sp" />
 
                 <TextView
@@ -519,7 +556,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -533,11 +571,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="客服代理确认: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="客服代理确认"
                     android:textSize="15sp" />
 
                 <TextView
@@ -545,7 +584,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -558,11 +598,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="联系方式: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:text="联系方式"
                     android:textSize="15sp" />
 
                 <TextView
@@ -570,7 +611,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -580,16 +622,17 @@
                 android:layout_marginTop="2dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="充值留言: "
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="@color/black_light"
+                    android:text="充值留言"
                     android:textSize="15sp" />
 
                 <TextView
@@ -597,7 +640,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
 

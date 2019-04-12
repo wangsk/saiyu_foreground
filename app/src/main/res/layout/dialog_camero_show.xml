@@ -34,7 +34,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="拍\t照"
-            android:textColor="#A1A1A1"
+            android:textColor="@color/black_light"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -48,7 +48,7 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:text="取\t消"
-        android:textColor="#A1A1A1"
+        android:textColor="@color/black_light"
         android:textSize="16sp" />
 
 </LinearLayout>

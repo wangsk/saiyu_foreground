@@ -1,6 +1,8 @@
 package com.saiyu.foreground.ui.fragments.businessFragments;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -72,6 +74,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
 
     }
 
@@ -82,11 +85,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
-        hallAdapter = new HallAdapter(mItems);
-        recyclerView.setAdapter(hallAdapter);
 
-        CallbackUtils.setCallback(this);
-        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
     }
 
     @Override
@@ -169,20 +168,20 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
         }
     }
 
-    @Click({R.id.iv_hall_selector, R.id.ll_recharge_game, R.id.ll_selector,R.id.iv_hall_question})
+    @Click({R.id.tv_cellphone,R.id.iv_hall_selector, R.id.ll_recharge_game, R.id.ll_selector,R.id.iv_hall_question,R.id.iv_hall_mobile})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_hall_question:
                 Bundle bundle = new Bundle();
                 Intent intent = new Intent(mContext,ContainerActivity_.class);
-                bundle.putString("url", "https://www.saiyu.com/help/");
+                bundle.putString("url", "https://www.saiyu.com/help/m.html");
                 bundle.putString("type","帮助文档");//
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
                 break;
             case R.id.ll_recharge_game:
-                PopWindowUtils.initPopWindow_2(productItemsBeans, ll_recharge_game, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_2(getActivity(),productItemsBeans, ll_recharge_game, new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
                         if(callbackList == null || callbackList.size() < 1){
@@ -199,7 +198,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 });
                 break;
             case R.id.ll_selector:
-                PopWindowUtils.initPopWindow_3(ll_selector, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_3(getActivity(),ll_selector, new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
                         if(callbackList == null || callbackList.size() < 3){
@@ -218,7 +217,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
                 break;
             case R.id.iv_hall_selector:
-                PopWindowUtils.initPopWindow_4(iv_hall_selector, new OnItemClickListener() {
+                PopWindowUtils.initPopWindow_4(getActivity(),iv_hall_selector, new OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         sort = position+"";
@@ -228,6 +227,27 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 });
 
                 break;
+            case R.id.tv_cellphone:
+                String phone = "0373-3030977";
+                //这里"tel:"+电话号码 是固定格式，系统一看是以"tel:"开头的，就知道后面应该是电话号码。
+                Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone.trim()));
+                startActivity(intentCall);//调用上面这个intent实现拨号
+                break;
+            case R.id.iv_hall_mobile:
+                joinQQ();
+                break;
+        }
+    }
+
+    /**
+     * 跳转QQ聊天界面
+     */
+    public void joinQQ() {
+        try {
+            String url = "http://q.url.cn/CDuRql?_type=wpa&qidian=true";
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -10,11 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
-import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetOrderPswFragment;
-import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetOrderPswFragment_;
+import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.City;
 import com.saiyu.foreground.utils.Province;
 import com.saiyu.foreground.utils.Utils;
@@ -30,11 +30,11 @@ import java.util.List;
 @EFragment(R.layout.fragment_order_replace_confirm)
 public class SetOrderReplaceConfirmFragment extends BaseFragment {
     @ViewById
-    TextView tv_title_content;
+    TextView tv_title_content,tv_qq;
     @ViewById
     Button btn_title_back,btn_confirm,btn_cancel;
     @ViewById
-    EditText et_qq,et_qq_psw;
+    EditText et_qq_psw;
     @ViewById
     Spinner sp_province,sp_city;
     private  static Province province = null;
@@ -57,7 +57,7 @@ public class SetOrderReplaceConfirmFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if(bundle != null){
             ReserveAccount = bundle.getString("ReserveAccount");
-            et_qq.setText(ReserveAccount);
+            tv_qq.setText(ReserveAccount);
         }
 
         list= Utils.parser(getActivity());
@@ -99,19 +99,35 @@ public class SetOrderReplaceConfirmFragment extends BaseFragment {
 
     @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.btn_cancel})
     void onClick(View view) {
+        Intent intent = null;
+        Bundle bundle = null;
         switch (view.getId()){
             case R.id.btn_title_back:
+                getActivity().finish();
+                break;
             case R.id.btn_cancel:
+                intent = new Intent();
+                bundle = new Bundle();
+                bundle.putString("ReservePwd","");
+                bundle.putString("OftenLoginProvince","");
+                bundle.putString("OftenLoginCity","");
+                intent.putExtras(bundle);
+                getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
                 break;
             case R.id.btn_confirm:
-                String qq = et_qq_psw.getText().toString();
-                String psw = et_qq_psw.getText().toString();
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                if(!TextUtils.equals(qq,ReserveAccount)){
-                    bundle.putString("ReserveAccount",qq);
+                if(TextUtils.isEmpty(ReserveAccount)){
+                    Toast.makeText(mContext,"请返回设置充值号码！",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                String psw = et_qq_psw.getText().toString();
+                if(TextUtils.isEmpty(psw)){
+                    Toast.makeText(mContext,"请输入QQ密码！",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                intent = new Intent();
+                bundle = new Bundle();
 
                 bundle.putString("ReservePwd",psw);
                 if(province != null){

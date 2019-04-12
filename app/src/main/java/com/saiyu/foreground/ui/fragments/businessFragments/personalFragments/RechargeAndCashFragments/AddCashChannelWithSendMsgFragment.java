@@ -56,12 +56,7 @@ public class AddCashChannelWithSendMsgFragment extends BaseFragment implements C
             Id = bundle.getString("Id");
             accountId = bundle.getString("accountId","0");
             remarks = bundle.getString("remarks","");
-        }
-        //添加银行卡的时候默认是没有accountId的，所以置为0代表添加,其他代表修改
-        if("0".equals(accountId)){
-            tv_title_content.setText("添加银行卡");
-        } else {
-            tv_title_content.setText("修改银行卡");
+            tv_title_content.setText(bundle.getString("title"));
         }
 
         countDownTimerUtils = new CountDownTimerUtils(tv_msg_count, 60000, 1000);

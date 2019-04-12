@@ -41,7 +41,7 @@ public class PointRechargeHistoryFragment extends BaseFragment implements Callba
     @ViewById
     TextView tv_title_content;
     @ViewById
-    Button btn_title_back;
+    Button btn_title_back,btn_blank;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
@@ -95,6 +95,16 @@ public class PointRechargeHistoryFragment extends BaseFragment implements Callba
             }
 
             int totalCount = ret.getData().getReceivePoinCount();
+
+            if(totalCount == 0){
+                recyclerView.setVisibility(View.GONE);
+                btn_blank.setVisibility(View.VISIBLE);
+                btn_blank.setText("您还没有充值点数记录");
+                return;
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                btn_blank.setVisibility(View.GONE);
+            }
 
             totalPage = totalCount / pageSize + 1;
             LogUtils.print("总数:" + totalCount + " ;总页码：" + totalPage);

@@ -5,42 +5,50 @@
     android:background="@color/white"
     android:clickable="true">
 
-    <LinearLayout
-        android:id="@+id/ll_item_layout"
+    <RelativeLayout
+        android:id="@+id/rl_item_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="50dp">
 
         <ImageView
             android:id="@+id/iv_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"/>
-        <TextView
-            android:id="@+id/tv_bankname"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"/>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_icon"
             android:layout_marginLeft="5dp"
-            android:textSize="15sp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:textSize="12sp"
-            android:textColor="@color/black_light"/>
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_bankname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/black_light"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_default"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/yuan_red"
+            android:src="@mipmap/xuanzhong"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
             android:visibility="gone"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_revise"
@@ -54,7 +62,7 @@
         android:id="@+id/btn_delete"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:background="@color/yellow"
+        android:background="@color/red"
         android:clickable="true"
         android:text="删除"
         android:textColor="@android:color/white" />

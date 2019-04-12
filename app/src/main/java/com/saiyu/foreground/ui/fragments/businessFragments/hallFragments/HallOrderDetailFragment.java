@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.MyArrayAdapter;
 import com.saiyu.foreground.adapters.OrderCountSelectorAdapter;
@@ -63,7 +64,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
     @ViewById
     TextView tv_title_content, tv_orderTitle, tv_reserveTitle, tv_2_1, tv_2_2, tv_2_3, tv_2_4, tv_zc, tv_2_5, tv_2_6, tv_orderName, tv_orderProgress, tv_orderCount,
-            tv_orderTime, tv_count_prompt, tv_orderPoint, tv_prompt, tv_protocol, tv_discount,tv_rechargePoint,tv_freePoint;
+            tv_orderTime, tv_count_prompt, tv_orderPoint, tv_prompt, tv_protocol, tv_discount,tv_rechargePoint,tv_freePoint,tv_bottom_prompt;
     @ViewById
     TextView tv_time,tv_prompt_1,tv_prompt_2,tv_prompt_3,tv_prompt_4;
     @ViewById
@@ -101,7 +102,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     private int isLock;
     private float maxOrderPoint;//卖家剩余的最大接单点数
     private float maxQBcount;//卖家能接的最大QB数量
-    private float OnceMinCount = 0;//最小充值QB数量
+    private int OnceMinCount = 0;//最小充值QB数量
     private float ReserveQBCount;//该订单最大QB数量
     private float RechargeQBCount;//该订单被接过的QB数量
 
@@ -185,6 +186,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 return;
             }
             if(ret.getData().isResult()){
+                tv_bottom_prompt.setVisibility(View.VISIBLE);
                 tv_count_prompt.setText("必须使用一个QQ号码一次性充值完成，否则视为违约！将扣除5%违约金!");
                 Utils.setButtonClickable(btn_confirm,true);
                 recyclerView.setVisibility(View.GONE);
@@ -199,6 +201,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 recyclerView.setAdapter(orderCountSelectorAdapter);
                 tv_count_prompt.setText("数量 "+ rechargeNum+" 当日已被使用，你可以选择:");
                 recyclerView.setVisibility(View.VISIBLE);
+                tv_bottom_prompt.setVisibility(View.GONE);
                 Utils.hideInput();
             }
         } else if(method.equals("HallOrderDetailFragment_hallDetailReceive")){
@@ -212,10 +215,8 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 Toast.makeText(mContext,"确认接单失败！",Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(orderTitleAdapter == null){
-                //加载两个子fragment (OrderInfoChildFragment/OrderSubmitChildFragment)
-                orderTitleAdapter = new OrderTitleAdapter(getChildFragmentManager(),ret);
-            }
+            //加载两个子fragment (OrderInfoChildFragment/OrderSubmitChildFragment)
+            orderTitleAdapter = new OrderTitleAdapter(getChildFragmentManager(),ret);
 
             view_pager.setAdapter(orderTitleAdapter);
             layout_tab.setupWithViewPager(view_pager);
@@ -378,24 +379,118 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         }
         tv_2_1.setVisibility(View.VISIBLE);
 
-        List<String> extraList = new ArrayList<>();
+        int index = 0;
         if(IsImgConfirmation){
-            extraList.add("验图代确认");
+            tv_2_2.setVisibility(View.VISIBLE);
+            tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
+            tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.yellow));
+            tv_2_2.setText("验图代确认");
+            index++;
         }
         if(IsCustomerConfirmation){
-            extraList.add("客服代确认");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zilight));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.zi_light));
+                    tv_2_2.setText("客服代确认");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zilight));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.zi_light));
+                    tv_2_3.setText("客服代确认");
+                    break;
+            }
+            index++;
         }
         if(IsLessThanOriginalPrice){
-            extraList.add("少充按原价");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    tv_2_2.setText("少充按原价");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    tv_2_3.setText("少充按原价");
+                    break;
+                case 2:
+                    tv_2_4.setVisibility(View.VISIBLE);
+                    tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    tv_2_4.setText("少充按原价");
+                    break;
+            }
+            index++;
         }
         if(IsOrderPwd){
-            extraList.add("私密订单");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_2.setText("私密订单");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_3.setText("私密订单");
+                    break;
+                case 2:
+                    tv_2_4.setVisibility(View.VISIBLE);
+                    tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_4.setText("私密订单");
+                    break;
+                case 3:
+                    tv_2_5.setVisibility(View.VISIBLE);
+                    tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_5.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_5.setText("私密订单");
+                    break;
+            }
+            index++;
         }
         if(IsFriendLimit){
-            extraList.add("需加好友");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_2.setText("需加好友");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_3.setText("需加好友");
+                    break;
+                case 2:
+                    tv_2_4.setVisibility(View.VISIBLE);
+                    tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_4.setText("需加好友");
+                    break;
+                case 3:
+                    tv_2_5.setVisibility(View.VISIBLE);
+                    tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_5.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_5.setText("需加好友");
+                    break;
+                case 4:
+                    tv_2_6.setVisibility(View.VISIBLE);
+                    tv_2_6.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_6.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_6.setText("需加好友");
+                    break;
+            }
+            index++;
         }
-
-        Utils.setExtraView(extraList,tv_2_2,tv_2_3,tv_2_4,tv_2_5,tv_2_6);
     }
 
     //计时器
@@ -576,6 +671,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
         if(TextUtils.isEmpty(rechargeNum) || "0".equals(rechargeNum)){
             tv_orderPoint.setText("0点");
+            tv_bottom_prompt.setVisibility(View.GONE);
             return;
         }
 
@@ -585,6 +681,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             //不可输入买家发布订单时所限制的单次充值最低数量
             tv_count_prompt.setText("该订单最低充值"+OnceMinCount+ "Q币，请修改出售数量！");
             Utils.setButtonClickable(btn_confirm,false);
+            tv_bottom_prompt.setVisibility(View.GONE);
             return;
         } else {
             tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
@@ -593,6 +690,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             //不得输入超过该订单需求的最大剩余数量
             tv_count_prompt.setText("超过订单最大需求量，请输入"+OnceMinCount+"-"+maxQBcount+ "之间任意数值");
             Utils.setButtonClickable(btn_confirm,false);
+            tv_bottom_prompt.setVisibility(View.GONE);
             return;
         } else {
             tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
@@ -603,6 +701,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             tv_prompt.setText("接单点数不足，请更改数量或充值点数");
             ll_point.setVisibility(View.VISIBLE);
             Utils.setButtonClickable(btn_confirm,false);
+            tv_bottom_prompt.setVisibility(View.GONE);
             return;
         } else {
             tv_prompt.setText("接单时按1:1扣除接单点数，交易成功双倍返还，失败不退");

@@ -223,7 +223,7 @@ public class OrderInfoChildFragment extends BaseFragment {
                 Bundle bundle = ((ContainerActivity)getActivity()).getIntent().getExtras();
                 if(bundle != null){
                     int fragmentTag = bundle.getInt(ContainerActivity.FragmentTag,0);
-                    if(fragmentTag == ContainerActivity.OrderRechargeFragmentTag){
+                    if(fragmentTag == ContainerActivity.WaitingRechargeOrderFragmentTag){
                         selectorList = ((OrderRechargeFragment) getParentFragment()).getSelectorList();
                     } else if(fragmentTag == ContainerActivity.HallOrderDetailFragmentTag){
                         selectorList = ((HallOrderDetailFragment) getParentFragment()).getSelectorList();

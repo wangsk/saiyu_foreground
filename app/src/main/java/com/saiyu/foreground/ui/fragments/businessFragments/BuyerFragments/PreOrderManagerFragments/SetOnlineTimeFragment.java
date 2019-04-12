@@ -41,21 +41,36 @@ public class SetOnlineTimeFragment extends BaseFragment {
         tv_title_content.setText("设置在线时间");
         Bundle bundle = getArguments();
         if(bundle != null){
-            String onLineTime = bundle.getString("onLineTime");
-            tv_onlingtime.setText(onLineTime);
+            onLineStartTime = bundle.getString("onLineStartTime");
+            onLineStopTime = bundle.getString("onLineStopTime");
+            if (!TextUtils.isEmpty(onLineStartTime) && !TextUtils.isEmpty(onLineStopTime)) {
+                tv_onlingtime.setText(onLineStartTime + "-" + onLineStopTime);
+            }
+
         }
     }
 
     @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.tv_onlingtime,R.id.btn_cancel})
     void onClick(View view) {
+        Intent intent = null;
+        Bundle bundle = null;
         switch (view.getId()){
             case R.id.btn_title_back:
+                getActivity().finish();
+                break;
             case R.id.btn_cancel:
+                intent = new Intent();
+                bundle = new Bundle();
+                bundle.putString("onLineStartTime","");
+                bundle.putString("onLineStopTime","");
+                intent.putExtras(bundle);
+                getActivity().setResult(RESULT_OK, intent);
+                getActivity().finish();
                 getActivity().finish();
                 break;
             case R.id.btn_confirm:
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
+                intent = new Intent();
+                bundle = new Bundle();
                 bundle.putString("onLineStartTime",onLineStartTime);
                 bundle.putString("onLineStopTime",onLineStopTime);
                 intent.putExtras(bundle);
@@ -69,8 +84,6 @@ public class SetOnlineTimeFragment extends BaseFragment {
                     public void setOnListCallbackListener(List<String> callbackList) {
                         if(callbackList == null){
                             tv_onlingtime.setText("请输入在线时间");
-                            onLineStartTime = "";
-                            onLineStopTime = "";
                             return;
                         }
                         if(callbackList.size() == 4){

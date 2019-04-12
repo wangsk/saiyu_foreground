@@ -15,7 +15,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:paddingTop="5dp"
@@ -33,31 +33,40 @@
 
                 <ImageView
                     android:id="@+id/iv_recharge_success_show"
-                    android:layout_width="120dp"
-                    android:layout_height="100dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_1"
-                    android:background="@drawable/border_colorline_radius" />
-
-                <Button
-                    android:id="@+id/btn_success_upload"
-                    android:layout_width="80dp"
-                    android:layout_height="28dp"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/iv_recharge_success_show"
-                    android:background="@drawable/shape_bg_blue_light"
-                    android:gravity="center"
-                    android:text="上传图片"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp" />
+                    android:layout_toRightOf="@id/tv_1"
+                    android:src="@mipmap/paizhaoshangchuan"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tv_success_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_light"
+                    android:text="选择图片上传"/>
+
+                <ImageView
+                    android:id="@+id/iv_success_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:paddingTop="5dp"
@@ -75,31 +84,40 @@
 
                 <ImageView
                     android:id="@+id/iv_recharge_info_show"
-                    android:layout_width="120dp"
-                    android:layout_height="100dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_2"
-                    android:background="@drawable/border_colorline_radius" />
-
-                <Button
-                    android:id="@+id/btn_info_upload"
-                    android:layout_width="80dp"
-                    android:layout_height="28dp"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/iv_recharge_info_show"
-                    android:background="@drawable/shape_bg_blue_light"
-                    android:gravity="center"
-                    android:text="上传图片"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp" />
+                    android:layout_toRightOf="@id/tv_2"
+                    android:src="@mipmap/paizhaoshangchuan"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tv_info_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_light"
+                    android:text="选择图片上传"/>
+
+                <ImageView
+                    android:id="@+id/iv_info_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:paddingTop="5dp"
@@ -117,25 +135,34 @@
 
                 <ImageView
                     android:id="@+id/iv_record_show"
-                    android:layout_width="120dp"
-                    android:layout_height="100dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_3"
-                    android:background="@drawable/border_colorline_radius" />
-
-                <Button
-                    android:id="@+id/btn_record_upload"
-                    android:layout_width="80dp"
-                    android:layout_height="28dp"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/iv_record_show"
-                    android:background="@drawable/shape_bg_blue_light"
-                    android:gravity="center"
-                    android:text="上传图片"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp" />
+                    android:layout_toRightOf="@id/tv_3"
+                    android:src="@mipmap/paizhaoshangchuan"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:id="@+id/tv_record_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black_light"
+                    android:text="选择图片上传"/>
+
+                <ImageView
+                    android:id="@+id/iv_record_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone"/>
 
 
             </RelativeLayout>
@@ -228,7 +255,7 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/mem_info_icon" />
+                    android:src="@mipmap/xuanzhong" />
 
             </LinearLayout>
 
@@ -264,7 +291,7 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/mem_info_icon"
+                    android:src="@mipmap/xuanzhong"
                     android:visibility="invisible" />
 
             </LinearLayout>
@@ -293,7 +320,7 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/mem_info_icon"
+                    android:src="@mipmap/xuanzhong"
                     android:visibility="invisible" />
 
             </LinearLayout>

@@ -42,11 +42,13 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:src="@mipmap/ic_launcher" />
+                        android:text="￥"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"/>
 
                     <EditText
                         android:id="@+id/et_count"
@@ -94,7 +96,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/zhifubao" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -125,7 +127,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/xuanzhong" />
 
             </LinearLayout>
 
@@ -144,7 +146,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/weixin" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,7 +177,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/xuanzhong"
                     android:visibility="gone"/>
 
             </LinearLayout>

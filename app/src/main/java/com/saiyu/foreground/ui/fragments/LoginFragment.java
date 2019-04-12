@@ -167,10 +167,13 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
         }
     }
 
-    @Click({R.id.tv_msg_count,R.id.btn_login,R.id.tv_forgot_psw,R.id.tv_login_type,R.id.tv_regist,R.id.tv_protocol,R.id.iv_psw,R.id.iv_account,R.id.iv_qq,R.id.iv_wechat})
+    @Click({R.id.iv_close,R.id.tv_msg_count,R.id.btn_login,R.id.tv_forgot_psw,R.id.tv_login_type,R.id.tv_regist,R.id.tv_protocol,R.id.iv_psw,R.id.iv_account,R.id.iv_qq,R.id.iv_wechat})
     void onClick(View view){
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
             switch (view.getId()){
+                case R.id.iv_close:
+                    getActivity().finish();
+                    break;
                 case R.id.btn_login://点击登录按钮
                     String userName = et_account.getText().toString().trim();
                     String userPassword = et_password.getText().toString().trim();

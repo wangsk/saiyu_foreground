@@ -1,5 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.hallFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.HallDetailReceiveRet;
 import com.saiyu.foreground.interfaces.OnClickListener;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
@@ -107,11 +110,20 @@ public class OrderConfirmFragment extends BaseFragment implements CallbackUtils.
                 DialogUtils.showOrderSuccessDialog(getActivity(), orderNum, new OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //回到大厅
+                        CallbackUtils.doBottomSelectCallback(1);
                         getActivity().finish();
                     }
                 }, new OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //回到卖家出售订单管理
+                        CallbackUtils.doBottomSelectCallback(2);
+                        Bundle bundle = new Bundle();
+                        Intent intent = new Intent(mContext,ContainerActivity_.class);
+                        bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SellOrderManagerFragmentTag);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
                         getActivity().finish();
                     }
                 });

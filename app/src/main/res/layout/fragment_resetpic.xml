@@ -585,11 +585,12 @@
                 android:textSize="12sp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
+                android:background="@color/white"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:background="@color/white">
+                android:paddingBottom="5dp">
+
                 <TextView
                     android:id="@+id/tv_1"
                     android:layout_width="wrap_content"
@@ -597,38 +598,50 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:text="充值成功截图:"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
                 <ImageView
                     android:id="@+id/iv_recharge_success_show"
-                    android:layout_toRightOf="@id/tv_1"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="120dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/border_colorline_radius"/>
+                    android:layout_toRightOf="@id/tv_1"
+                    android:src="@mipmap/paizhaoshangchuan"
+                    android:scaleType="fitXY" />
 
-                <Button
-                    android:id="@+id/btn_success_upload"
-                    android:layout_width="80dp"
-                    android:layout_height="28dp"
-                    android:layout_toRightOf="@id/iv_recharge_success_show"
-                    android:layout_marginLeft="20dp"
+                <TextView
+                    android:id="@+id/tv_success_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/shape_bg_blue_light"
-                    android:gravity="center"
-                    android:text="上传图片"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp"
-                    android:textColor="@color/blue"/>
+                    android:textColor="@color/black_light"
+                    android:text="选择图片上传"/>
+
+                <ImageView
+                    android:id="@+id/iv_success_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
+                android:background="@color/white"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:background="@color/white">
+                android:paddingBottom="5dp">
+
                 <TextView
                     android:id="@+id/tv_2"
                     android:layout_width="wrap_content"
@@ -636,38 +649,50 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:text="充值明细截图:"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
                 <ImageView
                     android:id="@+id/iv_recharge_info_show"
-                    android:layout_toRightOf="@id/tv_2"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="120dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/border_colorline_radius"/>
+                    android:layout_toRightOf="@id/tv_2"
+                    android:src="@mipmap/paizhaoshangchuan"
+                    android:scaleType="fitXY" />
 
-                <Button
-                    android:id="@+id/btn_info_upload"
-                    android:layout_width="80dp"
-                    android:layout_height="28dp"
-                    android:layout_toRightOf="@id/iv_recharge_info_show"
-                    android:layout_marginLeft="20dp"
+                <TextView
+                    android:id="@+id/tv_info_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/shape_bg_blue_light"
-                    android:gravity="center"
-                    android:text="上传图片"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp"
-                    android:textColor="@color/blue"/>
+                    android:textColor="@color/black_light"
+                    android:text="选择图片上传"/>
+
+                <ImageView
+                    android:id="@+id/iv_info_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="1dp"
+                android:background="@color/white"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:background="@color/white">
+                android:paddingBottom="5dp">
+
                 <TextView
                     android:id="@+id/tv_3"
                     android:layout_width="wrap_content"
@@ -675,28 +700,39 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:text="消费记录截图:"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
                 <ImageView
                     android:id="@+id/iv_record_show"
-                    android:layout_toRightOf="@id/tv_3"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tv_3"
+                    android:src="@mipmap/paizhaoshangchuan"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:id="@+id/tv_record_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_width="120dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/border_colorline_radius"/>
-                <Button
-                    android:id="@+id/btn_record_upload"
-                    android:layout_width="80dp"
-                    android:layout_height="28dp"
-                    android:layout_toRightOf="@id/iv_record_show"
-                    android:layout_marginLeft="20dp"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/shape_bg_blue_light"
-                    android:gravity="center"
-                    android:text="上传图片"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     android:textSize="15sp"
-                    android:textColor="@color/blue"/>
+                    android:textColor="@color/black_light"
+                    android:text="选择图片上传"/>
+
+                <ImageView
+                    android:id="@+id/iv_record_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone"/>
 
 
             </RelativeLayout>

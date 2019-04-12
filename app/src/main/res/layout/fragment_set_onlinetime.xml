@@ -14,9 +14,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/tv_label_tima"
@@ -45,7 +46,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="合理的设置在线时间，快速确认订单，降低平均确认时间，提升买家等级，快速高效完成预定订单！"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -77,10 +78,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:text="取消设置"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="18sp" />
 
         </LinearLayout>

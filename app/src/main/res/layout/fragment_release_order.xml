@@ -28,20 +28,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:text="订单号: "
-                        android:textColor="@color/black"
+                        android:text="订单号"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_orderName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -54,20 +55,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:text="充值类型: "
-                        android:textColor="@color/black"
+                        android:text="充值类型"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_rechargeType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text="全额付款预定"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -80,21 +82,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:text="充值游戏: "
-                        android:textColor="@color/black"
+                        android:text="充值游戏"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_rechargeGame"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="腾讯游戏充值"
-                        android:textColor="@color/black"
+                        android:layout_marginRight="10dp"
+                        android:text=""
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -108,27 +110,26 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:text="大区: "
-                        android:textColor="@color/black"
+                        android:text="大区"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_gamePlace"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@mipmap/mem_info_icon"
+                        android:src="@mipmap/jiantou"
                         android:layout_marginRight="10dp"/>
 
                 </LinearLayout>
@@ -136,19 +137,27 @@
                     android:id="@+id/ll_role"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="right"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
                         android:text="游戏角色: "
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
@@ -167,7 +176,8 @@
                         android:paddingRight="2dp"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -178,19 +188,21 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="75dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:gravity="right"
                         android:text="充值号码: "
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
@@ -209,7 +221,8 @@
                         android:paddingRight="2dp"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                 </LinearLayout>
 
@@ -221,19 +234,21 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="75dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:gravity="right"
                         android:text="预定数量: "
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
@@ -252,7 +267,8 @@
                         android:paddingRight="2dp"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                     <TextView
                         android:id="@+id/tv_release_count_prompt"
@@ -272,19 +288,21 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="75dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:gravity="right"
                         android:text="预定出价: "
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
@@ -303,13 +321,14 @@
                         android:paddingRight="2dp"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="元  或"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                     <EditText
                         android:id="@+id/et_release_discount"
@@ -327,13 +346,14 @@
                         android:paddingRight="2dp"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="折"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -347,12 +367,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:gravity="right"
                         android:text="预定附言: "
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <Spinner
@@ -374,38 +393,49 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="75dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="0dp"
-                        android:gravity="right"
                         android:text="在线时间: "
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_time_online"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:gravity="center_vertical"
-                        android:text="00:00:00-23:59:59"
+                        android:text="始终在线"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@mipmap/mem_info_icon"
+                        android:src="@mipmap/jiantou"
                         android:layout_marginRight="10dp"/>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="right|center_vertical"
+                    android:text="附件选项"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <RelativeLayout
                     android:id="@+id/rl_replace"
@@ -414,22 +444,12 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/white">
 
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:text="附件选项: "
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:layout_centerVertical="true"/>
-
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="110dp"
+                        android:layout_marginLeft="20dp"
                         android:background="@null"
-                        android:drawableLeft="@mipmap/mem_info_icon"
+                        android:drawableLeft="@mipmap/dai"
                         android:text="  客服代理确认"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_light"
@@ -444,7 +464,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="40dp"
-                        android:src="@mipmap/mem_info_icon"
+                        android:src="@mipmap/xuanzhong"
                         android:layout_centerVertical="true"
                         android:visibility="invisible"/>
                     <ImageView
@@ -452,7 +472,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
-                        android:src="@mipmap/mem_info_icon"
+                        android:src="@mipmap/jiantou"
                         android:layout_centerVertical="true"/>
                 </RelativeLayout>
                 <RelativeLayout
@@ -466,9 +486,9 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="110dp"
+                        android:layout_marginLeft="20dp"
                         android:background="@null"
-                        android:drawableLeft="@mipmap/mem_info_icon"
+                        android:drawableLeft="@mipmap/yan"
                         android:text="  支持验图确认"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_light"
@@ -483,7 +503,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="40dp"
-                        android:src="@mipmap/mem_info_icon"
+                        android:src="@mipmap/xuanzhong"
                         android:layout_centerVertical="true"
                         android:visibility="gone"/>
                     <ImageView
@@ -491,7 +511,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
-                        android:src="@mipmap/mem_info_icon"
+                        android:src="@mipmap/jiantou"
                         android:layout_centerVertical="true"/>
                 </RelativeLayout>
 
@@ -519,9 +539,9 @@
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
+                                android:layout_marginLeft="20dp"
                                 android:background="@null"
-                                android:drawableLeft="@mipmap/mem_info_icon"
+                                android:drawableLeft="@mipmap/daoqi"
                                 android:text="  到期时间"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/black_light"
@@ -536,15 +556,15 @@
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="40dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/xuanzhong"
                                 android:layout_centerVertical="true"
-                                android:visibility="invisible"/>
+                                android:visibility="gone"/>
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/jiantou"
                                 android:layout_centerVertical="true"/>
                         </RelativeLayout>
                         <RelativeLayout
@@ -558,9 +578,9 @@
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
+                                android:layout_marginLeft="20dp"
                                 android:background="@null"
-                                android:drawableLeft="@mipmap/mem_info_icon"
+                                android:drawableLeft="@mipmap/ddjm"
                                 android:text="  订单加密"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/black_light"
@@ -575,15 +595,15 @@
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="40dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/xuanzhong"
                                 android:layout_centerVertical="true"
-                                android:visibility="invisible"/>
+                                android:visibility="gone"/>
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/jiantou"
                                 android:layout_centerVertical="true"/>
                         </RelativeLayout>
                         <RelativeLayout
@@ -597,9 +617,9 @@
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
+                                android:layout_marginLeft="20dp"
                                 android:background="@null"
-                                android:drawableLeft="@mipmap/mem_info_icon"
+                                android:drawableLeft="@mipmap/danci"
                                 android:text="  单次充值最低"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/black_light"
@@ -614,15 +634,15 @@
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="40dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/xuanzhong"
                                 android:layout_centerVertical="true"
-                                android:visibility="invisible"/>
+                                android:visibility="gone"/>
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/jiantou"
                                 android:layout_centerVertical="true"/>
                         </RelativeLayout>
                         <RelativeLayout
@@ -637,9 +657,9 @@
                                 android:id="@+id/btn_betweentime_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
+                                android:layout_marginLeft="20dp"
                                 android:background="@null"
-                                android:drawableLeft="@mipmap/mem_info_icon"
+                                android:drawableLeft="@mipmap/sjjg"
                                 android:text="  接单间隔时间"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/black_light"
@@ -648,23 +668,21 @@
                                 android:clickable="false"
                                 android:layout_centerVertical="true"/>
 
-                            <TextView
-                                android:id="@+id/tv_betweentime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <ImageView
+                                android:id="@+id/iv_betweentime"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="40dp"
+                                android:src="@mipmap/xuanzhong"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="10dp"
-                                android:layout_toRightOf="@id/btn_betweentime_label"
-                                android:gravity="center_vertical"
-                                android:text=""
-                                android:textColor="@color/black_light"
-                                android:textSize="15sp" />
+                                android:visibility="gone"/>
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
-                                android:src="@mipmap/mem_info_icon"
+                                android:src="@mipmap/jiantou"
                                 android:layout_centerVertical="true"/>
                         </RelativeLayout>
 
@@ -683,7 +701,7 @@
                         android:id="@+id/iv_click"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@mipmap/mem_info_icon"/>
+                        android:src="@mipmap/xia"/>
                 </LinearLayout>
 
                 <RelativeLayout
@@ -695,12 +713,11 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:text="充值留言: "
-                        android:textColor="@color/black"
+                        android:text="充值留言"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <ImageView
@@ -708,8 +725,30 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
-                        android:src="@mipmap/mem_info_icon"/>
+                        android:src="@mipmap/jiantou"/>
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="联系方式"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -719,37 +758,22 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_marginLeft="5dp"/>
-
                     <TextView
-                        android:layout_width="75dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:gravity="right"
-                        android:text="联系方式: "
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="0dp"
-                        android:gravity="right"
-                        android:text="手机号码: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="手机号码"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_mobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -763,22 +787,22 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
-                        android:gravity="right"
-                        android:text="QQ号码: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="QQ号码"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/et_qq"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right|center_vertical"
                         android:hint="请输入QQ号码"
                         android:inputType="number"
                         android:maxLength="15"
@@ -787,7 +811,8 @@
                         android:paddingRight="2dp"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                 </LinearLayout>
 
@@ -800,9 +825,9 @@
                         android:id="@+id/tv_sw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="105dp"
+                        android:layout_marginLeft="10dp"
                         android:text="允许接单卖家查看"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                     <Switch
                         android:id="@+id/sw"

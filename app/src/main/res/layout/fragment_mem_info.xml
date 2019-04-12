@@ -65,6 +65,15 @@
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
+            <ImageView
+                android:id="@+id/iv_jiantou_realname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/jiantou"/>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -93,6 +102,15 @@
                 android:text=""
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_jiantou_identity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/jiantou"/>
 
         </RelativeLayout>
 
@@ -123,6 +141,15 @@
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
+            <ImageView
+                android:id="@+id/iv_jiantou_identify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/jiantou"/>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -151,6 +178,15 @@
                 android:text=""
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_jiantou_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/jiantou"/>
 
         </RelativeLayout>
 

@@ -32,7 +32,6 @@ public class SellerOrderReceiveInfoRet extends BaseRet{
         private int AgentConfirmAuditStatus;
         private String SuccMoney;
         private String AverageConfirmTime;
-        private String PenaltyMoney;
         private String ContactType;
         private String ContactQQ;
         private String ContactMobile;
@@ -47,7 +46,7 @@ public class SellerOrderReceiveInfoRet extends BaseRet{
 
         private String OrderCancelRemarks;
         private String ReserveDiscount;
-        private int OnceMinCount;
+        private float OnceMinCount;
         private float LessChargeDiscount;
         private String ServiceRate;
         private String LiquidatedMoney;
@@ -76,11 +75,11 @@ public class SellerOrderReceiveInfoRet extends BaseRet{
             ReserveDiscount = reserveDiscount;
         }
 
-        public int getOnceMinCount() {
+        public float getOnceMinCount() {
             return OnceMinCount;
         }
 
-        public void setOnceMinCount(int onceMinCount) {
+        public void setOnceMinCount(float onceMinCount) {
             OnceMinCount = onceMinCount;
         }
 
@@ -292,14 +291,6 @@ public class SellerOrderReceiveInfoRet extends BaseRet{
 
         public void setAverageConfirmTime(String averageConfirmTime) {
             AverageConfirmTime = averageConfirmTime;
-        }
-
-        public String getPenaltyMoney() {
-            return PenaltyMoney;
-        }
-
-        public void setPenaltyMoney(String penaltyMoney) {
-            PenaltyMoney = penaltyMoney;
         }
 
         public String getContactType() {

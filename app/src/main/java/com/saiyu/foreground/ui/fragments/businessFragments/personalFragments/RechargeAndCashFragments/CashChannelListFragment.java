@@ -122,6 +122,9 @@ public class CashChannelListFragment extends BaseFragment implements CallbackUti
         bundle.putString("withdrawWayConfigCharge",mItems.get(position).getWithdrawWayConfigCharge());
         bundle.putString("PayDateStr",mItems.get(position).getPayDateStr());
         bundle.putString("ImgUrl",mItems.get(position).getImgUrl());
+        bundle.putString("withdrawWayConfigCharge",mItems.get(position).getWithdrawWayConfigCharge());
+        bundle.putString("StartMoney",mItems.get(position).getStartMoney());
+        bundle.putString("TopMoney",mItems.get(position).getTopMoney());
         bundle.putInt("RiskLevel",RiskLevel);
 
         AddCashChannelFragment addCashChannelFragment = AddCashChannelFragment.newInstance(bundle);

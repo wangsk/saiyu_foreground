@@ -26,7 +26,7 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.request.RequestParams;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BooleanRet;
-import com.saiyu.foreground.https.response.StartAppealInfoRet;
+import com.saiyu.foreground.https.response.RechargeOrderInfoRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
@@ -93,7 +93,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
         }
         CallbackUtils.setOnActivityCallBack(this);
         CallbackUtils.setCallback(this);
-        ApiRequest.startAppealInfo(orderReceiveId,"RightFragment_startAppealInfo",pb_loading);
+        ApiRequest.orderReceiveInfo(orderReceiveId,"RightFragment_orderReceiveInfo",pb_loading);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                 Toast.makeText(mContext,"申请维权成功",Toast.LENGTH_SHORT).show();
                 getFragmentManager().popBackStack();
             }
-        } else if(method.equals("RightFragment_startAppealInfo")){
-            StartAppealInfoRet ret = (StartAppealInfoRet)baseRet;
+        } else if(method.equals("RightFragment_orderReceiveInfo")){
+            RechargeOrderInfoRet ret = (RechargeOrderInfoRet)baseRet;
             if(ret.getData() == null){
                 return;
             }

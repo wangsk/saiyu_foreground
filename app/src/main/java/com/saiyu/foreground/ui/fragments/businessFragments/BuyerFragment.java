@@ -10,25 +10,20 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.BuyerRechargeWebUrlAdapter;
-import com.saiyu.foreground.calenderview.SelectTimeDialog;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BuyerWebListRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
-import com.saiyu.foreground.interfaces.OnListCallbackListener;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
-import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.ReleaseOrderFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
+import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
-import com.saiyu.foreground.utils.LogUtils;
-import com.saiyu.foreground.utils.TimeParseUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -37,7 +32,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @EFragment(R.layout.fragment_buyer)
@@ -46,12 +40,10 @@ public class BuyerFragment extends BaseFragment implements CallbackUtils.Respons
     ProgressBar pb_loading;
     @ViewById
     RatingBar rb_mark;
-
     @ViewById
     TextView tv_time,tv_last_order,tv_wait_order,tv_total_order;
     @ViewById
     Button btn_release_order,btn_last_order_manager,btn_release_order_history,btn_recharge_order_manager,btn_recharge_order_history,btn_right;
-
     @ViewById
     SwipeMenuRecyclerView recyclerView;
     private BuyerRechargeWebUrlAdapter buyerRechargeWebUrlAdapter;
@@ -75,9 +67,6 @@ public class BuyerFragment extends BaseFragment implements CallbackUtils.Respons
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
-        buyerRechargeWebUrlAdapter = new BuyerRechargeWebUrlAdapter(mItems);
-        recyclerView.setAdapter(buyerRechargeWebUrlAdapter);
-        buyerRechargeWebUrlAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -102,9 +91,9 @@ public class BuyerFragment extends BaseFragment implements CallbackUtils.Respons
                 tv_time.setText(Html.fromHtml("<font color = \"#ffa800\">" + 0 + "</font>" + "天" + "<font color = \"#ffa800\">" + 0 + "</font>" + "小时"+ "<font color = \"#ffa800\">" + 0 + "</font>" + "分钟"));
             }
 
-            tv_last_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
-            tv_wait_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
-            tv_total_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "笔" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
+            tv_last_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
+            tv_wait_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
+            tv_total_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
 
             if(mItems == null){
                 mItems = new ArrayList<>();
@@ -164,7 +153,7 @@ public class BuyerFragment extends BaseFragment implements CallbackUtils.Respons
                     mContext.startActivity(intent);
                     break;
                 case R.id.btn_right:
-                    Toast.makeText(mContext,"请到web端操作",Toast.LENGTH_SHORT).show();
+                    MyToast.newInstance(getActivity(),"请前往web端操作","APP暂不支持").show();
                     break;
             }
         }

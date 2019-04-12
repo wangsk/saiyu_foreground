@@ -231,8 +231,10 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                 tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(account)) {
                     tv_regist_prompt_1.setText("*请输入账号");
+                    iv_account_clear.setVisibility(View.GONE);
                     return;
                 }
+                iv_account_clear.setVisibility(View.VISIBLE);
                 boolean isOk = true;
 
                 if (account.matches(ConstValue.checkAccout)) {

@@ -170,6 +170,11 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
                                 bundle.putString("account",callbackList.get(1));
                                 bundle.putString("remarks",callbackList.get(2));
                                 bundle.putString("accountId",callbackList.get(3));
+                                if(type == 0){
+                                    bundle.putString("title","修改银行卡");
+                                } else if(type == 1){
+                                    bundle.putString("title","修改支付宝");
+                                }
                                 AddCashChannelWithSendMsgFragment addCashChannelWithSendMsgFragment = AddCashChannelWithSendMsgFragment.newInstance(bundle);
                                 start(addCashChannelWithSendMsgFragment);
                             }
@@ -350,7 +355,7 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
 
         curItem = mItems.get(pos);
 
-        tv_able.setText(mItems.get(pos).getTotalMoney());
+        tv_able.setText(mItems.get(pos).getTotalMoney()+"元");
         String count = et_count.getText().toString();
         if(!TextUtils.isEmpty(mItems.get(pos).getCharge())&& !TextUtils.isEmpty(count)){
             BigDecimal bigDecimal_1 = new BigDecimal(mItems.get(pos).getCharge());

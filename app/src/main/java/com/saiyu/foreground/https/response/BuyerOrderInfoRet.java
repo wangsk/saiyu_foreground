@@ -1,5 +1,7 @@
 package com.saiyu.foreground.https.response;
 
+import java.util.List;
+
 public class BuyerOrderInfoRet extends BaseRet{
     private DataBean data;
 
@@ -38,7 +40,8 @@ public class BuyerOrderInfoRet extends BaseRet{
         private String SettlementMoney;
         private String OrderPwd;
         private String GetPenaltyMoney;
-        private String OnceMinCount;
+        private float OnceMinCount;
+        private float LessChargeDiscount;
         private String OrderReceivesCount;
         private String OrderInterval;
         private String CancelRemarks;
@@ -53,6 +56,15 @@ public class BuyerOrderInfoRet extends BaseRet{
         private String IsAllowShowContactStr;
         private String ContactQQ;
         private String ContactMobile;
+        private List<String> PostScriptList;
+
+        public List<String> getPostScriptList() {
+            return PostScriptList;
+        }
+
+        public void setPostScriptList(List<String> postScriptList) {
+            PostScriptList = postScriptList;
+        }
 
         public String getReservePwd() {
             return ReservePwd;
@@ -310,12 +322,20 @@ public class BuyerOrderInfoRet extends BaseRet{
             GetPenaltyMoney = getPenaltyMoney;
         }
 
-        public String getOnceMinCount() {
+        public float getOnceMinCount() {
             return OnceMinCount;
         }
 
-        public void setOnceMinCount(String onceMinCount) {
+        public void setOnceMinCount(float onceMinCount) {
             OnceMinCount = onceMinCount;
+        }
+
+        public float getLessChargeDiscount() {
+            return LessChargeDiscount;
+        }
+
+        public void setLessChargeDiscount(float lessChargeDiscount) {
+            LessChargeDiscount = lessChargeDiscount;
         }
 
         public String getOrderReceivesCount() {

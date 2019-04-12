@@ -14,12 +14,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:text="选择支持验图确认，该订单卖家接单充值后，可选择的确认方式支持验图确认；\n卖家提交支出Q币的QQ号码和密码即可进入客服验图确认步骤，几分钟就可以确认此订单；\n此功能可能会因为QQ异地登录失败，失败后卖家充值订单自动转入等待买家确认状态。"
+            android:padding="20dp"
+            android:text="选择支持验图确认，该订单卖家接单充值后，可选择的确认方式支持验图确认；\n\n卖家提交支出Q币的QQ号码和密码即可进入客服验图确认步骤，几分钟就可以确认此订单；\n\n此功能可能会因为QQ异地登录失败，失败后卖家充值订单自动转入等待买家确认状态。"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,10 +46,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:text="取消设置"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="18sp" />
 
         </LinearLayout>

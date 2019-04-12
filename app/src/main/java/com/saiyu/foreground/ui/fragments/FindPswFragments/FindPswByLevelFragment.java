@@ -67,9 +67,16 @@ public class FindPswByLevelFragment extends BaseFragment {
                 case 1:
                 case 2:
                     //一级，二级 手机，刷脸二选一
-                    rb_mobile.setVisibility(View.VISIBLE);
-                    rb_face.setVisibility(View.VISIBLE);
-                    rb_mobile.setChecked(true);
+                    if(TextUtils.isEmpty(mobile)){
+                        rb_face.setVisibility(View.VISIBLE);
+                        rb_face.setChecked(true);
+                        rb_face.setClickable(false);
+                    } else {
+                        rb_mobile.setVisibility(View.VISIBLE);
+                        rb_face.setVisibility(View.VISIBLE);
+                        rb_mobile.setChecked(true);
+                    }
+
                     break;
                 case 3:
                     //三级  手机验证

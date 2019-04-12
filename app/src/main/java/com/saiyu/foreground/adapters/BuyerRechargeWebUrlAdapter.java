@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ public class BuyerRechargeWebUrlAdapter extends RecyclerView.Adapter<BuyerRechar
 
         myHolder.tv_deal_1.setText(mItems.get(i).getTitle());
 
-        myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
+        myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mOnItemClickListener != null){
@@ -73,15 +74,18 @@ public class BuyerRechargeWebUrlAdapter extends RecyclerView.Adapter<BuyerRechar
     }
     public class MyHolder extends RecyclerView.ViewHolder {
         public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4;
-        public LinearLayout ll_item_layout;
+        public RelativeLayout rl_item_layout;
+        public ImageView iv_jiantou;
 
         public MyHolder(View itemView) {
             super(itemView);
-            ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
+            rl_item_layout = itemView.findViewById(R.id.rl_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
+            iv_jiantou = itemView.findViewById(R.id.iv_jiantou);
+            iv_jiantou.setVisibility(View.GONE);
             tv_deal_3.setVisibility(View.GONE);
             tv_deal_2.setVisibility(View.GONE);
             tv_deal_4.setVisibility(View.GONE);

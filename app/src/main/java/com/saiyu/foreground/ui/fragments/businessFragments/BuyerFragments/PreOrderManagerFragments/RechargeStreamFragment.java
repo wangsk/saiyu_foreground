@@ -3,9 +3,13 @@ package com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOr
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +21,13 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.RechargeStreamRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
+import com.saiyu.foreground.ui.activitys.BaseActivity;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.PopWindowUtils;
+import com.saiyu.foreground.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -121,7 +127,7 @@ public class RechargeStreamFragment extends BaseFragment implements CallbackUtil
         if(mItems == null && mItems.size() <= position){
             return;
         }
-        PopWindowUtils.initPopWindow_10(mItems.get(position));
+        initPopWindow_10(mItems.get(position));
     }
 
     @Click({R.id.btn_title_back,R.id.btn_confirm})
@@ -130,4 +136,91 @@ public class RechargeStreamFragment extends BaseFragment implements CallbackUtil
             getFragmentManager().popBackStack();
         }
     }
+
+    public void initPopWindow_10(RechargeStreamRet.DatasBean.ItemsBean itemsBean) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        TextView tv_1_1, tv_1_2, tv_2_1, tv_2_2, tv_3_1, tv_3_2, tv_4_1, tv_4_2, tv_5_1, tv_5_2, tv_6_1, tv_6_2, tv_7_1, tv_7_2, tv_8_1, tv_8_2;
+        RelativeLayout rl_7,rl_8;
+        LinearLayout ll_pop;
+
+        if(getActivity() == null){
+            return;
+        }
+
+        View mPopView = getActivity().getLayoutInflater().inflate(R.layout.popwindow_layout, null);
+        ll_pop = (LinearLayout) mPopView.findViewById(R.id.ll_pop);
+        rl_7 = (RelativeLayout)mPopView.findViewById(R.id.rl_7);
+        rl_8 = (RelativeLayout)mPopView.findViewById(R.id.rl_8);
+        tv_1_1 = (TextView) mPopView.findViewById(R.id.tv_1_1);
+        tv_1_2 = (TextView) mPopView.findViewById(R.id.tv_1_2);
+        tv_2_1 = (TextView) mPopView.findViewById(R.id.tv_2_1);
+        tv_2_2 = (TextView) mPopView.findViewById(R.id.tv_2_2);
+        tv_3_1 = (TextView) mPopView.findViewById(R.id.tv_3_1);
+        tv_3_2 = (TextView) mPopView.findViewById(R.id.tv_3_2);
+        tv_4_1 = (TextView) mPopView.findViewById(R.id.tv_4_1);
+        tv_4_2 = (TextView) mPopView.findViewById(R.id.tv_4_2);
+        tv_5_1 = (TextView) mPopView.findViewById(R.id.tv_5_1);
+        tv_5_2 = (TextView) mPopView.findViewById(R.id.tv_5_2);
+        tv_6_1 = (TextView) mPopView.findViewById(R.id.tv_6_1);
+        tv_6_2 = (TextView) mPopView.findViewById(R.id.tv_6_2);
+        tv_7_1 = (TextView) mPopView.findViewById(R.id.tv_7_1);
+        tv_7_2 = (TextView) mPopView.findViewById(R.id.tv_7_2);
+        tv_8_1 = (TextView) mPopView.findViewById(R.id.tv_8_1);
+        tv_8_2 = (TextView) mPopView.findViewById(R.id.tv_8_2);
+
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_6 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_6.setOutsideTouchable(true);
+        mPopupWindow_6.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_6.setFocusable(true);
+        mPopupWindow_6.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Utils.backgroundAlpha(getActivity(),1f);
+            }
+        });
+
+        ll_pop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPopupWindow_6.isShowing()) {
+                    mPopupWindow_6.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_6.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_6.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        Utils.backgroundAlpha(getActivity(),0.7f);
+
+        if(itemsBean == null){
+            return;
+        }
+
+        tv_1_1.setText("订单状态");
+        tv_1_2.setText(itemsBean.getReceiveOrderStatus());
+        tv_2_1.setText("充值订单号");
+        tv_2_2.setText(itemsBean.getReceiveOrderNum());
+        tv_3_1.setText("接单时间");
+        tv_3_2.setText(itemsBean.getCreateTime());
+        tv_4_1.setText("完成时间");
+        tv_4_2.setText(itemsBean.getOrderFinishTime());
+        tv_5_1.setText("充值时间");
+        tv_5_2.setText(itemsBean.getRechargeTime());
+        tv_6_1.setText("接单数量");
+        tv_6_2.setText(itemsBean.getReserveQBCount());
+        tv_7_1.setText("成功数量");
+        tv_7_2.setText(itemsBean.getSuccQBCount());
+        tv_8_1.setText("成功金额");
+        tv_8_2.setText(itemsBean.getSuccMoney()+"元");
+    }
+
 }

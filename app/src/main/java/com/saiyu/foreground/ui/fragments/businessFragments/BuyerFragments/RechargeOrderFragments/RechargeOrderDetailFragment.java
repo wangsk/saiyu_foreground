@@ -94,7 +94,7 @@ public class RechargeOrderDetailFragment extends BaseFragment implements Callbac
             tv_betweentime.setText(ret.getData().getOrderInterval()+"分钟");//接单间隔时间
             tv_pic.setText(ret.getData().getIsPicConfirm());//验图确认
             tv_replaceconfirm.setText(ret.getData().getIsAgentConfirm());//客服代理确认
-            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";QQ"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
+            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";qq"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
             tv_rechargeremark.setText(ret.getData().getRemarks());//充值留言
 
 

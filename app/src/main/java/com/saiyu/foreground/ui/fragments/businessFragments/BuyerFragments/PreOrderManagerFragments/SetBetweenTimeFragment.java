@@ -2,6 +2,7 @@ package com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOr
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,15 +39,27 @@ public class SetBetweenTimeFragment extends BaseFragment {
 
     @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.btn_cancel})
     void onClick(View view) {
+        Intent intent = null;
+        Bundle bundle = null;
         switch (view.getId()){
             case R.id.btn_title_back:
+                getActivity().finish();
+                break;
             case R.id.btn_cancel:
+                intent = new Intent();
+                bundle = new Bundle();
+                bundle.putString("orderInterval","");
+                intent.putExtras(bundle);
+                getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
                 break;
             case R.id.btn_confirm:
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
+                intent = new Intent();
+                bundle = new Bundle();
                 orderInterval = et_order_between.getText().toString();
+                if(TextUtils.isEmpty(orderInterval)){
+                    orderInterval = "";
+                }
                 bundle.putString("orderInterval",orderInterval);
                 intent.putExtras(bundle);
                 getActivity().setResult(RESULT_OK, intent);

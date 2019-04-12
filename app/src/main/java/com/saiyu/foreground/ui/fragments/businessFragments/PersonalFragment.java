@@ -96,9 +96,6 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
-        sytemNotifyAdapter = new SytemNotifyAdapter(mItems);
-        recyclerView.setAdapter(sytemNotifyAdapter);
-        sytemNotifyAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -118,6 +115,20 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
             tv_buyer_pre.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
             tv_seller_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerMoney() + "</font>" + "元"));
 
+            int IsRealNameAuth = ret.getData().getIsRealNameAuth();
+            int IsFaceAuth = ret.getData().getIsFaceAuth();
+            if(IsRealNameAuth == 0){
+                iv_identity.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.wrz));
+            } else {
+                iv_identity.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yrz));
+            }
+            if(IsFaceAuth == 0){
+                iv_face.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.wrz));
+            } else {
+                iv_face.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yrz));
+            }
+
+
             boolean UserBuyerStatus = ret.getData().isUserBuyerStatus();
             boolean UserSellerStatus = ret.getData().isUserSellerStatus();
 
@@ -127,14 +138,14 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                     long day = time/60/24;
                     long hour = time/60;
                     long minute = time - day*24*60 - hour*60;
-                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + day + "</font>" + "天" + "<font color = \"#148cf1\">" + hour + "</font>" + "小时"+ "<font color = \"#148cf1\">" + minute + "</font>" + "分钟"));
+                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + day + "</font>" + "天" + "<font color = \"#5069d5\">" + hour + "</font>" + "小时"+ "<font color = \"#5069d5\">" + minute + "</font>" + "分钟"));
                 } else {
-                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + 0 + "</font>" + "天" + "<font color = \"#148cf1\">" + 0 + "</font>" + "小时"+ "<font color = \"#148cf1\">" + 0 + "</font>" + "分钟"));
+                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + 0 + "</font>" + "天" + "<font color = \"#5069d5\">" + 0 + "</font>" + "小时"+ "<font color = \"#5069d5\">" + 0 + "</font>" + "分钟"));
                 }
 
-                tv_buyer_order_ing.setText(Html.fromHtml("预定中的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
-                tv_buyer_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
-                tv_buyer_order_totle.setText(Html.fromHtml("累计成交订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
+                tv_buyer_order_ing.setText(Html.fromHtml("预定中的订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
+                tv_buyer_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
+                tv_buyer_order_totle.setText(Html.fromHtml("累计成交订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerOrderRSettleTotalMoney() + "</font>" + "元"));
 
                 tv_active_buyer.setVisibility(View.GONE);
                 ll_buyer_info.setVisibility(View.VISIBLE);
@@ -143,10 +154,10 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                 ll_buyer_info.setVisibility(View.GONE);
             }
             if(UserSellerStatus){
-                tv_seller_wait_pay.setText(Html.fromHtml("待充值订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitRechargeOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitRechargeOrdersMoney() + "</font>" + "元"));
-                tv_seller_order_ing.setText(Html.fromHtml("审核中的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerAuditOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerAuditOrdersMoney() + "</font>" + "元"));
-                tv_seller_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerWaitConfirmOrdersMoney() + "</font>" + "元"));
-                tv_seller_order_totle.setText(Html.fromHtml("累计出售订单:" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#148cf1\">" + ret.getData().getUserSellerOrderRSettleTotalMoney() + "</font>" + "元"));
+                tv_seller_wait_pay.setText(Html.fromHtml("待充值订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerWaitRechargeOrdersCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerWaitRechargeOrdersMoney() + "</font>" + "元"));
+                tv_seller_order_ing.setText(Html.fromHtml("审核中的订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerAuditOrdersCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerAuditOrdersMoney() + "</font>" + "元"));
+                tv_seller_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerWaitConfirmOrdersMoney() + "</font>" + "元"));
+                tv_seller_order_totle.setText(Html.fromHtml("累计出售订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerOrderRSettleTotalCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserSellerOrderRSettleTotalMoney() + "</font>" + "元"));
 
                 tv_active_seller.setVisibility(View.GONE);
                 ll_seller_info.setVisibility(View.VISIBLE);

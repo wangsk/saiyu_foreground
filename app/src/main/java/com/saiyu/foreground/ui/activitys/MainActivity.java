@@ -1,6 +1,8 @@
 package com.saiyu.foreground.ui.activitys;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -14,10 +16,15 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.ActiveStatusRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragment_;
 import com.saiyu.foreground.ui.fragments.businessFragments.HallFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.HallFragment_;
 import com.saiyu.foreground.ui.fragments.businessFragments.MarketFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.MarketFragment_;
 import com.saiyu.foreground.ui.fragments.businessFragments.PersonalFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.PersonalFragment_;
 import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragment_;
 import com.saiyu.foreground.ui.views.BottomBar;
 import com.saiyu.foreground.ui.views.BottomBarTab;
 import com.saiyu.foreground.utils.CallbackUtils;
@@ -31,7 +38,7 @@ import org.androidannotations.annotations.ViewById;
 import me.yokeyword.fragmentation.SupportFragment;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements BottomBar.OnTabSelectedListener,CallbackUtils.ResponseCallback,CallbackUtils.OnBottomSelectListener{
+public class MainActivity extends BaseActivity implements BottomBar.OnTabSelectedListener,CallbackUtils.OnBottomSelectListener{
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
@@ -45,13 +52,35 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
     @ViewById
     ProgressBar pb_loading;
     private int curPosition;
-    private String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
-    private boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
+    private String accessToken;
+    private boolean autologinflag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SupportFragment firstFragment = findFragment(MarketFragment.class);
+        /**
+         * 补充说明:
+         * 我们需要判断:该意图是打开一个新的任务,还是将后台的应用给提到前台来.
+         * 若是要将应用提到前台来直接将这个Activity结束掉,然后显示出来的Activity就是之前被最小化的Activity.
+         * 因为点击图标的意图会将新启动的Activity置于顶端,而顶端的下面的Activity就是之前被最小化的Activity.
+         * 此时结束掉新启动的Activity,就可以让之前被最小化的Activity 显示出来了.
+         *
+         * https://blog.csdn.net/busjb/article/details/40891239  感谢博主分享！
+         * */
+
+        //添加这个if语句
+        if((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0){
+            finish();
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= 21){
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
+        SupportFragment firstFragment = findFragment(MarketFragment_.class);
         if (firstFragment == null) {
             mFragments[FIRST] = MarketFragment.newInstance(null);
             mFragments[SECOND] = HallFragment.newInstance(null);
@@ -69,21 +98,21 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
             // 这里我们需要拿到mFragments的引用
             mFragments[FIRST] = firstFragment;
-            mFragments[SECOND] = findFragment(HallFragment.class);
-            mFragments[THIRD] = findFragment(SellerFragment.class);
-            mFragments[FOURTH] = findFragment(BuyerFragment.class);
-            mFragments[FIVE] = findFragment(PersonalFragment.class);
+            mFragments[SECOND] = findFragment(HallFragment_.class);
+            mFragments[THIRD] = findFragment(SellerFragment_.class);
+            mFragments[FOURTH] = findFragment(BuyerFragment_.class);
+            mFragments[FIVE] = findFragment(PersonalFragment_.class);
         }
     }
 
     @AfterViews
     void afterViews(){
         bottomBar = (BottomBar)findViewById(R.id.bottomBar);
-        bottomBar.addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "行情"))
-                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "大厅"))
-                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "卖家"))
-                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "买家"))
-                .addItem(new BottomBarTab(this, R.mipmap.mem_info_icon, "我的"));
+        bottomBar.addItem(new BottomBarTab(this, R.mipmap.icon_hq, "行情"))
+                .addItem(new BottomBarTab(this, R.mipmap.index, "大厅"))
+                .addItem(new BottomBarTab(this, R.mipmap.icon_maij, "卖家"))
+                .addItem(new BottomBarTab(this, R.mipmap.icon_mj, "买家"))
+                .addItem(new BottomBarTab(this, R.mipmap.icon_w, "我的"));
         bottomBar.setOnTabSelectedListener(this);
         bottomBar.setCurrentItem(1);//默认选择大厅
 
@@ -92,7 +121,6 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
     @Override
     protected void onResume() {
         super.onResume();
-        CallbackUtils.setCallback(this);
         CallbackUtils.setOnBottomSelectListener(this);
 
         accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
@@ -113,9 +141,15 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
                     break;
                 case 1://当前账号买家未激活，请求买卖家激活状态
                     bottomBar.hide(3);
+                    if(getBottomBar().checkStatus(2) == View.GONE){
+                        getBottomBar().show(2);
+                    }
                     break;
                 case 2://当前账号卖家未激活，请求买卖家激活状态
                     bottomBar.hide(2);
+                    if(getBottomBar().checkStatus(3) == View.GONE){
+                        getBottomBar().show(3);
+                    }
                     break;
             }
 
@@ -128,17 +162,6 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
             }
         }
 
-    }
-
-    @Override
-    public void setOnResponseCallback(String method, BaseRet baseRet) {
-        if(baseRet == null || TextUtils.isEmpty(method)){
-            return;
-        }
-        if(method.equals("")){
-            //该页面暂时没有网络请求，所以这个接口实现暂时没用
-
-        }
     }
 
     @Override
@@ -229,6 +252,7 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
 
     @Override
     public void setOnBottomSelectListener(int position) {
+        LogUtils.print("setOnBottomSelectListener === " + position);
         bottomBar.setCurrentItem(position);
     }
 
@@ -236,14 +260,12 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
         return bottomBar;
     }
 
-    //按返回键不销毁activity
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            moveTaskToBack(true);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    public void onBackPressedSupport() {
+        Intent home = new Intent(Intent.ACTION_MAIN);
+        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        home.addCategory(Intent.CATEGORY_HOME);
+        startActivity(home);
     }
 
     @Override

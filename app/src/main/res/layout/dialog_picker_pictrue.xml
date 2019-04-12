@@ -20,7 +20,7 @@
             android:layout_height="45dp"
             android:gravity="center"
             android:text="请选择图片来源"
-            android:textColor="#b9b9b9" />
+            android:textColor="@color/black_light" />
 
         <View
             android:layout_width="fill_parent"
@@ -33,7 +33,7 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:text="照相机"
-            android:textColor="#FF4081"
+            android:textColor="@color/blue"
             android:textSize="20sp" />
 
         <View
@@ -47,7 +47,7 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:text="相册"
-            android:textColor="#009EE7"
+            android:textColor="@color/blue"
             android:textSize="20sp" />
 
 
@@ -67,9 +67,9 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:text="取消"
-            android:textColor="#cccccc"
+            android:textColor="@color/black_light"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            />
 
     </LinearLayout>
 </LinearLayout>

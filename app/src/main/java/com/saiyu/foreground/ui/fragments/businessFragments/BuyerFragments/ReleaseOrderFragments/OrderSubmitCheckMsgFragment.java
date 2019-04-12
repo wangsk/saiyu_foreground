@@ -41,8 +41,9 @@ public class OrderSubmitCheckMsgFragment extends BaseFragment implements Callbac
     private static CountDownTimerUtils countDownTimerUtils;
     private String OrderNum,ProductId,ProductName,ProductProperty1,ProductProperty2,ProductProperty3,ReserveAccount,
             ReserveQBCount,ReserveUnitCount,ReservePrice,ReserveDiscount,ReserveTitle,OnlineTimeBegin,OnlineTimeEnd,
-            OrderExpiryTime,OrderPwd,OnceMinCount,LessChargeDiscount,OrderInterval,IsAgentConfirm,ReservePwd,
-            OftenLoginProvince,OftenLoginCity,IsPicConfirm,Remarks,ContactMobile,ContactQQ,RoleName;
+            OrderExpiryTime,OrderPwd,OrderInterval,IsAgentConfirm,ReservePwd,
+            OftenLoginProvince,OftenLoginCity,IsPicConfirm,Remarks,ContactMobile,ContactQQ,RoleName,IsAllowShowContact;
+    private float LessChargeDiscount,OnceMinCount;
 
 
     public static OrderSubmitCheckMsgFragment newInstance(Bundle bundle) {
@@ -62,10 +63,8 @@ public class OrderSubmitCheckMsgFragment extends BaseFragment implements Callbac
         Utils.setButtonClickable(btn_confirm,false);
         tv_title_content.setText("订单支付");
         countDownTimerUtils = new CountDownTimerUtils(tv_msg_count, 60000, 1000);
-        countDownTimerUtils.setClickable(false);
         Bundle bundle = getArguments();
         if(bundle != null){
-
             OrderNum = bundle.getString("OrderNum");
             ProductId = bundle.getString("ProductId");
             ProductName = bundle.getString("ProductName");
@@ -82,8 +81,8 @@ public class OrderSubmitCheckMsgFragment extends BaseFragment implements Callbac
             OnlineTimeEnd = bundle.getString("OnlineTimeEnd");
             OrderExpiryTime = bundle.getString("OrderExpiryTime");
             OrderPwd = bundle.getString("OrderPwd");
-            OnceMinCount = bundle.getString("OnceMinCount");
-            LessChargeDiscount = bundle.getString("LessChargeDiscount");
+            OnceMinCount = bundle.getFloat("OnceMinCount");
+            LessChargeDiscount = bundle.getFloat("LessChargeDiscount");
             OrderInterval = bundle.getString("OrderInterval");
             IsAgentConfirm = bundle.getString("IsAgentConfirm");
             ReservePwd = bundle.getString("ReservePwd");
@@ -94,6 +93,11 @@ public class OrderSubmitCheckMsgFragment extends BaseFragment implements Callbac
             ContactMobile = bundle.getString("ContactMobile");
             ContactQQ = bundle.getString("ContactQQ");
             RoleName = bundle.getString("RoleName");
+            IsAllowShowContact = bundle.getString("IsAllowShowContact");
+
+            tv_orderNum.setText(OrderNum);
+            tv_orderMobile.setText(ContactMobile);
+            tv_orderMoney.setText(ReservePrice + "元");
         }
 
     }
@@ -161,6 +165,7 @@ public class OrderSubmitCheckMsgFragment extends BaseFragment implements Callbac
                 requestParams.put("ContactQQ",ContactQQ);
                 requestParams.put("code",et_orderCode.getText().toString());
                 requestParams.put("RoleName",RoleName);
+                requestParams.put("IsAllowShowContact", IsAllowShowContact);
                 ApiRequest.orderPublish(requestParams,"OrderSubmitCheckMsgFragment_orderPublish",pb_loading);
 
                 break;
@@ -172,10 +177,8 @@ public class OrderSubmitCheckMsgFragment extends BaseFragment implements Callbac
         if(hello.getId() == R.id.et_orderCode){
             String text = s.toString();
             if(!TextUtils.isEmpty(text)){
-                countDownTimerUtils.setClickable(true);
                 Utils.setButtonClickable(btn_confirm,true);
             } else {
-                countDownTimerUtils.setClickable(false);
                 Utils.setButtonClickable(btn_confirm,false);
             }
         }

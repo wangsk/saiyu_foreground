@@ -110,11 +110,17 @@ public class ConfirmReceiverFragment extends BaseFragment implements CallbackUti
 
     }
 
-    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.iv_info,R.id.iv_record,R.id.iv_success})
+    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.iv_info,R.id.iv_record,R.id.iv_success,R.id.btn_cancel})
     void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_title_back:
                 getFragmentManager().popBackStack();
+                break;
+            case R.id.btn_cancel:
+                Bundle bundle = new Bundle();
+                bundle.putString("orderReceiveId",orderReceiveId);
+                RightFragment rightFragment = RightFragment.newInstance(bundle);
+                start(rightFragment);
                 break;
             case R.id.btn_confirm:
                 if(!TextUtils.isEmpty(orderReceiveId)){

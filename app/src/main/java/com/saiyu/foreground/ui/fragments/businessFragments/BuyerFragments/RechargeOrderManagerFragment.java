@@ -3,9 +3,13 @@ package com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,15 +19,17 @@ import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.RechargeOrderManageRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
+import com.saiyu.foreground.ui.activitys.BaseActivity;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
-import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.BuyerOrderDetailFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.ConfirmReceiverFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.RechargeOrderDetailFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.RightFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
+import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.PopWindowUtils;
+import com.saiyu.foreground.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -43,7 +49,7 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
     @ViewById
     TextView tv_title_content;
     @ViewById
-    Button btn_title_back;
+    Button btn_title_back,btn_blank;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
@@ -99,6 +105,16 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
 
             int totalCount = ret.getData().getDataCount();
 
+            if(totalCount == 0){
+                recyclerView.setVisibility(View.GONE);
+                btn_blank.setVisibility(View.VISIBLE);
+                btn_blank.setText("您当前没有充值订单");
+                return;
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                btn_blank.setVisibility(View.GONE);
+            }
+
             totalPage = totalCount / pageSize + 1;
             LogUtils.print("总数:" + totalCount + " ;总页码：" + totalPage);
 
@@ -149,13 +165,13 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
         final String orderReceiveId = mItems.get(position).getId();
         final Bundle bundle = new Bundle();
         bundle.putString("orderReceiveId",orderReceiveId);
-        if(status == 0 || status == 1){
+        if(status == 0 || status == 1 || status == 2){
             RechargeOrderDetailFragment rechargeOrderDetailFragment = RechargeOrderDetailFragment.newInstance(bundle);
             start(rechargeOrderDetailFragment);
             return;
         }
 
-        PopWindowUtils.initPopWindow_12(status,new OnItemClickListener() {
+        initPopWindow_12(status,new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 switch (position){
@@ -172,7 +188,7 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
                         start(rightFragment);
                         break;
                     case 4://响应维权
-                        Toast.makeText(mContext,"请往web端处理！",Toast.LENGTH_SHORT).show();
+                        MyToast.newInstance(getActivity(),"请前往web端操作","APP暂不支持").show();
                         break;
                 }
             }
@@ -184,5 +200,135 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
         if (view.getId() == R.id.btn_title_back) {
             getActivity().finish();
         }
+    }
+
+    public void initPopWindow_12(int status,final OnItemClickListener onItemClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        if(getActivity() == null){
+            return;
+        }
+        View mPopView = getActivity().getLayoutInflater().inflate(R.layout.popwindow_8_layout, null);
+        RelativeLayout rl_1 = (RelativeLayout)mPopView.findViewById(R.id.rl_1);
+        RelativeLayout rl_2 = (RelativeLayout)mPopView.findViewById(R.id.rl_2);
+        RelativeLayout rl_3 = (RelativeLayout)mPopView.findViewById(R.id.rl_3);
+        RelativeLayout rl_4 = (RelativeLayout)mPopView.findViewById(R.id.rl_4);
+        RelativeLayout rl_5 = (RelativeLayout)mPopView.findViewById(R.id.rl_5);
+        RelativeLayout rl_6 = (RelativeLayout)mPopView.findViewById(R.id.rl_6);
+        TextView tv_1 = (TextView) mPopView.findViewById(R.id.tv_1);
+        TextView tv_2 = (TextView) mPopView.findViewById(R.id.tv_2);
+        TextView tv_3 = (TextView) mPopView.findViewById(R.id.tv_3);
+        TextView tv_4 = (TextView) mPopView.findViewById(R.id.tv_4);
+        TextView tv_5 = (TextView) mPopView.findViewById(R.id.tv_5);
+        TextView tv_6 = (TextView) mPopView.findViewById(R.id.tv_6);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_8 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        // 点击popuwindow外让其消失
+        mPopupWindow_8.setOutsideTouchable(true);
+        mPopupWindow_8.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_8.setFocusable(true);
+        mPopupWindow_8.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Utils.backgroundAlpha(getActivity(),1f);
+            }
+        });
+
+        switch (status){
+            case 4://等待确认
+                tv_1.setText("订单详情");
+                tv_2.setText("确认收货");
+                tv_3.setText("发起维权");
+                rl_4.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+            case 6://维权中
+                tv_1.setText("订单详情");
+                tv_4.setText("响应维权");
+                rl_2.setVisibility(View.GONE);
+                rl_3.setVisibility(View.GONE);
+                rl_5.setVisibility(View.GONE);
+                rl_6.setVisibility(View.GONE);
+                break;
+        }
+
+        rl_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,1);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,2);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,3);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,4);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,5);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+        rl_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(v,6);
+                }
+                if (mPopupWindow_8.isShowing()) {
+                    mPopupWindow_8.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_8.setAnimationStyle(R.style.pop_animation_up);
+
+        mPopupWindow_8.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        // 作为下拉视图显示
+        // mPopupWindow.showAsDropDown(mPopView, Gravity.CENTER, 200, 300);
+        Utils.backgroundAlpha(getActivity(),0.7f);
+
     }
 }

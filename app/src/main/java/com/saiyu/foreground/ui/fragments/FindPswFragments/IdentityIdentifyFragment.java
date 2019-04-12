@@ -57,7 +57,7 @@ public class IdentityIdentifyFragment extends BaseFragment implements CallbackUt
             RealName = bundle.getString("RealName","");
             IDNum = bundle.getString("IDNum","");
         }
-        tv_account.setText("赛鱼账号: "+account);
+        tv_account.setText(account);
 
     }
 

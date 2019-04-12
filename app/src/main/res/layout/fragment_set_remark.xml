@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -28,16 +28,15 @@
             <EditText
                 android:id="@+id/et_remark"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="20dp"
+                android:padding="5dp"
                 android:background="@drawable/border_colorline_radius"
                 android:gravity="top"
                 android:hint="输入你要给卖家的话，特殊说明等，最多不超过200字"
                 android:inputType="textMultiLine"
                 android:maxLength="200"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
                 android:singleLine="false"
                 android:textCursorDrawable="@drawable/edittext_cursor"
                 android:textSize="15sp" />
@@ -74,10 +73,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:text="取消设置"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="18sp" />
 
         </LinearLayout>

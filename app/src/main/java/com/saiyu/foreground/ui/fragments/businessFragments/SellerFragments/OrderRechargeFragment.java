@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.MyArrayAdapter;
 import com.saiyu.foreground.adapters.OrderCountSelectorAdapter;
@@ -41,7 +41,6 @@ import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;
 import com.saiyu.foreground.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -77,8 +76,6 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
     @ViewById
     MyViewPager view_pager;
     @ViewById
-    SwipeMenuRecyclerView recyclerView;
-    @ViewById
     Spinner sp_selector;
     @ViewById
     SmartRefreshLayout refreshLayout;
@@ -95,7 +92,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
     private int isLock;
     private float maxOrderPoint;//卖家剩余的最大接单点数
     private float maxQBcount;//卖家能接的最大QB数量
-    private float OnceMinCount = 0;//最小充值QB数量
+    private int OnceMinCount = 0;//最小充值QB数量
     private float ReserveQBCount;//该订单最大QB数量
     private float RechargeQBCount;//该订单被接过的QB数量
 
@@ -117,7 +114,6 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
     public static OrderRechargeFragment newInstance(Bundle bundle) {
         OrderRechargeFragment_ fragment = new OrderRechargeFragment_();
         fragment.setArguments(bundle);
-        CallbackUtils.setCallback(fragment);
         return fragment;
     }
 
@@ -125,11 +121,6 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-
-    }
-
-    @AfterViews
-    void afterViews() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             orderId = bundle.getString("orderId");
@@ -137,7 +128,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
             if(isDetail){
                 hall_order_1.setVisibility(View.VISIBLE);
                 hall_order_2.setVisibility(View.GONE);
-                ApiRequest.hallDetail(orderId, "HallOrderDetailFragment_hallDetail", pb_loading);
+                ApiRequest.hallDetail(orderId, "OrderRechargeFragment_hallDetail", pb_loading);
                 btn_confirm.setText("已接单");
                 Utils.setButtonClickable(btn_confirm,false);//确认接单按钮置为不可点击
                 et_count.setFocusable(false);
@@ -147,16 +138,19 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
             } else {
                 hall_order_1.setVisibility(View.GONE);
                 hall_order_2.setVisibility(View.VISIBLE);
-                ApiRequest.hallDetailReceive(orderId,bundle.getString("ReceiveQBCount"),"","HallOrderDetailFragment_hallDetailReceive", pb_loading);
+                ApiRequest.hallDetailReceive(orderId,bundle.getString("ReserveQBCount"),"","OrderRechargeFragment_hallDetailReceive", pb_loading);
 
             }
         }
 
+    }
+
+    @AfterViews
+    void afterViews() {
+
         refreshLayout.setEnableLoadmore(false);
         refreshLayout.setEnableRefresh(false);
         tv_title_content.setText("订单详情");
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,8);
-        recyclerView.setLayoutManager(gridLayoutManager);
 
     }
 
@@ -165,7 +159,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
         }
-        if(method.equals("HallOrderDetailFragment_hallDetailReceive")){
+        if(method.equals("OrderRechargeFragment_hallDetailReceive")){
             //该订单已经被自己接过，但是未充值
             HallDetailReceiveRet ret = (HallDetailReceiveRet)baseRet;
             if(ret.getData() == null){
@@ -210,7 +204,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
             String createTime = ret.getData().getCreateTime();
             setTime(createTime);
 
-        } else if (method.equals("HallOrderDetailFragment_hallDetail")) {
+        } else if (method.equals("OrderRechargeFragment_hallDetail")) {
             HallDetailRet ret = (HallDetailRet) baseRet;
             if (ret.getData() == null) {
                 return;
@@ -280,9 +274,8 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
                 break;
             case R.id.tv_rechargePoint:
                 if(!TextUtils.isEmpty(OrderRechargePointsUrl)){
-                    bundle.putString("url", OrderRechargePointsUrl);
-                    bundle.putString("type","充值点数");//
-                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
+                    bundle.putFloat("myPoint",maxOrderPoint);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.PointManagerFragmentTag);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
                 }
@@ -317,13 +310,13 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
                                 Toast.makeText(mContext,"请输入接单密码",Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            ApiRequest.hallDetailReceive(orderId,rechargeNum,callbackList.get(0),"HallOrderDetailFragment_hallDetailReceive", pb_loading);
+                            ApiRequest.hallDetailReceive(orderId,rechargeNum,callbackList.get(0),"OrderRechargeFragment_hallDetailReceive", pb_loading);
                         }
                     });
                     return;
                 }
 
-                ApiRequest.hallDetailReceive(orderId,rechargeNum,"","HallOrderDetailFragment_hallDetailReceive", pb_loading);
+                ApiRequest.hallDetailReceive(orderId,rechargeNum,"","OrderRechargeFragment_hallDetailReceive", pb_loading);
                 break;
             case R.id.btn_cancel:
                 bundle.putString("receiveId",receiveId);
@@ -342,24 +335,118 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
         }
         tv_2_1.setVisibility(View.VISIBLE);
 
-        List<String> extraList = new ArrayList<>();
+        int index = 0;
         if(IsImgConfirmation){
-            extraList.add("验图代确认");
+            tv_2_2.setVisibility(View.VISIBLE);
+            tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
+            tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.yellow));
+            tv_2_2.setText("验图代确认");
+            index++;
         }
         if(IsCustomerConfirmation){
-            extraList.add("客服代确认");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zilight));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.zi_light));
+                    tv_2_2.setText("客服代确认");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zilight));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.zi_light));
+                    tv_2_3.setText("客服代确认");
+                    break;
+            }
+            index++;
         }
         if(IsLessThanOriginalPrice){
-            extraList.add("少充按原价");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    tv_2_2.setText("少充按原价");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    tv_2_3.setText("少充按原价");
+                    break;
+                case 2:
+                    tv_2_4.setVisibility(View.VISIBLE);
+                    tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    tv_2_4.setText("少充按原价");
+                    break;
+            }
+            index++;
         }
         if(IsOrderPwd){
-            extraList.add("私密订单");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_2.setText("私密订单");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_3.setText("私密订单");
+                    break;
+                case 2:
+                    tv_2_4.setVisibility(View.VISIBLE);
+                    tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_4.setText("私密订单");
+                    break;
+                case 3:
+                    tv_2_5.setVisibility(View.VISIBLE);
+                    tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    tv_2_5.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    tv_2_5.setText("私密订单");
+                    break;
+            }
+            index++;
         }
         if(IsFriendLimit){
-            extraList.add("需加好友");
+            switch (index){
+                case 0:
+                    tv_2_2.setVisibility(View.VISIBLE);
+                    tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_2.setText("需加好友");
+                    break;
+                case 1:
+                    tv_2_3.setVisibility(View.VISIBLE);
+                    tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_3.setText("需加好友");
+                    break;
+                case 2:
+                    tv_2_4.setVisibility(View.VISIBLE);
+                    tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_4.setText("需加好友");
+                    break;
+                case 3:
+                    tv_2_5.setVisibility(View.VISIBLE);
+                    tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_5.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_5.setText("需加好友");
+                    break;
+                case 4:
+                    tv_2_6.setVisibility(View.VISIBLE);
+                    tv_2_6.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    tv_2_6.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    tv_2_6.setText("需加好友");
+                    break;
+            }
+            index++;
         }
-
-        Utils.setExtraView(extraList,tv_2_2,tv_2_3,tv_2_4,tv_2_5,tv_2_6);
     }
 
     //计时器
@@ -443,7 +530,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
         }catch (Exception e){
 
         }
-        getActivity().finish();
+        getFragmentManager().popBackStack();
         return true;
     }
 
@@ -474,11 +561,11 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
                 break;
         }
 
-        recyclerView.setVisibility(View.GONE);
     }
 
     //初始化输入框
     private void initYuanBaoList(HallDetailRet ret){
+        tv_orderPoint.setText(ret.getData().getReceiveQBCount()+"点");
         type = ret.getData().getType();
         if(type == 0){
             //普通游戏

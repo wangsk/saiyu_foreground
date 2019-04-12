@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
 
             <EditText
                 android:id="@+id/et_order_between"
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
@@ -37,7 +38,7 @@
                 android:inputType="number"
                 android:maxLength="4"
                 android:maxLines="1"
-                android:paddingLeft="2dp"
+                android:paddingLeft="5dp"
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:text="3"
@@ -47,6 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="分钟"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -56,11 +58,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:text="每次被接单的间隔时间，默认为3分钟，点击可更改间隔时间"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -92,10 +93,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:text="取消设置"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="18sp" />
 
         </LinearLayout>

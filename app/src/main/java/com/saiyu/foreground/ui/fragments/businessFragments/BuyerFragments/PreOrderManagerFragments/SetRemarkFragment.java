@@ -37,14 +37,23 @@ public class SetRemarkFragment extends BaseFragment {
 
     @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.btn_cancel})
     void onClick(View view) {
+        Intent intent = null;
+        Bundle bundle = null;
         switch (view.getId()){
             case R.id.btn_title_back:
+                getActivity().finish();
+                break;
             case R.id.btn_cancel:
+                intent = new Intent();
+                bundle = new Bundle();
+                bundle.putString("Remarks","");
+                intent.putExtras(bundle);
+                getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
                 break;
             case R.id.btn_confirm:
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
+                intent = new Intent();
+                bundle = new Bundle();
                 bundle.putString("Remarks",et_remark.getText().toString());
                 intent.putExtras(bundle);
                 getActivity().setResult(RESULT_OK, intent);

@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -61,7 +61,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -89,7 +89,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -117,7 +117,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -145,7 +145,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -173,7 +173,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -202,7 +202,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>
@@ -231,7 +231,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"  />
 
     </RelativeLayout>

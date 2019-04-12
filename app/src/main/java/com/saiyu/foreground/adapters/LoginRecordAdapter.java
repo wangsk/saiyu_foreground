@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
@@ -63,6 +64,7 @@ public class LoginRecordAdapter extends RecyclerView.Adapter<LoginRecordAdapter.
 
     public class MyHolder extends RecyclerView.ViewHolder {
         public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4;
+        public ImageView iv_jiantou;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -70,6 +72,8 @@ public class LoginRecordAdapter extends RecyclerView.Adapter<LoginRecordAdapter.
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
+            iv_jiantou = itemView.findViewById(R.id.iv_jiantou);
+            iv_jiantou.setVisibility(View.GONE);
         }
 
     }

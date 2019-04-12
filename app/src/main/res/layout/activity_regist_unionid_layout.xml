@@ -34,7 +34,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/jiantou" />
 
         </RelativeLayout>
 
@@ -81,10 +81,10 @@
 
                 <ImageView
                     android:id="@+id/iv_account_clear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/x_hei"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -134,11 +134,11 @@
 
                 <ImageView
                     android:id="@+id/iv_psw_clear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/x_hei"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -188,11 +188,11 @@
 
                 <ImageView
                     android:id="@+id/iv_psw_confirm_clear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/x_hei"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -255,7 +255,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/jiantou" />
 
         </RelativeLayout>
 
@@ -301,10 +301,10 @@
 
                 <ImageView
                     android:id="@+id/iv_account_old"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/x_hei"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -353,7 +353,7 @@
                         android:id="@+id/iv_psw"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/yanjing" />
 
                     <View
                         android:layout_width="1dp"

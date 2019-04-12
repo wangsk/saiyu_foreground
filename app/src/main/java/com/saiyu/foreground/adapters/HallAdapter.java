@@ -1,7 +1,5 @@
 package com.saiyu.foreground.adapters;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +13,7 @@ import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
-import com.saiyu.foreground.utils.LogUtils;
-import com.saiyu.foreground.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
@@ -55,24 +50,118 @@ public class HallAdapter extends RecyclerView.Adapter<HallAdapter.MyHolder> {
             myHolder.tv_2_1.setText("单次数量不限制");
         }
 
-        List<String> extraList = new ArrayList<>();
+        int index = 0;
         if(mItems.get(i).isImgConfirmation()){
-            extraList.add("验图代确认");
+            myHolder.tv_2_2.setVisibility(View.VISIBLE);
+            myHolder.tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
+            myHolder.tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.yellow));
+            myHolder.tv_2_2.setText("验图代确认");
+            index++;
         }
         if(mItems.get(i).isCustomerConfirmation()){
-            extraList.add("客服代确认");
+            switch (index){
+                case 0:
+                    myHolder.tv_2_2.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zilight));
+                    myHolder.tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.zi_light));
+                    myHolder.tv_2_2.setText("客服代确认");
+                    break;
+                case 1:
+                    myHolder.tv_2_3.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zilight));
+                    myHolder.tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.zi_light));
+                    myHolder.tv_2_3.setText("客服代确认");
+                    break;
+            }
+            index++;
         }
         if(mItems.get(i).isLessThanOriginalPrice()){
-            extraList.add("少充按原价");
+            switch (index){
+                case 0:
+                    myHolder.tv_2_2.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    myHolder.tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    myHolder.tv_2_2.setText("少充按原价");
+                    break;
+                case 1:
+                    myHolder.tv_2_3.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    myHolder.tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    myHolder.tv_2_3.setText("少充按原价");
+                    break;
+                case 2:
+                    myHolder.tv_2_4.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_green));
+                    myHolder.tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.green));
+                    myHolder.tv_2_4.setText("少充按原价");
+                    break;
+            }
+            index++;
         }
         if(mItems.get(i).isOrderPwd()){
-            extraList.add("私密订单");
+            switch (index){
+                case 0:
+                    myHolder.tv_2_2.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    myHolder.tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    myHolder.tv_2_2.setText("私密订单");
+                    break;
+                case 1:
+                    myHolder.tv_2_3.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    myHolder.tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    myHolder.tv_2_3.setText("私密订单");
+                    break;
+                case 2:
+                    myHolder.tv_2_4.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    myHolder.tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    myHolder.tv_2_4.setText("私密订单");
+                    break;
+                case 3:
+                    myHolder.tv_2_5.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_zi));
+                    myHolder.tv_2_5.setTextColor(App.getApp().getResources().getColor(R.color.zi));
+                    myHolder.tv_2_5.setText("私密订单");
+                    break;
+            }
+            index++;
         }
         if(mItems.get(i).isFriendLimit()){
-            extraList.add("需加好友");
+            switch (index){
+                case 0:
+                    myHolder.tv_2_2.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    myHolder.tv_2_2.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    myHolder.tv_2_2.setText("需加好友");
+                    break;
+                case 1:
+                    myHolder.tv_2_3.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    myHolder.tv_2_3.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    myHolder.tv_2_3.setText("需加好友");
+                    break;
+                case 2:
+                    myHolder.tv_2_4.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    myHolder.tv_2_4.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    myHolder.tv_2_4.setText("需加好友");
+                    break;
+                case 3:
+                    myHolder.tv_2_5.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    myHolder.tv_2_5.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    myHolder.tv_2_5.setText("需加好友");
+                    break;
+                case 4:
+                    myHolder.tv_2_6.setVisibility(View.VISIBLE);
+                    myHolder.tv_2_6.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_greenlight));
+                    myHolder.tv_2_6.setTextColor(App.getApp().getResources().getColor(R.color.green_light));
+                    myHolder.tv_2_6.setText("需加好友");
+                    break;
+            }
+            index++;
         }
-
-        Utils.setExtraView(extraList,myHolder.tv_2_2,myHolder.tv_2_3,myHolder.tv_2_4,myHolder.tv_2_5,myHolder.tv_2_6);
 
         myHolder.tv_line_3_1.setText(mItems.get(i).getRechargeQBCount()+"/"+mItems.get(i).getReserveQBCount()+"Q币");
         myHolder.tv_line_3_2.setText("成交"+mItems.get(i).getOrderRSettleTotalCount()+"笔"+mItems.get(i).getOrderRSettleTotalMoney()+"元");

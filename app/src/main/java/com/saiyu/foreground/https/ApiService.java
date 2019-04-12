@@ -48,7 +48,6 @@ import com.saiyu.foreground.https.response.FaceRet;
 import com.saiyu.foreground.https.response.SellerOrderHistoryRet;
 import com.saiyu.foreground.https.response.SellerOrderManagerRet;
 import com.saiyu.foreground.https.response.SellerOrderReceiveInfoRet;
-import com.saiyu.foreground.https.response.StartAppealInfoRet;
 import com.saiyu.foreground.https.response.StatisticsListRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.https.response.WaitingRechargeOrderRet;
@@ -365,9 +364,6 @@ public interface ApiService {
     //申请维权
     @POST("Buyer/StartAppeal")
     Observable<BooleanRet> startAppeal(@Body RequestBody body);
-    //获取维权信息
-    @POST("Buyer/StartAppealInfo")
-    Observable<StartAppealInfoRet> startAppealInfo(@Body RequestBody body);
 
     //预定订单历史
     @POST("Buyer/OrderHistory")

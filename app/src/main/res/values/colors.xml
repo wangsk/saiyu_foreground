@@ -6,14 +6,20 @@
 
     <color name="white">#ffffff</color>
     <color name="blue">#5069d5</color>
-    <color name="blue_light">#99ccff</color>
-    <color name="yellow">#ffa800</color>
+    <color name="yellow">#ff902e</color>
     <color name="grey_white">#c3c3c3</color>
     <color name="line">#f0f0f0</color>
     <color name="black">#363636</color>
     <color name="grey">#aeaeae</color>
     <color name="black_light">#666666</color>
     <color name="red">#dd6666</color>
+
+    <color name="zi_light">#b7a7e5</color>
+    <color name="zi">#bc6fe9</color>
+    <color name="green">#5abd46</color>
+    <color name="green_light">#6fc2e9</color>
+    <color name="blue_light">#e2eefd</color>
+    <color name="blue_light_2">#6f98e9</color>
 
     <color name="background">#31373a</color>
     <color name="transparent">#00000000</color>

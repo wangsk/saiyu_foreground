@@ -32,6 +32,7 @@ import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.SellerOrderReceiveInfoRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -64,9 +65,9 @@ import static com.saiyu.foreground.ui.views.RxDialogChooseImage.LayoutType.TITLE
 @EFragment(R.layout.fragment_resetpic)
 public class ResetPicFragment extends BaseFragment implements CallbackUtils.ResponseCallback,CallbackUtils.OnActivityCallBack{
     @ViewById
-    TextView tv_title_content,tv_recharge_prompt,tv_get;
+    TextView tv_title_content,tv_recharge_prompt,tv_get,tv_record_upload,tv_info_upload,tv_success_upload;
     @ViewById
-    Button btn_title_back,btn_confirm,btn_success_upload,btn_info_upload,btn_record_upload,btn_revise;
+    Button btn_title_back,btn_confirm,btn_revise;
     @ViewById
     EditText et_count;
     @ViewById
@@ -79,7 +80,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
             tv_product_type,tv_recharge_num,tv_once_limit,tv_pic,tv_confirm_type,tv_averagetime,
             tv_contacttype,tv_rechargeremark;
     @ViewById
-    ImageView iv_recharge_success_show,iv_recharge_info_show,iv_record_show;
+    ImageView iv_recharge_success_show,iv_recharge_info_show,iv_record_show,iv_success_del,iv_info_del,iv_record_del;
     private String orderId;
     private String successUrl,infoUrl,recordUrl;
     private int uploadCode = 0;
@@ -89,8 +90,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
 
     private String rechargeNum;//出售Q币数量
     private String ReceiveQBCount,ReserveDiscount, ServiceRate,LiquidatedMoney;
-    private int OnceMinCount = 0;
-    private float LessChargeDiscount;
+    private float LessChargeDiscount,OnceMinCount;
 
     public static ResetPicFragment newInstance(Bundle bundle) {
         ResetPicFragment_ fragment = new ResetPicFragment_();
@@ -149,7 +149,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
             }
             tv_confirm_type.setText(ret.getData().getContactType());
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
-            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";QQ"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
+            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";qq"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
             tv_rechargeremark.setText(ret.getData().getRemarks());//充值留言
 
             LessChargeDiscount = ret.getData().getLessChargeDiscount();
@@ -183,12 +183,18 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                 if(uploadCode == 0){
                     successUrl = ret.getData().getSrc();
                     LogUtils.print("successUrl=== " + successUrl);
+                    iv_success_del.setVisibility(View.VISIBLE);
+                    tv_success_upload.setVisibility(View.GONE);
                 } else if(uploadCode == 1){
                     infoUrl = ret.getData().getSrc();
                     LogUtils.print("infoUrl=== " + infoUrl);
+                    iv_info_del.setVisibility(View.VISIBLE);
+                    tv_info_upload.setVisibility(View.GONE);
                 } else if(uploadCode == 2){
                     recordUrl = ret.getData().getSrc();
                     LogUtils.print("recordUrl=== " + recordUrl);
+                    iv_record_del.setVisibility(View.VISIBLE);
+                    tv_record_upload.setVisibility(View.GONE);
                 }
             }
         } else if(method.equals("ResetPicFragment_orderReceiveReSubmit")){
@@ -203,7 +209,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
         }
     }
 
-    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.btn_record_upload, R.id.btn_info_upload, R.id.btn_success_upload,R.id.btn_revise})
+    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.tv_record_upload, R.id.tv_info_upload, R.id.tv_success_upload,R.id.btn_revise,R.id.iv_success_del,R.id.iv_info_del,R.id.iv_record_del,R.id.iv_recharge_info_show,R.id.iv_recharge_success_show,R.id.iv_record_show})
     void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_title_back:
@@ -216,17 +222,56 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                 }
                 ApiRequest.orderReceiveReSubmit(orderId,rechargeNum,successUrl,infoUrl,recordUrl,"ResetPicFragment_orderReceiveReSubmit",pb_loading);
                 break;
-            case R.id.btn_record_upload:
+            case R.id.iv_success_del:
+                successUrl = "";
+                iv_success_del.setVisibility(View.GONE);
+                tv_success_upload.setVisibility(View.VISIBLE);
+                iv_recharge_success_show.setImageDrawable(mContext.getDrawable(R.mipmap.paizhaoshangchuan));
+                break;
+            case R.id.iv_info_del:
+                infoUrl = "";
+                iv_info_del.setVisibility(View.GONE);
+                tv_info_upload.setVisibility(View.VISIBLE);
+                iv_recharge_info_show.setImageDrawable(mContext.getDrawable(R.mipmap.paizhaoshangchuan));
+                break;
+            case R.id.iv_record_del:
+                recordUrl = "";
+                iv_record_del.setVisibility(View.GONE);
+                tv_record_upload.setVisibility(View.VISIBLE);
+                iv_record_show.setImageDrawable(mContext.getDrawable(R.mipmap.paizhaoshangchuan));
+                break;
+            case R.id.tv_record_upload:
                 uploadCode = 2;
                 upLoadPic();
                 break;
-            case R.id.btn_info_upload:
+            case R.id.tv_info_upload:
                 uploadCode = 1;
                 upLoadPic();
                 break;
-            case R.id.btn_success_upload:
+            case R.id.tv_success_upload:
                 uploadCode = 0;
                 upLoadPic();
+                break;
+            case R.id.iv_recharge_info_show:
+                if(!TextUtils.isEmpty(infoUrl)){
+                    PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                    photoViewDialog.setmUrl(infoUrl);
+                    photoViewDialog.show();
+                }
+                break;
+            case R.id.iv_recharge_success_show:
+                if(!TextUtils.isEmpty(successUrl)){
+                    PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                    photoViewDialog.setmUrl(successUrl);
+                    photoViewDialog.show();
+                }
+                break;
+            case R.id.iv_record_show:
+                if(!TextUtils.isEmpty(recordUrl)){
+                    PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                    photoViewDialog.setmUrl(recordUrl);
+                    photoViewDialog.show();
+                }
                 break;
             case R.id.btn_revise:
                 switch (type) {

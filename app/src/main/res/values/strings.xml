@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">赛鱼</string>
     <!--//版本更新 ,需要更改这里和 versionCode-->
     <string name="app_versionName">1.0.0</string>
 
     <string name="zhifubao_prompt">
-         1.支付宝必须通过实名认证或者已绑定银行卡\n
+        1.支付宝必须通过实名认证或者已绑定银行卡\n
         2.支付宝登录账号的姓名和身份证号码必须和你在本站所填的姓名信息一致\n
         3.以上2个条件必须同时满足，否则将会认证失败！
     </string>

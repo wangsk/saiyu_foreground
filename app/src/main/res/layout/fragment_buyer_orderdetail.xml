@@ -28,19 +28,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="预定订单号: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="预定订单号"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_ordernum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -52,19 +54,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="付款方式: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="付款方式"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_paytype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -76,19 +80,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="充值产品: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="充值产品"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_recharge_product"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -100,19 +106,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="产品类型: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="产品类型"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_producttype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -124,19 +132,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="充值号码: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="充值号码"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_rechargenum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -148,19 +158,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="预定数量: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="预定数量"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_ordercount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -172,19 +184,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="预定出价: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="预定出价"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_orderprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -196,70 +210,77 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="预定附言: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="预定附言"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_orderremark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="在线时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="在线时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_time_online"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/white">
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="订单加密: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="订单加密"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp"
                         android:layout_centerVertical="true"/>
 
-                    <ImageView
-                        android:id="@+id/iv_orderPsw"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="40dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_centerVertical="true"
-                        android:visibility="invisible"/>
-                </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_orderPsw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text=""
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -269,19 +290,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="单次限制: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="单次限制"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_orderlimit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -294,46 +317,24 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="接单间隔时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="接单间隔时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_betweentime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/white">
 
-                    <TextView
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="支持验图确认: "
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:layout_centerVertical="true"/>
-
-                    <ImageView
-                        android:id="@+id/iv_pic"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="40dp"
-                        android:src="@mipmap/mem_info_icon"
-                        android:layout_centerVertical="true"
-                        android:visibility="gone"/>
-                </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -343,19 +344,50 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="客服代理确认: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="支持验图确认"
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/tv_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text=""
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="客服代理确认"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_replaceconfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -367,19 +399,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="联系方式: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="联系方式"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_contacttype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -393,43 +427,47 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="充值留言: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="充值留言"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_rechargeremark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="发布时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="发布时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_releasetime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -441,19 +479,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="到期时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="到期时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_latertime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -465,19 +505,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="完成数量: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="完成数量"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_completnum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -489,19 +531,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="确认方式: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="确认方式"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_confirmtype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -513,19 +557,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="平均确认时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="平均确认时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_averagetime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -537,19 +583,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="订单状态: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="订单状态"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_orderstatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -561,19 +609,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="审核状态: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="审核状态"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_reviewstatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -585,43 +635,47 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="完结时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="完结时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_completetime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="结算时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="结算时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_balancetime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -633,19 +687,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="结算金额: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="结算金额"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_balancemoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -657,19 +713,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="获得违约金: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="获得违约金"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_penalty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -681,19 +739,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="充值单数: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="充值单数"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_rechargeorders"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -705,19 +765,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="手动取消: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="手动取消"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -729,19 +791,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="取消时间: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="取消时间"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_canceltime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -753,19 +817,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="110dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="退款金额: "
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="退款金额"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_refunds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
                 </LinearLayout>
 

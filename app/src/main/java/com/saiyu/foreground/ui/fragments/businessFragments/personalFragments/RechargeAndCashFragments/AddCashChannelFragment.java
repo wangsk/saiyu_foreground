@@ -30,7 +30,7 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.fragment_add_cashchannel)
 public class AddCashChannelFragment extends BaseFragment  implements CallbackUtils.ResponseCallback{
     @ViewById
-    TextView tv_title_content,tv_realname,tv_id,tv_channel,tv_charge,tv_time;
+    TextView tv_title_content,tv_realname,tv_id,tv_channel,tv_charge,tv_time,tv_charge_prompt;
     @ViewById
     Button btn_title_back,btn_confirm;
     @ViewById
@@ -69,25 +69,29 @@ public class AddCashChannelFragment extends BaseFragment  implements CallbackUti
             ImgUrl = bundle.getString("ImgUrl");
             String withdrawWayConfigCharge = bundle.getString("withdrawWayConfigCharge");
             String PayDateStr = bundle.getString("PayDateStr");
+            String StartMoney = bundle.getString("StartMoney");
+            String TopMoney = bundle.getString("TopMoney");
             tv_charge.setText(withdrawWayConfigCharge + "%");
             tv_time.setText(PayDateStr);
+            tv_charge_prompt.setText("最低手续费"+StartMoney+"元，封顶手续费"+TopMoney+"元");
             switch (Type){
                 case 0://;其他
                     tv_title_content.setText("添加银行卡");
-                    tv_channel.setText("卡号:");
+                    tv_channel.setText("卡号");
                     et_count.setHint("请输入银行卡号");
                     ll_wechat.setVisibility(View.GONE);
                     ll_add.setVisibility(View.VISIBLE);
                     break;
                 case 1://支付宝
                     tv_title_content.setText("添加支付宝");
-                    tv_channel.setText("支付宝账号:");
+                    tv_channel.setText("支付宝账号");
                     et_count.setHint("请输入支付宝账号");
                     ll_wechat.setVisibility(View.GONE);
                     ll_add.setVisibility(View.VISIBLE);
                     break;
                 case 2://微信
                     tv_title_content.setText("添加微信");
+                    btn_confirm.setText("我已绑定完成");
                     ll_wechat.setVisibility(View.VISIBLE);
                     ll_add.setVisibility(View.GONE);
 
@@ -138,6 +142,11 @@ public class AddCashChannelFragment extends BaseFragment  implements CallbackUti
                 getFragmentManager().popBackStack();
                 break;
             case R.id.btn_confirm:
+                if(Type == 2){
+                    getFragmentManager().popBackStack();
+                    return;
+                }
+
                 String account = et_count.getText().toString();
                 if(TextUtils.isEmpty(account)){
                     Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
@@ -152,6 +161,12 @@ public class AddCashChannelFragment extends BaseFragment  implements CallbackUti
                     bundle.putString("Mobile",Mobile);
                     bundle.putString("account",account);
                     bundle.putString("Id",Id);
+                    if(Type == 0){
+                        bundle.putString("title","添加银行卡");
+                    } else if(Type == 1){
+                        bundle.putString("title","添加支付宝");
+                    }
+
                     AddCashChannelWithSendMsgFragment addCashChannelWithSendMsgFragment = AddCashChannelWithSendMsgFragment.newInstance(bundle);
                     start(addCashChannelWithSendMsgFragment);
                 }

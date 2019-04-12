@@ -37,7 +37,7 @@ public class LoginRecordFragment extends BaseFragment  implements OnRefreshListe
     @ViewById
     TextView tv_title_content;
     @ViewById
-    Button btn_title_back;
+    Button btn_title_back,btn_blank;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
@@ -89,6 +89,16 @@ public class LoginRecordFragment extends BaseFragment  implements OnRefreshListe
             }
 
             int totalCount = ret.getData().getTotalCount();
+
+            if(totalCount == 0){
+                recyclerView.setVisibility(View.GONE);
+                btn_blank.setVisibility(View.VISIBLE);
+                btn_blank.setText("您当前没有登录记录");
+                return;
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                btn_blank.setVisibility(View.GONE);
+            }
 
             totalPage = totalCount/pageSize + 1;
             LogUtils.print("总数:" + totalCount + " ;总页码：" + totalPage);

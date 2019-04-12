@@ -28,22 +28,13 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/et_qq"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
+            <TextView
+                android:id="@+id/tv_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:hint="请输入QQ号码"
-                android:inputType="number"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:singleLine="true"
-                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:text="请输入QQ号码"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
         </LinearLayout>

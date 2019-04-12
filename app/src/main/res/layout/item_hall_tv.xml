@@ -9,6 +9,6 @@
     android:layout_gravity="center"
     android:singleLine="true"
     android:textSize="15sp"
-    android:textColor="@color/black"
+    android:textColor="@color/text_color_selector"
     android:background="@drawable/selector_hall_game_bg">
 </TextView>

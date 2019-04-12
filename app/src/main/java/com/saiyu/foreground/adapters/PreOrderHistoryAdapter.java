@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.saiyu.foreground.R;
@@ -42,10 +43,10 @@ public class PreOrderHistoryAdapter extends RecyclerView.Adapter<PreOrderHistory
 
         myHolder.tv_deal_1.setText(mItems.get(i).getProductTypeName());
 
-        myHolder.tv_deal_2.setText(mItems.get(i).getOrderStatusType());
+        myHolder.tv_deal_5.setText(mItems.get(i).getOrderStatusType());
         myHolder.tv_deal_3.setText(mItems.get(i).getCreateTime());
 
-        myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
+        myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mOnItemClickListener != null){
@@ -77,16 +78,17 @@ public class PreOrderHistoryAdapter extends RecyclerView.Adapter<PreOrderHistory
 
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4;
-        public LinearLayout ll_item_layout;
+        public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4,tv_deal_5;
+        public RelativeLayout rl_item_layout;
 
         public MyHolder(View itemView) {
             super(itemView);
-            ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
+            rl_item_layout = itemView.findViewById(R.id.rl_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
+            tv_deal_5 = itemView.findViewById(R.id.tv_deal_5);
         }
 
     }

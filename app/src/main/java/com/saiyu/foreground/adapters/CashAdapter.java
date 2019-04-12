@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +82,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.MyHolder> {
         text = text + " 手续费: " + mItems.get(i).getCharge() + "%,到账时间:" + mItems.get(i).getPayDateStr();
         myHolder.tv_text.setText(text);
 
-        myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
+        myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int layoutPosition = myHolder.getLayoutPosition();
@@ -97,7 +98,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.MyHolder> {
                 }
             }
         });
-        myHolder.ll_item_layout.setOnLongClickListener(new View.OnLongClickListener() {
+        myHolder.rl_item_layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 int layoutPosition = myHolder.getLayoutPosition();
@@ -150,13 +151,13 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.MyHolder> {
 
     public class MyHolder extends RecyclerView.ViewHolder {
         public TextView tv_bankname,tv_text;
-        public LinearLayout ll_item_layout;
+        public RelativeLayout rl_item_layout;
         public Button btn_revise,btn_delete;
         public ImageView iv_icon,iv_default;
 
         public MyHolder(View itemView) {
             super(itemView);
-            ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
+            rl_item_layout = itemView.findViewById(R.id.rl_item_layout);
             tv_bankname = itemView.findViewById(R.id.tv_bankname);
             tv_text = itemView.findViewById(R.id.tv_text);
             iv_icon = itemView.findViewById(R.id.iv_icon);

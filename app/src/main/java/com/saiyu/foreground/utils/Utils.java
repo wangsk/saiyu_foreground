@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -262,66 +263,6 @@ public class Utils {
         } else return;
     }
 
-    public static void setExtraView(List<String>extraList,TextView tv_2_2,TextView tv_2_3,TextView tv_2_4,TextView tv_2_5,TextView tv_2_6){
-        switch (extraList.size()){
-            case 1:
-                tv_2_2.setText(extraList.get(0));
-                tv_2_2.setVisibility(View.VISIBLE);
-                tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                break;
-            case 2:
-                tv_2_2.setText(extraList.get(0));
-                tv_2_2.setVisibility(View.VISIBLE);
-                tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_3.setText(extraList.get(1));
-                tv_2_3.setVisibility(View.VISIBLE);
-                tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                break;
-            case 3:
-                tv_2_2.setText(extraList.get(0));
-                tv_2_2.setVisibility(View.VISIBLE);
-                tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_3.setText(extraList.get(1));
-                tv_2_3.setVisibility(View.VISIBLE);
-                tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_4.setText(extraList.get(2));
-                tv_2_4.setVisibility(View.VISIBLE);
-                tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                break;
-            case 4:
-                tv_2_2.setText(extraList.get(0));
-                tv_2_2.setVisibility(View.VISIBLE);
-                tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_3.setText(extraList.get(1));
-                tv_2_3.setVisibility(View.VISIBLE);
-                tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_4.setText(extraList.get(2));
-                tv_2_4.setVisibility(View.VISIBLE);
-                tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_5.setText(extraList.get(3));
-                tv_2_5.setVisibility(View.VISIBLE);
-                tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                break;
-            case 5:
-                tv_2_2.setText(extraList.get(0));
-                tv_2_2.setVisibility(View.VISIBLE);
-                tv_2_2.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_3.setText(extraList.get(1));
-                tv_2_3.setVisibility(View.VISIBLE);
-                tv_2_3.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_4.setText(extraList.get(2));
-                tv_2_4.setVisibility(View.VISIBLE);
-                tv_2_4.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_5.setText(extraList.get(3));
-                tv_2_5.setVisibility(View.VISIBLE);
-                tv_2_5.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                tv_2_6.setText(extraList.get(4));
-                tv_2_6.setVisibility(View.VISIBLE);
-                tv_2_6.setBackground(App.getApp().getResources().getDrawable(R.drawable.border_colorline_yellow));
-                break;
-        }
-    }
-
 
     public static void setButtonClickable(Button button, boolean flag){
         if(button == null){
@@ -336,6 +277,12 @@ public class Utils {
             button.setFocusable(false);
             button.setBackground(App.getApp().getResources().getDrawable(R.drawable.shape_bg_grey));
         }
+    }
+
+    public static void backgroundAlpha(Activity activity, float bgAlpha) {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        activity.getWindow().setAttributes(lp);
     }
 
 }

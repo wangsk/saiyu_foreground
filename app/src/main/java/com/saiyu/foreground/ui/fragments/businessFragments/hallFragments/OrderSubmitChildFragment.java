@@ -28,7 +28,9 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.interfaces.OnClickListener;
 import com.saiyu.foreground.interfaces.OnListCallbackListener;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments.OrderRechargeFragment;
 import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
@@ -64,12 +66,12 @@ import static com.saiyu.foreground.ui.views.RxDialogChooseImage.LayoutType.TITLE
 public class OrderSubmitChildFragment extends BaseFragment implements CallbackUtils.OnActivityCallBack,CallbackUtils.ResponseCallback ,CallbackUtils.OnContentListener{
 
     @ViewById
-    TextView tv_time_show,tv_averagetime;
+    TextView tv_time_show,tv_averagetime,tv_record_upload,tv_info_upload,tv_success_upload;
     @ViewById
-    Button btn_submit,btn_success_upload,btn_info_upload,btn_record_upload,btn_time;
+    Button btn_submit,btn_time;
 
     @ViewById
-    ImageView iv_recharge_success_show,iv_recharge_info_show,iv_record_show,iv_1,iv_2,iv_3;
+    ImageView iv_recharge_success_show,iv_recharge_info_show,iv_record_show,iv_1,iv_2,iv_3,iv_success_del,iv_info_del,iv_record_del;
     @ViewById
     ProgressBar pb_loading;
     @ViewById
@@ -110,12 +112,18 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                 if(uploadCode == 0){
                     successUrl = ret.getData().getSrc();
                     LogUtils.print("successUrl=== " + successUrl);
+                    iv_success_del.setVisibility(View.VISIBLE);
+                    tv_success_upload.setVisibility(View.GONE);
                 } else if(uploadCode == 1){
                     infoUrl = ret.getData().getSrc();
                     LogUtils.print("infoUrl=== " + infoUrl);
+                    iv_info_del.setVisibility(View.VISIBLE);
+                    tv_info_upload.setVisibility(View.GONE);
                 } else if(uploadCode == 2){
                     recordUrl = ret.getData().getSrc();
                     LogUtils.print("recordUrl=== " + recordUrl);
+                    iv_record_del.setVisibility(View.VISIBLE);
+                    tv_record_upload.setVisibility(View.GONE);
                 }
             }
         }
@@ -148,10 +156,28 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
         }
     }
 
-    @Click({R.id.btn_submit,R.id.ll_selector_3, R.id.ll_selector_1, R.id.ll_selector_2,R.id.btn_time, R.id.tv_time_show, R.id.btn_record_upload, R.id.btn_info_upload, R.id.btn_success_upload
-    ,R.id.iv_recharge_info_show})
+    @Click({R.id.btn_submit,R.id.ll_selector_3, R.id.ll_selector_1, R.id.ll_selector_2,R.id.btn_time, R.id.tv_time_show, R.id.tv_record_upload, R.id.tv_info_upload, R.id.tv_success_upload
+    ,R.id.iv_recharge_info_show,R.id.iv_recharge_success_show,R.id.iv_record_show,R.id.iv_success_del,R.id.iv_info_del,R.id.iv_record_del})
     void onClick(View view) {
         switch (view.getId()){
+            case R.id.iv_success_del:
+                successUrl = "";
+                iv_success_del.setVisibility(View.GONE);
+                tv_success_upload.setVisibility(View.VISIBLE);
+                iv_recharge_success_show.setImageDrawable(mContext.getDrawable(R.mipmap.paizhaoshangchuan));
+                break;
+            case R.id.iv_info_del:
+                infoUrl = "";
+                iv_info_del.setVisibility(View.GONE);
+                tv_info_upload.setVisibility(View.VISIBLE);
+                iv_recharge_info_show.setImageDrawable(mContext.getDrawable(R.mipmap.paizhaoshangchuan));
+                break;
+            case R.id.iv_record_del:
+                recordUrl = "";
+                iv_record_del.setVisibility(View.GONE);
+                tv_record_upload.setVisibility(View.VISIBLE);
+                iv_record_show.setImageDrawable(mContext.getDrawable(R.mipmap.paizhaoshangchuan));
+                break;
             case R.id.btn_submit:
                 if(TextUtils.isEmpty(ReceiveId)){
                     LogUtils.print("ReceiveId === " + ReceiveId);
@@ -161,10 +187,11 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     LogUtils.print("ReceiveQBCount === " + ReceiveQBCount);
                     return;
                 }
-                if(TextUtils.isEmpty(rechargeTime)){
-                    LogUtils.print("rechargeTime === " + rechargeTime);
-                    return;
-                }
+//                if(TextUtils.isEmpty(rechargeTime)){
+//                    LogUtils.print("rechargeTime === " + rechargeTime);
+//                    Toast.makeText(mContext,"请选择充值时间",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if(TextUtils.isEmpty(infoUrl)){
                     LogUtils.print("infoUrl === " + infoUrl);
                     Toast.makeText(mContext,"请上传充值明细截图",Toast.LENGTH_SHORT).show();
@@ -187,7 +214,16 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                 bundle.putString("orderNum",orderNum);
 
                 OrderConfirmFragment orderConfirmFragment = OrderConfirmFragment.newInstance(bundle);
-                ((HallOrderDetailFragment)getParentFragment()).start(orderConfirmFragment);
+
+                Bundle bundle_1 = ((ContainerActivity)getActivity()).getIntent().getExtras();
+                if(bundle_1 != null){
+                    int fragmentTag = bundle_1.getInt(ContainerActivity.FragmentTag,0);
+                    if(fragmentTag == ContainerActivity.WaitingRechargeOrderFragmentTag){
+                        ((OrderRechargeFragment)getParentFragment()).start(orderConfirmFragment);
+                    } else if(fragmentTag == ContainerActivity.HallOrderDetailFragmentTag){
+                        ((HallOrderDetailFragment)getParentFragment()).start(orderConfirmFragment);
+                    }
+                }
 
                 break;
             case R.id.ll_selector_1:
@@ -245,15 +281,15 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                 Calendar calendar1 = TimeParseUtils.DateToCalendar(new Date(System.currentTimeMillis()));
                 showTimeSelectDialog(calendar1);
                 break;
-            case R.id.btn_record_upload:
+            case R.id.tv_record_upload:
                 uploadCode = 2;
                 upLoadPic();
                 break;
-            case R.id.btn_info_upload:
+            case R.id.tv_info_upload:
                 uploadCode = 1;
                 upLoadPic();
                 break;
-            case R.id.btn_success_upload:
+            case R.id.tv_success_upload:
                 uploadCode = 0;
                 upLoadPic();
                 break;
@@ -261,6 +297,20 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                 if(!TextUtils.isEmpty(infoUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(infoUrl);
+                    photoViewDialog.show();
+                }
+                break;
+            case R.id.iv_recharge_success_show:
+                if(!TextUtils.isEmpty(successUrl)){
+                    PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                    photoViewDialog.setmUrl(successUrl);
+                    photoViewDialog.show();
+                }
+                break;
+            case R.id.iv_record_show:
+                if(!TextUtils.isEmpty(recordUrl)){
+                    PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                    photoViewDialog.setmUrl(recordUrl);
                     photoViewDialog.show();
                 }
                 break;

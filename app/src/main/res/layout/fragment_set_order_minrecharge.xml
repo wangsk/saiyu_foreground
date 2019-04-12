@@ -14,17 +14,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:text="最低充值: "
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:text="最低充值: "/>
+                android:textSize="15sp" />
+
             <EditText
                 android:id="@+id/et_release_num"
                 android:layout_width="match_parent"
@@ -46,66 +48,46 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_recharge_1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
                 android:layout_marginLeft="20dp"
-                android:text="如少充则: "
+                android:text="如少充则 "
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="100dp"
+            <RadioGroup
+                android:id="@+id/rg_selector"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="按原价计算"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-            <ImageView
-                android:id="@+id/iv_recharge_1"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="20dp"
-                android:src="@mipmap/mem_info_icon"
-                android:visibility="visible"/>
+                android:orientation="horizontal">
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_recharge_2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="1dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue"
+                    android:text="按原价计算"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:checked="true"/>
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="按优惠5%计算"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-            <ImageView
-                android:id="@+id/iv_recharge_2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="20dp"
-                android:src="@mipmap/mem_info_icon"
-                android:visibility="gone"/>
+                <RadioButton
+                    android:id="@+id/rb_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue"
+                    android:text="按优惠5%计算"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -117,7 +99,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="单词最低多少Q币，如果卖家提交的成功充值数量低于此数量则扣除5%的违约金，如果买家同时选择了原价计算则不扣除违约金；"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -149,10 +131,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:text="取消设置"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="18sp" />
 
         </LinearLayout>

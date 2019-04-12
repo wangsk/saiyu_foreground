@@ -9,7 +9,7 @@ import com.saiyu.foreground.R;
 public class CountDownTimerUtils extends CountDownTimer {
     private TextView mTextView;
     private boolean isClickable = true;
-    private int bgDrawable = R.drawable.shape_bg_grey20,foreDrawable = R.drawable.shape_bg_transparent;
+    private int bgDrawable = R.drawable.shape_bg_line,foreDrawable = R.drawable.shape_bg_transparent;
     /**
      * @param textView          The TextView
      * @param millisInFuture    The number of millis in the future from the call

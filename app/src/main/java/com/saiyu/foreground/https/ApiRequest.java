@@ -1,7 +1,6 @@
 package com.saiyu.foreground.https;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -60,13 +59,12 @@ import com.saiyu.foreground.https.response.FaceRet;
 import com.saiyu.foreground.https.response.SellerOrderHistoryRet;
 import com.saiyu.foreground.https.response.SellerOrderManagerRet;
 import com.saiyu.foreground.https.response.SellerOrderReceiveInfoRet;
-import com.saiyu.foreground.https.response.StartAppealInfoRet;
 import com.saiyu.foreground.https.response.StatisticsListRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.https.response.WaitingRechargeOrderRet;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
-import com.saiyu.foreground.ui.activitys.MainActivity_;
+import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.CountDownTimerUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -1508,53 +1506,6 @@ public class ApiRequest {
                 });
     }
 
-    public static void startAppealInfo(String orderReceiveId,final String callBackKey, final ProgressBar pb_loading) {
-        pb_loading.setVisibility(View.VISIBLE);
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("orderReceiveId",orderReceiveId);
-
-        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
-
-        apiService.startAppealInfo(requestParams.getBody())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StartAppealInfoRet>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.print("onError == " + e.toString());
-                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
-                        try {
-                            pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1) {
-                            LogUtils.print("pb_loading close Exception");
-                        }
-                    }
-
-                    @Override
-                    public void onNext(StartAppealInfoRet ret) {
-                        try {
-                            pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1) {
-                            LogUtils.print("pb_loading close Exception");
-                        }
-                        if (ret == null) {
-                            return;
-                        }
-                        if (ret.getCode() != 200) {
-                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
-
-                    }
-                });
-    }
     public static void orderReceiveConfirmP(String orderReceiveId,final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
         RequestParams requestParams = new RequestParams();
@@ -4886,7 +4837,7 @@ public class ApiRequest {
 
                 @Override
                 public void onResponse(String response, int id) {
-                    LogUtils.print(" QQ Response===================" + response);
+                    LogUtils.print(" qq Response===================" + response);
                     if (TextUtils.isEmpty(response)) {
                         return;
                     }
@@ -4896,7 +4847,7 @@ public class ApiRequest {
                         String str = "";
                         while (m.find()) {
                             str = m.group(0);
-                            LogUtils.print("QQ Response===================" + m.group(0));
+                            LogUtils.print("qq Response===================" + m.group(0));
                         }
                         if (TextUtils.isEmpty(str)) {
                             return;

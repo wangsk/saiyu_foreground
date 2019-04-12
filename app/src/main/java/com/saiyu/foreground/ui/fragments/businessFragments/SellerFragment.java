@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.SellerWebUrlAdapter;
@@ -21,6 +20,7 @@ import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
+import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
@@ -67,9 +67,6 @@ public class SellerFragment extends BaseFragment implements CallbackUtils.Respon
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(2));
-        sellerWebUrlAdapter = new SellerWebUrlAdapter(mItems);
-        recyclerView.setAdapter(sellerWebUrlAdapter);
-        sellerWebUrlAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -140,7 +137,7 @@ public class SellerFragment extends BaseFragment implements CallbackUtils.Respon
                     mContext.startActivity(intent);
                     break;
                 case R.id.btn_receive_right:
-                    Toast.makeText(mContext,"请往web端处理！",Toast.LENGTH_SHORT).show();
+                    MyToast.newInstance(getActivity(),"请前往web端操作","APP暂不支持").show();
                     break;
                 case R.id.btn_point_stream:
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SellerOrderPointStreamFragmentTag);
@@ -148,7 +145,7 @@ public class SellerFragment extends BaseFragment implements CallbackUtils.Respon
                     mContext.startActivity(intent);
                     break;
                 case R.id.btn_hongbao:
-                    Toast.makeText(mContext,"请往web端处理！",Toast.LENGTH_SHORT).show();
+                    MyToast.newInstance(getActivity(),"请前往web端操作","APP暂不支持").show();
                     break;
                 case R.id.btn_gohall:
                     CallbackUtils.doBottomSelectCallback(1);

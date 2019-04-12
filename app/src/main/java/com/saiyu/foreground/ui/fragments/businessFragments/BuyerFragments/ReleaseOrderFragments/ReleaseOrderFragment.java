@@ -1,16 +1,20 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -47,7 +51,7 @@ import java.util.List;
 @EFragment(R.layout.fragment_release_order)
 public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.ResponseCallback, CallbackUtils.OnActivityCallBack {
     @ViewById
-    TextView tv_title_content, tv_orderName, tv_release_count_prompt, tv_mobile, tv_time_online, tv_function, tv_sw, tv_rechargeGame, tv_gamePlace, tv_betweentime;
+    TextView tv_title_content, tv_orderName, tv_release_count_prompt, tv_mobile, tv_time_online, tv_function, tv_sw, tv_rechargeGame, tv_gamePlace;
     @ViewById
     Button btn_title_back;
     @ViewById
@@ -61,7 +65,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
     @ViewById
     RelativeLayout rl_orderEndTime, rl_orderPsw, rl_order_min;
     @ViewById
-    ImageView iv_click, iv_orderEndTime, iv_orderPsw, iv_order_min, iv_replace, iv_pic;
+    ImageView iv_click, iv_orderEndTime, iv_orderPsw, iv_order_min, iv_replace, iv_pic,iv_betweentime;
     @ViewById
     Spinner sp_selector;
     @ViewById
@@ -71,8 +75,9 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
     private boolean IsNeedMobile;
     private List<String> postScriptList;
     private String name, unitName, ReserveAccount, mobile, orderNum, convertCount, productId, reserveTitle, onLineStartTime, onLineStopTime, orderEndTime, orderPsw,
-            onceMinCount, lessChargeDiscount, orderInterval, IsAgentConfirm, ReservePwd, OftenLoginProvince, OftenLoginCity, IsPicConfirm, Remarks, ContactQQ, IsAllowShowContact, ProductProperty1, ProductProperty2, ProductProperty3, RoleName;
+             orderInterval = "3", IsAgentConfirm, ReservePwd, OftenLoginProvince, OftenLoginCity, IsPicConfirm, Remarks, IsAllowShowContact, ProductProperty1, ProductProperty2, ProductProperty3, RoleName;
     private int isRole;
+    private float LessChargeDiscount = 1f,OnceMinCount = 0f;
 
     private BigDecimal convertCountBig = new BigDecimal(0);//QB和预定数量换算的折扣
 
@@ -107,7 +112,12 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             ProductProperty1 = bundle.getString("ProductProperty1", "");
             ProductProperty2 = bundle.getString("ProductProperty2", "");
             ProductProperty3 = bundle.getString("ProductProperty3", "");
-            tv_gamePlace.setText(ProductProperty1 + " " + ProductProperty2 + " " + ProductProperty3);
+            if(TextUtils.isEmpty(ProductProperty1)){
+                ll_gamePlace.setVisibility(View.GONE);
+            } else {
+                tv_gamePlace.setText(ProductProperty1 + " " + ProductProperty2 + " " + ProductProperty3);
+                ll_gamePlace.setVisibility(View.VISIBLE);
+            }
 
             isRole = bundle.getInt("isRole");
             if (isRole == 0) {
@@ -187,7 +197,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 return;
             }
             if (ret.getData().isResult()) {
-                PopWindowUtils.initPopWindow_9(getActivity(), name, new OnClickListener() {
+                initPopWindow_9(name, new OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (IsNeedMobile) {
@@ -208,8 +218,8 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                             bundle.putString("OnlineTimeEnd", onLineStopTime);
                             bundle.putString("OrderExpiryTime", orderEndTime);
                             bundle.putString("OrderPwd", orderPsw);
-                            bundle.putString("OnceMinCount", onceMinCount);
-                            bundle.putString("LessChargeDiscount", lessChargeDiscount);
+                            bundle.putFloat("OnceMinCount", OnceMinCount);
+                            bundle.putFloat("LessChargeDiscount", LessChargeDiscount);
                             bundle.putString("OrderInterval", orderInterval);
                             bundle.putString("IsAgentConfirm", IsAgentConfirm);
                             bundle.putString("ReservePwd", ReservePwd);
@@ -220,6 +230,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                             bundle.putString("ContactMobile", mobile);
                             bundle.putString("ContactQQ", et_qq.getText().toString());
                             bundle.putString("RoleName", RoleName);
+                            bundle.putString("IsAllowShowContact",IsAllowShowContact);
                             OrderSubmitCheckMsgFragment orderSubmitCheckMsgFragment = OrderSubmitCheckMsgFragment.newInstance(bundle);
                             start(orderSubmitCheckMsgFragment);
                         } else {
@@ -240,8 +251,8 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                             requestParams.put("OnlineTimeEnd", onLineStopTime);
                             requestParams.put("OrderExpiryTime", orderEndTime);
                             requestParams.put("OrderPwd", orderPsw);
-                            requestParams.put("OnceMinCount", onceMinCount);
-                            requestParams.put("LessChargeDiscount", lessChargeDiscount);
+                            requestParams.put("OnceMinCount", OnceMinCount);
+                            requestParams.put("LessChargeDiscount", LessChargeDiscount);
                             requestParams.put("OrderInterval", orderInterval);
                             requestParams.put("IsAgentConfirm", IsAgentConfirm);
                             requestParams.put("ReservePwd", ReservePwd);
@@ -253,6 +264,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                             requestParams.put("ContactQQ", et_qq.getText().toString());
                             requestParams.put("code", "");
                             requestParams.put("RoleName", RoleName);
+                            requestParams.put("IsAllowShowContact", IsAllowShowContact);
                             LogUtils.print("发布订单信息 ： " + requestParams.toString());
                             ApiRequest.orderPublish(requestParams, "ReleaseOrderFragment_orderPublish", pb_loading);
                         }
@@ -272,8 +284,10 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             case R.id.top_bar:
                 if(ll_extra.getVisibility() == View.GONE){
                     dropdown_layout.toggle(ll_extra, true);
+                    iv_click.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.shang));
                 } else {
                     dropdown_layout.toggle(ll_extra, false);
+                    iv_click.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.xia));
                 }
 
                 break;
@@ -282,7 +296,8 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 getFragmentManager().popBackStack();
                 break;
             case R.id.ll_onlineTime:
-                bundle.putString("onLineTime", tv_time_online.getText().toString());
+                bundle.putString("onLineStartTime", onLineStartTime);
+                bundle.putString("onLineStopTime", onLineStopTime);
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SetOnlineTimeFragmentTag);
                 intent.putExtras(bundle);
                 getActivity().startActivityForResult(intent, ContainerActivity.SetOnlineTimeFragmentTag);
@@ -365,6 +380,8 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                     return;
                 }
 
+                dataFormat();//点击确认发布的时候再检测一下数据格式
+
                 ApiRequest.checkLimitQQ(ReserveAccount, "ReleaseOrderFragment_checkLimitQQ", pb_loading);
 
                 break;
@@ -388,7 +405,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                     onLineStopTime = data.getExtras().getString("onLineStopTime");
                     LogUtils.print("onLineStartTime === " + onLineStartTime + " onLineStopTime === " + onLineStopTime);
                     if (TextUtils.isEmpty(onLineStartTime) || TextUtils.isEmpty(onLineStopTime)) {
-                        tv_time_online.setText("00:00-23:59");
+                        tv_time_online.setText("始终在线");
                     } else {
                         tv_time_online.setText(onLineStartTime + "-" + onLineStopTime);
                     }
@@ -405,7 +422,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                     orderEndTime = data.getExtras().getString("orderEndTime");
                     LogUtils.print("orderEndTime === " + orderEndTime);
                     if (TextUtils.isEmpty(orderEndTime)) {
-                        iv_orderEndTime.setVisibility(View.INVISIBLE);
+                        iv_orderEndTime.setVisibility(View.GONE);
                     } else {
                         iv_orderEndTime.setVisibility(View.VISIBLE);
                     }
@@ -422,7 +439,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                     orderPsw = data.getExtras().getString("orderPsw");
                     LogUtils.print("orderPsw === " + orderPsw);
                     if (TextUtils.isEmpty(orderPsw)) {
-                        iv_orderPsw.setVisibility(View.INVISIBLE);
+                        iv_orderPsw.setVisibility(View.GONE);
                     } else {
                         iv_orderPsw.setVisibility(View.VISIBLE);
                     }
@@ -436,11 +453,12 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                     return;
                 }
                 try {
-                    onceMinCount = data.getExtras().getString("onceMinCount");
-                    lessChargeDiscount = data.getExtras().getString("lessChargeDiscount");
-                    LogUtils.print("onceMinCount === " + onceMinCount + " lessChargeDiscount === " + lessChargeDiscount);
-                    if (TextUtils.isEmpty(onceMinCount)) {
-                        iv_order_min.setVisibility(View.INVISIBLE);
+                    OnceMinCount = data.getExtras().getFloat("onceMinCount");
+                    LessChargeDiscount = data.getExtras().getFloat("lessChargeDiscount");
+                    LogUtils.print("onceMinCount === " + OnceMinCount + " lessChargeDiscount === " + LessChargeDiscount);
+
+                    if(OnceMinCount == 0f){
+                        iv_order_min.setVisibility(View.GONE);
                     } else {
                         iv_order_min.setVisibility(View.VISIBLE);
                     }
@@ -448,13 +466,19 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 } catch (Exception e) {
 
                 }
+                break;
             case ContainerActivity.SetBetweenTimeFragmentTag:
                 if (data == null || data.getExtras() == null) {
                     return;
                 }
                 try {
                     orderInterval = data.getExtras().getString("orderInterval");
-                    tv_betweentime.setText(orderInterval + "分钟");
+                    if(TextUtils.isEmpty(orderInterval)){
+                        orderInterval = "3";
+                        iv_betweentime.setVisibility(View.GONE);
+                    } else {
+                        iv_betweentime.setVisibility(View.VISIBLE);
+                    }
 
                     LogUtils.print("orderInterval === " + orderInterval);
 
@@ -467,20 +491,16 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                     return;
                 }
                 try {
-                    ReserveAccount = data.getExtras().getString("ReserveAccount");
                     ReservePwd = data.getExtras().getString("ReservePwd");
                     OftenLoginProvince = data.getExtras().getString("OftenLoginProvince");
                     OftenLoginCity = data.getExtras().getString("OftenLoginCity");
                     LogUtils.print("ReserveAccount === " + ReserveAccount + " ReservePwd == " + ReservePwd + " OftenLoginProvince == " + OftenLoginProvince + " OftenLoginCity == " + OftenLoginCity);
                     if (TextUtils.isEmpty(ReservePwd)) {
                         IsAgentConfirm = "0";
-                        iv_replace.setVisibility(View.INVISIBLE);
+                        iv_replace.setVisibility(View.GONE);
                     } else {
                         IsAgentConfirm = "1";
                         iv_replace.setVisibility(View.VISIBLE);
-                    }
-                    if (!TextUtils.isEmpty(ReserveAccount)) {
-                        et_recharge_qqnum.setText(ReserveAccount);
                     }
 
                 } catch (Exception e) {
@@ -579,6 +599,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 break;
             case R.id.et_recharge_qqnum:
                 ReserveAccount = text;
+                et_qq.setText(ReserveAccount);
                 if (TextUtils.isEmpty(et_release_count_str) || TextUtils.isEmpty(et_release_discount_str) || TextUtils.isEmpty(et_release_price_str) || TextUtils.isEmpty(ReserveAccount)) {
                     Utils.setButtonClickable(btn_confirm, false);
                     return;
@@ -622,6 +643,11 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             return;
         }
 
+        dataFormat();
+
+    }//focusChange end
+
+    private void dataFormat(){
         /**
          * 三级联动，优先处理非格式化输入：
          * 1.预定数量的值换算成Q币非整数，Q币向上取整，然后再得出预定数量
@@ -771,7 +797,96 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
         if (tv_function != null && inputCount != null && disCount != null && price != null) {
             tv_function.setText(inputCount + name + unitName + "=" + qbCount + "币*" + disCount + "折=" + price + "元");
         }
+    }
 
-    }//focusChange end
+
+    public void initPopWindow_9(String gameName, final OnClickListener onClickListener) {
+        // TODO Auto-generated method stub
+        // 将布局文件转换成View对象，popupview 内容视图
+        if(getActivity() == null){
+            return;
+        }
+        View mPopView = getActivity().getLayoutInflater().inflate(R.layout.pop_orderrelease, null);
+        // 将转换的View放置到 新建一个popuwindow对象中
+        final PopupWindow mPopupWindow_9 = new PopupWindow(mPopView,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        // 点击popuwindow外让其消失
+        mPopupWindow_9.setOutsideTouchable(true);
+        mPopupWindow_9.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_9.setFocusable(true);
+        mPopupWindow_9.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Utils.backgroundAlpha(getActivity(), 1f);
+            }
+        });
+
+        final CheckBox cb_1 = (CheckBox)mPopView.findViewById(R.id.cb_1);
+        cb_1.setText("我今天没有充值相同数量的"+gameName+"点券");
+        final CheckBox cb_2 = (CheckBox)mPopView.findViewById(R.id.cb_2);
+        final CheckBox cb_3 = (CheckBox)mPopView.findViewById(R.id.cb_3);
+        final Button btn_confirm = (Button)mPopView.findViewById(R.id.btn_confirm);
+        cb_1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(cb_2.isChecked() && cb_3.isChecked()){
+                        Utils.setButtonClickable(btn_confirm,true);
+                    } else {
+                        Utils.setButtonClickable(btn_confirm,false);
+                    }
+                } else {
+                    Utils.setButtonClickable(btn_confirm,false);
+                }
+            }
+        });
+        cb_2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(cb_1.isChecked() && cb_3.isChecked()){
+                        Utils.setButtonClickable(btn_confirm,true);
+                    } else {
+                        Utils.setButtonClickable(btn_confirm,false);
+                    }
+                } else {
+                    Utils.setButtonClickable(btn_confirm,false);
+                }
+            }
+        });
+        cb_3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(cb_1.isChecked() && cb_2.isChecked()){
+                        Utils.setButtonClickable(btn_confirm,true);
+                    } else {
+                        Utils.setButtonClickable(btn_confirm,false);
+                    }
+                } else {
+                    Utils.setButtonClickable(btn_confirm,false);
+                }
+            }
+        });
+
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onClickListener != null){
+                    onClickListener.onClick(v);
+                }
+                if (mPopupWindow_9.isShowing()) {
+                    mPopupWindow_9.dismiss();
+                }
+            }
+        });
+
+        mPopupWindow_9.setAnimationStyle(R.style.pop_animation_up);
+        // 作为下拉视图显示
+        mPopupWindow_9.showAtLocation(mPopView, Gravity.BOTTOM, 0, 0);
+        Utils.backgroundAlpha(getActivity(), 0.7f);
+
+    }
 
 }

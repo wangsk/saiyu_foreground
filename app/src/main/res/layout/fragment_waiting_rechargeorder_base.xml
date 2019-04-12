@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line">
+    <include
+        android:id="@+id/title"
+        layout="@layout/titlebar_layout" />
+
+    <LinearLayout
+        android:id="@+id/ll_body"
+        android:layout_below="@id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:orientation="vertical">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/layout_tab"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:tabBackground="@color/transparent"
+                app:tabIndicatorColor="@color/transparent"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/blue"
+                app:tabTextAppearance="@style/TabTextSizeStyle"
+                app:tabTextColor="@color/black" />
+
+            <com.saiyu.foreground.ui.views.MyViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_last"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableLeft="@mipmap/mem_info_icon"
+                android:text="  上一个"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:background="@null"
+                android:drawableRight="@mipmap/mem_info_icon"
+                android:text="下一个  "
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_blank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:drawableTop="@mipmap/blank"
+        android:text="您当前没有待充值订单"
+        android:textAlignment="center"
+        android:textColor="@color/black_light"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="@android:style/Widget.Material.ProgressBar.Small"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone" />
+
+</RelativeLayout>
