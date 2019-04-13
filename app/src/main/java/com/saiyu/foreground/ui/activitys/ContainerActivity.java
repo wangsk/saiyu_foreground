@@ -9,6 +9,7 @@ import com.saiyu.foreground.R;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.FaceIdentifyFragment;
 import com.saiyu.foreground.ui.fragments.FindPswFragments.ForgotPswFragment;
+import com.saiyu.foreground.ui.fragments.GuideFragment;
 import com.saiyu.foreground.ui.fragments.LoginFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistUnionIdFragment;
@@ -117,6 +118,7 @@ public class ContainerActivity extends BaseActivity {
     public static final int SellerOrderPointStreamFragmentTag = 40;//卖家接单点数流水
     public static final int SubmitPicReplaceConfirmFragmentTag = 41;//申请验图确认
     public static final int PointManagerFragmentTag = 42;//点数管理
+    public static final int GuideFragmentTag = 43;//引导页
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -204,6 +206,8 @@ public class ContainerActivity extends BaseActivity {
                 return SubmitPicReplaceConfirmFragment.newInstance(bundle);
             case PointManagerFragmentTag:
                 return PointManagerFragment.newInstance(bundle);
+            case GuideFragmentTag:
+                return GuideFragment.newInstance(bundle);
                 default:
                     return null;
         }

@@ -16,6 +16,8 @@ public class ConstValue {
     //自动登录的标记
     public static final String AUTO_LOGIN_FLAG = "autologinflag";
 
+    public static final String ISFIRSTRUNNING = "isFirstRunning";
+
     public static final int ACTION_PHOTOGRAPH = 201;//拍照的请求码
     public static final int ACTION_TRIM_IMAGE = 202;//相册的请求码
     public static final int ACTION_ALBUM = 203;//裁剪照片的请求码

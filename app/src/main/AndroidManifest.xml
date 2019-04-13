@@ -40,7 +40,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.activitys.MainActivity_"
+        <activity android:name=".ui.activitys.SplashActivity_"
             android:theme="@style/AppTheme.NoActionBar_loading">
 
             <intent-filter>
@@ -49,6 +49,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+        </activity>
+        <activity android:name=".ui.activitys.MainActivity_"
+            >
         </activity>
         <activity android:name=".ui.activitys.ContainerActivity_">
 
