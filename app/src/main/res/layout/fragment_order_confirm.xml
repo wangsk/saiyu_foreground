@@ -17,17 +17,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="0dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="货款金额: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="货款金额"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -44,17 +45,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="接单扣点: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="接单扣点"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -71,17 +73,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="交易成功返点: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="交易成功返点"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -98,17 +101,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="确认收货方式: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="确认收货方式"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -126,50 +130,59 @@
             android:id="@+id/ll_1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="通知类型: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="通知类型"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="预审结果"
-                android:textColor="@color/blue"
-                android:layout_marginLeft="10dp"
-                android:textSize="15sp" />
             <ImageView
                 android:id="@+id/iv_1"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="80dp"
                 android:src="@mipmap/xuanzhong"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预审结果"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="15sp" />
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/xuanzhong"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,49 +191,47 @@
                 android:text="确认结果"
                 android:textColor="@color/blue"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/iv_2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="80dp"
-                android:src="@mipmap/xuanzhong"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="通知手机: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="通知手机"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/et_mobile"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@null"
-                android:gravity="center_vertical"
+                android:gravity="right|center_vertical"
                 android:hint="请输入手机号码"
                 android:inputType="number"
-                android:maxLength="10"
+                android:maxLength="11"
                 android:maxLines="1"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
         </LinearLayout>
 
         <LinearLayout
@@ -232,30 +243,32 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="通知邮箱: "
-                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="通知邮箱"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/et_email"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@null"
-                android:gravity="center_vertical"
+                android:gravity="right|center_vertical"
                 android:hint="请输入邮箱地址"
                 android:inputType="textEmailAddress"
-                android:maxLength="10"
+                android:maxLength="30"
                 android:maxLines="1"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
         </LinearLayout>
 
         <Button

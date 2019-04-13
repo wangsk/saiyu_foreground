@@ -3,8 +3,10 @@ package com.saiyu.foreground.utils;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,7 +22,9 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.MyTagAdapter;
 import com.saiyu.foreground.https.response.CashDetailRet;
@@ -62,12 +66,12 @@ public class PopWindowUtils {
 
         // 点击popuwindow外让其消失
         mPopupWindow_2.setOutsideTouchable(true);
-        mPopupWindow_2.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_2.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_tran_half));
         mPopupWindow_2.setFocusable(true);
         mPopupWindow_2.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                Utils.backgroundAlpha(activity, 1f);
+//                Utils.backgroundAlpha(activity, 1f);
             }
         });
 
@@ -99,7 +103,7 @@ public class PopWindowUtils {
         mPopupWindow_2.setAnimationStyle(R.style.pop_animation);
         // 作为下拉视图显示
         mPopupWindow_2.showAsDropDown(view, Gravity.TOP, 0, 300);
-        Utils.backgroundAlpha(activity, 0.7f);
+//        Utils.backgroundAlpha(activity, 0.7f);
 
     }
 
@@ -118,7 +122,7 @@ public class PopWindowUtils {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         // 点击popuwindow外让其消失
         mPopupWindow_3.setOutsideTouchable(true);
-        mPopupWindow_3.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_3.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_tran_half));
         mPopupWindow_3.setFocusable(true);
         mPopupWindow_3.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -128,7 +132,7 @@ public class PopWindowUtils {
                 callbackList.add(rDiscount);
                 callbackList.add(extend);
                 listCallbackListener.setOnListCallbackListener(callbackList);
-                Utils.backgroundAlpha(activity, 1f);
+//                Utils.backgroundAlpha(activity, 1f);
             }
         });
 
@@ -348,10 +352,6 @@ public class PopWindowUtils {
                 extend = "";
                 rQBCount = "";
                 rDiscount = "";
-
-                if (mPopupWindow_3.isShowing()) {
-                    mPopupWindow_3.dismiss();
-                }
             }
         });
 
@@ -363,27 +363,43 @@ public class PopWindowUtils {
                     String tv_2 = et_count_2.getText().toString();
                     String tv_3 = et_count_3.getText().toString();
                     String tv_4 = et_count_4.getText().toString();
-                    if(TextUtils.isEmpty(tv_1) && TextUtils.isEmpty(tv_2)){
-
-                    } else {
-                        if(TextUtils.isEmpty(tv_1)){
-                            rQBCount = tv_2;
-                        } else if(TextUtils.isEmpty(tv_2)){
-                            rQBCount = tv_1;
-                        } else {
-                            rQBCount = tv_1 + "o" + tv_2;
+                    if(!TextUtils.isEmpty(tv_1) && !TextUtils.isEmpty(tv_2)){
+                        if(Integer.parseInt(tv_1) > 20000 || Integer.parseInt(tv_2) > 20000){
+                            Toast.makeText(App.getApp(),"输入Q币数量不能大于20000",Toast.LENGTH_SHORT).show();
+                            return;
                         }
+                        rQBCount = tv_1 + "o" + tv_2;
+                    } else if(!TextUtils.isEmpty(tv_1)){
+                        if(Integer.parseInt(tv_1) > 20000){
+                            Toast.makeText(App.getApp(),"输入Q币数量不能大于20000",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        rQBCount = tv_1;
+                    } else if(!TextUtils.isEmpty(tv_2)){
+                        if(Integer.parseInt(tv_2) > 20000){
+                            Toast.makeText(App.getApp(),"输入Q币数量不能大于20000",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        rQBCount = tv_2;
                     }
-                    if(TextUtils.isEmpty(tv_3) && TextUtils.isEmpty(tv_4)){
-
-                    } else {
-                        if(TextUtils.isEmpty(tv_3)){
-                            rDiscount = tv_4;
-                        } else if(TextUtils.isEmpty(tv_4)){
-                            rDiscount = tv_3;
-                        } else {
-                            rDiscount = tv_3 + "o" + tv_4;
+                    if(!TextUtils.isEmpty(tv_3) && !TextUtils.isEmpty(tv_4)){
+                        if(Integer.parseInt(tv_3) > 100 || Integer.parseInt(tv_4) > 100){
+                            Toast.makeText(App.getApp(),"输入折扣不能大于100",Toast.LENGTH_SHORT).show();
+                            return;
                         }
+                        rDiscount = tv_3 + "o" + tv_4;
+                    } else if(!TextUtils.isEmpty(tv_3)){
+                        if(Integer.parseInt(tv_3) > 100){
+                            Toast.makeText(App.getApp(),"输入折扣不能大于100",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        rDiscount = tv_3;
+                    } else if(!TextUtils.isEmpty(tv_4)){
+                        if(Integer.parseInt(tv_4) > 100){
+                            Toast.makeText(App.getApp(),"输入折扣不能大于100",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        rDiscount = tv_4;
                     }
 
                     if (mPopupWindow_3.isShowing()) {
@@ -396,7 +412,7 @@ public class PopWindowUtils {
         mPopupWindow_3.setAnimationStyle(R.style.pop_animation);
         // 作为下拉视图显示
         mPopupWindow_3.showAsDropDown(view, Gravity.TOP, 0, 300);
-        Utils.backgroundAlpha(activity, 0.7f);
+//        Utils.backgroundAlpha(activity, 0.7f);
 
     }
 
@@ -523,12 +539,12 @@ public class PopWindowUtils {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         // 点击popuwindow外让其消失
         mPopupWindow_4.setOutsideTouchable(true);
-        mPopupWindow_4.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_white));
+        mPopupWindow_4.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_bg_tran_half));
         mPopupWindow_4.setFocusable(true);
         mPopupWindow_4.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                Utils.backgroundAlpha(activity, 1f);
+//                Utils.backgroundAlpha(activity, 1f);
             }
         });
 
@@ -632,8 +648,8 @@ public class PopWindowUtils {
 
         mPopupWindow_4.setAnimationStyle(R.style.pop_animation);
         // 作为下拉视图显示
-        mPopupWindow_4.showAsDropDown(view, Gravity.TOP, 0, 300);
-        Utils.backgroundAlpha(activity, 0.7f);
+        mPopupWindow_4.showAsDropDown(view, Gravity.TOP, 15 , 300);
+//        Utils.backgroundAlpha(activity, 0.7f);
 
     }
 

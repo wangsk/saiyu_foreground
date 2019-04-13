@@ -41,7 +41,7 @@ public class OrderRecordFragment extends BaseFragment implements CallbackUtils.R
     @ViewById
     TextView tv_title_content,tv_game,tv_ordernum,tv_discount;
     @ViewById
-    Button btn_title_back,btn_confirm;
+    Button btn_title_back,btn_confirm,btn_blank;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
@@ -108,6 +108,14 @@ public class OrderRecordFragment extends BaseFragment implements CallbackUtils.R
 
             mItems.clear();
             mItems.addAll(ret.getData().getOrderReceiveList());
+
+            if(mItems.size() <= 0){
+                btn_blank.setVisibility(View.VISIBLE);
+                btn_blank.setText("您当前没有订单日志");
+                return;
+            } else {
+                btn_blank.setVisibility(View.GONE);
+            }
 
             orderRecordAdapter = new OrderRecordAdapter(mItems);
             orderRecordAdapter.setOnItemClickListener(this);

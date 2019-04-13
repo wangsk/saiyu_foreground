@@ -24,7 +24,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="真实姓名"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <EditText
@@ -43,7 +43,8 @@
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
 
         </LinearLayout>
 
@@ -61,7 +62,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="身份证号码"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <EditText
@@ -80,7 +81,8 @@
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
 
 
         </LinearLayout>

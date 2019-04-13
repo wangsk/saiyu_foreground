@@ -31,7 +31,7 @@
                     android:text="卖家中心"
                     android:textColor="@color/white"
                     android:textSize="25sp"
-                    android:textStyle="bold" />
+                    />
 
                 <Button
                     android:id="@+id/btn_rechargepoint"
@@ -48,7 +48,7 @@
                     android:layout_width="80dp"
                     android:layout_height="25dp"
                     android:gravity="center"
-                    android:background="@drawable/border_colorline_radius"
+                    android:background="@drawable/item_selector_bg"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text="免费获得"
@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:text="我的接单点数  "
                     android:textColor="@color/line"
                     android:textSize="15sp" />
@@ -99,7 +99,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:text="待充值订单: "
                         android:textColor="@color/line"
                         android:textSize="13sp" />
@@ -154,7 +154,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:text="待确认订单: "
                         android:textColor="@color/line"
                         android:textSize="12sp" />
@@ -199,7 +199,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@drawable/item_selector_bg"
             android:layout_marginTop="0dp"
             android:gravity="center">
 
@@ -213,7 +213,7 @@
                 android:text="  前往大厅接单"
                 android:textAlignment="textStart"
                 android:textColor="@color/blue"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:focusable="false"
                 android:clickable="false"/>
 
@@ -235,7 +235,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_recharge_order"
@@ -248,8 +248,8 @@
                         android:drawableTop="@mipmap/dczdd"
                         android:text="待充值订单"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -258,7 +258,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_sell_order_manager"
@@ -271,8 +271,8 @@
                         android:drawableTop="@mipmap/csddgl"
                         android:text="出售订单管理"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -281,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_sell_order_history"
@@ -294,8 +294,8 @@
                         android:drawableTop="@mipmap/csddls"
                         android:text="出售订单历史"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -312,7 +312,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_receive_right"
@@ -325,8 +325,8 @@
                         android:drawableTop="@mipmap/wq"
                         android:text="我收到的维权"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -335,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_point_stream"
@@ -348,8 +348,8 @@
                         android:drawableTop="@mipmap/jddsls"
                         android:text="接单点数流水"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -358,7 +358,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_hongbao"
@@ -371,8 +371,8 @@
                         android:drawableTop="@mipmap/hbhd"
                         android:text="红包活动"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -397,8 +397,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Q币寄售"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

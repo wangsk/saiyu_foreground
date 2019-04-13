@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
@@ -110,6 +112,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
 
     }
 
+    private boolean flag_1 = false;
+
     @Click({R.id.btn_title_back, R.id.rl_newaccount,R.id.rl_oldaccount,R.id.btn_regist_old,R.id.btn_regist_new,R.id.iv_psw,R.id.tv_forgot_psw})
     void onClick(View view) {
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
@@ -125,8 +129,14 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     mContext.startActivity(intent);
                     break;
                 case R.id.iv_psw:
-                    //从密码不可见模式变为密码可见模式
-                    et_password_old.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    if(flag_1){
+                        et_password_old.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        flag_1 = false;
+                    } else {
+                        //从密码不可见模式变为密码可见模式
+                        et_password_old.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        flag_1 = true;
+                    }
 
                     if(!TextUtils.isEmpty(et_password_old.getText())){
                         et_password_old.setSelection(et_password_old.getText().length());
@@ -135,6 +145,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 case R.id.rl_newaccount:
                     if(ll_new.getVisibility() == View.GONE){
                         dropdown_layout_new.toggle(ll_new,true);
+                        ll_old.setVisibility(View.GONE);
                         dropdown_layout_old.toggle(ll_old,false);
                     }
 //                    ll_new.setVisibility(View.VISIBLE);
@@ -143,6 +154,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 case R.id.rl_oldaccount:
                     if(ll_old.getVisibility() == View.GONE){
                         dropdown_layout_old.toggle(ll_old,true);
+                        ll_new.setVisibility(View.GONE);
                         dropdown_layout_new.toggle(ll_new,false);
                     }
 //                    ll_new.setVisibility(View.GONE);
@@ -153,9 +165,11 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     if (TextUtils.isEmpty(account)) {
                         tv_regist_prompt_1.setText("*请输入账号");
                         tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (accountExist.equals(tv_regist_prompt_1.getText().toString())) {
+                        Toast.makeText(mContext,"账号已存在",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     boolean isOk = true;
@@ -176,6 +190,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     if (!isOk) {
                         tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
+                        Toast.makeText(mContext,"账号格式错误",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -183,16 +198,19 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     if (TextUtils.isEmpty(password)) {
                         tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*请输入密码");
+                        Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() < 6) {
                         tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*密码不能小于6位");
+                        Toast.makeText(mContext,"密码不能小于6位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() > 32) {
                         tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*密码不能大于32位");
+                        Toast.makeText(mContext,"密码不能大于32位",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -200,11 +218,13 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     if (TextUtils.isEmpty(password_confirm)) {
                         tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_3.setText("*请再次输入密码");
+                        Toast.makeText(mContext,"请再次输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!password_confirm.equals(et_password_new.getText().toString())) {
                         tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_3.setText("*两次输入不一致");
+                        Toast.makeText(mContext,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -216,11 +236,13 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     if(TextUtils.isEmpty(userName)){
                         tv_login_response_msg.setVisibility(View.VISIBLE);
                         tv_login_response_msg.setText("请输入用户名");
+                        Toast.makeText(mContext,"请输入用户名",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if(TextUtils.isEmpty(userPassword)){
                         tv_login_response_msg.setVisibility(View.VISIBLE);
                         tv_login_response_msg.setText("请输入密码");
+                        Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
 

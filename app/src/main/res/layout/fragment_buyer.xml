@@ -29,7 +29,7 @@
                     android:text="买家中心"
                     android:textColor="@color/white"
                     android:textSize="25sp"
-                    android:textStyle="bold" />
+                    />
 
                 <RatingBar
                     android:id="@+id/rb_mark"
@@ -174,7 +174,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_release_order"
@@ -187,8 +187,8 @@
                         android:drawableTop="@mipmap/fbyddd"
                         android:text="发布预定订单"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -197,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_last_order_manager"
@@ -210,8 +210,8 @@
                         android:drawableTop="@mipmap/yyddgl"
                         android:text="预定订单管理"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_release_order_history"
@@ -233,8 +233,8 @@
                         android:drawableTop="@mipmap/yyddls"
                         android:text="预定订单历史"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -251,7 +251,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_recharge_order_manager"
@@ -264,8 +264,8 @@
                         android:drawableTop="@mipmap/czddgl"
                         android:text="充值订单管理"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -274,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_recharge_order_history"
@@ -287,8 +287,8 @@
                         android:drawableTop="@mipmap/czddls"
                         android:text="充值订单历史"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
 
@@ -297,7 +297,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_white">
+                    android:background="@drawable/item_selector_bg">
 
                     <Button
                         android:id="@+id/btn_right"
@@ -310,8 +310,8 @@
                         android:drawableTop="@mipmap/wq"
                         android:text="我发起的维权"
                         android:textAlignment="center"
-                        android:textColor="@color/black_light"
-                        android:textSize="15sp" />
+                        android:textColor="@color/black90"
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -336,8 +336,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="点劵充值"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

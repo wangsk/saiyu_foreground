@@ -346,7 +346,7 @@ public class BarGraphView extends View {
                 canvas.drawCircle(rx, ry, 6, dotPain);
                 if (i == selectIndex - 1) {
                     canvas.drawCircle(rx, ry, 8, dotPain);
-                    canvas.drawCircle(rx, ry, 20, dotPain_2);
+                    canvas.drawCircle(rx, ry, 22, dotPain_2);
                 }
             }
         }
@@ -409,7 +409,7 @@ public class BarGraphView extends View {
                 canvas.drawCircle(rx, ry, 6, dotPain);
                 if (i == selectIndex - 1) {
                     canvas.drawCircle(rx, ry, 8, dotPain);
-                    canvas.drawCircle(rx, ry, 20, dotPain_2);
+                    canvas.drawCircle(rx, ry, 22, dotPain_2);
                     String text = value.get(xValue.get(i)) + "";
                     String text_2 = value_2.get(xValue.get(i)) + "";
                     String text_3 = "平均折扣: "+text + "\n最高折扣: " + text_2;
@@ -430,23 +430,23 @@ public class BarGraphView extends View {
     private void drawFloatTextBox(Canvas canvas, float x, float y, String text,int pos) {
         //p1
         Path path = new Path();
-        float left = x - 120;
-        float top = y - 125;
-        float right = x + 120;
+        float left = x - 150;
+        float top = y - 150;
+        float right = x + 150;
         float bottom = y - 20;
         if (pos == 0) {
             left = x - mSize / 2;
-            right = 120 * 2 + x - mSize / 2;
+            right = 150 * 2 + x - mSize / 2;
         }
         if (pos == value.size() - 1) {
-            left = x + mSize / 2 - 120 * 2;
+            left = x + mSize / 2 - 150 * 2;
             right = x + mSize / 2;
         }
         RectF oval3 = new RectF(left, top, right, bottom);// 设置个新的长方形
         canvas.drawRoundRect(oval3, 7, 7, textBgPain);//第二个参数是x半径，第三个参数是y半径
         path.moveTo(x, y);
-        path.lineTo(x - 25, y - 20);
-        path.lineTo(x + 25, y - 20);
+        path.lineTo(x - 20, y - 20);
+        path.lineTo(x + 20, y - 20);
         path.close();
         canvas.drawPath(path, textBgPain);//绘制背景的下角
 
@@ -459,13 +459,13 @@ public class BarGraphView extends View {
         mPaint.setColor(context.getResources().getColor(R.color.white));
         canvas.drawPath(path1, mPaint);
 
-        mPaint.setTextSize(30);
+        mPaint.setTextSize(40);
         mPaint.setTextAlign(Paint.Align.CENTER);
         mPaint.setColor(context.getResources().getColor(R.color.blue));//要写在draw里面不然画不出来
         mPaint.getTextBounds(text, 0, text.length(), mBound);
-        float y_1 = y - 80;
+        float y_1 = y - 95;
         if (pos == value.size() - 1) {
-            float x_1 = x - 40;
+            float x_1 = x - 70;
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
@@ -473,12 +473,12 @@ public class BarGraphView extends View {
                 } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.yellow));
                 }
-                canvas.drawCircle(x_1 - 100, y_1 - 10, 6, dotPain);
+                canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
         } else if (pos == 0) {
-            float x_1 = x + 50;
+            float x_1 = x + 80;
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
@@ -486,7 +486,7 @@ public class BarGraphView extends View {
                 } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.yellow));
                 }
-                canvas.drawCircle(x_1 - 100, y_1 - 10, 6, dotPain);
+                canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
@@ -499,7 +499,7 @@ public class BarGraphView extends View {
                 } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.yellow));
                 }
-                canvas.drawCircle(x_1 - 100, y_1 - 10, 6, dotPain);
+                canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }

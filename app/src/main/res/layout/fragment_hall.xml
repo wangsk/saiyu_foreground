@@ -11,21 +11,20 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="23dp"
             android:background="@color/blue">
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/white">
+            android:layout_height="90dp">
 
             <ImageView
                 android:id="@+id/iv_hall_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/logo"
                 android:scaleType="fitXY"/>
@@ -42,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="赛鱼24小时服务热线"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="12dp" />
 
                 <TextView
@@ -50,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0373-3030977"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15dp" />
 
             </LinearLayout>
@@ -142,8 +141,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                 android:text="预定订单"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -163,8 +162,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="充值游戏"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -185,8 +184,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="筛选"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -210,7 +209,7 @@
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="0dp">
+            android:layout_marginTop="2dp">
 
             <com.scwang.smartrefresh.layout.header.ClassicsHeader
                 android:layout_width="match_parent"
@@ -229,6 +228,19 @@
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_blank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:drawableTop="@mipmap/blank"
+        android:text="暂无数据"
+        android:textAlignment="center"
+        android:textColor="@color/black_light"
+        android:textSize="15sp"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/pb_loading"

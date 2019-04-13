@@ -157,9 +157,9 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="0dp"
             android:background="@drawable/shape_bg_blue"
             android:gravity="center"
             android:paddingTop="8dp"
@@ -180,6 +180,14 @@
                 android:text="短信验证码登录"
                 android:textSize="15sp"
                 android:textColor="@color/black"/>
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                style="@android:style/Widget.Material.ProgressBar.Small"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerHorizontal="true"
+                android:indeterminateTint="@color/blue"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tv_regist"
                 android:layout_width="wrap_content"
@@ -259,7 +267,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="登录即代表您已同意"
+                android:text="我已看过并同意"
                 android:textSize="15sp"
                 android:textColor="@color/black_light"/>
             <TextView
@@ -274,12 +282,4 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        style="@android:style/Widget.Material.ProgressBar.Small"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_centerInParent="true"
-        android:indeterminateTint="@color/blue"
-        android:visibility="gone" />
 </RelativeLayout>

@@ -106,7 +106,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     private float ReserveQBCount;//该订单最大QB数量
     private float RechargeQBCount;//该订单被接过的QB数量
 
-    private String OrderRechargePointsUrl,OrderFreePointsUrl;
+    private String OrderFreePointsUrl;
     public static List<HallDetailRet.DataBean.YanBaoBean> selectorList = null;
 
     //该方法是用于OrderSubmitChildFragment类中 修改实际Q币数量时spinner控件加载调用
@@ -243,7 +243,6 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 sendHandlerMsg(1);
 
                 OrderFreePointsUrl = ret.getData().getOrderFreePointsUrl();//获取免费点数的链接
-                OrderRechargePointsUrl = ret.getData().getOrderRechargePointsUrl();//充值点数链接
 
                 maxOrderPoint = ret.getData().getReceivePoint();//最大接单点数，超过最大接单点数则不允许接单
 
@@ -663,7 +662,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     //判断输入Q币数量是否可用
     private void isCountAble(){
         if(!isLogin){
-            tv_count_prompt.setText("请登录");
+            tv_orderPoint.setText("0点");
             return;
         }
 

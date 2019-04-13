@@ -28,6 +28,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,13 +111,14 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             Map<String, Integer> value_max = new HashMap<>();//最高折扣列表
             Map<String, Integer> value_aver = new HashMap<>();//平均折扣列表
 
-            for (int i = 0; i < 7; i++) {//取折扣列表的前七个显示折线图
-                if(mItem.size() <= i){//如果行情列表个数小于7，提前退出循环
-                    break;
-                } else {
-                    dateList.add(mItem.get(i).getDate());
-                    value_max.put(mItem.get(i).getDate(),mItem.get(i).getMaxDiscount());
-                    value_aver.put(mItem.get(i).getDate(),mItem.get(i).getAverageDiscount());
+            if(mItem.size() >= 7){
+                int index = mItem.size() - 7;
+                //从后向前取
+                while (index < mItem.size()){
+                    dateList.add(mItem.get(index).getDate());
+                    value_max.put(mItem.get(index).getDate(),mItem.get(index).getMaxDiscount());
+                    value_aver.put(mItem.get(index).getDate(),mItem.get(index).getAverageDiscount());
+                    index++;
                 }
             }
 
@@ -124,6 +126,8 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
                 bar_view.setValue(value_aver,value_max, dateList, 250);
                 bar_view.setCurrentMonth(dateList.size());
             }
+
+            Collections.reverse(mItem); // 倒序排列
 
             //月折扣行情列表
             marketAdapter = new MarketAdapter(mItem);

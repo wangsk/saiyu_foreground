@@ -29,6 +29,7 @@ import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.Utils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -94,6 +95,8 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
         cashAdapter = new CashAdapter(mItems);
         recyclerView.setAdapter(cashAdapter);
         cashAdapter.notifyDataSetChanged();
+
+        Utils.setButtonClickable(btn_confirm,false);
     }
 
     @Override
@@ -335,7 +338,8 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
     @TextChange({R.id.et_count})
     void textChange(CharSequence s, TextView hello, int before, int start, int count) {
         String money = s.toString();
-        if(TextUtils.isEmpty(money) || curItem == null || TextUtils.isEmpty(curItem.getCharge())){
+        if(TextUtils.isEmpty(money) || curItem == null || TextUtils.isEmpty(curItem.getCharge())|| TextUtils.isEmpty(curItem.getMinApplyMoney())){
+            LogUtils.print("数据异常");
             return;
         }
         BigDecimal bigDecimal_1 = new BigDecimal(curItem.getCharge());
@@ -343,7 +347,21 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
         BigDecimal bigDecimal_3 = bigDecimal_1.multiply(bigDecimal_2);
         BigDecimal bigDecimal_100 = new BigDecimal(100);
         BigDecimal bigDecimal_4 = bigDecimal_3.divide(bigDecimal_100,2,BigDecimal.ROUND_HALF_UP);
-        tv_get.setText(bigDecimal_4 + "元");
+        BigDecimal bigDecimal_5 = bigDecimal_2.subtract(bigDecimal_4);
+        tv_get.setText(bigDecimal_5 + "元");
+
+        BigDecimal bigDecimal_6 = new BigDecimal(curItem.getMinApplyMoney());
+
+        switch (bigDecimal_2.compareTo(bigDecimal_6)){
+            case -1://小于
+                Utils.setButtonClickable(btn_confirm,false);
+                break;
+            case 0://等于
+            case 1://大于
+                Utils.setButtonClickable(btn_confirm,true);
+                break;
+        }
+
 
     }
 

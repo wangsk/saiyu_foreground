@@ -3295,7 +3295,7 @@ public class ApiRequest {
     }
 
     public static void uploadIdentity(File file, final String callBackKey, final ProgressBar pb_loading) {
-        pb_loading.setVisibility(View.VISIBLE);
+//        pb_loading.setVisibility(View.VISIBLE);
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         apiService.uploadIdentity(new RequestParams().getUploadBody(file))
                 .subscribeOn(Schedulers.io())

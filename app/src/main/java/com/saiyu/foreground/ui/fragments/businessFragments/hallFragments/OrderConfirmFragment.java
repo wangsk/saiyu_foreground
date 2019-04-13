@@ -100,7 +100,7 @@ public class OrderConfirmFragment extends BaseFragment implements CallbackUtils.
             }
             tv_successdian.setText(ret.getData().getSuccessDian());
             tv_consumerpoint.setText(ret.getData().getConsumeRPoint());
-            tv_totalmoney.setText(ret.getData().getTotalMoney());
+            tv_totalmoney.setText(ret.getData().getTotalMoney()+"元");
         } else if(method.equals("OrderConfirmFragment_receiveSubmit")){
             BooleanRet ret = (BooleanRet)baseRet;
             if(ret.getData() == null){

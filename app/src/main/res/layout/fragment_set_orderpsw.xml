@@ -52,7 +52,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="密码只能为4位纯数字，交易大厅中属于加密的订单会显示附加选项标签《私密订单》，卖家接单时输入被接受的数量后点击确定接单后弹窗显示密码输入框，密码正确才可以进入下一步；\n此功能常用于买卖双方已协商好的发单接单交易；"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="12sp" />
 
         <LinearLayout

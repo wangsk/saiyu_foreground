@@ -83,14 +83,14 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
             QQUnionid = bundle.getString("QQOpenId");
             WXUnionid = bundle.getString("WXOpenId");
             if(TextUtils.isEmpty(QQUnionid)){
-                btn_qq.setText("未绑定 ");
+                btn_qq.setText("未绑定");
             } else {
-                btn_qq.setText("已绑定 ");
+                btn_qq.setText("已绑定");
             }
             if(TextUtils.isEmpty(WXUnionid)){
-                btn_wechat.setText("未绑定 ");
+                btn_wechat.setText("未绑定");
             } else {
-                btn_wechat.setText("已绑定 ");
+                btn_wechat.setText("已绑定");
             }
         }
 

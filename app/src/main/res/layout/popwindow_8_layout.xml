@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
-        android:background="@color/white">
+        android:background="@drawable/item_selector_bg">
 
         <TextView
             android:id="@+id/tv_1"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
-        android:background="@color/white">
+        android:background="@drawable/item_selector_bg">
 
         <TextView
             android:id="@+id/tv_2"
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
-        android:background="@color/white">
+        android:background="@drawable/item_selector_bg">
 
         <TextView
             android:id="@+id/tv_3"
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
-        android:background="@color/white">
+        android:background="@drawable/item_selector_bg">
 
         <TextView
             android:id="@+id/tv_4"
@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
-        android:background="@color/white">
+        android:background="@drawable/item_selector_bg">
 
         <TextView
             android:id="@+id/tv_5"
@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="2dp"
-        android:background="@color/white">
+        android:background="@drawable/item_selector_bg">
 
         <TextView
             android:id="@+id/tv_6"

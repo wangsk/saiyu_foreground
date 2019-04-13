@@ -56,8 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -217,7 +216,7 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="我的赛鱼"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -239,8 +238,8 @@
                             android:drawableTop="@mipmap/huiyuanziliao"
                             android:text="会员资料"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_wad_info"
@@ -253,8 +252,8 @@
                             android:drawableTop="@mipmap/ziliaotianbu"
                             android:text="资料补填"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_security_manage"
@@ -267,8 +266,8 @@
                             android:drawableTop="@mipmap/anquanguanli"
                             android:text="安全管理"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_unionid_login"
@@ -281,8 +280,8 @@
                             android:drawableTop="@mipmap/huliandenglu"
                             android:text="互联登录"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -291,7 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/shape_bg_white"
+                        android:background="@drawable/item_selector_bg"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -299,13 +298,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="10dp"
                             android:background="@null"
                             android:drawableLeft="@mipmap/wsmj"
                             android:text="  我是卖家"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black_light"
-                            android:textSize="18sp"
+                            android:textColor="@color/black90"
+                            android:textSize="15sp"
                             android:focusable="false"
                             android:clickable="false"/>
 
@@ -393,7 +392,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/shape_bg_white"
+                        android:background="@drawable/item_selector_bg"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -401,13 +400,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="10dp"
                             android:background="@null"
                             android:drawableLeft="@mipmap/wsmj2"
                             android:text="  我是买家"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black_light"
-                            android:textSize="18sp"
+                            android:textColor="@color/black90"
+                            android:textSize="15sp"
                             android:focusable="false"
                             android:clickable="false"/>
 
@@ -503,7 +502,7 @@
                             android:paddingBottom="10dp"
                             android:layout_marginLeft="10dp"
                             android:text="资金管理"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black_light"
                             android:textSize="18sp" />
 
                         <TextView
@@ -514,7 +513,7 @@
                             android:paddingBottom="10dp"
                             android:layout_marginRight="10dp"
                             android:text="资金明细"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black_light"
                             android:textSize="18sp" />
 
                     </RelativeLayout>
@@ -538,8 +537,8 @@
                             android:drawableTop="@mipmap/chongzhi"
                             android:text="我要充值"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_cash"
@@ -552,8 +551,8 @@
                             android:drawableTop="@mipmap/tixian"
                             android:text="我要提现"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_recharge_record"
@@ -566,8 +565,8 @@
                             android:drawableTop="@mipmap/chongzhijilu"
                             android:text="充值记录"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_cash_record"
@@ -580,8 +579,8 @@
                             android:drawableTop="@mipmap/tixianjilu"
                             android:text="提现记录"
                             android:textAlignment="center"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -595,7 +594,7 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="认证管理"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -616,8 +615,8 @@
                             android:drawableLeft="@mipmap/shimingrenzheng"
                             android:text="  实名认证"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                         <Button
                             android:id="@+id/btn_face"
@@ -629,8 +628,8 @@
                             android:drawableLeft="@mipmap/shualian"
                             android:text="  刷脸认证"
                             android:textAlignment="textStart"
-                            android:textColor="@color/black_light"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black90"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -644,8 +643,8 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="系统通知"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="16sp" />
 
                     <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
                         android:id="@+id/recyclerView"

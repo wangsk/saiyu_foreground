@@ -3,12 +3,14 @@ package com.saiyu.foreground.ui.fragments.RegistFragments;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
@@ -20,6 +22,7 @@ import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment
 import com.saiyu.foreground.ui.fragments.ProtocolFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.Utils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -99,9 +102,11 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     if (TextUtils.isEmpty(account)) {
                         tv_regist_prompt_1.setText("*请输入账号");
                         tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (accountExist.equals(tv_regist_prompt_1.getText().toString())) {
+                        Toast.makeText(mContext,"账号已存在",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     boolean isOk = true;
@@ -122,6 +127,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     if (!isOk) {
                         tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
+                        Toast.makeText(mContext,"账号格式错误",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -129,16 +135,19 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     if (TextUtils.isEmpty(password)) {
                         tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*请输入密码");
+                        Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() < 6) {
                         tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*密码不能小于6位");
+                        Toast.makeText(mContext,"密码不能小于6位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() > 32) {
                         tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*密码不能大于32位");
+                        Toast.makeText(mContext,"密码不能大于32位",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -146,11 +155,13 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     if (TextUtils.isEmpty(password_confirm)) {
                         tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_3.setText("*请再次输入密码");
+                        Toast.makeText(mContext,"请再次输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!password_confirm.equals(et_password.getText().toString())) {
                         tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_3.setText("*两次输入不一致");
+                        Toast.makeText(mContext,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -170,15 +181,29 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                     et_password_confirm.setText("");
                     break;
                 case R.id.iv_psw:
-                    //从密码不可见模式变为密码可见模式
-                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    if(flag_1){
+                        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        flag_1 = false;
+                    } else {
+                        //从密码不可见模式变为密码可见模式
+                        et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        flag_1 = true;
+                    }
+
                     if (!TextUtils.isEmpty(et_password.getText())) {
                         et_password.setSelection(et_password.getText().length());
                     }
                     break;
                 case R.id.iv_psw_confirm:
-                    //从密码不可见模式变为密码可见模式
-                    et_password_confirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    if(flag_2){
+                        et_password_confirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        flag_2 = false;
+                    } else {
+                        //从密码不可见模式变为密码可见模式
+                        et_password_confirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        flag_2 = true;
+                    }
+
                     if (!TextUtils.isEmpty(et_password_confirm.getText())) {
                         et_password_confirm.setSelection(et_password_confirm.getText().length());
                     }
@@ -187,6 +212,8 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
             }
         }
     }
+
+    private boolean flag_1 = false,flag_2 = false;
 
     @FocusChange(R.id.et_account)
     void focusChange(View v, boolean hasFocus) {

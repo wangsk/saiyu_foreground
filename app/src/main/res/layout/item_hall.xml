@@ -3,23 +3,23 @@
     android:id="@+id/ll_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/item_selector_bg"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_line_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:text=""
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/black_light"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_zc"
@@ -41,6 +41,7 @@
         android:id="@+id/tv_line_1_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:layout_marginLeft="10dp"
         android:text=""
         android:textColor="@color/black_light"
@@ -137,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/tv_line_3_1"
@@ -145,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text=""
-            android:textColor="@color/black_light"
+            android:textColor="#90666666"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -171,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text=""
-                android:textColor="@color/black_light"
+                android:textColor="#90666666"
                 android:textSize="15sp" />
 
         </LinearLayout>

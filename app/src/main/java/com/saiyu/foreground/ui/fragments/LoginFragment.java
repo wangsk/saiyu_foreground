@@ -82,6 +82,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
         super.onSupportVisible();
         //回调的注册放在这里是因为之前遇到从其他页面跳转回来的时候，回调不执行了，所以每次页面显示的时候都注册一次
         CallbackUtils.setCallback(this);
+        pb_loading.setVisibility(View.GONE);
     }
 
     @AfterViews
@@ -167,6 +168,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
         }
     }
 
+    private boolean flag_1 = false;
+
     @Click({R.id.iv_close,R.id.tv_msg_count,R.id.btn_login,R.id.tv_forgot_psw,R.id.tv_login_type,R.id.tv_regist,R.id.tv_protocol,R.id.iv_psw,R.id.iv_account,R.id.iv_qq,R.id.iv_wechat})
     void onClick(View view){
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
@@ -239,6 +242,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         et_password.setText("");
                         //从密码不可见模式变为密码可见模式
                         et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        flag_1 = true;
 
                         ll_psw.setVisibility(View.GONE);
                         tv_msg_count.setVisibility(View.VISIBLE);
@@ -251,6 +255,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         et_password.setText("");
                         //从密码可见模式变为密码不可见模式
                         et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        flag_1 = false;
 
                         ll_psw.setVisibility(View.VISIBLE);
                         tv_msg_count.setVisibility(View.GONE);
@@ -268,8 +273,14 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     start(protocolFragment);
                     break;
                 case R.id.iv_psw:
-                    //从密码不可见模式变为密码可见模式
-                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    if(flag_1){
+                        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        flag_1 = false;
+                    } else {
+                        //从密码不可见模式变为密码可见模式
+                        et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        flag_1 = true;
+                    }
 
                     if(!TextUtils.isEmpty(et_password.getText())){
                         et_password.setSelection(et_password.getText().length());
@@ -282,6 +293,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                 case R.id.iv_wechat://点击微信登录
                     boolean weixinAvilible = Utils.isWeixinAvilible();
                     if (weixinAvilible) {
+                        pb_loading.setVisibility(View.VISIBLE);
                         SendAuth.Req req = new SendAuth.Req();
                         req.scope = "snsapi_userinfo";
                         req.state = "diandi_wx_login";
@@ -291,6 +303,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     }
                     break;
                 case R.id.iv_qq://点击QQ登录
+                    pb_loading.setVisibility(View.VISIBLE);
                     qqCallback = new QQCallback();
                     //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
                     if (!mTencent.isSessionValid()) {
@@ -303,12 +316,16 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
 
                             @Override
                             public void onError(UiError uiError) {
+                                pb_loading.setVisibility(View.GONE);
                             }
 
                             @Override
                             public void onCancel() {
+                                pb_loading.setVisibility(View.GONE);
                             }
                         });
+                    } else {
+                        pb_loading.setVisibility(View.GONE);
                     }
                     break;
 

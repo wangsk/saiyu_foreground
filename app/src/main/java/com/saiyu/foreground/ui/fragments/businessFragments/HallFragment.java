@@ -1,5 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,6 +34,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -42,16 +45,21 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 @EFragment(R.layout.fragment_hall)
 public class HallFragment extends BaseFragment implements CallbackUtils.ResponseCallback, OnRefreshListener, OnLoadmoreListener, OnItemClickListener {
     @ViewById
     ProgressBar pb_loading;
     @ViewById
+    Button btn_blank;
+    @ViewById
     TextView tv_total_order, tv_total_qcount;
     @ViewById
     LinearLayout ll_recharge_game, ll_selector;
     @ViewById
-    ImageView iv_hall_selector,iv_hall_question;
+    ImageView iv_hall_selector, iv_hall_question;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
@@ -62,7 +70,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     private int page = 1;
     private int pageSize = 30;
     private int totalPage;
-    private String rQBCount = "",rDiscount = "",pId = "",extend = "",sort = "";
+    private String rQBCount = "", rDiscount = "", pId = "", extend = "", sort = "";
 
     public static HallFragment newInstance(Bundle bundle) {
         HallFragment_ fragment = new HallFragment_();
@@ -74,7 +82,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
 
     }
 
@@ -103,6 +111,16 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
             int totalCount = ret.getData().getOrderCount();
 
+            if (totalCount == 0) {
+                recyclerView.setVisibility(View.GONE);
+                btn_blank.setVisibility(View.VISIBLE);
+                btn_blank.setText("很抱歉，没有满足当前条件的订单");
+                return;
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                btn_blank.setVisibility(View.GONE);
+            }
+
             totalPage = totalCount / pageSize + 1;
             LogUtils.print("总数:" + totalCount + " ;总页码：" + totalPage);
 
@@ -128,14 +146,14 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
     @Override
     public void onItemClick(View view, int position) {
-        if(mItems == null || mItems.size() <= position || TextUtils.isEmpty(mItems.get(position).getOrderNum())){
+        if (mItems == null || mItems.size() <= position || TextUtils.isEmpty(mItems.get(position).getOrderNum())) {
             LogUtils.print("点击异常");
             return;
         }
 
-        Intent intent = new Intent(mContext,ContainerActivity_.class);
+        Intent intent = new Intent(mContext, ContainerActivity_.class);
         Bundle bundle = new Bundle();
-        bundle.putString("orderId",mItems.get(position).getId());
+        bundle.putString("orderId", mItems.get(position).getId());
         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.HallOrderDetailFragmentTag);
         intent.putExtras(bundle);
         mContext.startActivity(intent);
@@ -146,7 +164,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     public void onLoadmore(RefreshLayout refreshlayout) {
         if (page < totalPage) {
             page++;
-            ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+            ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
         } else {
             Toast.makeText(mContext, "已经是最后一页", Toast.LENGTH_SHORT).show();
         }
@@ -162,76 +180,101 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
         } else {
             Toast.makeText(mContext, "已经是第一页", Toast.LENGTH_SHORT).show();
         }
-        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
         if (refreshLayout != null) {
             refreshlayout.finishRefresh();
         }
     }
 
-    @Click({R.id.tv_cellphone,R.id.iv_hall_selector, R.id.ll_recharge_game, R.id.ll_selector,R.id.iv_hall_question,R.id.iv_hall_mobile})
+    @Click({R.id.tv_cellphone, R.id.iv_hall_selector, R.id.ll_recharge_game, R.id.ll_selector, R.id.iv_hall_question, R.id.iv_hall_mobile})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_hall_question:
                 Bundle bundle = new Bundle();
-                Intent intent = new Intent(mContext,ContainerActivity_.class);
+                Intent intent = new Intent(mContext, ContainerActivity_.class);
                 bundle.putString("url", "https://www.saiyu.com/help/m.html");
-                bundle.putString("type","帮助文档");//
+                bundle.putString("type", "帮助文档");//
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
                 break;
             case R.id.ll_recharge_game:
-                PopWindowUtils.initPopWindow_2(getActivity(),productItemsBeans, ll_recharge_game, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_2(getActivity(), productItemsBeans, ll_recharge_game, new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
-                        if(callbackList == null || callbackList.size() < 1){
+                        if (callbackList == null || callbackList.size() < 1) {
                             return;
                         }
                         LogUtils.print("old _pId ==== " + pId + " newId === " + callbackList.get(0));
 
-                        if(TextUtils.equals(callbackList.get(0),pId)){
+                        if (TextUtils.equals(callbackList.get(0), pId)) {
                             return;
                         }
                         pId = callbackList.get(0);
-                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
                     }
                 });
                 break;
             case R.id.ll_selector:
-                PopWindowUtils.initPopWindow_3(getActivity(),ll_selector, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_3(getActivity(), ll_selector, new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
-                        if(callbackList == null || callbackList.size() < 3){
+                        if (callbackList == null || callbackList.size() < 3) {
                             return;
                         }
                         LogUtils.print("old rQBCount ==== " + rQBCount + " new rQBCount === " + callbackList.get(0) + " old rDiscount ==== " + rDiscount + " new rDiscount === " + callbackList.get(1) + " old extend ==== " + extend + " new extend === " + callbackList.get(2));
-                        if(TextUtils.equals(rQBCount,callbackList.get(0)) && TextUtils.equals(rDiscount,callbackList.get(1)) && TextUtils.equals(extend,callbackList.get(2))){
+                        if (TextUtils.equals(rQBCount, callbackList.get(0)) && TextUtils.equals(rDiscount, callbackList.get(1)) && TextUtils.equals(extend, callbackList.get(2))) {
                             return;
                         }
                         rQBCount = callbackList.get(0);
                         rDiscount = callbackList.get(1);
                         extend = callbackList.get(2);
-                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
                     }
                 });
 
                 break;
             case R.id.iv_hall_selector:
-                PopWindowUtils.initPopWindow_4(getActivity(),iv_hall_selector, new OnItemClickListener() {
+                PopWindowUtils.initPopWindow_4(getActivity(), iv_hall_selector, new OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        sort = position+"";
-                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount,rDiscount,pId,extend,sort,"HallFragment_hallIndex", pb_loading);
+                        sort = position + "";
+                        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
                         LogUtils.print("你点击了 ：" + position);
                     }
                 });
 
                 break;
             case R.id.tv_cellphone:
-                String phone = "0373-3030977";
-                //这里"tel:"+电话号码 是固定格式，系统一看是以"tel:"开头的，就知道后面应该是电话号码。
-                Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone.trim()));
-                startActivity(intentCall);//调用上面这个intent实现拨号
+                RxPermissions rxPermissions = new RxPermissions(getActivity());
+                rxPermissions.request(Manifest.permission.CALL_PHONE)
+                        .subscribe(new Observer<Boolean>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                            }
+
+                            @Override
+                            public void onNext(Boolean aBoolean) {
+                                if (aBoolean) {
+                                    String phone = "0373-3030977";
+                                    //这里"tel:"+电话号码 是固定格式，系统一看是以"tel:"开头的，就知道后面应该是电话号码。
+                                    Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone.trim()));
+                                    startActivity(intentCall);//调用上面这个intent实现拨号
+
+                                } else {
+                                    Toast.makeText(mContext, "请开启通话权限", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+
+                            @Override
+                            public void onComplete() {
+                            }
+                        });
+
                 break;
             case R.id.iv_hall_mobile:
                 joinQQ();

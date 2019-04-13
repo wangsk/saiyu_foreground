@@ -434,7 +434,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="right|center_vertical"
                     android:text="附件选项"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="18sp" />
 
                 <RelativeLayout
@@ -452,7 +452,7 @@
                         android:drawableLeft="@mipmap/dai"
                         android:text="  客服代理确认"
                         android:textAlignment="textStart"
-                        android:textColor="@color/black_light"
+                        android:textColor="@color/black90"
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
@@ -491,7 +491,7 @@
                         android:drawableLeft="@mipmap/yan"
                         android:text="  支持验图确认"
                         android:textAlignment="textStart"
-                        android:textColor="@color/black_light"
+                        android:textColor="@color/black90"
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
@@ -544,7 +544,7 @@
                                 android:drawableLeft="@mipmap/daoqi"
                                 android:text="  到期时间"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black_light"
+                                android:textColor="@color/black90"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -583,7 +583,7 @@
                                 android:drawableLeft="@mipmap/ddjm"
                                 android:text="  订单加密"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black_light"
+                                android:textColor="@color/black90"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -622,7 +622,7 @@
                                 android:drawableLeft="@mipmap/danci"
                                 android:text="  单次充值最低"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black_light"
+                                android:textColor="@color/black90"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -662,7 +662,7 @@
                                 android:drawableLeft="@mipmap/sjjg"
                                 android:text="  接单间隔时间"
                                 android:textAlignment="textStart"
-                                android:textColor="@color/black_light"
+                                android:textColor="@color/black90"
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
@@ -744,9 +744,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="0dp"
                         android:text="联系方式"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="18sp" />
                 </LinearLayout>
 

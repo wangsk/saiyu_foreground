@@ -118,7 +118,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="设置客服代理确认，该订单将不再显示平均时间，卖家充值完毕提交后也无需等待，几分钟后就可以确认完毕，如代理确认失败，则该订单自动转入等待买家确认；"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="12sp" />
 
         <LinearLayout

@@ -25,17 +25,17 @@
                     android:id="@+id/rl_account"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:text="会员号"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_account"
@@ -45,8 +45,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
 
@@ -55,16 +55,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/white">
+                    android:background="@drawable/item_selector_bg">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:text="清理缓存"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -81,16 +81,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
-                    android:background="@color/white">
+                    android:background="@drawable/item_selector_bg">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:text="用户协议"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -107,16 +107,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
-                    android:background="@color/white">
+                    android:background="@drawable/item_selector_bg">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:text="版权信息"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -137,12 +137,13 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/shape_bg_blue"
+            android:background="@drawable/btn_selector_bg"
             android:gravity="center"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="退出登录"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 

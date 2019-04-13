@@ -20,10 +20,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="会员号"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_account"
@@ -43,16 +43,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
-            android:background="@color/white">
+            android:background="@drawable/item_selector_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="真实姓名"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_realname"
@@ -81,16 +81,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
-            android:background="@color/white">
+            android:background="@drawable/item_selector_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="身份证号码"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_identity"
@@ -119,16 +119,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
-            android:background="@color/white">
+            android:background="@drawable/item_selector_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="实名认证"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_identify"
@@ -157,16 +157,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
-            android:background="@color/white">
+            android:background="@drawable/item_selector_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="刷脸认证"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_face"

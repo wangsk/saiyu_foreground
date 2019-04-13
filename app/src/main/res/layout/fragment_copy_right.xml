@@ -28,8 +28,8 @@
         <RelativeLayout
             android:id="@+id/rl_checkupdate"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
             android:background="@color/white">
 
             <TextView
@@ -38,8 +38,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="检查更新"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,8 +71,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -81,8 +81,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="软件名称"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,8 +98,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -108,8 +108,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="软件版本"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,8 +125,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -135,8 +135,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="客服电话"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,8 +152,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -162,8 +162,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="ICP备案号"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,8 +178,8 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -188,8 +188,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="电信增值业务许可证"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -205,8 +205,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -215,8 +215,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="网络文化经营许可证"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,8 +231,8 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -241,8 +241,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="公安备案"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -257,8 +257,8 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -267,8 +267,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="开发公司"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"

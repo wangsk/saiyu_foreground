@@ -29,7 +29,7 @@
                 android:text="行情"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -74,27 +74,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="当天最高折扣TOP3"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/black_light"
+                android:textSize="16sp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_top_1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"
-            android:background="@color/white"
+            android:background="@drawable/item_selector_bg"
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/tv_top_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
                 android:layout_marginRight="10dp"
                 android:src="@mipmap/jiantou"/>
         </LinearLayout>
@@ -103,19 +103,19 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"
-            android:background="@color/white"
+            android:background="@drawable/item_selector_bg"
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/tv_top_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
                 android:layout_marginRight="10dp"
                 android:src="@mipmap/jiantou"/>
         </LinearLayout>
@@ -124,19 +124,19 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"
-            android:background="@color/white"
+            android:background="@drawable/item_selector_bg"
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/tv_top_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
                 android:layout_marginRight="10dp"
                 android:src="@mipmap/jiantou"/>
         </LinearLayout>
@@ -153,8 +153,8 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="月折扣行情"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/black_light"
+                android:textSize="16sp" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                     android:text="  平均折扣"
                     android:textAlignment="textStart"
                     android:textColor="@color/black_light"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:focusable="false"
                     android:clickable="false"/>
                 <Button
@@ -181,7 +181,7 @@
                     android:text="  最高折扣"
                     android:textAlignment="textStart"
                     android:textColor="@color/black_light"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:focusable="false"
                     android:clickable="false"/>
 
