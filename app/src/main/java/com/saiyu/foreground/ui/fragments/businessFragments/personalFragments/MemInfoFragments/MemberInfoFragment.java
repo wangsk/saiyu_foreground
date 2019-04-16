@@ -132,6 +132,7 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                     Intent intent = new Intent(mContext,ContainerActivity_.class);
                     bundle.putString("RealName",RealName);
                     bundle.putString("IDNum",IDNum);
+                    bundle.putBoolean("IsModify",ret.getData().isModify());
                     bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
                     intent.putExtras(bundle);
@@ -159,6 +160,7 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                     Intent intent = new Intent(mContext,ContainerActivity_.class);
                     bundle.putString("RealName",RealName);
                     bundle.putString("IDNum",IDNum);
+                    bundle.putBoolean("IsModify",ret.getData().isModify());
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UploadIdentityFragmentTag);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);

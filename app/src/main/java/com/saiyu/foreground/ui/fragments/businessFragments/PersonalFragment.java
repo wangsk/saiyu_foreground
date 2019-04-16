@@ -239,6 +239,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         Intent intent = new Intent(mContext,ContainerActivity_.class);
                         bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
                         bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
+                        bundle.putBoolean("IsModify",ret.getData().isModify());
                         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UploadIdentityFragmentTag);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
@@ -266,6 +267,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         Intent intent = new Intent(mContext,ContainerActivity_.class);
                         bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
                         bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
+                        bundle.putBoolean("IsModify",ret.getData().isModify());
                         bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
                         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
                         intent.putExtras(bundle);

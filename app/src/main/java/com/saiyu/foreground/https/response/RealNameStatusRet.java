@@ -13,6 +13,15 @@ public class RealNameStatusRet extends BaseRet{
 
     public static class DataBean {
         private int realNameStatus;//0申请1通过2失败3未申请
+        private boolean IsModify;
+
+        public boolean isModify() {
+            return IsModify;
+        }
+
+        public void setModify(boolean modify) {
+            IsModify = modify;
+        }
 
         public int getRealNameStatus() {
             return realNameStatus;

@@ -41,7 +41,7 @@ public class GuideFragment extends BaseFragment{
 
     @AfterViews
     void afterViews(){
-        imageIds = new int[]{R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3};
+        imageIds = new int[]{R.mipmap.guide_1, R.mipmap.guide_2, R.mipmap.guide_3};
 
         assignData();
     }

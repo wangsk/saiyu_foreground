@@ -69,6 +69,7 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
     EditText et_realname,et_identity;
     private int uploadCode = -1;//区别身份证正反面
     private String identity_front,identity_bg;
+    private boolean IsModify;
 
     public static UploadIdentityFragment newInstance(Bundle bundle) {
         UploadIdentityFragment_ fragment = new UploadIdentityFragment_();
@@ -89,10 +90,17 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
         tv_title_content.setText("实名认证");
         Bundle bundle = getArguments();
         if (bundle != null) {
+            IsModify = bundle.getBoolean("IsModify",true);
             String RealName = bundle.getString("RealName","");
             String IDNum = bundle.getString("IDNum","");
             et_realname.setText(RealName);
             et_identity.setText(IDNum);
+            if(!IsModify){
+                et_realname.setClickable(false);
+                et_realname.setFocusable(false);
+                et_identity.setClickable(false);
+                et_identity.setFocusable(false);
+            }
         }
     }
 

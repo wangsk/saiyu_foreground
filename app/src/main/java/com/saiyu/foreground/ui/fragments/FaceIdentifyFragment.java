@@ -55,6 +55,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
 
     public final static String FaceIdentifyFunctionType = "FaceIdentifyFunctionType";//bundle传值的key
     private int type;//0:刷脸认证；1：解绑手机；2：找回密码
+    private boolean IsModify;
 
     public static FaceIdentifyFragment newInstance(Bundle bundle) {
         FaceIdentifyFragment_ fragment = new FaceIdentifyFragment_();
@@ -89,6 +90,13 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
                     tv_title_content.setText("刷脸认证");
                     et_realname.setText(RealName);
                     et_identity.setText(IDNum);
+                    IsModify = bundle.getBoolean("IsModify",true);
+                    if(!IsModify){
+                        et_realname.setClickable(false);
+                        et_realname.setFocusable(false);
+                        et_identity.setClickable(false);
+                        et_identity.setFocusable(false);
+                    }
                     break;
                 case 1://解绑手机
                     et_realname.setFocusable(false);
