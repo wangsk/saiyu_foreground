@@ -34,7 +34,7 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black_light"
-                    android:text="预定订单号: "
+                    android:text="预定订单号"
                     android:textSize="15sp" />
 
                 <TextView
@@ -267,8 +267,8 @@
                     android:visibility="invisible"/>
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
@@ -303,8 +303,8 @@
                     android:visibility="invisible"/>
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
@@ -340,8 +340,8 @@
 
                 <ImageView
                     android:id="@+id/iv_order_min_jiantou"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:src="@mipmap/jiantou"
                     android:layout_centerVertical="true"/>
@@ -376,8 +376,8 @@
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
@@ -412,8 +412,8 @@
                     android:visibility="gone"/>
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
@@ -432,7 +432,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="客服代理确认状态:"
+                    android:text="客服代理确认状态 "
                     android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
@@ -492,10 +492,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
-                            android:text="QQ号码:"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="QQ号码"
                             android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
@@ -503,7 +504,7 @@
                             android:id="@+id/tv_qq"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:text=""
                             android:textColor="@color/black_light"
                             android:textSize="15sp" />
@@ -519,23 +520,23 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
-                            android:text="QQ密码:"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="QQ密码"
                             android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <EditText
                             android:id="@+id/et_psw"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:layout_toRightOf="@id/tv_4"
                             android:background="@null"
-                            android:gravity="center_vertical"
+                            android:gravity="right|center_vertical"
                             android:hint="请输入QQ密码"
                             android:inputType="textVisiblePassword"
                             android:maxLength="20"
@@ -558,23 +559,24 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
-                            android:text="常登陆地:"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="常登陆地"
                             android:textColor="@color/black_light"
                             android:textSize="15sp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
                             android:orientation="horizontal">
 
                             <Spinner
                                 android:id="@+id/sp_province"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
                                 android:background="@drawable/border_colorline_radius">
 
                             </Spinner>
@@ -592,8 +594,7 @@
                                 android:id="@+id/tv_province"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black_light"
                                 android:textSize="15sp"
                                 android:visibility="gone"
                                 android:text=""/>
@@ -603,7 +604,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black_light"
                                 android:text=""
                                 android:textSize="15sp"
                                 android:visibility="gone"/>
@@ -660,8 +661,8 @@
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"

@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:text="接单扣点:"
+                android:text="接单扣点"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:text="超时扣点:"
+                android:text="超时扣点"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:text="总计扣点:"
+                android:text="总计扣点"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
 

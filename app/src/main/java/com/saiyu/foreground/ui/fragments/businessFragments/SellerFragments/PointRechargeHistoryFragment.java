@@ -73,7 +73,7 @@ public class PointRechargeHistoryFragment extends BaseFragment implements Callba
         tv_title_content.setText("点数充值历史");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         pointRechargeHistoryAdapter = new PointRechargeHistoryAdapter(mItems);

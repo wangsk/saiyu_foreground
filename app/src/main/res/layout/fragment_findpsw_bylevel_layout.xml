@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/line">
+    android:background="@color/white">
 
     <include
         android:id="@+id/rl_title_bar"
@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_title_bar"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="找回方式:"
+            android:text="找回方式"
             android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="visible" />
@@ -89,25 +89,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_title_bar"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:orientation="vertical"
         android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/shibai"/>
 
         <TextView
             android:id="@+id/tv_level_5_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="抱歉,您的赛鱼账号未绑定手机,未补填资料,无法找回!"
-            android:textColor="@color/blue"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text=""
+            android:textColor="@color/black_light"
             android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/tv_level_5_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:text="会员余额: 0.00元"
             android:textColor="@color/black_light"
             android:textSize="15sp"
@@ -118,19 +136,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="visible" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="30dp">
 
             <Button
                 android:id="@+id/btn_level_5_back"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:paddingTop="8dp"
@@ -141,18 +163,20 @@
 
             <Button
                 android:id="@+id/btn_level_5_regist"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/shape_bg_blue"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_bg_blue_light"
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="注册账号"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="15sp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -6,7 +6,7 @@ import android.util.Log;
  */
 public class ButtonUtils {
     private static long lastClickTime = 0;
-    private static long DIFF = 1000;
+    private static long DIFF = 500;
     private static int lastButtonId = -1;
     /**
      * 判断两次点击的间隔，如果小于1000，则认为是多次无效点击

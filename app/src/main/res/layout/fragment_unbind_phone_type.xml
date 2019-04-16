@@ -22,7 +22,7 @@
             android:layout_marginTop="10dp"
             android:text="选择验证方式"
             android:textColor="@color/black_light"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <RadioGroup
             android:id="@+id/rg_selector"
@@ -40,7 +40,7 @@
                 android:buttonTint="@color/blue"
                 android:checked="true"
                 android:text="原手机验证码解绑"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_light" />
 
             <RadioButton
                 android:id="@+id/rb_face"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="20dp"
                 android:buttonTint="@color/blue"
                 android:text="通过刷脸验证解绑"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_light" />
 
         </RadioGroup>
 

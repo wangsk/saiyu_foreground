@@ -1,5 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
@@ -21,6 +22,8 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.RechargeRecordRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
 import com.saiyu.foreground.ui.activitys.BaseActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.ButtonUtils;
@@ -81,7 +84,7 @@ public class RechargeRecordFragment extends BaseFragment implements CallbackUtil
         tv_title_right.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         rechargeRecordAdapter = new RechargeRecordAdapter(mItems);
@@ -134,8 +137,11 @@ public class RechargeRecordFragment extends BaseFragment implements CallbackUtil
                     getActivity().finish();
                     break;
                 case R.id.tv_title_right:
-                    CashDetailFragment cashDetailFragment = CashDetailFragment.newInstance(null);
-                    start(cashDetailFragment);
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.CashDetailFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
                     break;
             }
         }

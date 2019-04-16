@@ -79,7 +79,7 @@ public class CashDetailFragment extends BaseFragment implements CallbackUtils.Re
         tv_title_content.setText("资金明细");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         cashDetailAdapter = new CashDetailAdapter(mItems);
@@ -161,7 +161,7 @@ public class CashDetailFragment extends BaseFragment implements CallbackUtils.Re
     @Click(R.id.btn_title_back)
     void onClick(View view) {
         if (view.getId() == R.id.btn_title_back) {
-            getFragmentManager().popBackStack();
+            getActivity().finish();
         }
     }
 

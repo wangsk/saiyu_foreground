@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:text=""
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
@@ -54,7 +54,7 @@
                     android:id="@+id/rl_clearcache"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="1dp"
                     android:background="@drawable/item_selector_bg">
 
                     <TextView
@@ -66,12 +66,23 @@
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                    <TextView
+                        android:id="@+id/tv_cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="30dp"
+                        android:text=""
+                        android:textColor="@color/black_light"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
                         android:src="@mipmap/jiantou" />
 
                 </RelativeLayout>
@@ -80,7 +91,7 @@
                     android:id="@+id/rl_protocal"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@drawable/item_selector_bg">
 
                     <TextView
@@ -93,11 +104,11 @@
                         android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:src="@mipmap/jiantou" />
 
                 </RelativeLayout>
@@ -106,7 +117,7 @@
                     android:id="@+id/rl_copyright"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@drawable/item_selector_bg">
 
                     <TextView
@@ -119,11 +130,11 @@
                         android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:src="@mipmap/jiantou" />
 
                 </RelativeLayout>

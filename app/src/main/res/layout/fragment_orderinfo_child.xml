@@ -22,20 +22,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="充值号码:"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="充值号码"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_recharge_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
@@ -43,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
                     android:text="复制号码"
                     android:textColor="@color/blue"
                     android:textSize="15sp" />
@@ -58,20 +59,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="充值游戏:"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="充值游戏"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_recharge_game"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -85,20 +87,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="官方比例:"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="官方比例"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_recharge_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -112,20 +115,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="充值大区:"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="充值大区"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_recharge_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -139,20 +143,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="充值数量:"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="充值数量"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_recharge_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -165,21 +170,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:text="实际充值数量:"
-                    android:textColor="@color/black"
+                    android:text="实际充值数量"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/et_count"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
                     android:background="@null"
-                    android:gravity="center_vertical"
+                    android:gravity="right|center_vertical"
                     android:hint=""
                     android:inputType="number"
                     android:maxLength="20"
@@ -188,13 +193,14 @@
                     android:paddingRight="2dp"
                     android:singleLine="true"
                     android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textColor="@color/black_light"/>
 
                 <Spinner
                     android:id="@+id/sp_selector"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/border_colorline_radius"
                     android:visibility="gone" />
 
@@ -203,22 +209,28 @@
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_bg_blue_light"
                     android:gravity="center"
                     android:text="取消修改"
-                    android:textColor="@color/white"
-                    android:visibility="invisible" />
+                    android:textColor="@color/blue"
+                    android:visibility="gone" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_recharge_prompt"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:background="@color/white"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/tv_recharge_prompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black_light"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -235,7 +247,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -272,7 +284,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/border_colorline_radius"
+                    android:background="@drawable/shape_bg_blue_light"
                     android:gravity="center"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
@@ -290,20 +302,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="好友添加:"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:text="好友添加"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_friend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -317,12 +330,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:text="买家留言:"
-                    android:textColor="@color/black"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="买家留言"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
@@ -332,7 +347,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
             </LinearLayout>

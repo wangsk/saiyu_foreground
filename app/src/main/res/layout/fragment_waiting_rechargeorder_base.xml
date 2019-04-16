@@ -26,9 +26,9 @@
                 app:tabIndicatorColor="@color/transparent"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/blue"
+                app:tabSelectedTextColor="@color/transparent"
                 app:tabTextAppearance="@style/TabTextSizeStyle"
-                app:tabTextColor="@color/black" />
+                app:tabTextColor="@color/transparent" />
 
             <com.saiyu.foreground.ui.views.MyViewPager
                 android:id="@+id/view_pager"

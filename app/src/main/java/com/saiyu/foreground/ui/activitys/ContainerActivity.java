@@ -41,6 +41,7 @@ import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.Mem
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.MemInfoFragments.MemberInfoFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.MemInfoFragments.UploadIdentityFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments.CashChannelListFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments.CashDetailFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments.CashFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments.CashRecordFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.RechargeAndCashFragments.RechargeFragment;
@@ -119,6 +120,7 @@ public class ContainerActivity extends BaseActivity {
     public static final int SubmitPicReplaceConfirmFragmentTag = 41;//申请验图确认
     public static final int PointManagerFragmentTag = 42;//点数管理
     public static final int GuideFragmentTag = 43;//引导页
+    public static final int CashDetailFragmentTag = 44;//资金明细
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -208,6 +210,8 @@ public class ContainerActivity extends BaseActivity {
                 return PointManagerFragment.newInstance(bundle);
             case GuideFragmentTag:
                 return GuideFragment.newInstance(bundle);
+            case CashDetailFragmentTag:
+                return CashDetailFragment.newInstance(bundle);
                 default:
                     return null;
         }

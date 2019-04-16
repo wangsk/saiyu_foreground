@@ -79,7 +79,7 @@ public class CacheUtil {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
 //            return size + "Byte";
-            return "0K";
+            return "0KB";
         }
 
         double megaByte = kiloByte / 1024;

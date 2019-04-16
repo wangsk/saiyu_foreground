@@ -86,25 +86,29 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
                 case R.id.btn_next:
                     String password = et_password.getText().toString();
                     if (TextUtils.isEmpty(password)) {
+                        tv_revisepsw_prompt_1.setVisibility(View.VISIBLE);
                         tv_revisepsw_prompt_1.setText("*请输入密码");
                         return;
                     }
                     if (password.length() < 6) {
+                        tv_revisepsw_prompt_1.setVisibility(View.VISIBLE);
                         tv_revisepsw_prompt_1.setText("*密码不能小于6位");
                         return;
                     }
                     if (password.length() > 32) {
+                        tv_revisepsw_prompt_1.setVisibility(View.VISIBLE);
                         tv_revisepsw_prompt_1.setText("*密码不能大于32位");
                         return;
                     }
 
                     String password_confirm = et_password_confirm.getText().toString();
-                    tv_revisepsw_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                     if (TextUtils.isEmpty(password_confirm)) {
+                        tv_revisepsw_prompt_2.setVisibility(View.VISIBLE);
                         tv_revisepsw_prompt_2.setText("*请再次输入密码");
                         return;
                     }
                     if (!password_confirm.equals(et_password.getText().toString())) {
+                        tv_revisepsw_prompt_2.setVisibility(View.VISIBLE);
                         tv_revisepsw_prompt_2.setText("*两次输入不一致");
                         return;
                     }
@@ -121,37 +125,17 @@ public class RevisePswFragment extends BaseFragment implements CallbackUtils.Res
         switch (hello.getId()) {
             case R.id.et_password:
                 String password = et_password.getText().toString();
-                tv_revisepsw_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(password)) {
-                    tv_revisepsw_prompt_1.setText("*请输入密码");
+                    tv_revisepsw_prompt_1.setVisibility(View.INVISIBLE);
                     return;
                 }
-                if (password.length() < 6) {
-                    tv_revisepsw_prompt_1.setText("*密码不能小于6位");
-                    return;
-                }
-                if (password.length() > 32) {
-                    tv_revisepsw_prompt_1.setText("*密码不能大于32位");
-                    return;
-                }
-                tv_revisepsw_prompt_1.setText("*密码可用");
-                if (password.equals(et_password_confirm.getText().toString())) {
-                    tv_revisepsw_prompt_2.setText("*密码可用");
-                } else {
-                    tv_revisepsw_prompt_2.setText("*两次输入不一致");
-                }
+
                 break;
             case R.id.et_password_confirm:
                 String password_confirm = et_password_confirm.getText().toString();
-                tv_revisepsw_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(password_confirm)) {
-                    tv_revisepsw_prompt_2.setText("*请再次输入密码");
+                    tv_revisepsw_prompt_2.setVisibility(View.INVISIBLE);
                     return;
-                }
-                if (password_confirm.equals(et_password.getText().toString())) {
-                    tv_revisepsw_prompt_2.setText("*密码可用");
-                } else {
-                    tv_revisepsw_prompt_2.setText("*两次输入不一致");
                 }
                 break;
         }

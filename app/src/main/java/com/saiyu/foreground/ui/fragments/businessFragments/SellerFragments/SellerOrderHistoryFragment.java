@@ -78,7 +78,7 @@ public class SellerOrderHistoryFragment extends BaseFragment implements Callback
         tv_title_content.setText("出售订单历史");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         sellerOrderHistoryAdapter = new SellerOrderHistoryAdapter(mItems);

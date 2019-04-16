@@ -28,7 +28,7 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.fragment_reset_psw)
 public class ResetPswFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
     @ViewById
-    TextView tv_title_content, tv_revisepsw_prompt_1, tv_revisepsw_prompt_2,tv_revisepsw_prompt_3;
+    TextView tv_title_content;
     @ViewById
     Button btn_title_back, btn_next;
     @ViewById
@@ -89,42 +89,38 @@ public class ResetPswFragment extends BaseFragment implements CallbackUtils.Resp
                     String password_old = et_password_old.getText().toString();
 
                     if (TextUtils.isEmpty(password_old)) {
-                        tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
-                        tv_revisepsw_prompt_3.setText("*请输入密码");
+                        Toast.makeText(mContext,"请输入原密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password_old.length() < 6) {
-                        tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
-                        tv_revisepsw_prompt_3.setText("*密码不能小于6位");
+                        Toast.makeText(mContext,"密码不能小于6位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password_old.length() > 32) {
-                        tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
-                        tv_revisepsw_prompt_3.setText("*密码不能大于32位");
+                        Toast.makeText(mContext,"密码不能大于32位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     String password = et_password.getText().toString();
                     if (TextUtils.isEmpty(password)) {
-                        tv_revisepsw_prompt_1.setText("*请输入密码");
+                        Toast.makeText(mContext,"请输入新密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() < 6) {
-                        tv_revisepsw_prompt_1.setText("*密码不能小于6位");
+                        Toast.makeText(mContext,"密码不能小于6位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() > 32) {
-                        tv_revisepsw_prompt_1.setText("*密码不能大于32位");
+                        Toast.makeText(mContext,"密码不能大于32位",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     String password_confirm = et_password_confirm.getText().toString();
-                    tv_revisepsw_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                     if (TextUtils.isEmpty(password_confirm)) {
-                        tv_revisepsw_prompt_2.setText("*请再次输入密码");
+                        Toast.makeText(mContext,"请再次输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!password_confirm.equals(et_password.getText().toString())) {
-                        tv_revisepsw_prompt_2.setText("*两次输入不一致");
+                        Toast.makeText(mContext,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -132,65 +128,6 @@ public class ResetPswFragment extends BaseFragment implements CallbackUtils.Resp
                     break;
 
             }
-        }
-    }
-
-    @TextChange({R.id.et_password, R.id.et_password_confirm,R.id.et_password_old})
-    void textChange(CharSequence s, TextView hello, int before, int start, int count) {
-        switch (hello.getId()) {
-            case R.id.et_password:
-                String password = et_password.getText().toString();
-                tv_revisepsw_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
-                if (TextUtils.isEmpty(password)) {
-                    tv_revisepsw_prompt_1.setText("*请输入密码");
-                    return;
-                }
-                if (password.length() < 6) {
-                    tv_revisepsw_prompt_1.setText("*密码不能小于6位");
-                    return;
-                }
-                if (password.length() > 32) {
-                    tv_revisepsw_prompt_1.setText("*密码不能大于32位");
-                    return;
-                }
-                tv_revisepsw_prompt_1.setText("*密码可用");
-                if (password.equals(et_password_confirm.getText().toString())) {
-                    tv_revisepsw_prompt_2.setText("*密码可用");
-                } else {
-                    tv_revisepsw_prompt_2.setText("*两次输入不一致");
-                }
-                break;
-            case R.id.et_password_confirm:
-                String password_confirm = et_password_confirm.getText().toString();
-                tv_revisepsw_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
-                if (TextUtils.isEmpty(password_confirm)) {
-                    tv_revisepsw_prompt_2.setText("*请再次输入密码");
-                    return;
-                }
-                if (password_confirm.equals(et_password.getText().toString())) {
-                    tv_revisepsw_prompt_2.setText("*密码可用");
-                } else {
-                    tv_revisepsw_prompt_2.setText("*两次输入不一致");
-                }
-                break;
-            case R.id.et_password_old:
-                String password_old = et_password_old.getText().toString();
-                tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
-                if (TextUtils.isEmpty(password_old)) {
-                    tv_revisepsw_prompt_3.setText("*请输入密码");
-                    return;
-                }
-                if (password_old.length() < 6) {
-                    tv_revisepsw_prompt_3.setText("*密码不能小于6位");
-                    return;
-                }
-                if (password_old.length() > 32) {
-                    tv_revisepsw_prompt_3.setText("*密码不能大于32位");
-                    return;
-                }
-                tv_revisepsw_prompt_3.setTextColor(mContext.getResources().getColor(R.color.black_light));
-                tv_revisepsw_prompt_3.setText("*请输入原登录密码");
-                break;
         }
     }
 }

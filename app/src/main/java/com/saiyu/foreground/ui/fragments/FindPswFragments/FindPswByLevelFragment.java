@@ -110,6 +110,7 @@ public class FindPswByLevelFragment extends BaseFragment {
                     //五级  无法验证找回
                     ll_level_top4.setVisibility(View.GONE);
                     ll_level_5.setVisibility(View.VISIBLE);
+                    tv_level_5_prompt.setText("抱歉,您的赛鱼账号"+account+"未绑定手机\n未补填资料，无法找回!");
                     tv_level_5_time.setText("注册时间: " + RegTime);
                     break;
             }

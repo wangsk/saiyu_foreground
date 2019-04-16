@@ -17,7 +17,7 @@ public class ProtocolFragment extends BaseFragment{
     @ViewById
     TextView tv_protocol_detail,tv_title_content;
     @ViewById
-    Button btn_title_back;
+    Button btn_title_back,btn_back;
 
     public static ProtocolFragment newInstance(Bundle bundle) {
         ProtocolFragment_ fragment = new ProtocolFragment_();
@@ -30,10 +30,11 @@ public class ProtocolFragment extends BaseFragment{
         tv_title_content.setText("赛鱼网服务协议");
     }
 
-    @Click({R.id.btn_title_back})
+    @Click({R.id.btn_title_back,R.id.btn_back})
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_title_back:
+            case R.id.btn_back:
                 getFragmentManager().popBackStack();
                 break;
         }

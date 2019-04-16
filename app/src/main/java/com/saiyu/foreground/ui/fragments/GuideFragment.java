@@ -41,9 +41,7 @@ public class GuideFragment extends BaseFragment{
 
     @AfterViews
     void afterViews(){
-        imageIds = new int[]{R.drawable.loading, R.drawable.loading};
-
-        boolean isFirst = SPUtils.getBoolean(ConstValue.ISFIRSTRUNNING, true);
+        imageIds = new int[]{R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3};
 
         assignData();
     }

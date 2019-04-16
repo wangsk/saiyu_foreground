@@ -30,11 +30,13 @@ public class SetingFragment extends BaseFragment implements CallbackUtils.Respon
     @ViewById
     ProgressBar pb_loading;
     @ViewById
-    TextView tv_title_content,tv_account;
+    TextView tv_title_content,tv_account,tv_cash;
     @ViewById
     Button btn_title_back;
     @ViewById
     RelativeLayout rl_account,rl_clearcache,rl_protocal,rl_copyright;
+
+    private String totalCacheSize = "0";
 
     public static SetingFragment newInstance(Bundle bundle) {
         SetingFragment_ fragment = new SetingFragment_();
@@ -57,6 +59,14 @@ public class SetingFragment extends BaseFragment implements CallbackUtils.Respon
             String account = bundle.getString("account");
             tv_account.setText(account);
         }
+
+        try {
+            totalCacheSize = CacheUtil.getTotalCacheSize(mContext);
+        } catch (Exception e) {
+            totalCacheSize = "0KB";
+            e.printStackTrace();
+        }
+        tv_cash.setText(totalCacheSize);
     }
 
     @Override
@@ -79,13 +89,13 @@ public class SetingFragment extends BaseFragment implements CallbackUtils.Respon
                     ApiRequest.unLogin(getActivity());
                     break;
                 case R.id.rl_clearcache:
-                    String totalCacheSize = "";
                     try {
                         totalCacheSize = CacheUtil.getTotalCacheSize(mContext);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        totalCacheSize = "0KB";
                     }
-                    if (totalCacheSize.equals("0K")) {
+                    if (totalCacheSize.equals("0KB")) {
                         Toast.makeText(mContext, "您当前没有缓存", Toast.LENGTH_SHORT).show();
                     } else {
                         DialogUtils.showDialog(getActivity(),"提示", "确定要清理:" + totalCacheSize + "缓存吗?", "取消", "清理", new OnClickListener() {

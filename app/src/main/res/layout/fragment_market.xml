@@ -24,8 +24,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
                 android:text="行情"
                 android:textColor="@color/white"
                 android:textSize="25sp"
@@ -33,7 +33,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="60dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <View
@@ -93,8 +93,8 @@
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
             <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:src="@mipmap/jiantou"/>
         </LinearLayout>
@@ -114,8 +114,8 @@
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
             <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:src="@mipmap/jiantou"/>
         </LinearLayout>
@@ -135,8 +135,8 @@
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
             <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:src="@mipmap/jiantou"/>
         </LinearLayout>

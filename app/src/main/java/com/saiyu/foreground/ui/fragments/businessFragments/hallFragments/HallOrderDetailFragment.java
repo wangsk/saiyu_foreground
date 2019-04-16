@@ -662,7 +662,10 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     //判断输入Q币数量是否可用
     private void isCountAble(){
         if(!isLogin){
-            tv_orderPoint.setText("0点");
+            if(TextUtils.isEmpty(rechargeNum)){
+                tv_count_prompt.setText("请登录");
+            }
+            tv_orderPoint.setText(rechargeNum+"点");
             return;
         }
 

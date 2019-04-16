@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -40,7 +40,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -68,7 +68,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -96,7 +96,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -124,7 +124,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -152,7 +152,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -181,7 +181,7 @@
         android:id="@+id/rl_7"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -210,7 +210,7 @@
         android:id="@+id/rl_8"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView

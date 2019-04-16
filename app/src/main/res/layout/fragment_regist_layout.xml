@@ -60,16 +60,16 @@
             android:id="@+id/tv_regist_prompt_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="*账号以字母开头，可包含数字，不区分大小写!"
             android:textColor="@color/black_light"
             android:textSize="14sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <EditText
@@ -122,16 +122,16 @@
             android:id="@+id/tv_regist_prompt_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="*密码由6-32位字符(字母区分大小写)组成"
             android:textColor="@color/black_light"
             android:textSize="14sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <EditText
@@ -184,11 +184,11 @@
             android:id="@+id/tv_regist_prompt_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="*请再次输入登录密码"
             android:textColor="@color/black_light"
             android:textSize="14sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/btn_next"

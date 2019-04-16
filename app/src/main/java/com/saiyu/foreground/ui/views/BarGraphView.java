@@ -252,7 +252,7 @@ public class BarGraphView extends View {
             rectF.left = rectX;
             rectF.right = rectX + mSize;
             rectF.bottom = mHeight;
-            rectF.top = mHeight - 400;
+            rectF.top = mHeight - 390;
             if (i % 2 != 0) {
                 canvas.drawRect(rectF, bg);
             } else {
@@ -565,15 +565,14 @@ public class BarGraphView extends View {
     private void clickAction(MotionEvent event) {
         if (value == null || xValue == null || value.size() == 0 || xValue.size() == 0)
             return;
-        int dp25 = 50;
+        int dp25 = 80;
         float eventX = event.getX();
         float eventY = event.getY();
         for (int i = 0; i < xValue.size(); i++) {
             //节点
             float x = linearStartX + mSize * i;
-            float y = yOri - yOri * value.get(xValue.get(i)) / yValue;
-            if (eventX >= x - dp25 && eventX <= x + dp25 &&
-                    eventY >= y - dp25 && eventY <= y + dp25 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
+//            float y = yOri - yOri * value.get(xValue.get(i)) / yValue;
+            if (eventX >= x - dp25 && eventX <= x + dp25 && selectIndex != i + 1) {//每个节点所在的柱状图内都是可点击区域
                 if (i + 1 <= posMonth) {
                     selectIndex = i + 1;
                     invalidate();
@@ -581,19 +580,19 @@ public class BarGraphView extends View {
                 return;
             }
         }
-        for (int i = 0; i < xValue.size(); i++) {
-            //节点
-            float x = linearStartX + mSize * i;
-            float y = yOri - yOri * value_2.get(xValue.get(i)) / yValue;
-            if (eventX >= x - dp25 && eventX <= x + dp25 &&
-                    eventY >= y - dp25 && eventY <= y + dp25 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
-                if (i + 1 <= posMonth) {
-                    selectIndex = i + 1;
-                    invalidate();
-                }
-                return;
-            }
-        }
+//        for (int i = 0; i < xValue.size(); i++) {
+//            //节点
+//            float x = linearStartX + mSize * i;
+//            float y = yOri - yOri * value_2.get(xValue.get(i)) / yValue;
+//            if (eventX >= x - dp25 && eventX <= x + dp25 &&
+//                    eventY >= y - dp25 && eventY <= y + dp25 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
+//                if (i + 1 <= posMonth) {
+//                    selectIndex = i + 1;
+//                    invalidate();
+//                }
+//                return;
+//            }
+//        }
     }
 
     /**

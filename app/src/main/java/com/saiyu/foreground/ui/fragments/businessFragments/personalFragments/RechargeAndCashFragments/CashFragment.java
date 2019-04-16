@@ -90,7 +90,7 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
         tv_title_content.setText("我要提现");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
 
         cashAdapter = new CashAdapter(mItems);
         recyclerView.setAdapter(cashAdapter);

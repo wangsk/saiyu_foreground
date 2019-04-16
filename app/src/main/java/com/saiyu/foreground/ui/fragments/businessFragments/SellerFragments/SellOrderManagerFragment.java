@@ -81,7 +81,7 @@ public class SellOrderManagerFragment extends BaseFragment implements CallbackUt
         tv_title_content.setText("出售订单管理");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         sellerOrderManagerAdapter = new SellerOrderManagerAdapter(mItems);

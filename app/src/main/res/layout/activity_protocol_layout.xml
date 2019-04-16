@@ -7,18 +7,37 @@
 
     <include layout="@layout/titlebar_layout" />
 
-    <com.saiyu.foreground.ui.views.ReboundScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tv_protocol_detail"
+        <com.saiyu.foreground.ui.views.ReboundScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:text="@string/app_protocol"/>
-    </com.saiyu.foreground.ui.views.ReboundScrollView>
+            android:layout_marginBottom="50dp">
+
+            <TextView
+                android:id="@+id/tv_protocol_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:text="@string/app_protocol"/>
+        </com.saiyu.foreground.ui.views.ReboundScrollView>
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_selector_bg"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

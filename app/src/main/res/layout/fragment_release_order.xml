@@ -22,7 +22,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -49,7 +49,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -76,7 +76,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -104,7 +104,7 @@
                     android:id="@+id/ll_gamePlace"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -127,10 +127,11 @@
                         android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:src="@mipmap/jiantou"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="5dp"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -153,21 +154,22 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:text="游戏角色: "
+                        android:layout_weight="1"
+                        android:text="游戏角色"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/et_role"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right|center_vertical"
                         android:hint="请输入游戏角色"
                         android:inputType="text"
                         android:maxLength="20"
@@ -198,21 +200,22 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:text="充值号码: "
+                        android:layout_weight="1"
+                        android:text="充值号码"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/et_recharge_qqnum"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right|center_vertical"
                         android:hint="请输入要充值的QQ号码"
                         android:inputType="number"
                         android:maxLength="20"
@@ -229,7 +232,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -244,19 +247,19 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:text="预定数量: "
+                        android:layout_weight="1"
+                        android:text="预定数量"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/et_release_count"
-                        android:layout_width="120dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:hint="请输入预定数量"
@@ -274,6 +277,8 @@
                         android:id="@+id/tv_release_count_prompt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="5dp"
                         android:text="0英雄联盟点券=0Q币"
                         android:textColor="@color/blue"
                         android:textSize="12sp" />
@@ -283,7 +288,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -298,19 +303,19 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:text="预定出价: "
+                        android:layout_weight="1"
+                        android:text="预定出价"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/et_release_price"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:hint="请输入价格"
@@ -332,7 +337,7 @@
                         android:textSize="15sp" />
                     <EditText
                         android:id="@+id/et_release_discount"
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
@@ -352,6 +357,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:text="折"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
@@ -361,24 +367,25 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="预定附言: "
+                        android:layout_weight="1"
+                        android:text="预定附言"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <Spinner
                         android:id="@+id/sp_selector"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/border_colorline_radius">
 
                     </Spinner>
@@ -388,7 +395,7 @@
                     android:id="@+id/ll_onlineTime"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -422,8 +429,8 @@
                         android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:src="@mipmap/jiantou"
                         android:layout_marginRight="10dp"/>
                 </LinearLayout>
@@ -435,7 +442,7 @@
                     android:gravity="right|center_vertical"
                     android:text="附件选项"
                     android:textColor="@color/black_light"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:id="@+id/rl_replace"
@@ -447,7 +454,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@null"
                         android:drawableLeft="@mipmap/dai"
                         android:text="  客服代理确认"
@@ -468,8 +475,8 @@
                         android:layout_centerVertical="true"
                         android:visibility="invisible"/>
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
                         android:src="@mipmap/jiantou"
@@ -486,7 +493,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@null"
                         android:drawableLeft="@mipmap/yan"
                         android:text="  支持验图确认"
@@ -507,8 +514,8 @@
                         android:layout_centerVertical="true"
                         android:visibility="gone"/>
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
                         android:src="@mipmap/jiantou"
@@ -532,14 +539,14 @@
                             android:id="@+id/rl_orderEndTime"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="1dp"
                             android:background="@color/white"
                             android:gravity="center_vertical">
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:background="@null"
                                 android:drawableLeft="@mipmap/daoqi"
                                 android:text="  到期时间"
@@ -560,8 +567,8 @@
                                 android:layout_centerVertical="true"
                                 android:visibility="gone"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
                                 android:src="@mipmap/jiantou"
@@ -571,14 +578,14 @@
                             android:id="@+id/rl_orderPsw"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="1dp"
                             android:background="@color/white"
                             android:gravity="center_vertical">
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:background="@null"
                                 android:drawableLeft="@mipmap/ddjm"
                                 android:text="  订单加密"
@@ -599,8 +606,8 @@
                                 android:layout_centerVertical="true"
                                 android:visibility="gone"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
                                 android:src="@mipmap/jiantou"
@@ -610,14 +617,14 @@
                             android:id="@+id/rl_order_min"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="1dp"
                             android:background="@color/white"
                             android:gravity="center_vertical">
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:background="@null"
                                 android:drawableLeft="@mipmap/danci"
                                 android:text="  单次充值最低"
@@ -638,8 +645,8 @@
                                 android:layout_centerVertical="true"
                                 android:visibility="gone"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
                                 android:src="@mipmap/jiantou"
@@ -649,7 +656,7 @@
                             android:id="@+id/rl_order_between"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="1dp"
                             android:background="@color/white"
                             android:gravity="center_vertical">
 
@@ -657,7 +664,7 @@
                                 android:id="@+id/btn_betweentime_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:background="@null"
                                 android:drawableLeft="@mipmap/sjjg"
                                 android:text="  接单间隔时间"
@@ -678,8 +685,8 @@
                                 android:layout_centerVertical="true"
                                 android:visibility="gone"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
                                 android:src="@mipmap/jiantou"
@@ -693,7 +700,7 @@
                     android:id="@+id/top_bar"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center">
 
@@ -708,7 +715,7 @@
                     android:id="@+id/rl_remark"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical">
 
@@ -721,8 +728,8 @@
                         android:textSize="15sp" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
                         android:src="@mipmap/jiantou"/>
@@ -747,13 +754,13 @@
                         android:layout_marginLeft="0dp"
                         android:text="联系方式"
                         android:textColor="@color/black_light"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -781,7 +788,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -826,7 +833,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="允许接单卖家查看"
+                        android:text="不允许接单卖家查看"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
                     <Switch

@@ -71,7 +71,7 @@ public class OrderRecordFragment extends BaseFragment implements CallbackUtils.R
         tv_title_content.setText("订单日志");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setEnableRefresh(false);
         refreshLayout.setEnableRefresh(false);
         orderRecordAdapter = new OrderRecordAdapter(mItems);

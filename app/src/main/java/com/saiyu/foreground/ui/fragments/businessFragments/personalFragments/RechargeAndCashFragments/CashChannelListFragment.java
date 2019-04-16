@@ -71,7 +71,7 @@ public class CashChannelListFragment extends BaseFragment implements CallbackUti
         refreshLayout.setEnableRefresh(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
 
         cashChannelAdapter = new CashChannelAdapter(mItems);
         recyclerView.setAdapter(cashChannelAdapter);

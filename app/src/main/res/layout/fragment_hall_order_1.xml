@@ -76,10 +76,11 @@
                     android:paddingBottom="5dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:text="附加选项  "
+                        android:text="附加选项"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
@@ -87,6 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp">
 
@@ -387,7 +389,9 @@
                         android:id="@+id/tv_count_prompt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="输入您要出售的Q币数量，最大不超过Q币"
                         android:textColor="@color/black_light"
@@ -434,7 +438,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
                     android:background="@color/white"
-                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
@@ -443,6 +446,9 @@
                         android:id="@+id/tv_prompt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="接单时按1:1扣除接单点数，交易成功双倍返还，失败不退"
                         android:textColor="@color/black_light"

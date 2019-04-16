@@ -19,7 +19,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -36,7 +36,8 @@
                 <Button
                     android:id="@+id/btn_rechargepoint"
                     android:layout_width="80dp"
-                    android:layout_height="25dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="2dp"
                     android:gravity="center"
                     android:background="@drawable/border_yellow_radius"
                     android:text="充值点数"
@@ -46,7 +47,8 @@
                 <Button
                     android:id="@+id/btn_free"
                     android:layout_width="80dp"
-                    android:layout_height="25dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="2dp"
                     android:gravity="center"
                     android:background="@drawable/item_selector_bg"
                     android:layout_marginLeft="10dp"

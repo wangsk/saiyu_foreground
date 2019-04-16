@@ -8,128 +8,137 @@
     android:orientation="vertical"
     android:visibility="gone">
 
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_prompt_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="后将按分钟扣除接单点数"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_prompt_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tv_prompt_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/blue"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_prompt_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="请尽快充值或取消订单"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg_blue"
-        android:gravity="center"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:text="取消订单"
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/btn_prompt"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@null"
-        android:clickable="false"
-        android:drawableLeft="@mipmap/jg"
-        android:focusable="false"
-        android:text="  新老用户必看，否则容易出错！"
-        android:textAlignment="center"
-        android:textColor="@color/yellow"
-        android:textSize="15sp" />
+        android:background="@color/white"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_prompt_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="后将按分钟扣除接单点数"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_prompt_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_prompt_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_prompt_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请尽快充值或取消订单"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_bg_blue_light"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="取消订单"
+            android:textColor="@color/blue" />
+
+        <Button
+            android:id="@+id/btn_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:clickable="false"
+            android:drawableLeft="@mipmap/jg"
+            android:focusable="false"
+            android:text="  新老用户必看，否则容易出错！"
+            android:textAlignment="center"
+            android:textColor="@color/yellow"
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/ll_title_bar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/layout_tab"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:tabBackground="@drawable/selector_bg"
-                app:tabIndicatorColor="@color/yellow"
-                app:tabIndicatorHeight="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:tabBackground="@color/white"
+                app:tabIndicatorColor="@color/blue"
+                app:tabIndicatorHeight="2dp"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/blue"
                 app:tabTextAppearance="@style/TabTextSizeStyle"
-                app:tabTextColor="@color/black" />
+                app:tabTextColor="@color/black_light" />
         </LinearLayout>
 
         <com.saiyu.foreground.ui.views.MyViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="1dp"
             android:layout_weight="1" />
     </LinearLayout>
 

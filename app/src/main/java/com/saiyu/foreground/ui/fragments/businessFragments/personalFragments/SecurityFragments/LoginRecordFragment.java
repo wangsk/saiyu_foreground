@@ -69,7 +69,7 @@ public class LoginRecordFragment extends BaseFragment  implements OnRefreshListe
         tv_title_content.setText("登录日志");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         loginRecordAdapter = new LoginRecordAdapter(mItems);

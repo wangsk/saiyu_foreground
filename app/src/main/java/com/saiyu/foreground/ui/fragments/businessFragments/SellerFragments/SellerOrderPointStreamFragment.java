@@ -78,7 +78,7 @@ public class SellerOrderPointStreamFragment extends BaseFragment implements Call
         tv_title_content.setText("接单点数流水");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         receivePointAdapter = new ReceivePointAdapter(mItems);

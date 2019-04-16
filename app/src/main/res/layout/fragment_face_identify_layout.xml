@@ -46,7 +46,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="认证时可更改，认证通过后真是姓名永久不可修改"
+            android:text="认证时可更改，认证通过后真实姓名永久不可修改"
             android:textColor="@color/yellow"
             android:textSize="15sp"
             android:visibility="visible" />
@@ -178,8 +178,7 @@
             android:layout_marginLeft="10dp"
             android:text="重要提示!"
             android:textColor="@color/black_light"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="15sp"
             android:visibility="visible" />
 
         <TextView
@@ -188,7 +187,27 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/zhifubao_prompt"
+            android:text="1.支付宝必须通过实名认证或者已绑定银行卡"
+            android:textColor="@color/black_light"
+            android:textSize="15sp"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="2.支付宝登录账号的姓名和身份证号码必须和你在本站所填的姓名信息一致"
+            android:textColor="@color/black_light"
+            android:textSize="15sp"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="3.以上2个条件必须同时满足，否则将会认证失败！"
             android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="visible" />

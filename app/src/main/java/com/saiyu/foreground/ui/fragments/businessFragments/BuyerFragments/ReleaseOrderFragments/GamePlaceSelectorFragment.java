@@ -65,7 +65,7 @@ public class GamePlaceSelectorFragment extends BaseFragment implements CallbackU
         tv_title_content.setText("充值大区选择");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setEnableLoadmore(false);
         refreshLayout.setEnableRefresh(false);
 

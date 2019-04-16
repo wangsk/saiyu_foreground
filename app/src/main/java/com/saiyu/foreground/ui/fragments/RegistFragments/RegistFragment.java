@@ -80,10 +80,13 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
             if (ret.getData() == null) {
                 return;
             }
+
             if (ret.getData().isExist()) {
+                tv_regist_prompt_1.setVisibility(View.VISIBLE);
                 tv_regist_prompt_1.setText(accountExist);
             } else {
-                tv_regist_prompt_1.setText("*账号可用");
+                tv_regist_prompt_1.setText("");
+                tv_regist_prompt_1.setVisibility(View.INVISIBLE);
             }
 
         }
@@ -100,8 +103,8 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                 case R.id.btn_next:
                     String account = et_account.getText().toString();
                     if (TextUtils.isEmpty(account)) {
+                        tv_regist_prompt_1.setVisibility(View.VISIBLE);
                         tv_regist_prompt_1.setText("*请输入账号");
-                        tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -125,7 +128,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                         isOk = false;
                     }
                     if (!isOk) {
-                        tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        tv_regist_prompt_1.setVisibility(View.VISIBLE);
                         tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
                         Toast.makeText(mContext,"账号格式错误",Toast.LENGTH_SHORT).show();
                         return;
@@ -133,19 +136,19 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
 
                     String password = et_password.getText().toString();
                     if (TextUtils.isEmpty(password)) {
-                        tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        tv_regist_prompt_2.setVisibility(View.VISIBLE);
                         tv_regist_prompt_2.setText("*请输入密码");
                         Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() < 6) {
-                        tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        tv_regist_prompt_2.setVisibility(View.VISIBLE);
                         tv_regist_prompt_2.setText("*密码不能小于6位");
                         Toast.makeText(mContext,"密码不能小于6位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() > 32) {
-                        tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        tv_regist_prompt_2.setVisibility(View.VISIBLE);
                         tv_regist_prompt_2.setText("*密码不能大于32位");
                         Toast.makeText(mContext,"密码不能大于32位",Toast.LENGTH_SHORT).show();
                         return;
@@ -153,13 +156,13 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
 
                     String password_confirm = et_password_confirm.getText().toString();
                     if (TextUtils.isEmpty(password_confirm)) {
-                        tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        tv_regist_prompt_3.setVisibility(View.VISIBLE);
                         tv_regist_prompt_3.setText("*请再次输入密码");
                         Toast.makeText(mContext,"请再次输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!password_confirm.equals(et_password.getText().toString())) {
-                        tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
+                        tv_regist_prompt_3.setVisibility(View.VISIBLE);
                         tv_regist_prompt_3.setText("*两次输入不一致");
                         Toast.makeText(mContext,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                         return;
@@ -183,10 +186,12 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                 case R.id.iv_psw:
                     if(flag_1){
                         et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yanjing));
                         flag_1 = false;
                     } else {
                         //从密码不可见模式变为密码可见模式
                         et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.eye_2));
                         flag_1 = true;
                     }
 
@@ -197,10 +202,12 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                 case R.id.iv_psw_confirm:
                     if(flag_2){
                         et_password_confirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        iv_psw_confirm.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yanjing));
                         flag_2 = false;
                     } else {
                         //从密码不可见模式变为密码可见模式
                         et_password_confirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        iv_psw_confirm.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.eye_2));
                         flag_2 = true;
                     }
 
@@ -222,9 +229,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
                 return;
             }
             String account = et_account.getText().toString();
-            tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
             if (TextUtils.isEmpty(account)) {
-                tv_regist_prompt_1.setText("*请输入账号");
                 return;
             }
             boolean isOk = true;
@@ -245,6 +250,7 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
             if (isOk) {
                 ApiRequest.isAccountExist(account, "RegistFragment_isAccountExist");
             } else {
+                tv_regist_prompt_1.setVisibility(View.VISIBLE);
                 tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
             }
         }
@@ -254,69 +260,36 @@ public class RegistFragment extends BaseFragment implements CallbackUtils.Respon
     void textChange(CharSequence s, TextView hello, int before, int start, int count) {
         switch (hello.getId()) {
             case R.id.et_account:
+                if(tv_regist_prompt_1.getVisibility() == View.VISIBLE){
+                    tv_regist_prompt_1.setText("");
+                    tv_regist_prompt_1.setVisibility(View.INVISIBLE);
+                }
                 String account = et_account.getText().toString();
-                tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(account)) {
-                    tv_regist_prompt_1.setText("*请输入账号");
                     iv_account_clear.setVisibility(View.GONE);
                     return;
                 }
                 iv_account_clear.setVisibility(View.VISIBLE);
-                boolean isOk = true;
-
-                if (account.matches(ConstValue.checkAccout)) {
-                    if (account.matches(ConstValue.checkAccout_2)) {
-                        isOk = false;
-                    }
-                    if (account.matches(ConstValue.checkAccout_3)) {
-                        isOk = false;
-                    }
-                    if (account.matches(ConstValue.checkAccout_4)) {
-                        isOk = false;
-                    }
-                } else {
-                    isOk = false;
-                }
-                if (!isOk) {
-                    tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
-                } else {
-                    tv_regist_prompt_1.setText("*账号格式正确");
-                }
 
                 break;
             case R.id.et_password:
                 String password = et_password.getText().toString();
-                tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(password)) {
-                    tv_regist_prompt_2.setText("*请输入密码");
+                    tv_regist_prompt_2.setVisibility(View.INVISIBLE);
                     return;
                 }
-                if (password.length() < 6) {
-                    tv_regist_prompt_2.setText("*密码不能小于6位");
-                    return;
-                }
-                if (password.length() > 32) {
-                    tv_regist_prompt_2.setText("*密码不能大于32位");
-                    return;
-                }
-                tv_regist_prompt_2.setText("*密码可用");
-                if(password.equals(et_password_confirm.getText().toString())){
-                    tv_regist_prompt_3.setText("*密码可用");
-                } else {
-                    tv_regist_prompt_3.setText("*两次输入不一致");
+                if(tv_regist_prompt_2.getVisibility() == View.VISIBLE){
+                    tv_regist_prompt_2.setVisibility(View.INVISIBLE);
                 }
                 break;
             case R.id.et_password_confirm:
                 String password_confirm = et_password_confirm.getText().toString();
-                tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(password_confirm)) {
-                    tv_regist_prompt_3.setText("*请再次输入密码");
+                    tv_regist_prompt_3.setVisibility(View.INVISIBLE);
                     return;
                 }
-                if (password_confirm.equals(et_password.getText().toString())) {
-                    tv_regist_prompt_3.setText("*密码可用");
-                } else {
-                    tv_regist_prompt_3.setText("*两次输入不一致");
+                if(tv_regist_prompt_3.getVisibility() == View.VISIBLE){
+                    tv_regist_prompt_3.setVisibility(View.INVISIBLE);
                 }
                 break;
         }

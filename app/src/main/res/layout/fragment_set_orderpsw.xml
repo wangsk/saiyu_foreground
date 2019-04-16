@@ -15,24 +15,26 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="订单加密: "
-                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="订单加密"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/et_release_psw"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 android:background="@null"
-                android:gravity="center_vertical"
+                android:gravity="right|center_vertical"
                 android:hint="请输入4位数字密码"
                 android:inputType="number"
                 android:maxLength="4"
@@ -41,7 +43,8 @@
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
 
         </LinearLayout>
 

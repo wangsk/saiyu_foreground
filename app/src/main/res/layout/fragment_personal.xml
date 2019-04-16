@@ -16,27 +16,18 @@
             android:background="@mipmap/top_bg"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_seting"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:src="@mipmap/shezhi" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="40dp"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_headicon"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:contentDescription="@null"
                     android:padding="2dp"
                     android:src="@mipmap/logo_personal"
@@ -44,8 +35,9 @@
                     app:civ_border_width="0dp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:orientation="vertical">
@@ -56,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -96,6 +88,14 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_seting"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/shezhi" />
 
             </LinearLayout>
 
@@ -187,9 +187,9 @@
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp">
 
             <com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -217,12 +217,12 @@
                         android:paddingBottom="10dp"
                         android:text="我的赛鱼"
                         android:textColor="@color/black_light"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="1dp"
                         android:background="@drawable/shape_bg_white"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -289,7 +289,7 @@
                         android:id="@+id/ll_active_seller"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/item_selector_bg"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -324,7 +324,7 @@
                         android:id="@+id/ll_seller_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="1dp"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
                         android:background="@drawable/shape_bg_white"
@@ -391,7 +391,7 @@
                         android:id="@+id/ll_active_buyer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="1dp"
                         android:background="@drawable/item_selector_bg"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -426,7 +426,7 @@
                         android:id="@+id/ll_buyer_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="1dp"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
                         android:background="@drawable/shape_bg_white"
@@ -492,7 +492,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/shape_bg_white">
 
                         <TextView
@@ -503,9 +503,10 @@
                             android:layout_marginLeft="10dp"
                             android:text="资金管理"
                             android:textColor="@color/black_light"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tv_cashinfo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -514,14 +515,14 @@
                             android:layout_marginRight="10dp"
                             android:text="资金明细"
                             android:textColor="@color/black_light"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                     </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="1dp"
                         android:background="@drawable/shape_bg_white"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -589,18 +590,18 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_bg_white"
                         android:gravity="center_vertical"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="10dp"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="认证管理"
                         android:textColor="@color/black_light"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="1dp"
                         android:background="@drawable/shape_bg_white"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -636,7 +637,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/shape_bg_white"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"

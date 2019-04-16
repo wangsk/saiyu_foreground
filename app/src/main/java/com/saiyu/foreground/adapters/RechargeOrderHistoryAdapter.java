@@ -42,10 +42,10 @@ public class RechargeOrderHistoryAdapter extends RecyclerView.Adapter<RechargeOr
         }
 
         myHolder.tv_deal_1.setText(mItems.get(i).getProductName());
-        myHolder.tv_deal_5.setText(mItems.get(i).getReceiveOrderStatusStr());
+        myHolder.tv_deal_5.setText(mItems.get(i).getReceiveOrderStatusStr()+"  ");
         myHolder.tv_deal_3.setText(mItems.get(i).getCreateTime());
 
-        myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {
+        myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mOnItemClickListener != null){
@@ -78,11 +78,11 @@ public class RechargeOrderHistoryAdapter extends RecyclerView.Adapter<RechargeOr
 
     public class MyHolder extends RecyclerView.ViewHolder {
         public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4,tv_deal_5;
-        public RelativeLayout rl_item_layout;
+        public LinearLayout ll_item_layout;
 
         public MyHolder(View itemView) {
             super(itemView);
-            rl_item_layout = itemView.findViewById(R.id.rl_item_layout);
+            ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);

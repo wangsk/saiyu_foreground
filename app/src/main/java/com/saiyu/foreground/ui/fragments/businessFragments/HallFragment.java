@@ -59,7 +59,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     @ViewById
     LinearLayout ll_recharge_game, ll_selector;
     @ViewById
-    ImageView iv_hall_selector, iv_hall_question;
+    ImageView iv_hall_selector, iv_hall_question,iv_jiantou_1,iv_jiantou_2;
     @ViewById
     SmartRefreshLayout refreshLayout;
     @ViewById
@@ -90,7 +90,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     void afterView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
 
@@ -199,7 +199,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 mContext.startActivity(intent);
                 break;
             case R.id.ll_recharge_game:
-                PopWindowUtils.initPopWindow_2(getActivity(), productItemsBeans, ll_recharge_game, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_2(getActivity(), productItemsBeans, ll_recharge_game, iv_jiantou_1,new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
                         if (callbackList == null || callbackList.size() < 1) {
@@ -216,7 +216,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                 });
                 break;
             case R.id.ll_selector:
-                PopWindowUtils.initPopWindow_3(getActivity(), ll_selector, new OnListCallbackListener() {
+                PopWindowUtils.initPopWindow_3(getActivity(), ll_selector, iv_jiantou_2,new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
                         if (callbackList == null || callbackList.size() < 3) {

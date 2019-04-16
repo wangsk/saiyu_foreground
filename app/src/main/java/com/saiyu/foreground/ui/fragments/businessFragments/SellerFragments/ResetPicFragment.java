@@ -564,7 +564,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
         }
         BigDecimal bd_8 = bd_4.subtract(bd_6).subtract(bd_7);
 
-        String text = "获得: " + "<font color = \"#148cf1\">" + param_1 + "</font>" + "Q币 * " + "<font color = \"#148cf1\">" + ReserveDiscount + "</font>" + "折 - " + "<font color = \"#148cf1\">" + bd_6.toString() + "</font>" + "元服务费 - " + "<font color = \"#148cf1\">" + bd_7.toString() + "</font>" + "元违约金 = " + "<font color = \"#148cf1\">" + bd_8.toString() + "</font>" + "元";
+        String text = "获得: " + "<font color = \"#5069d5\">" + param_1 + "</font>" + "Q币 * " + "<font color = \"#5069d5\">" + ReserveDiscount + "</font>" + "折 - " + "<font color = \"#5069d5\">" + bd_6.toString() + "</font>" + "元服务费 - " + "<font color = \"#5069d5\">" + bd_7.toString() + "</font>" + "元违约金 = " + "<font color = \"#5069d5\">" + bd_8.toString() + "</font>" + "元";
         return Html.fromHtml(text);
     }
 

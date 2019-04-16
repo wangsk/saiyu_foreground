@@ -255,6 +255,7 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                         et_password.setText("");
                         //从密码可见模式变为密码不可见模式
                         et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yanjing));
                         flag_1 = false;
 
                         ll_psw.setVisibility(View.VISIBLE);
@@ -274,11 +275,13 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
                     break;
                 case R.id.iv_psw:
                     if(flag_1){
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yanjing));
                         et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         flag_1 = false;
                     } else {
                         //从密码不可见模式变为密码可见模式
                         et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.eye_2));
                         flag_1 = true;
                     }
 

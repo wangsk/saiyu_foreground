@@ -166,6 +166,7 @@
                         android:textSize="16sp" />
 
                     <ImageView
+                        android:id="@+id/iv_jiantou_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -188,6 +189,7 @@
                         android:textSize="16sp" />
 
                     <ImageView
+                        android:id="@+id/iv_jiantou_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -209,7 +211,7 @@
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="2dp">
+            android:layout_marginTop="1dp">
 
             <com.scwang.smartrefresh.layout.header.ClassicsHeader
                 android:layout_width="match_parent"

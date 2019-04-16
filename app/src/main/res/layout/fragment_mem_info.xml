@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -42,7 +42,7 @@
             android:id="@+id/rl_realname"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@drawable/item_selector_bg">
 
             <TextView
@@ -80,7 +80,7 @@
             android:id="@+id/rl_identity"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@drawable/item_selector_bg">
 
             <TextView
@@ -118,7 +118,7 @@
             android:id="@+id/rl_identify"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@drawable/item_selector_bg">
 
             <TextView
@@ -156,7 +156,7 @@
             android:id="@+id/rl_face"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@drawable/item_selector_bg">
 
             <TextView

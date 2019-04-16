@@ -49,7 +49,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
     @ViewById
     EditText et_account_new,et_password_new,et_password_confirm,et_account_old,et_password_old;
     @ViewById
-    ImageView iv_psw;
+    ImageView iv_psw,iv_jiantou_1,iv_jiantou_2;
     @ViewById
     ProgressBar pb_loading;
     @ViewById
@@ -131,10 +131,12 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 case R.id.iv_psw:
                     if(flag_1){
                         et_password_old.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yanjing));
                         flag_1 = false;
                     } else {
                         //从密码不可见模式变为密码可见模式
                         et_password_old.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        iv_psw.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.eye_2));
                         flag_1 = true;
                     }
 
@@ -147,6 +149,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         dropdown_layout_new.toggle(ll_new,true);
                         ll_old.setVisibility(View.GONE);
                         dropdown_layout_old.toggle(ll_old,false);
+                        iv_jiantou_1.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.xxjt));
+                        iv_jiantou_2.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.jiantou));
                     }
 //                    ll_new.setVisibility(View.VISIBLE);
 //                    ll_old.setVisibility(View.GONE);
@@ -156,6 +160,8 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         dropdown_layout_old.toggle(ll_old,true);
                         ll_new.setVisibility(View.GONE);
                         dropdown_layout_new.toggle(ll_new,false);
+                        iv_jiantou_1.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.jiantou));
+                        iv_jiantou_2.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.xxjt));
                     }
 //                    ll_new.setVisibility(View.GONE);
 //                    ll_old.setVisibility(View.VISIBLE);
@@ -164,7 +170,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                     String account = et_account_new.getText().toString();
                     if (TextUtils.isEmpty(account)) {
                         tv_regist_prompt_1.setText("*请输入账号");
-                        tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -188,7 +193,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         isOk = false;
                     }
                     if (!isOk) {
-                        tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_1.setText("*账号由5-20位字母加数字组成，首位为字母");
                         Toast.makeText(mContext,"账号格式错误",Toast.LENGTH_SHORT).show();
                         return;
@@ -196,19 +200,16 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
 
                     String password = et_password_new.getText().toString();
                     if (TextUtils.isEmpty(password)) {
-                        tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*请输入密码");
                         Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() < 6) {
-                        tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*密码不能小于6位");
                         Toast.makeText(mContext,"密码不能小于6位",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (password.length() > 32) {
-                        tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_2.setText("*密码不能大于32位");
                         Toast.makeText(mContext,"密码不能大于32位",Toast.LENGTH_SHORT).show();
                         return;
@@ -216,13 +217,11 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
 
                     String password_confirm = et_password_confirm.getText().toString();
                     if (TextUtils.isEmpty(password_confirm)) {
-                        tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_3.setText("*请再次输入密码");
                         Toast.makeText(mContext,"请再次输入密码",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!password_confirm.equals(et_password_new.getText().toString())) {
-                        tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                         tv_regist_prompt_3.setText("*两次输入不一致");
                         Toast.makeText(mContext,"两次密码输入不一致",Toast.LENGTH_SHORT).show();
                         return;
@@ -259,7 +258,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
         switch (hello.getId()) {
             case R.id.et_account_new:
                 String account = et_account_new.getText().toString();
-                tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(account)) {
                     tv_regist_prompt_1.setText("*请输入账号");
                     return;
@@ -288,7 +286,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 break;
             case R.id.et_password_new:
                 String password = et_password_new.getText().toString();
-                tv_regist_prompt_2.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(password)) {
                     tv_regist_prompt_2.setText("*请输入密码");
                     return;
@@ -310,7 +307,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 break;
             case R.id.et_password_confirm:
                 String password_confirm = et_password_confirm.getText().toString();
-                tv_regist_prompt_3.setTextColor(mContext.getResources().getColor(R.color.blue));
                 if (TextUtils.isEmpty(password_confirm)) {
                     tv_regist_prompt_3.setText("*请再次输入密码");
                     return;
@@ -337,7 +333,6 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                 return;
             }
             String account = et_account_new.getText().toString();
-            tv_regist_prompt_1.setTextColor(mContext.getResources().getColor(R.color.blue));
             if (TextUtils.isEmpty(account)) {
                 tv_regist_prompt_1.setText("*请输入账号");
                 return;

@@ -141,7 +141,7 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                     getActivity().finish();
                     break;
                 case R.id.rl_qq:
-                    DialogUtils.showDialog(getActivity(), "提示", TextUtils.isEmpty(QQUnionid)?"需要绑定QQ吗？":"需要解绑QQ吗？", "取消", TextUtils.isEmpty(QQUnionid)?"绑定":"解绑", new OnClickListener() {
+                    DialogUtils.showDialog(getActivity(), TextUtils.isEmpty(QQUnionid)?"需要绑定QQ吗？":"需要解绑QQ吗？", "", "取消", TextUtils.isEmpty(QQUnionid)?"绑定":"解绑", new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             if(TextUtils.isEmpty(QQUnionid)){
@@ -171,7 +171,7 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                     });
                     break;
                 case R.id.rl_wechat:
-                    DialogUtils.showDialog(getActivity(), "提示", TextUtils.isEmpty(WXUnionid)?"需要绑定微信吗？":"需要解绑微信吗？", "取消", TextUtils.isEmpty(WXUnionid)?"绑定":"解绑", new OnClickListener() {
+                    DialogUtils.showDialog(getActivity(), TextUtils.isEmpty(WXUnionid)?"需要绑定微信吗？":"需要解绑微信吗？", "", "取消", TextUtils.isEmpty(WXUnionid)?"绑定":"解绑", new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             if(TextUtils.isEmpty(WXUnionid)){

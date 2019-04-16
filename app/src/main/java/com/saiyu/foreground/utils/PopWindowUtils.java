@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -52,7 +53,7 @@ public class PopWindowUtils {
     private static TagFlowLayout tfl_recharge_game;
     private static ProgressBar pb_loading;
     private static String gameSelected = "";
-    public static void initPopWindow_2(final Activity activity,final List<HallRet.DatasBean.ProductItemsBean> productItemsBeans, View view, final OnListCallbackListener listCallbackListener) {
+    public static void initPopWindow_2(final Activity activity, final List<HallRet.DatasBean.ProductItemsBean> productItemsBeans, View view, final ImageView iv_jiantou_1,final OnListCallbackListener listCallbackListener) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         if(activity == null){
@@ -71,6 +72,7 @@ public class PopWindowUtils {
         mPopupWindow_2.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                iv_jiantou_1.setImageDrawable(App.getApp().getDrawable(R.mipmap.xl));
 //                Utils.backgroundAlpha(activity, 1f);
             }
         });
@@ -103,13 +105,14 @@ public class PopWindowUtils {
         mPopupWindow_2.setAnimationStyle(R.style.pop_animation);
         // 作为下拉视图显示
         mPopupWindow_2.showAsDropDown(view, Gravity.TOP, 0, 300);
+        iv_jiantou_1.setImageDrawable(App.getApp().getDrawable(R.mipmap.sl));
 //        Utils.backgroundAlpha(activity, 0.7f);
 
     }
 
     private static String extend = "",rQBCount = "",rDiscount = "";
     private static TagFlowLayout tfl_1,tfl_2,tfl_3;
-    public static void initPopWindow_3(final Activity activity,View view,final OnListCallbackListener listCallbackListener) {
+    public static void initPopWindow_3(final Activity activity,View view,final ImageView iv_jiantou_2,final OnListCallbackListener listCallbackListener) {
         // TODO Auto-generated method stub
         // 将布局文件转换成View对象，popupview 内容视图
         if(activity == null){
@@ -132,6 +135,7 @@ public class PopWindowUtils {
                 callbackList.add(rDiscount);
                 callbackList.add(extend);
                 listCallbackListener.setOnListCallbackListener(callbackList);
+                iv_jiantou_2.setImageDrawable(App.getApp().getDrawable(R.mipmap.xl));
 //                Utils.backgroundAlpha(activity, 1f);
             }
         });
@@ -412,6 +416,7 @@ public class PopWindowUtils {
         mPopupWindow_3.setAnimationStyle(R.style.pop_animation);
         // 作为下拉视图显示
         mPopupWindow_3.showAsDropDown(view, Gravity.TOP, 0, 300);
+        iv_jiantou_2.setImageDrawable(App.getApp().getDrawable(R.mipmap.sl));
 //        Utils.backgroundAlpha(activity, 0.7f);
 
     }

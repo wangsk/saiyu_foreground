@@ -161,50 +161,46 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="@color/white">
 
                 <TextView
                     android:id="@+id/tv_4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:text="具体充值时间:"
-                    android:textColor="@color/black"
+                    android:text="具体充值时间"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_time_show"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_4"
-                    android:background="@drawable/border_colorline_radius"
                     android:gravity="center_vertical"
-                    android:paddingLeft="2dp"
                     android:text="点击添加时间"
                     android:textColor="@color/black_light"
-                    android:textSize="12sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_time"
                     android:layout_width="80dp"
                     android:layout_height="28dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/tv_time_show"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/shape_bg_blue_light"
                     android:gravity="center"
                     android:text="现在时间"
                     android:textColor="@color/blue"
                     android:textSize="15sp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -240,7 +236,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="提交截图后，等待买家给我确认，平均确认时间:0天0小时0分钟"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -267,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="客服代理确认"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
@@ -305,7 +301,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="使用验图待确认方式，提交充值账号密码给客服，验图后直接确认"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView

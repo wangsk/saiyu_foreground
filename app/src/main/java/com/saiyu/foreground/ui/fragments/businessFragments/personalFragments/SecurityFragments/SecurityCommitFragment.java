@@ -29,7 +29,7 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.fragment_bind_phone)
 public class SecurityCommitFragment extends BaseFragment  implements CallbackUtils.ResponseCallback {
     @ViewById
-    TextView tv_title_content, tv_phone, tv_msg_count, et_msg, tv_response_msg;
+    TextView tv_title_content, tv_phone, tv_msg_count, et_msg;
     @ViewById
     Button btn_title_back, btn_bind;
     @ViewById
@@ -100,17 +100,17 @@ public class SecurityCommitFragment extends BaseFragment  implements CallbackUti
         }
     }
 
-    @Click({R.id.btn_title_back, R.id.btn_bind, R.id.tv_msg_count})
+    @Click({R.id.btn_title_back, R.id.btn_bind, R.id.tv_msg_count,R.id.btn_last})
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_title_back:
+            case R.id.btn_last:
                 getFragmentManager().popBackStack();
                 break;
             case R.id.btn_bind:
                 String checkCode = et_msg.getText().toString();
                 if(TextUtils.isEmpty(checkCode)){
-                    tv_response_msg.setText("*请输入验证码");
-                    tv_response_msg.setVisibility(View.VISIBLE);
+                    Toast.makeText(mContext,"请输入验证码",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -125,15 +125,5 @@ public class SecurityCommitFragment extends BaseFragment  implements CallbackUti
                 break;
         }
 
-    }
-    @TextChange({R.id.et_msg})
-    void textChange(CharSequence s, TextView hello, int before, int start, int count) {
-        switch (hello.getId()){
-            case R.id.et_msg:
-                if(!TextUtils.isEmpty(s.toString())){
-                    tv_response_msg.setVisibility(View.INVISIBLE);
-                }
-                break;
-        }
     }
 }

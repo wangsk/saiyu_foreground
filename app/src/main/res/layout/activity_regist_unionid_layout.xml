@@ -16,7 +16,7 @@
             android:id="@+id/rl_newaccount"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:background="@color/white">
 
             <TextView
@@ -29,6 +29,7 @@
                 android:textSize="18sp" />
 
             <ImageView
+                android:id="@+id/iv_jiantou_1"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
@@ -48,7 +49,7 @@
             android:id="@+id/ll_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="vertical"
             android:visibility="gone">
@@ -220,9 +221,9 @@
                 android:id="@+id/btn_regist_new"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="0dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:paddingTop="8dp"
@@ -237,7 +238,7 @@
             android:id="@+id/rl_oldaccount"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <TextView
@@ -250,6 +251,7 @@
                 android:textSize="18sp" />
 
             <ImageView
+                android:id="@+id/iv_jiantou_2"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
@@ -269,7 +271,7 @@
             android:id="@+id/ll_old"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="vertical">
 
@@ -399,9 +401,9 @@
                 android:id="@+id/btn_regist_old"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="0dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/shape_bg_blue"
                 android:gravity="center"
                 android:paddingTop="8dp"

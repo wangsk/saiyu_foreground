@@ -41,7 +41,7 @@ public class GamePlaceSelectorAdapter extends RecyclerView.Adapter<GamePlaceSele
 
         myHolder.tv_deal_1.setText(mItems.get(i));
 
-        myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {
+        myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mOnItemClickListener != null){
@@ -74,12 +74,12 @@ public class GamePlaceSelectorAdapter extends RecyclerView.Adapter<GamePlaceSele
 
     public class MyHolder extends RecyclerView.ViewHolder {
         public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4;
-        public RelativeLayout rl_item_layout;
+        public LinearLayout ll_item_layout;
         public RelativeLayout rl_line_2;
 
         public MyHolder(View itemView) {
             super(itemView);
-            rl_item_layout = itemView.findViewById(R.id.rl_item_layout);
+            ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
             rl_line_2 = itemView.findViewById(R.id.rl_line_2);
             rl_line_2.setVisibility(View.GONE);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);

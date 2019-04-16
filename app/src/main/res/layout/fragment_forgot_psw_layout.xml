@@ -40,14 +40,6 @@
                 android:textCursorDrawable="@drawable/edittext_cursor"
                 android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/iv_account"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_launcher"
-                android:visibility="gone" />
-
         </LinearLayout>
 
         <View
@@ -62,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="*提示信息"
-            android:textColor="@color/blue"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:visibility="invisible" />
 
@@ -70,9 +62,9 @@
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="0dp"
             android:background="@drawable/shape_bg_blue"
             android:gravity="center"
             android:paddingTop="8dp"

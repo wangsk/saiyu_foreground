@@ -21,17 +21,19 @@
 
             <TextView
                 android:id="@+id/tv_label_tima"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="设置在线时间: "
-                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="设置在线时间"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_onlingtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="请输入在线时间"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />

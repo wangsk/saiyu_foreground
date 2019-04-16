@@ -28,6 +28,7 @@ import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SdLocal;
 import com.saiyu.foreground.utils.Utils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
@@ -56,6 +57,8 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
     ProgressBar pb_loading;
     @ViewById
     ImageView iv_newversion;
+    @ViewById
+    SmartRefreshLayout refreshLayout;
     private String downloadUrl;
     private int serverVersion,curVersion;
 
@@ -76,6 +79,8 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
     @AfterViews
     void afterViews() {
         tv_title_content.setText("版权信息");
+        refreshLayout.setEnableLoadmore(false);
+        refreshLayout.setEnableRefresh(false);
     }
 
     @Override

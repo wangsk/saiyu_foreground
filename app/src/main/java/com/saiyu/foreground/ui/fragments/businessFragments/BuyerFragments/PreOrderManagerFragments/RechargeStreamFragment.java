@@ -76,7 +76,7 @@ public class RechargeStreamFragment extends BaseFragment implements CallbackUtil
         tv_title_content.setText("充值流水");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setEnableRefresh(false);
         refreshLayout.setEnableRefresh(false);
         rechargeStreamAdapter = new RechargeStreamAdapter(mItems);

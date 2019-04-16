@@ -63,7 +63,7 @@ public class LoginRecordAdapter extends RecyclerView.Adapter<LoginRecordAdapter.
 
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4;
+        public TextView tv_deal_1,tv_deal_2,tv_deal_3,tv_deal_4,tv_deal_5;
         public ImageView iv_jiantou;
 
         public MyHolder(View itemView) {
@@ -72,7 +72,9 @@ public class LoginRecordAdapter extends RecyclerView.Adapter<LoginRecordAdapter.
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
+            tv_deal_5 = itemView.findViewById(R.id.tv_deal_5);
             iv_jiantou = itemView.findViewById(R.id.iv_jiantou);
+            tv_deal_5.setVisibility(View.GONE);
             iv_jiantou.setVisibility(View.GONE);
         }
 

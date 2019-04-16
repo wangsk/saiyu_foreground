@@ -95,7 +95,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
         refreshLayout.setOnRefreshListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
     }
 
     @Override
@@ -278,12 +278,18 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
     }
 
     @Click({R.id.iv_seting,R.id.btn_mem_info,R.id.btn_wad_info,R.id.btn_security_manage,R.id.btn_unionid_login,R.id.ll_active_seller,
-            R.id.ll_active_buyer,R.id.btn_recharge,R.id.btn_cash,R.id.btn_recharge_record,R.id.btn_cash_record,R.id.btn_identity,R.id.btn_face})
+            R.id.ll_active_buyer,R.id.btn_recharge,R.id.btn_cash,R.id.btn_recharge_record,R.id.btn_cash_record,R.id.btn_identity,R.id.btn_face,R.id.tv_cashinfo})
     void onClick(View view) {
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
             final Bundle bundle = new Bundle();
             final Intent intent = new Intent(mContext,ContainerActivity_.class);
             switch (view.getId()) {
+                case R.id.tv_cashinfo:
+                    //资金明细
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.CashDetailFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                    break;
                 case R.id.iv_seting:
                     //设置
                     if(accountInfoLoginRet != null && accountInfoLoginRet.getData() != null){
@@ -295,6 +301,14 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                     break;
                 case R.id.btn_mem_info:
                     //会员资料
+                    if(accountInfoLoginRet != null && accountInfoLoginRet.getData() != null){
+                        bundle.putString("account",accountInfoLoginRet.getData().getAccount());
+                        bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
+                        bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
+                        bundle.putString("Mobile",accountInfoLoginRet.getData().getMobile());
+                        bundle.putInt("IsFaceAuth",accountInfoLoginRet.getData().getIsFaceAuth());
+                        bundle.putInt("IsRealNameAuth",accountInfoLoginRet.getData().getIsRealNameAuth());
+                    }
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.MemberInfoFragmentTag);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);

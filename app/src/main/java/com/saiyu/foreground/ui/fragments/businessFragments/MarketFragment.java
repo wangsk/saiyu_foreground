@@ -66,7 +66,7 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
     void afterView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
 
     }
 

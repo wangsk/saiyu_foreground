@@ -81,7 +81,7 @@ public class PreOrderHistoryFragment extends BaseFragment implements CallbackUti
         tv_title_content.setText("预定订单历史");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
-        recyclerView.addItemDecoration(new DashlineItemDivider(2));
+        recyclerView.addItemDecoration(new DashlineItemDivider(1));
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
         preOrderHistoryAdapter = new PreOrderHistoryAdapter(mItems);

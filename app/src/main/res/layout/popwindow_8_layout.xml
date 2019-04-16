@@ -12,7 +12,7 @@
         android:id="@+id/rl_1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -29,7 +29,7 @@
         android:id="@+id/rl_2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -46,7 +46,7 @@
         android:id="@+id/rl_3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -63,7 +63,7 @@
         android:id="@+id/rl_4"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -80,7 +80,7 @@
         android:id="@+id/rl_5"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
@@ -97,7 +97,7 @@
         android:id="@+id/rl_6"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/item_selector_bg">
 
         <TextView
