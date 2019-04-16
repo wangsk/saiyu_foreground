@@ -56,7 +56,7 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
     @ViewById
     TextView tv_title_content;
     @ViewById
-    Button btn_title_back,btn_next,btn_last;
+    Button btn_title_back,btn_next;
     @ViewById
     FrameLayout fl_identity_front,fl_identity_bg;
     @ViewById
@@ -95,7 +95,7 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
             String IDNum = bundle.getString("IDNum","");
             et_realname.setText(RealName);
             et_identity.setText(IDNum);
-            if(!IsModify){
+            if(!IsModify){//如果该为true说明用户已经通过刷脸认证，修改过一次姓名和身份证号码了
                 et_realname.setClickable(false);
                 et_realname.setFocusable(false);
                 et_identity.setClickable(false);
@@ -104,11 +104,10 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
         }
     }
 
-    @Click({R.id.btn_title_back,R.id.fl_identity_front,R.id.fl_identity_bg,R.id.btn_last,R.id.btn_next})
+    @Click({R.id.btn_title_back,R.id.fl_identity_front,R.id.fl_identity_bg,R.id.btn_next})
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_title_back:
-            case R.id.btn_last:
                 getActivity().finish();
                 break;
             case R.id.btn_next:

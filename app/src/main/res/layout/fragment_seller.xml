@@ -72,7 +72,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="我的接单点数  "
                     android:textColor="@color/line"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/tv_orderpoint"
@@ -81,7 +81,7 @@
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 

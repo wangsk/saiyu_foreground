@@ -49,10 +49,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:drawableLeft="@mipmap/mem_info_icon"
+                android:drawableLeft="@null"
                 android:text="  上一个"
                 android:textAlignment="textStart"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <Button
@@ -61,10 +61,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:background="@null"
-                android:drawableRight="@mipmap/mem_info_icon"
+                android:drawableRight="@null"
                 android:text="下一个  "
                 android:textAlignment="textEnd"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
         </LinearLayout>

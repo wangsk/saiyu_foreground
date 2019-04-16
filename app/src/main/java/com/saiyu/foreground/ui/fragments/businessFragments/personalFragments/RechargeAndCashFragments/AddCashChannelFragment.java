@@ -102,7 +102,7 @@ public class AddCashChannelFragment extends BaseFragment  implements CallbackUti
                             iv_wechat.setOnLongClickListener(new View.OnLongClickListener() {
                                 @Override
                                 public boolean onLongClick(View v) {
-                                    Utils.loadImage(bitmap);
+                                    Utils.loadImage(getActivity(),bitmap);
                                     return true;
                                 }
                             });

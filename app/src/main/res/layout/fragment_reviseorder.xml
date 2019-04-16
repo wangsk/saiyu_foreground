@@ -1097,7 +1097,8 @@
             android:gravity="center"
             android:text="确定保存"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <Button
             android:id="@+id/btn_cancel"
@@ -1112,7 +1113,8 @@
             android:gravity="center"
             android:text="返回关闭"
             android:textColor="@color/blue"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

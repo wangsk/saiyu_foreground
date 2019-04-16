@@ -29,9 +29,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="出售数量:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:text="出售数量"
+                        android:textColor="@color/black_light"
+                        android:textSize="16sp" />
 
                     <com.zhy.view.flowlayout.TagFlowLayout
                         android:id="@+id/tfl_1"
@@ -63,20 +63,21 @@
                             android:paddingRight="2dp"
                             android:singleLine="true"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:textColor="@color/black_light"/>
 
                         <View
                             android:layout_width="50dp"
                             android:layout_height="1dp"
-                            android:layout_marginLeft="8dp"
-                            android:background="@color/black_light" />
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/black90" />
 
                         <EditText
                             android:id="@+id/et_count_2"
                             android:layout_width="120dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
                             android:background="@drawable/border_colorline_radius"
                             android:gravity="center_vertical"
                             android:hint=""
@@ -87,7 +88,8 @@
                             android:paddingRight="2dp"
                             android:singleLine="true"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:textColor="@color/black_light"/>
 
                     </LinearLayout>
 
@@ -97,7 +99,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="5dp"
                         android:text="输入数量为0-20000"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -105,9 +107,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="出售折扣:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:text="出售折扣"
+                        android:textColor="@color/black_light"
+                        android:textSize="16sp" />
 
                     <com.zhy.view.flowlayout.TagFlowLayout
                         android:id="@+id/tfl_2"
@@ -139,20 +141,21 @@
                             android:paddingRight="2dp"
                             android:singleLine="true"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:textColor="@color/black_light"/>
 
                         <View
                             android:layout_width="50dp"
                             android:layout_height="1dp"
-                            android:layout_marginLeft="8dp"
-                            android:background="@color/black_light" />
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/black90" />
 
                         <EditText
                             android:id="@+id/et_count_4"
                             android:layout_width="120dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
                             android:background="@drawable/border_colorline_radius"
                             android:gravity="center_vertical"
                             android:hint=""
@@ -163,7 +166,8 @@
                             android:paddingRight="2dp"
                             android:singleLine="true"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:textColor="@color/black_light"/>
 
                     </LinearLayout>
 
@@ -173,7 +177,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:text="输入数量0-100折，如90折就代表100Q币=90元"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -182,8 +186,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="附加选项:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textColor="@color/black_light"
+                        android:textSize="16sp" />
 
                     <com.zhy.view.flowlayout.TagFlowLayout
                         android:id="@+id/tfl_3"
@@ -219,7 +223,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="重置"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/blue"
+                    style="?android:attr/borderlessButtonStyle"/>
 
                 <Button
                     android:id="@+id/btn_confirm"
@@ -235,7 +240,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="确定"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </LinearLayout>
 

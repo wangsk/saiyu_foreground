@@ -41,46 +41,36 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_bind"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:orientation="horizontal"
-            android:background="@color/white">
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text=""
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
 
-            <Button
-                android:id="@+id/btn_bind"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_bg_blue"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text=""
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/btn_replace_phone"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_bg_blue_light"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text=""
-                android:textColor="@color/blue" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_replace_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bg_blue_light"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text=""
+            android:textColor="@color/blue"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

@@ -273,7 +273,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="点击进入充值"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    style="?android:attr/borderlessButtonStyle"/>
 
                 <Button
                     android:id="@+id/btn_copy"
@@ -289,7 +290,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="复制地址"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/blue"
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </LinearLayout>
 

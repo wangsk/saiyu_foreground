@@ -25,7 +25,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="渠道"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="姓名"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text=""
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <EditText
@@ -100,7 +100,8 @@
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textCursorDrawable="@drawable/edittext_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -115,7 +116,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                 android:text="手续费"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <RelativeLayout
@@ -160,7 +161,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:text="到账时间"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -177,8 +178,7 @@
             android:id="@+id/ll_wechat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -196,22 +196,23 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
                 android:text="长按二维码保存图片"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textColor="@color/black_light"
+                android:textSize="15sp"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"

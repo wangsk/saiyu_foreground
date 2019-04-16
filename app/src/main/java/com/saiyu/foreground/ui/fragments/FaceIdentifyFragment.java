@@ -43,7 +43,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
     @ViewById
     TextView tv_title_content, tv_account;
     @ViewById
-    Button btn_title_back, btn_next, btn_last;
+    Button btn_title_back, btn_next;
     @ViewById
     LinearLayout ll_account;
     @ViewById
@@ -85,13 +85,13 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
             type = bundle.getInt(FaceIdentifyFunctionType, 0);
             switch (type) {
                 case 0://刷脸认证
-                    //只有在刷脸认证的时候才能修改姓名和身份证号码
+                    //只有在刷脸认证的时候才能修改姓名和身份证号码（解绑手机和修改密码都不能修改姓名和身份证号码，防止其他人借用用户的号码实名认证）
                     ll_account.setVisibility(View.GONE);
                     tv_title_content.setText("刷脸认证");
                     et_realname.setText(RealName);
                     et_identity.setText(IDNum);
                     IsModify = bundle.getBoolean("IsModify",true);
-                    if(!IsModify){
+                    if(!IsModify){//如果该为true说明用户已经通过实名认证，修改过一次姓名和身份证号码了
                         et_realname.setClickable(false);
                         et_realname.setFocusable(false);
                         et_identity.setClickable(false);
@@ -178,12 +178,11 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
         }
     }
 
-    @Click({R.id.btn_title_back, R.id.btn_next, R.id.btn_last})
+    @Click({R.id.btn_title_back, R.id.btn_next})
     void onClick(View view) {
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.btn_title_back:
-                case R.id.btn_last:
                     switch (type) {
                         case 0:
                             getActivity().finish();

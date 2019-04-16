@@ -117,7 +117,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     private MyArrayAdapter yuanbaoAdapter;//元宝spinner下拉数据绑定adapter
     private int type;//区别普通商品 : 0 ，金元宝 : 1 ，银元宝 : 2
 
-    private String rechargeNum;//出售Q币数量
+    private String rechargeNum = "0";//出售Q币数量
 
     public static HallOrderDetailFragment newInstance(Bundle bundle) {
         HallOrderDetailFragment_ fragment = new HallOrderDetailFragment_();
@@ -663,8 +663,9 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     private void isCountAble(){
         if(!isLogin){
             if(TextUtils.isEmpty(rechargeNum)){
-                tv_count_prompt.setText("请登录");
+                rechargeNum = "0";
             }
+            tv_count_prompt.setText("请登录");
             tv_orderPoint.setText(rechargeNum+"点");
             return;
         }

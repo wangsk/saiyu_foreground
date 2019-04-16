@@ -72,6 +72,7 @@ public class WaitingRechargeOrderFragment extends BaseFragment implements Callba
     @AfterViews
     void afterView() {
         tv_title_content.setText("待充值订单");
+        curPosition = 0;
     }
 
     @Override
@@ -90,7 +91,6 @@ public class WaitingRechargeOrderFragment extends BaseFragment implements Callba
                 btn_blank.setVisibility(View.GONE);
                 String str = "您当前有"+ "<font color = \"#148cf1\">" + totalCount + "</font>" +"笔需要立即充值的订单，如不能充值，请尽快取消，以免带来接单点数的损失！";
                 tv_prompt.setText(Html.fromHtml(str));
-                curPosition = 0;
 
                 if(mItem == null){
                     mItem = new ArrayList<>();
@@ -101,6 +101,14 @@ public class WaitingRechargeOrderFragment extends BaseFragment implements Callba
                 fragmentViewPagerAdapter = new FragmentViewPagerAdapter(getChildFragmentManager(),mItem);
                 view_pager.setAdapter(fragmentViewPagerAdapter);
                 layout_tab.setupWithViewPager(view_pager);
+
+                if(curPosition != 0){
+                    if(curPosition >= mItem.size()){
+                        view_pager.setCurrentItem(mItem.size() - 1);
+                    } else {
+                        view_pager.setCurrentItem(curPosition);
+                    }
+                }
 
             } else {
                 ll_body.setVisibility(View.GONE);

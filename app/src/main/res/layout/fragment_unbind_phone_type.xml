@@ -12,86 +12,82 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_title_bar"
-        android:orientation="vertical"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="选择验证方式"
-            android:textColor="@color/black_light"
-            android:textSize="16sp" />
-
-        <RadioGroup
-            android:id="@+id/rg_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/rb_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/blue"
-                android:checked="true"
-                android:text="原手机验证码解绑"
-                android:textColor="@color/black_light" />
-
-            <RadioButton
-                android:id="@+id/rb_face"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:buttonTint="@color/blue"
-                android:text="通过刷脸验证解绑"
-                android:textColor="@color/black_light" />
-
-        </RadioGroup>
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_bg_blue"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="下一步"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/btn_last"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_bg_blue_light"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="上一步"
-                android:textColor="@color/blue" />
+                android:layout_marginTop="10dp"
+                android:text="选择验证方式"
+                android:textColor="@color/black_light"
+                android:textSize="16sp" />
 
+            <RadioGroup
+                android:id="@+id/rg_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue"
+                    android:checked="true"
+                    android:text="原手机验证码解绑"
+                    android:textColor="@color/black_light" />
+
+                <RadioButton
+                    android:id="@+id/rb_face"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:buttonTint="@color/blue"
+                    android:text="通过刷脸验证解绑"
+                    android:textColor="@color/black_light" />
+
+            </RadioGroup>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="下一步"
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_last"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bg_blue_light"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="上一步"
+            android:textColor="@color/blue"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

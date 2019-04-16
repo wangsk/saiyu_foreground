@@ -33,6 +33,9 @@ import java.util.List;
 public class DialogUtils {
 
     public static void showDialog(Activity activity, String title, String content, String cancel, String confirm, final OnClickListener mOnClickListener) {
+        if(activity == null){
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_bind, null);
         Button btn_dialog_cancel = view.findViewById(R.id.btn_dialog_cancel);
@@ -80,6 +83,9 @@ public class DialogUtils {
     }
 
     public static void showOrderSuccessDialog(Activity activity, String title, final OnClickListener mOnClickListener, final OnClickListener mOnClickListener_2) {
+        if(activity == null){
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_ordersubmit_success, null);
         Button btn_dialog_cancel = view.findViewById(R.id.btn_dialog_cancel);
@@ -120,6 +126,9 @@ public class DialogUtils {
     }
 
     public static void showOrderPswDialog(Activity activity, String orderNum,final OnListCallbackListener listCallbackListener) {
+        if(activity == null){
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_order_psw, null);
         Button btn_dialog_confirm = view.findViewById(R.id.btn_confirm);
@@ -159,6 +168,9 @@ public class DialogUtils {
     private static ArrayAdapter<Province> arrayAdapter1;
     private static ArrayAdapter<City> arrayAdapter2;
     public static void showOrderSubmitDialog(final Activity activity,final OnListCallbackListener listCallbackListener) {
+        if(activity == null){
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_order_submit, null);
         final EditText et_qq = view.findViewById(R.id.et_qq);
@@ -243,6 +255,9 @@ public class DialogUtils {
     private static String wayId,account,remarks,accountId;
     private static int type;
     public static void showCashChannelReviseDialog(final Activity activity, CashRet.DatasBean.ItemsBean itemsBean, final List<CashChannelRet.DatasBean.ItemsBean> mItems, final OnListCallbackListener listCallbackListener) {
+        if(activity == null){
+            return;
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View.inflate(activity, R.layout.dialog_revise_cashchannel, null);
@@ -307,7 +322,7 @@ public class DialogUtils {
                                 iv_wechat.setOnLongClickListener(new View.OnLongClickListener() {
                                     @Override
                                     public boolean onLongClick(View v) {
-                                        Utils.loadImage(bitmap);
+                                        Utils.loadImage(activity,bitmap);
                                         return true;
                                     }
                                 });
@@ -351,7 +366,7 @@ public class DialogUtils {
                                 iv_wechat.setOnLongClickListener(new View.OnLongClickListener() {
                                     @Override
                                     public boolean onLongClick(View v) {
-                                        Utils.loadImage(bitmap);
+                                        Utils.loadImage(activity,bitmap);
                                         return true;
                                     }
                                 });

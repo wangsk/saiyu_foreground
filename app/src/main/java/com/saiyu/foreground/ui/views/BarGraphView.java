@@ -279,10 +279,10 @@ public class BarGraphView extends View {
             String text = xValue.get(i);
             mPaint.getTextBounds(text, 0, text.length(), mBound);
             if (i == selectIndex - 1) {
-                mPaint.setTextSize(30);
+                mPaint.setTextSize(35);
                 mPaint.setColor(context.getResources().getColor(R.color.white));
             } else {
-                mPaint.setTextSize(27);
+                mPaint.setTextSize(32);
                 mPaint.setColor(context.getResources().getColor(R.color.grey_white));
             }
             canvas.drawText(text, tx, mHeight - 40, mPaint);

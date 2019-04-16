@@ -130,45 +130,20 @@
             android:textSize="15sp"
             android:visibility="visible" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_bind"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="开始认证"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/btn_last"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_bg_blue_light"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="返回"
-                android:textColor="@color/blue" />
-
-        </LinearLayout>
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="开始认证"
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <TextView
             android:layout_width="wrap_content"

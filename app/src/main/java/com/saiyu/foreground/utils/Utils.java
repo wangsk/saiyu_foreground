@@ -85,8 +85,11 @@ public class Utils {
         }
     }
 
-    public static void loadImage(final Bitmap bitmap) {
-        RxPermissions rxPermissions = new RxPermissions(BaseActivity.getBaseActivity());
+    public static void loadImage(Activity activity,final Bitmap bitmap) {
+        if(activity == null){
+            return;
+        }
+        RxPermissions rxPermissions = new RxPermissions(activity);
         rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(new io.reactivex.Observer<Boolean>() {
                     @Override

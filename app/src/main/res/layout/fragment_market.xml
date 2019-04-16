@@ -47,7 +47,7 @@
                     android:layout_marginLeft="2dp"
                     android:text="平均折扣"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
                 <View
                     android:layout_width="30dp"
                     android:layout_height="1dp"
@@ -59,7 +59,7 @@
                     android:layout_marginLeft="2dp"
                     android:text="最高折扣"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
