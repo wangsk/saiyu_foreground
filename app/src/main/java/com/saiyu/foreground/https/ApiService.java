@@ -89,6 +89,9 @@ public interface ApiService {
     //第三方注册
     @POST("Authorize/register")
     Observable<RegistRet> unionIDRegist(@Body RequestBody body);
+    //第三方绑定
+    @POST("Authorize/OldMemberBind")
+    Observable<RegistRet> oldMemberBind(@Body RequestBody body);
 
     //发送验证码
     @POST("Tool/SendMobileCode")

@@ -202,7 +202,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 tv_count_prompt.setText("数量 "+ rechargeNum+" 当日已被使用，你可以选择:");
                 recyclerView.setVisibility(View.VISIBLE);
                 tv_bottom_prompt.setVisibility(View.GONE);
-                Utils.hideInput();
+                Utils.hideInput(getActivity());
             }
         } else if(method.equals("HallOrderDetailFragment_hallDetailReceive")){
             //该订单已经被自己接过，但是未充值

@@ -57,9 +57,9 @@
                     android:drawableLeft="@mipmap/jiahao"
                     android:focusable="false"
                     android:text="  新增提现渠道"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black_light"
-                    android:textSize="18sp" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black90"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

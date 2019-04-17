@@ -2887,6 +2887,59 @@ public class ApiRequest {
                 });
     }
 
+    public static void oldMemberBind(String account, String password, String oauthType, String unionId, String openId, final String callBackKey, final ProgressBar pb_loading) {
+        LogUtils.print("account == " + account + " password == " + password + " oauthType == " + oauthType + " unionId == " + unionId + " openId == " + openId);
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("account", account);
+        requestParams.put("password", password);
+        requestParams.put("oauthType", oauthType);
+        requestParams.put("openId", openId);
+        requestParams.put("unionId", unionId);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.oldMemberBind(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RegistRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1) {
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(RegistRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1) {
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
     public static void isAccountExist(String account, final String callBackKey) {
         ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
         RequestParams requestParams = new RequestParams();

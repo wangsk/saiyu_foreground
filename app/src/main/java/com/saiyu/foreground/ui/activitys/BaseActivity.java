@@ -1,8 +1,12 @@
 package com.saiyu.foreground.ui.activitys;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.saiyu.foreground.utils.ButtonUtils;
 
@@ -12,14 +16,13 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class BaseActivity extends SupportActivity{
 
-    protected static BaseActivity baseActivity;
-    public static BaseActivity getBaseActivity(){return baseActivity;}
+    protected Activity mContext = this;
     private boolean isForegroud = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        baseActivity = this;
+        mContext = this;
         CacheActivity.addActivity(this);
     }
 
@@ -68,14 +71,48 @@ public class BaseActivity extends SupportActivity{
         return isForegroud;
     }
 
-    //防止连续点击事件
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (ButtonUtils.isFastDoubleClick()) {
+            if (ButtonUtils.isFastDoubleClick()) { //防止连续点击事件
                 return true;
+            }
+            View v = getCurrentFocus();
+            boolean hideInputResult = isShouldHideInput(v, ev);
+            if (hideInputResult) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) mContext
+                        .getSystemService(Activity.INPUT_METHOD_SERVICE);
+                if (v != null) {
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                }
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            // 之前一直不成功的原因是,getX获取的是相对父视图的坐标,getRawX获取的才是相对屏幕原点的坐标！！！
+//            KLog.i("leftTop[]", "zz--left:" + left + "--top:" + top + "--bottom:" + bottom + "--right:" + right);
+//            KLog.i("event", "zz--getX():" + event.getRawX() + "--getY():" + event.getRawY());
+            if (event.getRawX() > left && event.getRawX() < right
+                    && event.getRawY() > top && event.getRawY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }

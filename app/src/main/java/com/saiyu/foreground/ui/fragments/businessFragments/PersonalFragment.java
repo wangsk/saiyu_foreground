@@ -29,6 +29,7 @@ import com.saiyu.foreground.ui.activitys.MainActivity;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.FaceIdentifyFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
+import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
@@ -374,10 +375,11 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                     break;
 
                 case R.id.btn_recharge:
+                    MyToast.newInstance(getActivity(),"APP端暂不支持在线充值功能,如需充值请前往网页端操作 https://www.saiyu.com/,给您带来的不便非常抱歉!","").show();
                     //我要充值
-                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.RechargeFragmentTag);
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
+//                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.RechargeFragmentTag);
+//                    intent.putExtras(bundle);
+//                    mContext.startActivity(intent);
                     break;
                 case R.id.btn_cash:
                     if(accountInfoLoginRet == null || accountInfoLoginRet.getData() == null){

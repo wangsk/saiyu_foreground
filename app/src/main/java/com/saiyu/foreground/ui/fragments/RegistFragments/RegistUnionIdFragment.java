@@ -101,7 +101,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
             start(successFindPswFragment);
 
-        } else if (method.equals("RegistUnionIdFragment_bind")) {
+        } else if (method.equals("RegistUnionIdFragment_oldMemberBind")) {
             Bundle bundle = new Bundle();
             bundle.putBoolean("bind", true);
             SuccessFindPswFragment successFindPswFragment = SuccessFindPswFragment.newInstance(bundle);
@@ -244,7 +244,7 @@ public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils
                         return;
                     }
 
-                    ApiRequest.unionIDRegist(userName, userPassword, type,unionId,openId,"RegistUnionIdFragment_bind",pb_loading);
+                    ApiRequest.oldMemberBind(userName, userPassword, type,unionId,openId,"RegistUnionIdFragment_oldMemberBind",pb_loading);
 
                     break;
 

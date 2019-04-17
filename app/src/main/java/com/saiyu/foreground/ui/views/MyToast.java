@@ -52,7 +52,7 @@ public class MyToast extends Toast {
         }
         TextView textView = new TextView(App.getApp());
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
-        textView.setTextColor(Color.BLACK);
+        textView.setTextColor(Color.parseColor("#666666"));
         textView.setText(text);
         textView.setPadding(70, 50, 70, 50);
         linearLayout.addView(textView);

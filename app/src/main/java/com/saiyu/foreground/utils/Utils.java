@@ -77,9 +77,12 @@ public class Utils {
     /**
      * 隐藏键盘
      */
-    public static void hideInput() {
-        InputMethodManager imm = (InputMethodManager) BaseActivity.getBaseActivity().getSystemService(INPUT_METHOD_SERVICE);
-        View v = BaseActivity.getBaseActivity().getWindow().peekDecorView();
+    public static void hideInput(Activity activity) {
+        if(activity == null){
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
+        View v = activity.getWindow().peekDecorView();
         if (null != v) {
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
