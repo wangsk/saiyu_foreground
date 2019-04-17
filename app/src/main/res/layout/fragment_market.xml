@@ -40,24 +40,24 @@
                     android:layout_width="30dp"
                     android:layout_height="1dp"
                     android:layout_marginLeft="20dp"
-                    android:background="@color/white"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="平均折扣"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
                     android:background="@color/yellow"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:text="最高折扣"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="平均折扣"
                     android:textColor="@color/white"
                     android:textSize="13sp" />
 

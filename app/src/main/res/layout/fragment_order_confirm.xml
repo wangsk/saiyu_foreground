@@ -194,7 +194,6 @@
                 android:layout_marginRight="10dp"
                 android:textSize="15sp" />
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -283,7 +282,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="确认提交"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

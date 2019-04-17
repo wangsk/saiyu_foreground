@@ -32,7 +32,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text="剩余数量"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text="买家等级"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text="平均确认时间"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -192,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -224,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text="折扣"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView
@@ -257,7 +257,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <TextView

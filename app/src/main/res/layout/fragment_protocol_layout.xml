@@ -22,7 +22,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textSize="15sp"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:text="@string/app_protocol"/>
         </com.saiyu.foreground.ui.views.ReboundScrollView>
 
@@ -35,7 +35,8 @@
             android:gravity="center"
             android:text="返回"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </RelativeLayout>
 

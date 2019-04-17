@@ -207,7 +207,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="确定取消"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

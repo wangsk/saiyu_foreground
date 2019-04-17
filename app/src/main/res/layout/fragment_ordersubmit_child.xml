@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="充值成功截图:"
+                    android:text="充值成功截图"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="充值明细截图:"
+                    android:text="充值明细截图"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="消费记录截图:"
+                    android:text="消费记录截图"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -198,7 +198,8 @@
                     android:gravity="center"
                     android:text="现在时间"
                     android:textColor="@color/blue"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </LinearLayout>
 
@@ -215,8 +216,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="确认收货方式"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black_light"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -328,7 +329,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="完成充值，提交审核"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </LinearLayout>
     </com.saiyu.foreground.ui.views.ReboundScrollView>

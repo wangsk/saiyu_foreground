@@ -510,7 +510,7 @@
             android:gravity="center"
             android:text="接单后必须在20分钟内充值完毕!"
             android:textColor="@color/blue"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:visibility="invisible"
             android:background="@color/blue_light"/>
 
@@ -527,7 +527,7 @@
                 android:layout_height="wrap_content"
                 android:text="我已仔细阅读并同意"
                 android:textColor="@color/black_light"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_protocol"
@@ -569,7 +569,8 @@
                 android:gravity="center"
                 android:text="确认接单"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </LinearLayout>
 

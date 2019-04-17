@@ -21,6 +21,10 @@ public class LoginRet extends BaseRet {
         private String accessToken;
         private String userKey;
 
+        private boolean UserBuyerStatus;
+        private boolean UserSellerStatus;
+        private boolean UserInfoStatus;
+
         public String getAccessToken() {
             return accessToken;
         }
@@ -35,6 +39,30 @@ public class LoginRet extends BaseRet {
 
         public void setUserKey(String userKey) {
             this.userKey = userKey;
+        }
+
+        public boolean isUserBuyerStatus() {
+            return UserBuyerStatus;
+        }
+
+        public void setUserBuyerStatus(boolean userBuyerStatus) {
+            UserBuyerStatus = userBuyerStatus;
+        }
+
+        public boolean isUserSellerStatus() {
+            return UserSellerStatus;
+        }
+
+        public void setUserSellerStatus(boolean userSellerStatus) {
+            UserSellerStatus = userSellerStatus;
+        }
+
+        public boolean isUserInfoStatus() {
+            return UserInfoStatus;
+        }
+
+        public void setUserInfoStatus(boolean userInfoStatus) {
+            UserInfoStatus = userInfoStatus;
         }
 
         @Override

@@ -22,7 +22,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="@string/app_protocol"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
         </com.saiyu.foreground.ui.views.ReboundScrollView>
 
@@ -47,7 +47,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="同意条款 激活卖家"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                style="?android:attr/borderlessButtonStyle"/>
 
             <Button
                 android:id="@+id/btn_close"
@@ -63,7 +64,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="不同意条款 关闭"
-                android:textColor="@color/blue" />
+                android:textColor="@color/blue"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </LinearLayout>
 

@@ -412,7 +412,7 @@ public class BarGraphView extends View {
                     canvas.drawCircle(rx, ry, 22, dotPain_2);
                     String text = value.get(xValue.get(i)) + "";
                     String text_2 = value_2.get(xValue.get(i)) + "";
-                    String text_3 = "平均折扣: "+text + "\n最高折扣: " + text_2;
+                    String text_3 = "最高折扣: "+text_2 + "\n平均折扣: " + text;
                     drawFloatTextBox(canvas, rx, ry, text_3, i);
                 }
             }
@@ -469,9 +469,9 @@ public class BarGraphView extends View {
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
-                    dotPain.setColor(context.getResources().getColor(R.color.white));
-                } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.yellow));
+                } else if(i == 1){
+                    dotPain.setColor(context.getResources().getColor(R.color.white));
                 }
                 canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
@@ -482,9 +482,9 @@ public class BarGraphView extends View {
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
-                    dotPain.setColor(context.getResources().getColor(R.color.white));
-                } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.yellow));
+                } else if(i == 1){
+                    dotPain.setColor(context.getResources().getColor(R.color.white));
                 }
                 canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
@@ -495,9 +495,9 @@ public class BarGraphView extends View {
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
-                    dotPain.setColor(context.getResources().getColor(R.color.white));
-                } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.yellow));
+                } else if(i == 1){
+                    dotPain.setColor(context.getResources().getColor(R.color.white));
                 }
                 canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);

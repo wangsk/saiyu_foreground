@@ -27,7 +27,6 @@ import com.saiyu.foreground.ui.fragments.FindPswFragments.SuccessFindPswFragment
 import com.saiyu.foreground.ui.views.DropdownLayout;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
-import com.saiyu.foreground.utils.LogUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -36,7 +35,7 @@ import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
-@EFragment(R.layout.activity_regist_unionid_layout)
+@EFragment(R.layout.fragment_regist_unionid_layout)
 public class RegistUnionIdFragment extends BaseFragment implements CallbackUtils.ResponseCallback{
     @ViewById
     TextView tv_title_content, tv_regist_prompt_1, tv_regist_prompt_2, tv_regist_prompt_3,tv_forgot_psw,tv_login_response_msg;

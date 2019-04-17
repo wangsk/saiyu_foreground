@@ -19,14 +19,12 @@
             android:gravity="right"
             android:text="出货QQ号码:"
             android:textSize="15sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black_light"/>
 
         <EditText
             android:id="@+id/et_qq"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_toRightOf="@id/tv_4"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@null"
@@ -39,7 +37,8 @@
             android:paddingRight="2dp"
             android:singleLine="true"
             android:textCursorDrawable="@drawable/edittext_cursor"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="@color/black_light"/>
 
     </LinearLayout>
 
@@ -58,14 +57,12 @@
             android:gravity="right"
             android:text="QQ登录密码:"
             android:textSize="15sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black_light"/>
 
         <EditText
             android:id="@+id/et_psw"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_toRightOf="@id/tv_4"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@null"
@@ -78,7 +75,8 @@
             android:paddingRight="2dp"
             android:singleLine="true"
             android:textCursorDrawable="@drawable/edittext_cursor"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="@color/black_light"/>
 
     </LinearLayout>
     <LinearLayout
@@ -96,7 +94,7 @@
             android:gravity="right"
             android:text="常用登陆地:"
             android:textSize="15sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black_light" />
 
         <Spinner
             android:id="@+id/sp_province"

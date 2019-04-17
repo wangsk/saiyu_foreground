@@ -734,9 +734,7 @@
                     android:src="@mipmap/delete"
                     android:visibility="gone"/>
 
-
             </RelativeLayout>
-
 
         </LinearLayout>
 
@@ -759,7 +757,8 @@
             android:gravity="center"
             android:text="修改完成，提交审核"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

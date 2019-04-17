@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:buttonTint="@color/blue"/>
 
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="我已经将好友设置为允许任何人加入"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:buttonTint="@color/blue"/>
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="我已经仔细阅读并同意《赛鱼网络虚拟货币交易平台服务协议》"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp"
             android:checked="true"
             android:buttonTint="@color/blue"/>
@@ -98,7 +98,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="付款发布"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

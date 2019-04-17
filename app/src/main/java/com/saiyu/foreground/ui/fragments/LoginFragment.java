@@ -102,13 +102,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             IntentFilter weChat_loginFragment = new IntentFilter("Action_WeChat_UnionId");
             mContext.registerReceiver(weChatReceiver, weChat_loginFragment);
         }
-
- //       et_account.setText("space111");//四级小于100  林华 身份证号 512501197506045175
-//        et_account.setText("space123");//一级
-//        et_account.setText("space112");//三级手机验证
-//        et_account.setText("space113");//二级风险 绑定手机
-//        et_account.setText("space114");//五级风险
-//        et_password.setText("space123");
     }
 
     @Override
@@ -125,14 +118,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             SPUtils.putString(ConstValue.ACCESS_TOKEN, ret.getData().getAccessToken());
             SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
-            ApiRequest.getUserStatus("LoginFragment_getUserStatus",pb_loading);
-
-
-        } else if(method.equals("LoginFragment_getUserStatus")){
-            ActiveStatusRet ret = (ActiveStatusRet)baseRet;
-            if(ret.getData() == null){
-                return;
-            }
             boolean UserInfoStatus = ret.getData().isUserInfoStatus();
             if(UserInfoStatus){
                 SPUtils.putInt(ConstValue.IdentifyInfo,1);//已补填身份信息
@@ -165,6 +150,8 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             getActivity().setResult(RESULT_OK, intent);//如果需要登录返回状态的时候可以用这段代码
 
             getActivity().finish();
+
+
         }
     }
 

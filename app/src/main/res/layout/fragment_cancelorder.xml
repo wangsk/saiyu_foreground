@@ -17,7 +17,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:text="订单取消后，资金会即刻退回到您的赛鱼余额，\n审核进度将一并取消！"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="退款金额: "
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -47,9 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
-
 
         </LinearLayout>
 
@@ -65,7 +64,8 @@
             android:gravity="center"
             android:text="取消订单"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
     <ProgressBar

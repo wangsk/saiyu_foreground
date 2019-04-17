@@ -45,7 +45,8 @@
                 android:paddingBottom="8dp"
                 android:text="确定"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                style="?android:attr/borderlessButtonStyle"/>
 
         </RelativeLayout>
 

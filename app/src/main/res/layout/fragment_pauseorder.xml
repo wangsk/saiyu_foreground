@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="当前有"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="个订单，共计"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
             <TextView
@@ -53,9 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元"
-                android:textColor="@color/black"
+                android:textColor="@color/black_light"
                 android:textSize="15sp" />
-
 
         </LinearLayout>
 
@@ -64,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="正在充值中，请及时处理！"
-            android:textColor="@color/black"
+            android:textColor="@color/black_light"
             android:textSize="15sp" />
 
 
@@ -80,7 +79,8 @@
             android:gravity="center"
             android:text="确定暂停"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
     <ProgressBar

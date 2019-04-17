@@ -12,7 +12,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-@EFragment(R.layout.activity_protocol_layout)
+@EFragment(R.layout.fragment_protocol_layout)
 public class ProtocolFragment extends BaseFragment{
     @ViewById
     TextView tv_protocol_detail,tv_title_content;

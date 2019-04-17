@@ -178,7 +178,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
         }
     }
 
-    @Click({R.id.btn_title_back, R.id.btn_next})
+    @Click({R.id.btn_title_back, R.id.btn_bind})
     void onClick(View view) {
         if (!ButtonUtils.isFastDoubleClick(view.getId())) {
             switch (view.getId()) {
@@ -193,7 +193,7 @@ public class FaceIdentifyFragment extends BaseFragment implements CallbackUtils.
                     }
 
                     break;
-                case R.id.btn_next:
+                case R.id.btn_bind:
                     switch (type) {
                         case 0://刷脸认证
                             String realName = et_realname.getText().toString();

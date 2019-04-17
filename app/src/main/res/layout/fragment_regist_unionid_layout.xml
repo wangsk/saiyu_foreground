@@ -232,7 +232,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="确认注册"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
 
         </com.saiyu.foreground.ui.views.DropdownLayout>
@@ -414,7 +415,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="账号绑定"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
         </com.saiyu.foreground.ui.views.DropdownLayout>
     </LinearLayout>

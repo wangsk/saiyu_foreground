@@ -4609,102 +4609,6 @@ public class ApiRequest {
                 });
     }
 
-    //买家信息
-    public static void buyerInfo(final String callBackKey, final ProgressBar pb_loading) {
-        pb_loading.setVisibility(View.VISIBLE);
-        RequestParams requestParams = new RequestParams();
-
-        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
-
-        apiService.buyerInfo(requestParams.getBody())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BuyerInfoRet>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.print("onError == " + e.toString());
-                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
-                        try {
-                            pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1) {
-                            LogUtils.print("pb_loading close Exception");
-                        }
-                    }
-
-                    @Override
-                    public void onNext(BuyerInfoRet ret) {
-                        try {
-                            pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1) {
-                            LogUtils.print("pb_loading close Exception");
-                        }
-                        if (ret == null) {
-                            return;
-                        }
-                        if (ret.getCode() != 200) {
-                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
-
-                    }
-                });
-    }
-
-    //卖家信息
-    public static void sellerInfo(final String callBackKey, final ProgressBar pb_loading) {
-        pb_loading.setVisibility(View.VISIBLE);
-        RequestParams requestParams = new RequestParams();
-
-        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
-
-        apiService.sellerInfo(requestParams.getBody())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<SellerInfoRet>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.print("onError == " + e.toString());
-                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
-                        try {
-                            pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1) {
-                            LogUtils.print("pb_loading close Exception");
-                        }
-                    }
-
-                    @Override
-                    public void onNext(SellerInfoRet ret) {
-                        try {
-                            pb_loading.setVisibility(View.GONE);
-                        } catch (Exception e1) {
-                            LogUtils.print("pb_loading close Exception");
-                        }
-                        if (ret == null) {
-                            return;
-                        }
-                        if (ret.getCode() != 200) {
-                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
-
-                    }
-                });
-    }
-
     //解绑 0: qq; 1:wechat
     public static void unBind(String IdentityType, final String callBackKey, final ProgressBar pb_loading) {
         pb_loading.setVisibility(View.VISIBLE);
@@ -5006,8 +4910,38 @@ public class ApiRequest {
                         SPUtils.putString("accessToken", ret.getData().getAccessToken());
                         SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
-                        //获取用户买卖家激活状态，在Loginfragment类中有处理回调的方法
-                        ApiRequest.getUserStatus("LoginFragment_getUserStatus",pb_loading);
+                        boolean UserInfoStatus = ret.getData().isUserInfoStatus();
+                        if(UserInfoStatus){
+                            SPUtils.putInt(ConstValue.IdentifyInfo,1);//已补填身份信息
+                        } else {
+                            SPUtils.putInt(ConstValue.IdentifyInfo,0);//未补填身份信息
+                        }
+                        boolean UserBuyerStatus = ret.getData().isUserBuyerStatus();
+                        boolean UserSellerStatus = ret.getData().isUserSellerStatus();
+
+                        if(UserBuyerStatus && UserSellerStatus){
+                            //全部激活
+                            SPUtils.putInt(ConstValue.MainBottomVisibleType,3);//全部显示
+                        }else if(!UserBuyerStatus && !UserSellerStatus){
+                            //全部未激活
+                            SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//全部显示
+                        } else {
+                            if(!UserBuyerStatus){
+                                //卖家激活，买家未激活
+                                SPUtils.putInt(ConstValue.MainBottomVisibleType,1);//不显示买家
+                            } else if(!UserSellerStatus){
+                                //买家激活，卖家未激活
+                                SPUtils.putInt(ConstValue.MainBottomVisibleType,2);//不显示卖家
+                            }
+                        }
+
+                        Intent intent = new Intent();
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("isLogin",true);
+                        intent.putExtras(bundle);
+                        activity.setResult(activity.RESULT_OK, intent);//如果需要登录返回状态的时候可以用这段代码
+
+                        activity.finish();
 
 //                        Intent intent = new Intent(activity, MainActivity_.class);
 //                        activity.startActivity(intent);

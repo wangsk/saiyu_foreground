@@ -666,7 +666,8 @@
             android:gravity="center"
             android:text="返回"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 
