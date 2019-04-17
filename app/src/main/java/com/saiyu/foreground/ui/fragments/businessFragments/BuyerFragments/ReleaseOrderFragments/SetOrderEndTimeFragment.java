@@ -38,10 +38,18 @@ public class SetOrderEndTimeFragment extends BaseFragment {
 
     @AfterViews
     void afterViews() {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            orderEndTime = bundle.getString("orderEndTime");
+            if(!TextUtils.isEmpty(orderEndTime)){
+                tv_onlingtime.setText(orderEndTime);
+            } else {
+                tv_onlingtime.setText("请输入到期时间");
+            }
+        }
         tv_title_content.setText("到期时间");
         tv_label_tima.setText("设置到期时间");
-        tv_onlingtime.setText("请输入到期时间");
-        tv_time_prompt.setText("设置好订单到期时间，该订单到期前30分钟下架并退款，发生充值的本项自动失效！");
+        tv_time_prompt.setText("设置好订单到期时间,该订单到期前30分钟下架并退款,发生充值的本项自动失效！");
 
     }
 

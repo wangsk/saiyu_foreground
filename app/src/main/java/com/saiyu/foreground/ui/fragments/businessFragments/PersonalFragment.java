@@ -65,7 +65,7 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
     CircleImageView civ_headicon;
     @ViewById
     TextView tv_account,tv_seller_order,tv_buyer_pre,tv_remain,tv_active_seller,tv_seller_wait_pay,tv_seller_order_ing,tv_seller_order_wait,tv_seller_order_totle,tv_active_buyer,
-            tv_buyer_time,tv_buyer_order_ing,tv_buyer_order_wait,tv_buyer_order_totle;
+            tv_buyer_order_ing,tv_buyer_order_wait,tv_buyer_order_totle;
     @ViewById
     Button btn_mem_info,btn_wad_info,btn_security_manage,btn_unionid_login,btn_recharge,
             btn_cash,btn_recharge_record,btn_cash_record,btn_identity,btn_face;
@@ -116,17 +116,18 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
             tv_buyer_pre.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
             tv_seller_order.setText(Html.fromHtml("<font color = \"#ffa800\">" + ret.getData().getUserSellerCount() + "</font>" + "单" + "<font color = \"#ffa800\">" + ret.getData().getUserSellerMoney() + "</font>" + "元"));
 
-            int IsRealNameAuth = ret.getData().getIsRealNameAuth();
-            int IsFaceAuth = ret.getData().getIsFaceAuth();
-            if(IsRealNameAuth == 0){
-                iv_identity.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.wrz));
-            } else {
+            int IsRealNameAuth = ret.getData().getRealNameStatus();
+            int IsFaceAuth = ret.getData().getFaceAuthStatus();
+            //0申请中，1通过，2失败，3未申请
+            if(IsRealNameAuth == 1){
                 iv_identity.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yrz));
-            }
-            if(IsFaceAuth == 0){
-                iv_face.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.wrz));
             } else {
+                iv_identity.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.wrz));
+            }
+            if(IsFaceAuth == 1){
                 iv_face.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.yrz));
+            } else {
+                iv_face.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.wrz));
             }
 
 
@@ -134,15 +135,6 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
             boolean UserSellerStatus = ret.getData().isUserSellerStatus();
 
             if(UserBuyerStatus){
-                if(!TextUtils.isEmpty(ret.getData().getAverageConfirmTime())){
-                    long time = Long.parseLong(ret.getData().getAverageConfirmTime());
-                    long day = time/60/24;
-                    long hour = time/60;
-                    long minute = time - day*24*60 - hour*60;
-                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + day + "</font>" + "天" + "<font color = \"#5069d5\">" + hour + "</font>" + "小时"+ "<font color = \"#5069d5\">" + minute + "</font>" + "分钟"));
-                } else {
-                    tv_buyer_time.setText(Html.fromHtml("<font color = \"#148cf1\">" + 0 + "</font>" + "天" + "<font color = \"#5069d5\">" + 0 + "</font>" + "小时"+ "<font color = \"#5069d5\">" + 0 + "</font>" + "分钟"));
-                }
 
                 tv_buyer_order_ing.setText(Html.fromHtml("预定中的订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerMoney() + "</font>" + "元"));
                 tv_buyer_order_wait.setText(Html.fromHtml("待确认的订单:" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerWaitConfirmOrdersCount() + "</font>" + "单" + "<font color = \"#5069d5\">" + ret.getData().getUserBuyerWaitConfirmOrdersMoney() + "</font>" + "元"));
@@ -220,63 +212,6 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                 });
             }
 
-        } else if(method.equals("PersonalFragment_realNameStatus")){
-            RealNameStatusRet ret = (RealNameStatusRet)baseRet;
-            if(ret.getData() == null){
-                return;
-            }
-            int status = ret.getData().getRealNameStatus();
-            switch (status){
-                case 0://正在申请中
-                    Toast.makeText(mContext,"您有实名认证任务正在处理中，请稍后",Toast.LENGTH_LONG).show();
-                    break;
-                case 1://通过
-                    Toast.makeText(mContext,"您已经刷脸认证通过",Toast.LENGTH_LONG).show();
-                    break;
-                case 2://失败
-                case 3://未申请
-                    if(accountInfoLoginRet != null && accountInfoLoginRet.getData() != null){
-                        Bundle bundle = new Bundle();
-                        Intent intent = new Intent(mContext,ContainerActivity_.class);
-                        bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
-                        bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
-                        bundle.putBoolean("IsModify",ret.getData().isModify());
-                        bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UploadIdentityFragmentTag);
-                        intent.putExtras(bundle);
-                        mContext.startActivity(intent);
-                    }
-
-                    break;
-            }
-        } else if(method.equals("PersonalFragment_faceStatus")){
-            FaceStatusRet ret = (FaceStatusRet)baseRet;
-            if(ret.getData() == null){
-                return;
-            }
-            int status = ret.getData().getFaceAuthStatus();
-            switch (status){
-                case 0:
-                    Toast.makeText(mContext,"您有刷脸认证任务正在处理中，请稍后",Toast.LENGTH_LONG).show();
-                    break;
-                case 1:
-                    Toast.makeText(mContext,"您已经刷脸认证通过",Toast.LENGTH_LONG).show();
-                    break;
-                case 2://认证失败
-                case 3://没有认证申请记录
-                    if(accountInfoLoginRet != null && accountInfoLoginRet.getData() != null){
-                        Bundle bundle = new Bundle();
-                        Intent intent = new Intent(mContext,ContainerActivity_.class);
-                        bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
-                        bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
-                        bundle.putBoolean("IsModify",ret.getData().isModify());
-                        bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
-                        bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
-                        intent.putExtras(bundle);
-                        mContext.startActivity(intent);
-                    }
-
-                    break;
-            }
         }
     }
 
@@ -309,8 +244,8 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
                         bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
                         bundle.putString("Mobile",accountInfoLoginRet.getData().getMobile());
-                        bundle.putInt("IsFaceAuth",accountInfoLoginRet.getData().getIsFaceAuth());
-                        bundle.putInt("IsRealNameAuth",accountInfoLoginRet.getData().getIsRealNameAuth());
+                        bundle.putInt("IsFaceAuth",accountInfoLoginRet.getData().getFaceAuthStatus());
+                        bundle.putInt("IsRealNameAuth",accountInfoLoginRet.getData().getRealNameStatus());
                     }
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.MemberInfoFragmentTag);
                     intent.putExtras(bundle);
@@ -335,8 +270,8 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                 case R.id.btn_unionid_login:
                     //互联登陆
                     if(accountInfoLoginRet != null && accountInfoLoginRet.getData() != null){
-                        bundle.putString("QQOpenId",accountInfoLoginRet.getData().getQQOpenId());
-                        bundle.putString("WXOpenId",accountInfoLoginRet.getData().getWXOpenId());
+                        bundle.putBoolean("QQOpenId",TextUtils.isEmpty(accountInfoLoginRet.getData().getQQOpenId())?false:true);
+                        bundle.putBoolean("WXOpenId",TextUtils.isEmpty(accountInfoLoginRet.getData().getWXOpenId())?false:true);
                     }
 
                     bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UnionLoginFragmentTag);
@@ -410,6 +345,16 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                     if(accountInfoLoginRet == null || accountInfoLoginRet.getData() == null){
                         return;
                     }
+
+                    if(accountInfoLoginRet.getData().getRealNameStatus() == 1){
+                        Toast.makeText(mContext,"您已经通过实名认证",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(accountInfoLoginRet.getData().getRealNameStatus() == 0){
+                        Toast.makeText(mContext,"实名认证中",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     if(TextUtils.isEmpty(accountInfoLoginRet.getData().getRealName()) || TextUtils.isEmpty(accountInfoLoginRet.getData().getIDNum())){
                         DialogUtils.showDialog(getActivity(), "提示", "实名认证需要补填信息，是否补填信息", "取消", "补填信息", new OnClickListener() {
                             @Override
@@ -434,14 +379,28 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         return;
                     }
 
-                    //查询实名认证状态
-                    ApiRequest.realNameStatus("PersonalFragment_realNameStatus",pb_loading);
+                    bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
+                    bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
+                    bundle.putBoolean("IsModify",accountInfoLoginRet.getData().isModify());
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UploadIdentityFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
                     break;
                 case R.id.btn_face:
                     //刷脸认证
                     if(accountInfoLoginRet == null || accountInfoLoginRet.getData() == null){
                         return;
                     }
+
+                    if(accountInfoLoginRet.getData().getFaceAuthStatus() == 1){
+                        Toast.makeText(mContext,"您已经通过刷脸认证",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(accountInfoLoginRet.getData().getFaceAuthStatus() == 0){
+                        Toast.makeText(mContext,"刷脸认证中",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     if(TextUtils.isEmpty(accountInfoLoginRet.getData().getRealName()) || TextUtils.isEmpty(accountInfoLoginRet.getData().getIDNum())){
                         DialogUtils.showDialog(getActivity(), "提示", "刷脸认证需要补填信息，是否补填信息", "取消", "补填信息", new OnClickListener() {
                             @Override
@@ -465,8 +424,13 @@ public class PersonalFragment extends BaseFragment implements CallbackUtils.Resp
                         });
                         return;
                     }
-                    //查询刷脸认证状态
-                    ApiRequest.faceStatus("PersonalFragment_faceStatus",pb_loading);
+                    bundle.putString("RealName",accountInfoLoginRet.getData().getRealName());
+                    bundle.putString("IDNum",accountInfoLoginRet.getData().getIDNum());
+                    bundle.putBoolean("IsModify",accountInfoLoginRet.getData().isModify());
+                    bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
                     break;
             }
         }

@@ -55,12 +55,13 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
     Button btn_title_back,btn_qq,btn_wechat;
     @ViewById
     RelativeLayout rl_qq,rl_wechat;
-    private String QQUnionid,WXUnionid;
+    private boolean QQUnionid,WXUnionid;
 
     private Tencent mTencent;
     private QQCallback qqCallback;
     private IWXAPI wxapi;
     private WeChatReceiver weChatReceiver;
+    private String type = "";
 
     public static UnionLoginFragment newInstance(Bundle bundle) {
         UnionLoginFragment_ fragment = new UnionLoginFragment_();
@@ -80,14 +81,14 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
         tv_title_content.setText("互联登录");
         Bundle bundle = getArguments();
         if (bundle != null) {
-            QQUnionid = bundle.getString("QQOpenId");
-            WXUnionid = bundle.getString("WXOpenId");
-            if(TextUtils.isEmpty(QQUnionid)){
+            QQUnionid = bundle.getBoolean("QQOpenId",false);
+            WXUnionid = bundle.getBoolean("WXOpenId",false);
+            if(!QQUnionid){
                 btn_qq.setText("未绑定");
             } else {
                 btn_qq.setText("已绑定");
             }
-            if(TextUtils.isEmpty(WXUnionid)){
+            if(!WXUnionid){
                 btn_wechat.setText("未绑定");
             } else {
                 btn_wechat.setText("已绑定");
@@ -119,7 +120,13 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
             }
             if(ret.getData().isResult()){
                 Toast.makeText(mContext,"解绑成功",Toast.LENGTH_LONG).show();
-                getActivity().finish();
+                if(TextUtils.equals("0",type)){
+                    QQUnionid = false;
+                    btn_qq.setText("未绑定");
+                } else if(TextUtils.equals("1",type)){
+                    WXUnionid = false;
+                    btn_wechat.setText("未绑定");
+                }
             }
         } else if(method.equals("UnionLoginFragment_Bind")){
             BooleanRet ret = (BooleanRet)baseRet;
@@ -128,7 +135,13 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
             }
             if(ret.getData().isResult()){
                 Toast.makeText(mContext,"绑定成功",Toast.LENGTH_LONG).show();
-                getActivity().finish();
+                if(TextUtils.equals("0",type)){
+                    QQUnionid = true;
+                    btn_qq.setText("已绑定");
+                } else if(TextUtils.equals("1",type)){
+                    WXUnionid = true;
+                    btn_wechat.setText("已绑定");
+                }
             }
         }
     }
@@ -141,10 +154,10 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                     getActivity().finish();
                     break;
                 case R.id.rl_qq:
-                    DialogUtils.showDialog(getActivity(), TextUtils.isEmpty(QQUnionid)?"需要绑定QQ吗？":"需要解绑QQ吗？", "", "取消", TextUtils.isEmpty(QQUnionid)?"绑定":"解绑", new OnClickListener() {
+                    DialogUtils.showDialog(getActivity(), !QQUnionid?"需要绑定QQ吗？":"需要解绑QQ吗？", "", "取消", !QQUnionid?"绑定":"解绑", new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(TextUtils.isEmpty(QQUnionid)){
+                            if(!QQUnionid){
                                 qqCallback = new QQCallback();
                                 //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
                                 if (!mTencent.isSessionValid()) {
@@ -152,6 +165,7 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                                         @Override
                                         public void onComplete(Object response) {
                                             //此为成功返回数据,拿到openId转换成uniodid根据此判断是否已经绑定
+                                            type = "0";
                                             ApiRequest.getMessage(response, mTencent,getActivity(),pb_loading,false);
                                         }
 
@@ -165,16 +179,17 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                                     });
                                 }
                             } else {
-                                ApiRequest.unBind("0","UnionLoginFragment_unBind",pb_loading);
+                                type = "0";
+                                ApiRequest.unBind(type,"UnionLoginFragment_unBind",pb_loading);
                             }
                         }
                     });
                     break;
                 case R.id.rl_wechat:
-                    DialogUtils.showDialog(getActivity(), TextUtils.isEmpty(WXUnionid)?"需要绑定微信吗？":"需要解绑微信吗？", "", "取消", TextUtils.isEmpty(WXUnionid)?"绑定":"解绑", new OnClickListener() {
+                    DialogUtils.showDialog(getActivity(), !WXUnionid?"需要绑定微信吗？":"需要解绑微信吗？", "", "取消", !WXUnionid?"绑定":"解绑", new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(TextUtils.isEmpty(WXUnionid)){
+                            if(!WXUnionid){
                                 boolean weixinAvilible = Utils.isWeixinAvilible();
                                 if (weixinAvilible) {
                                     SendAuth.Req req = new SendAuth.Req();
@@ -185,7 +200,8 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                                     Toast.makeText(mContext, "请先安装微信", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                ApiRequest.unBind("1","UnionLoginFragment_unBind",pb_loading);
+                                type = "1";
+                                ApiRequest.unBind(type,"UnionLoginFragment_unBind",pb_loading);
                             }
                         }
                     });
@@ -218,7 +234,8 @@ public class UnionLoginFragment extends BaseFragment implements CallbackUtils.Re
                     }
                     LogUtils.print("wechat_unionid === " + wechat_unionid + " openid == " + openid);
 
-                    ApiRequest.isUnionIdBind(wechat_unionid, openid,"1",getActivity(),pb_loading,false);
+                    type = "1";
+                    ApiRequest.isUnionIdBind(wechat_unionid, openid,type,getActivity(),pb_loading,false);
                 }
             }
         }

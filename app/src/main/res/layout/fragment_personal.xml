@@ -328,8 +328,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
                         android:background="@drawable/shape_bg_white"
                         android:orientation="vertical"
                         android:visibility="gone">
@@ -363,7 +363,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginBottom="2dp"
                             android:orientation="horizontal">
                             <TextView
@@ -430,8 +430,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
                         android:background="@drawable/shape_bg_white"
                         android:orientation="vertical"
                         android:visibility="gone">
@@ -442,16 +442,6 @@
                             android:layout_marginTop="2dp"
                             android:orientation="horizontal">
                             <TextView
-                                android:id="@+id/tv_buyer_time"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="10dp"
-                                android:text="平均确认时间"
-                                android:textColor="@color/black_light"
-                                android:textSize="12sp" />
-
-                            <TextView
                                 android:id="@+id/tv_buyer_order_ing"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -461,13 +451,6 @@
                                 android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="2dp"
-                            android:orientation="horizontal">
                             <TextView
                                 android:id="@+id/tv_buyer_order_wait"
                                 android:layout_width="0dp"
@@ -478,6 +461,13 @@
                                 android:textColor="@color/black_light"
                                 android:textSize="12sp" />
 
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
                             <TextView
                                 android:id="@+id/tv_buyer_order_totle"
                                 android:layout_width="0dp"

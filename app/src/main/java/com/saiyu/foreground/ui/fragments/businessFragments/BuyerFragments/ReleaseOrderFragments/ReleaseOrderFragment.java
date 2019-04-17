@@ -303,6 +303,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 getActivity().startActivityForResult(intent, ContainerActivity.SetOnlineTimeFragmentTag);
                 break;
             case R.id.rl_orderEndTime:
+                bundle.putString("orderEndTime",orderEndTime);
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SetOrderEndTimeFragmentTag);
                 intent.putExtras(bundle);
                 getActivity().startActivityForResult(intent, ContainerActivity.SetOrderEndTimeFragmentTag);

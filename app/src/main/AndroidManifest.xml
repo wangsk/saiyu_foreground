@@ -50,9 +50,10 @@
 
         </activity>
         <activity android:name=".ui.activitys.MainActivity_"
-            >
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.activitys.ContainerActivity_">
+        <activity android:name=".ui.activitys.ContainerActivity_"
+            android:screenOrientation="portrait">
 
         </activity>
 

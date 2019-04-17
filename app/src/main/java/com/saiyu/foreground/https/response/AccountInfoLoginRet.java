@@ -17,8 +17,8 @@ public class AccountInfoLoginRet extends BaseRet{
 
     public static class DataBean {
         String Account;
-        int IsRealNameAuth;
-        int IsFaceAuth;
+        int RealNameStatus;
+        int FaceAuthStatus;
         String TotalMoney;
         String UserBuyerCount;
         String UserBuyerMoney;
@@ -55,6 +55,16 @@ public class AccountInfoLoginRet extends BaseRet{
         boolean IsUserLimit;
         String OrderMoneyLimitByDay;
         String OrderCountLimitByDay;
+
+        boolean IsModify;
+
+        public boolean isModify() {
+            return IsModify;
+        }
+
+        public void setModify(boolean modify) {
+            IsModify = modify;
+        }
 
         public String getOrderMoneyLimitByDay() {
             return OrderMoneyLimitByDay;
@@ -98,20 +108,20 @@ public class AccountInfoLoginRet extends BaseRet{
             Account = account;
         }
 
-        public int getIsRealNameAuth() {
-            return IsRealNameAuth;
+        public int getRealNameStatus() {
+            return RealNameStatus;
         }
 
-        public void setIsRealNameAuth(int isRealNameAuth) {
-            IsRealNameAuth = isRealNameAuth;
+        public void setRealNameStatus(int realNameStatus) {
+            RealNameStatus = realNameStatus;
         }
 
-        public int getIsFaceAuth() {
-            return IsFaceAuth;
+        public int getFaceAuthStatus() {
+            return FaceAuthStatus;
         }
 
-        public void setIsFaceAuth(int isFaceAuth) {
-            IsFaceAuth = isFaceAuth;
+        public void setFaceAuthStatus(int faceAuthStatus) {
+            FaceAuthStatus = faceAuthStatus;
         }
 
         public String getTotalMoney() {

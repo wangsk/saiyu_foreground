@@ -31,7 +31,6 @@ public class RequestHeaderInterceptor implements Interceptor {
                 .header("equipmentType", "1")//设备类型
                 .header("signature", SHA1(ConstValue.APPID + ConstValue.APPSecret + String.valueOf(time)))//加密
                 .build();
-        LogUtils.print("token  === " + SPUtils.getString(ConstValue.ACCESS_TOKEN, ""));
         return chain.proceed(updateRequest);
     }
 

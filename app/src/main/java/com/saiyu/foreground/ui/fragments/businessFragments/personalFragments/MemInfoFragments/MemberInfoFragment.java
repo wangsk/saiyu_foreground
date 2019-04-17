@@ -45,6 +45,7 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
     ImageView iv_jiantou_realname,iv_jiantou_identity,iv_jiantou_identify,iv_jiantou_face;
     private String account,RealName,IDNum,Mobile;
     private int IsRealNameAuth = 0,IsFaceAuth = 0;
+    private boolean IsModify;
 
     public static MemberInfoFragment newInstance(Bundle bundle) {
         MemberInfoFragment_ fragment = new MemberInfoFragment_();
@@ -71,6 +72,7 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
             Mobile = bundle.getString("Mobile");
             IsFaceAuth = bundle.getInt("IsFaceAuth");
             IsRealNameAuth = bundle.getInt("IsRealNameAuth");
+            IsModify = bundle.getBoolean("IsModify");
 
             tv_account.setText(account);
             if(!TextUtils.isEmpty(RealName)){
@@ -88,20 +90,30 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                 iv_jiantou_identity.setVisibility(View.VISIBLE);
             }
             if(IsRealNameAuth == 0){
-                //未实名
-                tv_identify.setText("未认证");
-                iv_jiantou_identify.setVisibility(View.VISIBLE);
+                tv_identify.setText("认证中");
+                iv_jiantou_identify.setVisibility(View.GONE);
             } else if(IsRealNameAuth == 1){
                 tv_identify.setText("已认证");
                 iv_jiantou_identify.setVisibility(View.GONE);
+            } else if(IsRealNameAuth == 2){
+                tv_identify.setText("认证失败");
+                iv_jiantou_identify.setVisibility(View.VISIBLE);
+            } else if(IsRealNameAuth == 3){
+                tv_identify.setText("未认证");
+                iv_jiantou_identify.setVisibility(View.VISIBLE);
             }
             if(IsFaceAuth == 0){
-                //未刷脸
-                tv_face.setText("未认证");
-                iv_jiantou_face.setVisibility(View.VISIBLE);
+                tv_face.setText("认证中");
+                iv_jiantou_face.setVisibility(View.GONE);
             } else if(IsFaceAuth == 1){
                 tv_face.setText("已认证");
                 iv_jiantou_face.setVisibility(View.GONE);
+            } else if(IsFaceAuth == 2){
+                tv_face.setText("认证失败");
+                iv_jiantou_face.setVisibility(View.VISIBLE);
+            } else if(IsFaceAuth == 3){
+                tv_face.setText("未认证");
+                iv_jiantou_face.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -111,62 +123,7 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
         }
-        if(method.equals("MemberInfoFragment_faceStatus")){
-            FaceStatusRet ret = (FaceStatusRet)baseRet;
-            if(ret.getData() == null){
-                return;
-            }
-            int status = ret.getData().getFaceAuthStatus();
-            switch (status){
-                case 0:
-                    Toast.makeText(mContext,"您有刷脸认证任务正在处理中，请稍后",Toast.LENGTH_LONG).show();
-                    break;
-                case 1:
-                    tv_face.setText("已认证");
-                    IsFaceAuth = 1;
-                    Toast.makeText(mContext,"您已经刷脸认证通过",Toast.LENGTH_LONG).show();
-                    break;
-                case 2://认证失败
-                case 3://没有认证申请记录
-                    Bundle bundle = new Bundle();
-                    Intent intent = new Intent(mContext,ContainerActivity_.class);
-                    bundle.putString("RealName",RealName);
-                    bundle.putString("IDNum",IDNum);
-                    bundle.putBoolean("IsModify",ret.getData().isModify());
-                    bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
-                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
-                    break;
-            }
-        } else if(method.equals("MemberInfoFragment_realNameStatus")){
-            RealNameStatusRet ret = (RealNameStatusRet)baseRet;
-            if(ret.getData() == null){
-                return;
-            }
-            int status = ret.getData().getRealNameStatus();
-            switch (status){
-                case 0://正在申请中
-                    Toast.makeText(mContext,"您有实名认证任务正在处理中，请稍后",Toast.LENGTH_LONG).show();
-                    break;
-                case 1://通过
-                    tv_identify.setText("已认证");
-                    IsRealNameAuth = 1;
-                    Toast.makeText(mContext,"您已经刷脸认证通过",Toast.LENGTH_LONG).show();
-                    break;
-                case 2://失败
-                case 3://未申请
-                    Bundle bundle = new Bundle();
-                    Intent intent = new Intent(mContext,ContainerActivity_.class);
-                    bundle.putString("RealName",RealName);
-                    bundle.putString("IDNum",IDNum);
-                    bundle.putBoolean("IsModify",ret.getData().isModify());
-                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UploadIdentityFragmentTag);
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
-                    break;
-            }
-        } else if(method.equals("MemberInfoFragment_getSmallAccountInfoLogin")){
+        if(method.equals("MemberInfoFragment_getSmallAccountInfoLogin")){
             AccountInfoLoginRet ret = (AccountInfoLoginRet)baseRet;
             if(ret.getData() == null){
                 return;
@@ -175,8 +132,9 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
             RealName = ret.getData().getRealName();
             IDNum = ret.getData().getIDNum();
             Mobile = ret.getData().getMobile();
-            IsRealNameAuth = ret.getData().getIsRealNameAuth();
-            IsFaceAuth = ret.getData().getIsFaceAuth();
+            IsRealNameAuth = ret.getData().getRealNameStatus();
+            IsFaceAuth = ret.getData().getFaceAuthStatus();
+            IsModify = ret.getData().isModify();
             tv_account.setText(account);
             if(!TextUtils.isEmpty(RealName)){
                 tv_realname.setText(RealName);
@@ -193,20 +151,30 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                 iv_jiantou_identity.setVisibility(View.VISIBLE);
             }
             if(IsRealNameAuth == 0){
-                //未实名
-                tv_identify.setText("未认证");
-                iv_jiantou_identify.setVisibility(View.VISIBLE);
+                tv_identify.setText("认证中");
+                iv_jiantou_identify.setVisibility(View.GONE);
             } else if(IsRealNameAuth == 1){
                 tv_identify.setText("已认证");
                 iv_jiantou_identify.setVisibility(View.GONE);
+            } else if(IsRealNameAuth == 2){
+                tv_identify.setText("认证失败");
+                iv_jiantou_identify.setVisibility(View.VISIBLE);
+            } else if(IsRealNameAuth == 3){
+                tv_identify.setText("未认证");
+                iv_jiantou_identify.setVisibility(View.VISIBLE);
             }
             if(IsFaceAuth == 0){
-                //未刷脸
-                tv_face.setText("未认证");
-                iv_jiantou_face.setVisibility(View.VISIBLE);
+                tv_face.setText("认证中");
+                iv_jiantou_face.setVisibility(View.GONE);
             } else if(IsFaceAuth == 1){
                 tv_face.setText("已认证");
                 iv_jiantou_face.setVisibility(View.GONE);
+            } else if(IsFaceAuth == 2){
+                tv_face.setText("认证失败");
+                iv_jiantou_face.setVisibility(View.VISIBLE);
+            } else if(IsFaceAuth == 3){
+                tv_face.setText("未认证");
+                iv_jiantou_face.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -243,6 +211,10 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                         Toast.makeText(mContext,"您已经通过实名认证",Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if(IsRealNameAuth == 0){
+                        Toast.makeText(mContext,"实名认证中",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     //查询实名认证状态
                     if(TextUtils.isEmpty(RealName) || TextUtils.isEmpty(IDNum)){
                         DialogUtils.showDialog(getActivity(), "提示", "实名认证需要补填信息，是否补填信息", "取消", "补填信息", new OnClickListener() {
@@ -266,11 +238,20 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                         });
                         return;
                     }
-                    ApiRequest.realNameStatus("MemberInfoFragment_realNameStatus",pb_loading);
+                    bundle.putString("RealName",RealName);
+                    bundle.putString("IDNum",IDNum);
+                    bundle.putBoolean("IsModify",IsModify);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.UploadIdentityFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
                     break;
                 case R.id.rl_face:
                     if(IsFaceAuth == 1){
                         Toast.makeText(mContext,"您已经通过刷脸认证",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(IsFaceAuth == 0){
+                        Toast.makeText(mContext,"刷脸认证中",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if(TextUtils.isEmpty(RealName) || TextUtils.isEmpty(IDNum)){
@@ -295,8 +276,14 @@ public class MemberInfoFragment extends BaseFragment implements CallbackUtils.Re
                         });
                         return;
                     }
-                    //查询刷脸认证状态
-                    ApiRequest.faceStatus("MemberInfoFragment_faceStatus",pb_loading);
+
+                    bundle.putString("RealName",RealName);
+                    bundle.putString("IDNum",IDNum);
+                    bundle.putBoolean("IsModify",IsModify);
+                    bundle.putInt(FaceIdentifyFragment.FaceIdentifyFunctionType,0);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.FaceIdentifyFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
 
                     break;
             }

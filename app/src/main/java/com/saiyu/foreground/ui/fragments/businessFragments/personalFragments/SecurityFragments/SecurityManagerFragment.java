@@ -73,9 +73,11 @@ public class SecurityManagerFragment extends BaseFragment implements CallbackUti
                 tv_security_limit.setText("每日下单累计金额 " + OrderMoneyLimitByDay+"元");
                 tv_security_limit_2.setText("每日下单累计笔数 " + OrderCountLimitByDay+"笔");
                 tv_security_limit_2.setVisibility(View.VISIBLE);
+                sw_security.setChecked(true);
             } else {
                 tv_security_limit.setText("不限制");
                 tv_security_limit_2.setVisibility(View.GONE);
+                sw_security.setChecked(false);
             }
         }
     }

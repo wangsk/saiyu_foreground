@@ -103,6 +103,8 @@ public class SetingFragment extends BaseFragment implements CallbackUtils.Respon
                             public void onClick(View view) {
                                 CacheUtil.clearAllCache(mContext);
                                 Toast.makeText(mContext, "清理成功", Toast.LENGTH_SHORT).show();
+                                totalCacheSize = "0KB";
+                                tv_cash.setText(totalCacheSize);
                             }
                         });
                     }
