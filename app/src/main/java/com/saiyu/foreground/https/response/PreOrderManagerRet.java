@@ -55,6 +55,15 @@ public class PreOrderManagerRet extends BaseRet{
             private String PrepaidMoney;
             private String Title;
             private int OrderStatus;
+            private String ProductName;
+
+            public String getProductName() {
+                return ProductName;
+            }
+
+            public void setProductName(String productName) {
+                ProductName = productName;
+            }
 
             public int getOrderStatus() {
                 return OrderStatus;

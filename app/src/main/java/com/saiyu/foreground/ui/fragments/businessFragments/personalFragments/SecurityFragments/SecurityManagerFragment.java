@@ -31,7 +31,7 @@ public class SecurityManagerFragment extends BaseFragment implements CallbackUti
     @ViewById
     ProgressBar pb_loading;
     @ViewById
-    TextView tv_title_content,tv_security_limit,tv_security_limit_2;
+    TextView tv_title_content,tv_security_limit,tv_security_limit_2,tv_security_nolimit;
     @ViewById
     Switch sw_security;
     @ViewById
@@ -72,10 +72,13 @@ public class SecurityManagerFragment extends BaseFragment implements CallbackUti
                 OrderCountLimitByDay = ret.getData().getOrderCountLimitByDay();
                 tv_security_limit.setText("每日下单累计金额 " + OrderMoneyLimitByDay+"元");
                 tv_security_limit_2.setText("每日下单累计笔数 " + OrderCountLimitByDay+"笔");
+                tv_security_limit.setVisibility(View.VISIBLE);
                 tv_security_limit_2.setVisibility(View.VISIBLE);
+                tv_security_nolimit.setVisibility(View.GONE);
                 sw_security.setChecked(true);
             } else {
-                tv_security_limit.setText("不限制");
+                tv_security_nolimit.setVisibility(View.VISIBLE);
+                tv_security_limit.setVisibility(View.GONE);
                 tv_security_limit_2.setVisibility(View.GONE);
                 sw_security.setChecked(false);
             }

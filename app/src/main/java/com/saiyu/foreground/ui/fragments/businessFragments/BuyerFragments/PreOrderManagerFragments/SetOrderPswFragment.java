@@ -36,6 +36,11 @@ public class SetOrderPswFragment extends BaseFragment {
     @AfterViews
     void afterViews() {
         tv_title_content.setText("订单加密");
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            String orderPsw = bundle.getString("orderPsw");
+            et_release_psw.setText(orderPsw);
+        }
     }
 
     @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.btn_cancel})

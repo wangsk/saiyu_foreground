@@ -18,8 +18,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
-        <item name="colorPrimaryDark">@color/line</item>
-        <item name="android:windowBackground">@drawable/loading</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="android:windowBackground">@mipmap/loading</item>
     </style>
 
     <style name="TabTextSizeStyle">

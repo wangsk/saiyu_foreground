@@ -66,60 +66,66 @@
         <RelativeLayout
             android:id="@+id/rl_security"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:background="@drawable/item_selector_bg">
 
             <TextView
                 android:id="@+id/tv_security"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:text="安全配置"
                 android:textColor="@color/black_light"
                 android:textSize="15sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_security_nolimit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/tv_security"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:text="不限制"
+                android:textColor="@color/black_light"
+                android:textSize="13sp"
+                android:visibility="gone"
+                android:layout_alignBaseline="@id/tv_security"/>
 
-                <TextView
-                    android:id="@+id/tv_security_limit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="不限制"
-                    android:textColor="@color/black_light"
-                    android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_security_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_security"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textColor="@color/black_light"
+                android:textSize="13sp"
+                android:visibility="gone"/>
 
-                <TextView
-                    android:id="@+id/tv_security_limit_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text=""
-                    android:textColor="@color/black_light"
-                    android:textSize="13sp"
-                    android:visibility="gone" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_security_limit_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_security_limit"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textColor="@color/black_light"
+                android:textSize="13sp"
+                android:visibility="gone" />
 
             <Switch
                 android:id="@+id/sw_security"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:clickable="false"
                 android:focusable="false"
-                app:theme="@style/MySwitch" />
+                app:theme="@style/MySwitch"
+                android:layout_alignBaseline="@id/tv_security"/>
 
         </RelativeLayout>
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.LoginRecordRet;
 import com.saiyu.foreground.utils.LogUtils;
@@ -69,6 +70,8 @@ public class LoginRecordAdapter extends RecyclerView.Adapter<LoginRecordAdapter.
         public MyHolder(View itemView) {
             super(itemView);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
+            tv_deal_1.setTextColor(App.getApp().getResources().getColor(R.color.black));
+            tv_deal_1.setTextSize(16);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);

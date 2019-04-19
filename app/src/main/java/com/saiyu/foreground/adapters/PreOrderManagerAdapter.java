@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.PreOrderManagerRet;
@@ -45,7 +46,7 @@ public class PreOrderManagerAdapter extends RecyclerView.Adapter<PreOrderManager
 
         myHolder.tv_deal_1.setText(Html.fromHtml(deal_1));
         myHolder.tv_deal_2.setText(mItems.get(i).getOperatorType());
-        myHolder.tv_deal_3.setText(mItems.get(i).getProductTypeName());
+        myHolder.tv_deal_3.setText(mItems.get(i).getProductName());
         myHolder.tv_deal_4.setText(mItems.get(i).getAuditStatusStr());
 
         myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +88,11 @@ public class PreOrderManagerAdapter extends RecyclerView.Adapter<PreOrderManager
             super(itemView);
             ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
+            tv_deal_1.setTextColor(App.getApp().getResources().getColor(R.color.black));
+            tv_deal_1.setTextSize(16);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
+            tv_deal_2.setTextColor(App.getApp().getResources().getColor(R.color.black));
+            tv_deal_2.setTextSize(16);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
         }

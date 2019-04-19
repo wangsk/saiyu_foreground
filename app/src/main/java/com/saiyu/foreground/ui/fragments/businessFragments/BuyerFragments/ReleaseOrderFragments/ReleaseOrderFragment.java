@@ -51,7 +51,7 @@ import java.util.List;
 @EFragment(R.layout.fragment_release_order)
 public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.ResponseCallback, CallbackUtils.OnActivityCallBack {
     @ViewById
-    TextView tv_title_content, tv_orderName, tv_release_count_prompt, tv_mobile, tv_time_online, tv_function, tv_sw, tv_rechargeGame, tv_gamePlace;
+    TextView tv_title_content, tv_orderName, tv_release_count_prompt, tv_time_online, tv_function, tv_sw, tv_rechargeGame, tv_gamePlace;
     @ViewById
     Button btn_title_back;
     @ViewById
@@ -69,7 +69,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
     @ViewById
     Spinner sp_selector;
     @ViewById
-    EditText et_recharge_qqnum, et_release_count, et_release_price, et_release_discount, et_qq, et_role;
+    EditText et_recharge_qqnum, et_release_count, et_release_price, et_release_discount, et_qq, et_role,et_mobile;
     @ViewById
     Switch sw;
     private boolean IsNeedMobile;
@@ -80,6 +80,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
     private float LessChargeDiscount = 1f,OnceMinCount = 0f;
 
     private BigDecimal convertCountBig = new BigDecimal(0);//QB和预定数量换算的折扣
+    private BigDecimal qbConvertCountBig = new BigDecimal(0);
 
     public static ReleaseOrderFragment newInstance(Bundle bundle) {
         ReleaseOrderFragment_ fragment = new ReleaseOrderFragment_();
@@ -106,8 +107,15 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             productId = bundle.getString("ProductId");
             unitName = bundle.getString("unitName");
             convertCount = bundle.getString("convertCount");
-            convertCountBig = new BigDecimal(convertCount);
-            LogUtils.print("折扣 ： " + convertCount);
+            String qbConvertCount = bundle.getString("qbCount");
+            if(!TextUtils.isEmpty(qbConvertCount)){
+                qbConvertCountBig = new BigDecimal(qbConvertCount);
+            }
+            if(!TextUtils.isEmpty(convertCount)){
+                convertCountBig = new BigDecimal(convertCount);
+            }
+            LogUtils.print("convertCount === " + convertCount);
+            LogUtils.print("qbConvertCount === " + qbConvertCount);
             tv_release_count_prompt.setText(name + unitName + "=" + "Q币");
             ProductProperty1 = bundle.getString("ProductProperty1", "");
             ProductProperty2 = bundle.getString("ProductProperty2", "");
@@ -169,7 +177,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             orderNum = ret.getData().getOrderNum();
             tv_orderName.setText(orderNum);
             mobile = ret.getData().getMobile();
-            tv_mobile.setText(mobile);
+            et_mobile.setText(mobile);
             IsNeedMobile = ret.getData().isNeedMobile();
             postScriptList = ret.getData().getPostScriptList();
 
@@ -309,6 +317,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 getActivity().startActivityForResult(intent, ContainerActivity.SetOrderEndTimeFragmentTag);
                 break;
             case R.id.rl_orderPsw:
+                bundle.putString("orderPsw", orderPsw);
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SetOrderPswFragmentTag);
                 intent.putExtras(bundle);
                 getActivity().startActivityForResult(intent, ContainerActivity.SetOrderPswFragmentTag);
@@ -542,10 +551,13 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
 
     private String et_release_count_str, et_release_price_str, et_release_discount_str;
 
-    @TextChange({R.id.et_recharge_qqnum, R.id.et_release_count, R.id.et_release_discount, R.id.et_release_price, R.id.et_role})
+    @TextChange({R.id.et_recharge_qqnum, R.id.et_release_count, R.id.et_release_discount, R.id.et_release_price, R.id.et_role,R.id.et_mobile})
     void textChange(CharSequence s, TextView hello, int before, int start, int count) {
         String text = s.toString();
         switch (hello.getId()) {
+            case R.id.et_mobile:
+                mobile = text;
+                break;
             case R.id.et_release_count:
                 et_release_count_str = text;
                 if (TextUtils.isEmpty(text)) {
@@ -664,15 +676,16 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             BigDecimal[] yu = inputCount.divideAndRemainder(convertCountBig);
             if (yu[1].compareTo(new BigDecimal(0)) == 0) {
                 //余数等于0
-                if(yu[0].compareTo(new BigDecimal(20000)) == 1){
-                    //QB大于20000，取20000
-                    qbCount = new BigDecimal(20000);
-                    inputCount = qbCount.multiply(convertCountBig);
+                if(yu[0].compareTo(new BigDecimal(20000)) == 1 || yu[0].compareTo(new BigDecimal(20000)) == 0){
+                    //QB大于等于20000
+                    BigDecimal bigDecimal_2w = new BigDecimal(20000);
+                    inputCount = bigDecimal_2w.divide(convertCountBig).divide(qbConvertCountBig,0,BigDecimal.ROUND_DOWN);
+                    qbCount = inputCount.multiply(convertCountBig).multiply(qbConvertCountBig);
                     if (et_release_count != null) {
                         et_release_count.setText(inputCount + "");
                     }
                 } else {
-                    qbCount = yu[0];
+                    qbCount = yu[0].multiply(qbConvertCountBig);
                 }
 
                 if (tv_release_count_prompt != null) {
@@ -681,12 +694,16 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
 
             } else {
                 //余数不等于0
-                qbCount = yu[0].add(new BigDecimal(1));
-                if(qbCount.compareTo(new BigDecimal(20000)) == 1){
-                    //QB大于20000，取20000
-                    qbCount = new BigDecimal(20000);
+                qbCount = (yu[0].add(new BigDecimal(1))).multiply(qbConvertCountBig);
+                if(qbCount.compareTo(new BigDecimal(20000)) == 1||qbCount.compareTo(new BigDecimal(20000)) == 0){
+                    //QB大于等于20000
+                    BigDecimal bigDecimal_2w = new BigDecimal(20000);
+                    inputCount = bigDecimal_2w.divide(convertCountBig).divide(qbConvertCountBig,0,BigDecimal.ROUND_DOWN);
+                    qbCount = inputCount.multiply(convertCountBig).multiply(qbConvertCountBig);
+                } else {
+                    inputCount = qbCount.multiply(convertCountBig);
                 }
-                inputCount = qbCount.multiply(convertCountBig);
+
                 if (tv_release_count_prompt != null && et_release_count != null) {
                     tv_release_count_prompt.setText(name + unitName + "=" + qbCount + "Q币");
                     et_release_count.setText(inputCount + "");
@@ -734,7 +751,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
 
         } else if (!TextUtils.isEmpty(et_release_count_str) && !TextUtils.isEmpty(et_release_price_str)) {
             //根据数量 和 出价 算折扣，折扣作为计算结果，有可能是非格式化的值，如果是非格式化的值，需要先把折扣进行格式化，然后再和QB数量反算出价格
-            disCount = price.multiply(new BigDecimal(100)).divide(qbCount);
+            disCount = price.multiply(new BigDecimal(100)).divide(qbCount,0,BigDecimal.ROUND_DOWN);
             if (disCount.compareTo(new BigDecimal(65)) == -1) {
                 //折扣小于65
                 price = qbCount.multiply(new BigDecimal(65)).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
@@ -765,33 +782,37 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
 
             if (yu[1].compareTo(new BigDecimal(0)) == 0) {
                 //余数等于0
-                if(yu[0].compareTo(new BigDecimal(20000)) == 1){
-                    //QB大于20000，取20000
-                    qbCount = new BigDecimal(20000);
+                if(yu[0].compareTo(new BigDecimal(20000)) == 1 || yu[0].compareTo(new BigDecimal(20000)) == 0){
+                    //大于等于2W
+                    BigDecimal bigDecimal_2w = new BigDecimal(20000);
+                    inputCount = bigDecimal_2w.divide(convertCountBig).divide(qbConvertCountBig,0,BigDecimal.ROUND_DOWN);
+                    qbCount = inputCount.multiply(convertCountBig).multiply(qbConvertCountBig);
+
                 } else {
-                    qbCount = yu[0];
-                }
-                inputCount = qbCount.multiply(convertCountBig);
-                if (tv_release_count_prompt != null && et_release_count != null) {
-                    et_release_count.setText(inputCount.toString());
-                    tv_release_count_prompt.setText(name + unitName + "=" + qbCount + "Q币");
+                    inputCount = yu[0].divide(convertCountBig).divide(qbConvertCountBig,0,BigDecimal.ROUND_DOWN);
+                    qbCount = inputCount.multiply(convertCountBig).multiply(qbConvertCountBig);
                 }
 
             } else {
                 //余数不等于0
-                qbCount = yu[0].add(new BigDecimal(1));
-                if(qbCount.compareTo(new BigDecimal(20000)) == 1){
-                    //QB大于20000，取20000
-                    qbCount = new BigDecimal(20000);
+                qbCount = (yu[0].add(new BigDecimal(1))).multiply(qbConvertCountBig);
+                if(qbCount.compareTo(new BigDecimal(20000)) == 1 || qbCount.compareTo(new BigDecimal(20000)) == 0){
+                    //QB大于等于20000
+                    BigDecimal bigDecimal_2w = new BigDecimal(20000);
+                    inputCount = bigDecimal_2w.divide(convertCountBig).divide(qbConvertCountBig,0,BigDecimal.ROUND_DOWN);
+                    qbCount = inputCount.multiply(convertCountBig).multiply(qbConvertCountBig);
+                } else {
+                    inputCount = yu[0].divide(convertCountBig).divide(qbConvertCountBig,0,BigDecimal.ROUND_DOWN);
+                    qbCount = inputCount.multiply(convertCountBig).multiply(qbConvertCountBig);
                 }
-                inputCount = qbCount.multiply(convertCountBig);
-                price = qbCount.multiply(disCount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+            }
 
-                if (tv_release_count_prompt != null && et_release_count != null && et_release_price != null) {
-                    tv_release_count_prompt.setText(name + unitName + "=" + qbCount + "Q币");
-                    et_release_count.setText(inputCount.toString());
-                    et_release_price.setText(price.toString());
-                }
+            price = qbCount.multiply(disCount).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+
+            if (tv_release_count_prompt != null && et_release_count != null && et_release_price != null) {
+                tv_release_count_prompt.setText(name + unitName + "=" + qbCount + "Q币");
+                et_release_count.setText(inputCount.toString());
+                et_release_price.setText(price.toString());
             }
         }
 
@@ -827,18 +848,18 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
         cb_1.setText("我今天没有充值相同数量的"+gameName+"点券");
         final CheckBox cb_2 = (CheckBox)mPopView.findViewById(R.id.cb_2);
         final CheckBox cb_3 = (CheckBox)mPopView.findViewById(R.id.cb_3);
-        final Button btn_confirm = (Button)mPopView.findViewById(R.id.btn_confirm);
+        final Button btn_confirm_pop = (Button)mPopView.findViewById(R.id.btn_confirm_pop);
         cb_1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     if(cb_2.isChecked() && cb_3.isChecked()){
-                        Utils.setButtonClickable(btn_confirm,true);
+                        Utils.setButtonClickable(btn_confirm_pop,true);
                     } else {
-                        Utils.setButtonClickable(btn_confirm,false);
+                        Utils.setButtonClickable(btn_confirm_pop,false);
                     }
                 } else {
-                    Utils.setButtonClickable(btn_confirm,false);
+                    Utils.setButtonClickable(btn_confirm_pop,false);
                 }
             }
         });
@@ -847,12 +868,12 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     if(cb_1.isChecked() && cb_3.isChecked()){
-                        Utils.setButtonClickable(btn_confirm,true);
+                        Utils.setButtonClickable(btn_confirm_pop,true);
                     } else {
-                        Utils.setButtonClickable(btn_confirm,false);
+                        Utils.setButtonClickable(btn_confirm_pop,false);
                     }
                 } else {
-                    Utils.setButtonClickable(btn_confirm,false);
+                    Utils.setButtonClickable(btn_confirm_pop,false);
                 }
             }
         });
@@ -861,19 +882,31 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     if(cb_1.isChecked() && cb_2.isChecked()){
-                        Utils.setButtonClickable(btn_confirm,true);
+                        Utils.setButtonClickable(btn_confirm_pop,true);
                     } else {
-                        Utils.setButtonClickable(btn_confirm,false);
+                        Utils.setButtonClickable(btn_confirm_pop,false);
                     }
                 } else {
-                    Utils.setButtonClickable(btn_confirm,false);
+                    Utils.setButtonClickable(btn_confirm_pop,false);
                 }
             }
         });
 
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
+        btn_confirm_pop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!cb_1.isChecked()){
+                    Toast.makeText(mContext,"请勾选以上3个选项后再发布订单",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!cb_2.isChecked()){
+                    Toast.makeText(mContext,"请勾选以上3个选项后再发布订单",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!cb_3.isChecked()){
+                    Toast.makeText(mContext,"请勾选以上3个选项后再发布订单",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(onClickListener != null){
                     onClickListener.onClick(v);
                 }

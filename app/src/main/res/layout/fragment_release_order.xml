@@ -200,10 +200,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:layout_weight="1"
                         android:text="充值号码"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
@@ -213,9 +212,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@null"
-                        android:gravity="right|center_vertical"
+                        android:gravity="center_vertical"
                         android:hint="请输入要充值的QQ号码"
                         android:inputType="number"
                         android:maxLength="20"
@@ -247,18 +246,19 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:layout_weight="1"
                         android:text="预定数量"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/et_release_count"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
                         android:gravity="center_vertical"
@@ -303,10 +303,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
-                        android:layout_weight="1"
                         android:text="预定出价"
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
@@ -316,6 +315,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:hint="请输入价格"
@@ -342,7 +342,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right|center_vertical"
                         android:hint="请输入折扣"
                         android:inputType="number"
                         android:maxLength="3"
@@ -782,6 +782,24 @@
                         android:text=""
                         android:textColor="@color/black_light"
                         android:textSize="15sp" />
+                    <EditText
+                        android:id="@+id/et_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请输入手机号码"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="15sp"
+                        android:textColor="@color/black_light"/>
 
                 </LinearLayout>
 

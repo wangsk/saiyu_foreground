@@ -337,13 +337,13 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
 
     @TextChange({R.id.et_count})
     void textChange(CharSequence s, TextView hello, int before, int start, int count) {
-        String money = s.toString();
-        if(TextUtils.isEmpty(money) || curItem == null || TextUtils.isEmpty(curItem.getCharge())|| TextUtils.isEmpty(curItem.getMinApplyMoney())){
+        String curmoney = s.toString();
+        if(TextUtils.isEmpty(curmoney) || curItem == null || TextUtils.isEmpty(curItem.getCharge())|| TextUtils.isEmpty(curItem.getMinApplyMoney())){
             LogUtils.print("数据异常");
             return;
         }
         BigDecimal bigDecimal_1 = new BigDecimal(curItem.getCharge());
-        BigDecimal bigDecimal_2 = new BigDecimal(money);
+        BigDecimal bigDecimal_2 = new BigDecimal(curmoney);
         BigDecimal bigDecimal_3 = bigDecimal_1.multiply(bigDecimal_2);
         BigDecimal bigDecimal_100 = new BigDecimal(100);
         BigDecimal bigDecimal_4 = bigDecimal_3.divide(bigDecimal_100,2,BigDecimal.ROUND_HALF_UP);
@@ -373,15 +373,29 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
 
         curItem = mItems.get(pos);
 
-        tv_able.setText(mItems.get(pos).getTotalMoney()+"元");
+        tv_able.setText(curItem.getTotalMoney()+"元");
         String count = et_count.getText().toString();
-        if(!TextUtils.isEmpty(mItems.get(pos).getCharge())&& !TextUtils.isEmpty(count)){
-            BigDecimal bigDecimal_1 = new BigDecimal(mItems.get(pos).getCharge());
+        if(!TextUtils.isEmpty(curItem.getCharge())&& !TextUtils.isEmpty(count) && !TextUtils.isEmpty(curItem.getMinApplyMoney())){
+            BigDecimal bigDecimal_1 = new BigDecimal(curItem.getCharge());
             BigDecimal bigDecimal_2 = new BigDecimal(count);
             BigDecimal bigDecimal_3 = bigDecimal_1.multiply(bigDecimal_2);
             BigDecimal bigDecimal_100 = new BigDecimal(100);
             BigDecimal bigDecimal_4 = bigDecimal_3.divide(bigDecimal_100,2,BigDecimal.ROUND_HALF_UP);
-            tv_get.setText(bigDecimal_4 + "元");
+            BigDecimal bigDecimal_5 = bigDecimal_2.subtract(bigDecimal_4);
+            tv_get.setText(bigDecimal_5 + "元");
+
+            BigDecimal bigDecimal_6 = new BigDecimal(curItem.getMinApplyMoney());
+
+            switch (bigDecimal_2.compareTo(bigDecimal_6)){
+                case -1://小于
+                    Utils.setButtonClickable(btn_confirm,false);
+                    break;
+                case 0://等于
+                case 1://大于
+                    Utils.setButtonClickable(btn_confirm,true);
+                    break;
+            }
+
         }
 
         tv_prompt.setText("当前渠道，最低提现"+mItems.get(pos).getMinApplyMoney()+",最低手续费"+mItems.get(pos).getStartMoney()+"元，封顶手续费"+mItems.get(pos).getTopMoney()+"元");
