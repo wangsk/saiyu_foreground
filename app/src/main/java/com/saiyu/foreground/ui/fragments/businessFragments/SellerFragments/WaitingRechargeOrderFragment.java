@@ -110,6 +110,14 @@ public class WaitingRechargeOrderFragment extends BaseFragment implements Callba
                     }
                 }
 
+                if(mItem.size() > 1){
+                    btn_last.setVisibility(View.VISIBLE);
+                    btn_next.setVisibility(View.VISIBLE);
+                } else {
+                    btn_last.setVisibility(View.GONE);
+                    btn_next.setVisibility(View.GONE);
+                }
+
             } else {
                 ll_body.setVisibility(View.GONE);
                 btn_blank.setVisibility(View.VISIBLE);

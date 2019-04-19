@@ -30,11 +30,11 @@ import java.util.List;
 @EFragment(R.layout.fragment_order_replace_confirm)
 public class SetOrderReplaceConfirmFragment extends BaseFragment {
     @ViewById
-    TextView tv_title_content,tv_qq;
+    TextView tv_title_content;
     @ViewById
     Button btn_title_back,btn_confirm,btn_cancel;
     @ViewById
-    EditText et_qq_psw;
+    EditText et_qq,et_qq_psw;
     @ViewById
     Spinner sp_province,sp_city;
     private  static Province province = null;
@@ -57,7 +57,9 @@ public class SetOrderReplaceConfirmFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if(bundle != null){
             ReserveAccount = bundle.getString("ReserveAccount");
-            tv_qq.setText(ReserveAccount);
+            et_qq.setText(ReserveAccount);
+            et_qq.setClickable(false);
+            et_qq.setFocusable(false);
         }
 
         list= Utils.parser(getActivity());

@@ -29,7 +29,7 @@ public class RechargeOrderDetailFragment extends BaseFragment implements Callbac
     ProgressBar pb_loading;
     @ViewById
     TextView tv_recharge_ordernum,tv_ordernum,tv_creattime,tv_completetime,tv_rechargetime,tv_autoconfirmtime,tv_ordercount,
-            tv_successcount,tv_successprice,tv_confirmtype,tv_averagetime,tv_orderstatus,
+            tv_successcount,tv_successprice,tv_confirm_type,tv_averagetime,tv_orderstatus,
             tv_recharge_product,tv_producttype,tv_rechargenum,tv_time_online,tv_orderPsw,tv_orderlimit,tv_betweentime,
             tv_pic,tv_replaceconfirm,tv_contacttype,tv_rechargeremark;
 
@@ -78,7 +78,7 @@ public class RechargeOrderDetailFragment extends BaseFragment implements Callbac
             tv_ordercount.setText(ret.getData().getReserveQBCount());//接单数量
             tv_successcount.setText(ret.getData().getSuccQBCount());//成功数量
             tv_successprice.setText(ret.getData().getSuccMoney()+"元");//成功金额
-            tv_confirmtype.setText(ret.getData().getConfirmType());//确认方式
+            tv_confirm_type.setText(ret.getData().getConfirmType());//确认方式
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
             tv_orderstatus.setText(ret.getData().getReceiveOrderStatus());//订单状态
             tv_recharge_product.setText(ret.getData().getProductName());//充值产品

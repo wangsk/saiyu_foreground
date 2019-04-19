@@ -9,7 +9,7 @@ public class ConstValue {
 //    public static final String SERVR_URL = "https://api.saiyu.com/";//线上地址
     public static String MetaTypeJson = "application/json; charset=utf-8";
     public static final String APPID = "SaiyuAndroidApp";
-    public static final String APPSecret = "faaffa";
+    public static final String APPSecret = "ammLYNXrC822OoEDqWyIt8Twf9czIqsl";
     public static String UserSecret;
     public static final String ACCESS_TOKEN = "accessToken";
     public static final String USER_KEY = "userKey";

@@ -70,7 +70,6 @@ public class PreOrderManagerFragment extends BaseFragment implements CallbackUti
     public static PreOrderManagerFragment newInstance(Bundle bundle) {
         PreOrderManagerFragment_ fragment = new PreOrderManagerFragment_();
         fragment.setArguments(bundle);
-        CallbackUtils.setCallback(fragment);
         return fragment;
     }
 
@@ -78,6 +77,7 @@ public class PreOrderManagerFragment extends BaseFragment implements CallbackUti
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
+        ApiRequest.orderManage(page + "", pageSize + "", "PreOrderManagerFragment_orderManage", pb_loading);
     }
 
     @AfterViews
@@ -91,8 +91,6 @@ public class PreOrderManagerFragment extends BaseFragment implements CallbackUti
         preOrderManagerAdapter = new PreOrderManagerAdapter(mItems);
         recyclerView.setAdapter(preOrderManagerAdapter);
         preOrderManagerAdapter.notifyDataSetChanged();
-
-        ApiRequest.orderManage(page + "", pageSize + "", "PreOrderManagerFragment_orderManage", pb_loading);
 
     }
 

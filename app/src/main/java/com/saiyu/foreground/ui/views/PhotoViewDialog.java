@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -74,8 +75,8 @@ public class PhotoViewDialog extends Dialog {
                 }
             }
         });
-        Button closeBtn = (Button)findViewById(R.id.btn_close);
-        closeBtn.setOnClickListener(new View.OnClickListener() {
+        ImageView iv_close = (ImageView)findViewById(R.id.iv_close);
+        iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isShowing()){

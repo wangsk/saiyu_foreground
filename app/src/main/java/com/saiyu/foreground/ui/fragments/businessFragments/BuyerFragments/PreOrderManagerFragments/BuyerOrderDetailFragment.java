@@ -32,7 +32,7 @@ public class BuyerOrderDetailFragment extends BaseFragment implements CallbackUt
     @ViewById
     TextView tv_ordernum,tv_paytype,tv_recharge_product,tv_producttype,tv_rechargenum,tv_ordercount,tv_orderprice,
             tv_orderremark,tv_time_online,tv_orderlimit,tv_betweentime,tv_replaceconfirm,
-            tv_contacttype,tv_rechargeremark,tv_releasetime,tv_latertime,tv_completnum,tv_confirmtype,tv_averagetime,
+            tv_contacttype,tv_rechargeremark,tv_releasetime,tv_latertime,tv_completnum,tv_confirm_type,tv_averagetime,
             tv_orderstatus,tv_reviewstatus,tv_completetime,tv_balancetime,tv_balancemoney,tv_penalty,tv_rechargeorders
             ,tv_cancel,tv_canceltime,tv_refunds,tv_orderPsw,tv_pic;
     private String orderId;
@@ -108,7 +108,7 @@ public class BuyerOrderDetailFragment extends BaseFragment implements CallbackUt
             tv_releasetime.setText(ret.getData().getCreateTime());//发布时间
             tv_latertime.setText(ret.getData().getOrderExpiryTime());//到期时间
             tv_completnum.setText(ret.getData().getSuccQBCount());//完成数量
-            tv_confirmtype.setText(ret.getData().getConfirmStr());//确认方式
+            tv_confirm_type.setText(ret.getData().getConfirmStr());//确认方式
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
             tv_orderstatus.setText(ret.getData().getOrderStatusType());//订单状态
             tv_reviewstatus.setText(ret.getData().getOrderAuditStatusType());//审核状态

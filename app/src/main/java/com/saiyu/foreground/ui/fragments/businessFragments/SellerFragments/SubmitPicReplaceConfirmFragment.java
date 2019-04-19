@@ -137,7 +137,7 @@ public class SubmitPicReplaceConfirmFragment extends BaseFragment implements Cal
                 getActivity().finish();
                 break;
             case R.id.btn_confirm:
-                String qq = et_qq_psw.getText().toString();
+                String qq = et_qq.getText().toString();
                 String psw = et_qq_psw.getText().toString();
 
                 ApiRequest.applyPicConfirm(receiveId,qq,psw,province == null?"":province.getName(),city == null ?"":city.getName(),"SubmitPicReplaceConfirmFragment_applyPicConfirm",pb_loading);

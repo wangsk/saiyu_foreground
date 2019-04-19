@@ -31,6 +31,7 @@ public class RequestHeaderInterceptor implements Interceptor {
                 .header("equipmentType", "1")//设备类型
                 .header("signature", SHA1(ConstValue.APPID + ConstValue.APPSecret + String.valueOf(time)))//加密
                 .build();
+        LogUtils.print("timestamp === " + String.valueOf(time) + " signature === " + ConstValue.APPID + ConstValue.APPSecret + String.valueOf(time));
         return chain.proceed(updateRequest);
     }
 

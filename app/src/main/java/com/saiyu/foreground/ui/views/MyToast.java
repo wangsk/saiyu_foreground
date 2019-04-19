@@ -40,7 +40,7 @@ public class MyToast extends Toast {
         LinearLayout linearLayout = new LinearLayout(App.getApp());
         linearLayout.setLayoutParams(layoutParamsRoot);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setBackgroundColor(App.getApp().getResources().getColor(R.color.line));
+        linearLayout.setBackgroundColor(Color.parseColor("#cccccc"));
 
         if(!TextUtils.isEmpty(text_2)){
             TextView textView_2 = new TextView(App.getApp());
@@ -77,13 +77,13 @@ public class MyToast extends Toast {
             @Override
             public void onViewDetachedFromWindow(View v) {
                 LogUtils.print("onViewDetachedFromWindow");
-                Utils.backgroundAlpha(activity,1f);
+//                Utils.backgroundAlpha(activity,1f);
             }
 
             @Override
             public void onViewAttachedToWindow(View v) {
                 LogUtils.print("onViewAttachedToWindow");
-                Utils.backgroundAlpha(activity,0.7f);
+//                Utils.backgroundAlpha(activity,0.7f);
             }
 
         });

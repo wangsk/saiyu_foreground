@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.MyArrayAdapter;
 import com.saiyu.foreground.consts.ConstValue;
@@ -171,6 +173,37 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
 
             tv_get.setText(setFormula(ReceiveQBCount));
 
+            if(!TextUtils.isEmpty(ret.getData().getPic_BillRecord())){
+                recordUrl = ret.getData().getPic_BillRecord();
+                LogUtils.print("recordUrl=== " + recordUrl);
+                iv_record_del.setVisibility(View.VISIBLE);
+                tv_record_upload.setVisibility(View.GONE);
+                Glide.with(App.getApp())
+                        .load(recordUrl)
+                        .error(R.mipmap.ic_launcher)
+                        .into(iv_record_show);
+            }
+            if(!TextUtils.isEmpty(ret.getData().getPic_RechargeSucc())){
+                successUrl = ret.getData().getPic_RechargeSucc();
+                LogUtils.print("successUrl=== " + successUrl);
+                iv_success_del.setVisibility(View.VISIBLE);
+                tv_success_upload.setVisibility(View.GONE);
+                Glide.with(App.getApp())
+                        .load(successUrl)
+                        .error(R.mipmap.ic_launcher)
+                        .into(iv_recharge_success_show);
+            }
+            if(!TextUtils.isEmpty(ret.getData().getPic_TradeInfo())){
+                infoUrl = ret.getData().getPic_TradeInfo();
+                LogUtils.print("infoUrl=== " + infoUrl);
+                iv_info_del.setVisibility(View.VISIBLE);
+                tv_info_upload.setVisibility(View.GONE);
+                Glide.with(App.getApp())
+                        .load(infoUrl)
+                        .error(R.mipmap.ic_launcher)
+                        .into(iv_recharge_info_show);
+            }
+
             initYuanBaoList(ret);
 
         } else  if(method.equals("SellerOrderDetailFragment_uploadIdentity")){
@@ -257,6 +290,9 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(infoUrl);
                     photoViewDialog.show();
+                } else {
+                    uploadCode = 1;
+                    upLoadPic();
                 }
                 break;
             case R.id.iv_recharge_success_show:
@@ -264,6 +300,9 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(successUrl);
                     photoViewDialog.show();
+                }else {
+                    uploadCode = 0;
+                    upLoadPic();
                 }
                 break;
             case R.id.iv_record_show:
@@ -271,6 +310,9 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(recordUrl);
                     photoViewDialog.show();
+                }else {
+                    uploadCode = 2;
+                    upLoadPic();
                 }
                 break;
             case R.id.btn_revise:

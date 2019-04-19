@@ -298,6 +298,9 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(infoUrl);
                     photoViewDialog.show();
+                } else {
+                    uploadCode = 1;
+                    upLoadPic();
                 }
                 break;
             case R.id.iv_recharge_success_show:
@@ -305,6 +308,9 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(successUrl);
                     photoViewDialog.show();
+                }else {
+                    uploadCode = 0;
+                    upLoadPic();
                 }
                 break;
             case R.id.iv_record_show:
@@ -312,6 +318,9 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
                     photoViewDialog.setmUrl(recordUrl);
                     photoViewDialog.show();
+                }else {
+                    uploadCode = 2;
+                    upLoadPic();
                 }
                 break;
         }

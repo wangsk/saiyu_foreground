@@ -47,7 +47,7 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
     @ViewById
     TextView tv_title_content,tv_ordernum,tv_recharge_product,tv_producttype,
             tv_ordercount,tv_orderprice,tv_submit,
-            tv_contacttype,tv_releasetime,tv_latertime,tv_completnum,tv_confirmtype,tv_averagetime,tv_orderstatus
+            tv_contacttype,tv_releasetime,tv_latertime,tv_completnum,tv_confirm_type,tv_averagetime,tv_orderstatus
             ,tv_reviewstatus,tv_completetime,tv_balancetime,tv_balancemoney,tv_penalty,tv_rechargeorders,tv_cancel
             ,tv_canceltime,tv_refunds,tv_qq,tv_province,tv_city,tv_once_limit,tv_reserveTitle,tv_recharge_qqnum,tv_betweentime;
     @ViewById
@@ -217,7 +217,8 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
             } else {
                 iv_onlinetime.setVisibility(View.VISIBLE);
             }
-            if(TextUtils.isEmpty(ret.getData().getOrderPwd())){//订单加密
+            orderPsw = ret.getData().getOrderPwd();
+            if(TextUtils.isEmpty(orderPsw)){//订单加密
                 iv_orderPsw.setVisibility(View.GONE);
             } else {
                 iv_orderPsw.setVisibility(View.VISIBLE);
@@ -324,7 +325,7 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
             tv_releasetime.setText(ret.getData().getCreateTime());//发布时间
             tv_latertime.setText(ret.getData().getOrderExpiryTime());//到期时间              ?
             tv_completnum.setText(ret.getData().getSuccQBCount());//完成数量
-            tv_confirmtype.setText(ret.getData().getConfirmStr());//确认方式
+            tv_confirm_type.setText(ret.getData().getConfirmStr());//确认方式
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
             tv_orderstatus.setText(ret.getData().getOrderStatusType());//订单状态
             tv_reviewstatus.setText(ret.getData().getOrderAuditStatusType());//审核状态
@@ -430,6 +431,7 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                 getActivity().startActivityForResult(intent,ContainerActivity.SetOnlineTimeFragmentTag);
                 break;
             case R.id.rl_orderpsw:
+                bundle.putString("orderPsw", orderPsw);
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SetOrderPswFragmentTag);
                 intent.putExtras(bundle);
                 getActivity().startActivityForResult(intent,ContainerActivity.SetOrderPswFragmentTag);

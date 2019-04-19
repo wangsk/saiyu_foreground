@@ -82,8 +82,8 @@ public class ConfirmReceiverFragment extends BaseFragment implements CallbackUti
             }
             tv_order.setText(ret.getData().getReceiveOrderNum());
             tv_rechargetime.setText(ret.getData().getRechargeTime());
-            tv_rechargenum.setText(ret.getData().getReserveQBCount());
-            tv_ordercount.setText(ret.getData().getReserveAccount());
+            tv_rechargenum.setText(ret.getData().getReserveAccount());
+            tv_ordercount.setText(ret.getData().getReserveQBCount());
             tv_successnum.setText(ret.getData().getSuccQBCount());
             pic_success = ret.getData().getPic_RechargeSucc();
             pic_info = ret.getData().getPic_TradeInfo();
