@@ -29,7 +29,10 @@ import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.RechargeOrderInfoRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.interfaces.OnListCallbackListener;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragment;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -77,6 +80,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
 
     private String orderReceiveId,BuyerContactMobile,BuyerContactQQ,BuyerContacTimeBegin,BuyerContacTimeEnd,RefundQBCount,Remarks;
     private String SuccQBCount;
+    private boolean isEndActivity;
 
     public static RightFragment newInstance(Bundle bundle) {
         RightFragment_ fragment = new RightFragment_();
@@ -90,6 +94,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
         Bundle bundle = getArguments();
         if(bundle != null){
             orderReceiveId = bundle.getString("orderReceiveId");
+            isEndActivity = bundle.getBoolean("isEndActivity",false);
         }
         CallbackUtils.setOnActivityCallBack(this);
         CallbackUtils.setCallback(this);
@@ -108,7 +113,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
             }
             if(ret.getData().isResult()){
                 Toast.makeText(mContext,"申请维权成功",Toast.LENGTH_SHORT).show();
-                getFragmentManager().popBackStack();
+                getActivity().finish();
             }
         } else if(method.equals("RightFragment_orderReceiveInfo")){
             RechargeOrderInfoRet ret = (RechargeOrderInfoRet)baseRet;
@@ -168,7 +173,12 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
         switch (view.getId()){
             case R.id.btn_title_back:
             case R.id.btn_cancel:
-                getFragmentManager().popBackStack();
+                if(isEndActivity){
+                    getActivity().finish();
+                } else {
+                    getFragmentManager().popBackStack();
+                }
+
                 break;
             case R.id.btn_confirm:
                 if(TextUtils.isEmpty(orderReceiveId)){

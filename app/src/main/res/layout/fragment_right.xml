@@ -486,16 +486,16 @@
 
                     <ImageView
                         android:id="@+id/iv_1"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/jiahao"
                         android:layout_marginLeft="10dp" />
 
                     <ImageView
                         android:id="@+id/iv_2"
                         android:layout_toRightOf="@id/iv_1"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/jiahao"
                         android:layout_marginLeft="10dp"
                         android:visibility="gone"/>
@@ -503,8 +503,8 @@
                     <ImageView
                         android:id="@+id/iv_3"
                         android:layout_below="@id/iv_1"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/jiahao"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
@@ -514,8 +514,8 @@
                         android:id="@+id/iv_4"
                         android:layout_below="@id/iv_1"
                         android:layout_toRightOf="@id/iv_3"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/jiahao"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"

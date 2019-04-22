@@ -236,7 +236,7 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     OftenLoginProvince = "";
                     OftenLoginCity = "";
 
-                    ConfirmType = "";
+                    ConfirmType = "0";//等待买家手动确认
                 }
                 break;
             case R.id.ll_selector_3:
@@ -248,16 +248,10 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                     BillQQPwd = "";
                     OftenLoginProvince = "";
                     OftenLoginCity = "";
-                    ConfirmType = "1";
+                    ConfirmType = "1";//客服代理确认
                 }
                 break;
             case R.id.ll_selector_2:
-                if(iv_2.getVisibility() == View.INVISIBLE){
-                    iv_1.setVisibility(View.INVISIBLE);
-                    iv_2.setVisibility(View.VISIBLE);
-                    iv_3.setVisibility(View.INVISIBLE);
-                    ConfirmType = "2";
-                }
                 DialogUtils.showOrderSubmitDialog(getActivity(), new OnListCallbackListener() {
                     @Override
                     public void setOnListCallbackListener(List<String> callbackList) {
@@ -268,6 +262,13 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
                         BillQQPwd = callbackList.get(1);
                         OftenLoginProvince = callbackList.get(2);
                         OftenLoginCity = callbackList.get(3);
+
+                        if(iv_2.getVisibility() == View.INVISIBLE){
+                            iv_1.setVisibility(View.INVISIBLE);
+                            iv_2.setVisibility(View.VISIBLE);
+                            iv_3.setVisibility(View.INVISIBLE);
+                            ConfirmType = "2";//客服验图确认
+                        }
                     }
                 });
                 break;

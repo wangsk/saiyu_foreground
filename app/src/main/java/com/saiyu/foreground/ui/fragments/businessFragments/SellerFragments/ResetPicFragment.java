@@ -250,7 +250,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                 break;
             case R.id.btn_confirm:
                 if(TextUtils.isEmpty(infoUrl)){
-                    Toast.makeText(mContext,"请上传详情图片",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,"请上传充值明细截图",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ApiRequest.orderReceiveReSubmit(orderId,rechargeNum,successUrl,infoUrl,recordUrl,"ResetPicFragment_orderReceiveReSubmit",pb_loading);

@@ -76,6 +76,16 @@ public class OrderConfirmFragment extends BaseFragment implements CallbackUtils.
             PicTradeInfo = bundle.getString("PicTradeInfo");
             PicBillRecord = bundle.getString("PicBillRecord");
             ConfirmType = bundle.getString("ConfirmType");
+            if(!TextUtils.isEmpty(ConfirmType)){
+                if(ConfirmType.equals("0")){
+                    tv_type.setText("等待买家手动确认");
+                } else if(ConfirmType.equals("1")){
+                    tv_type.setText("客服代理确认");
+                } else if(ConfirmType.equals("2")){
+                    tv_type.setText("客服验图确认");
+                }
+            }
+
             BillQQNum = bundle.getString("BillQQNum");
             BillQQPwd = bundle.getString("BillQQPwd");
             OftenLoginProvince = bundle.getString("OftenLoginProvince");

@@ -181,8 +181,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/iv_info"
@@ -191,8 +190,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/iv_record"
@@ -202,8 +200,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"/>
+                    android:layout_weight="1" />
 
             </LinearLayout>
 

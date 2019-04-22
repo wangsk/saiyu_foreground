@@ -237,6 +237,22 @@ public class DialogUtils {
                     if(city != null){
                         cityName = city.getName();
                     }
+                    if(TextUtils.isEmpty(et_qq.getText().toString())){
+                        Toast.makeText(activity,"请输入QQ号码",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_psw.getText().toString())){
+                        Toast.makeText(activity,"请输入QQ密码",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(proName)){
+                        Toast.makeText(activity,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(cityName)){
+                        Toast.makeText(activity,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     LogUtils.print("qq " + et_qq.getText().toString() + " psw " + et_psw.getText().toString() + " 省份 " + proName + " 城市 " + cityName);
                     List<String> callbackList = new ArrayList<>();
                     callbackList.add(et_qq.getText().toString());

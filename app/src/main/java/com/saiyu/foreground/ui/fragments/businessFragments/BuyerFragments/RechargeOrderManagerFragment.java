@@ -1,5 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -20,6 +21,8 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.RechargeOrderManageRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
 import com.saiyu.foreground.ui.activitys.BaseActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.ConfirmReceiverFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.RechargeOrderDetailFragment;
@@ -171,6 +174,7 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
             return;
         }
 
+        final Intent intent = new Intent(mContext,ContainerActivity_.class);
         initPopWindow_12(status,new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -180,12 +184,15 @@ public class RechargeOrderManagerFragment extends BaseFragment implements Callba
                         start(rechargeOrderDetailFragment);
                         break;
                     case 2://确认收货
-                        ConfirmReceiverFragment confirmReceiverFragment = ConfirmReceiverFragment.newInstance(bundle);
-                        start(confirmReceiverFragment);
+                        bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ConfirmReceiverFragmentTag);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
                         break;
                     case 3://发起维权
-                        RightFragment rightFragment = RightFragment.newInstance(bundle);
-                        start(rightFragment);
+                        bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.RightFragmentTag);
+                        bundle.putBoolean("isEndActivity",true);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
                         break;
                     case 4://响应维权
                         MyToast.newInstance(getActivity(),"请前往web端操作","APP暂不支持").show();

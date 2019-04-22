@@ -73,7 +73,7 @@ public class ConfirmReceiverFragment extends BaseFragment implements CallbackUti
             }
             if(ret.getData().isResult()){
                 Toast.makeText(mContext,"确认收货成功",Toast.LENGTH_SHORT).show();
-                getFragmentManager().popBackStack();
+                getActivity().finish();
             }
         } else if(method.equals("ConfirmReceiverFragment_orderReceiveConfirm")){
             OrderReceiveConfirmRet ret = (OrderReceiveConfirmRet)baseRet;
@@ -114,11 +114,12 @@ public class ConfirmReceiverFragment extends BaseFragment implements CallbackUti
     void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_title_back:
-                getFragmentManager().popBackStack();
+                getActivity().finish();
                 break;
             case R.id.btn_cancel:
                 Bundle bundle = new Bundle();
                 bundle.putString("orderReceiveId",orderReceiveId);
+                bundle.putBoolean("isEndActivity",false);
                 RightFragment rightFragment = RightFragment.newInstance(bundle);
                 start(rightFragment);
                 break;

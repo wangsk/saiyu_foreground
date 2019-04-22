@@ -563,32 +563,33 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@color/white">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/black_light"
+                    android:layout_centerVertical="true"
                     android:text="客服代理确认"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_replaceconfirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
+                    android:layout_marginLeft="100dp"
                     android:textSize="15sp" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

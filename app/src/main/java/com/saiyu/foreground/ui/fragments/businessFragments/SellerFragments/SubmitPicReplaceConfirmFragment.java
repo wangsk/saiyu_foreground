@@ -139,8 +139,32 @@ public class SubmitPicReplaceConfirmFragment extends BaseFragment implements Cal
             case R.id.btn_confirm:
                 String qq = et_qq.getText().toString();
                 String psw = et_qq_psw.getText().toString();
+                if(TextUtils.isEmpty(qq)){
+                    Toast.makeText(mContext,"请输入QQ号码",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(psw)){
+                    Toast.makeText(mContext,"请输入QQ密码",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(province == null){
+                    Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(city == null){
+                    Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(province.getName())){
+                    Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(city.getName())){
+                    Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                ApiRequest.applyPicConfirm(receiveId,qq,psw,province == null?"":province.getName(),city == null ?"":city.getName(),"SubmitPicReplaceConfirmFragment_applyPicConfirm",pb_loading);
+                ApiRequest.applyPicConfirm(receiveId,qq,psw,province.getName(),city.getName(),"SubmitPicReplaceConfirmFragment_applyPicConfirm",pb_loading);
 
                 break;
         }

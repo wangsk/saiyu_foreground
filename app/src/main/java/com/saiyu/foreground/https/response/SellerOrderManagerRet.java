@@ -54,6 +54,15 @@ public class SellerOrderManagerRet extends BaseRet{
             private String ConfirmTypeStr;
             private int ReceiveOrderStatus;
             private String ReceiveOrderStatusStr;
+            private String ProductName;
+
+            public String getProductName() {
+                return ProductName;
+            }
+
+            public void setProductName(String productName) {
+                ProductName = productName;
+            }
 
             public int getIsPicConfirm() {
                 return IsPicConfirm;

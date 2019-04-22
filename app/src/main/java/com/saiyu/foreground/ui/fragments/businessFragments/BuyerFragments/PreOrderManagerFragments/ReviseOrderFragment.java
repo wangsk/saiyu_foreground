@@ -49,7 +49,7 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
             tv_ordercount,tv_orderprice,tv_submit,
             tv_contacttype,tv_releasetime,tv_latertime,tv_completnum,tv_confirm_type,tv_averagetime,tv_orderstatus
             ,tv_reviewstatus,tv_completetime,tv_balancetime,tv_balancemoney,tv_penalty,tv_rechargeorders,tv_cancel
-            ,tv_canceltime,tv_refunds,tv_qq,tv_province,tv_city,tv_once_limit,tv_reserveTitle,tv_recharge_qqnum,tv_betweentime;
+            ,tv_canceltime,tv_refunds,tv_qq,tv_province,tv_city,tv_once_limit,tv_reserveTitle,tv_recharge_qqnum,tv_betweentime,tv_psw;
     @ViewById
     ImageView iv_orderPsw,iv_pic,iv_onlinetime,iv_order_min_jiantou;
     @ViewById
@@ -262,9 +262,9 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                         btn_submit.setText("放弃申请");
                         btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.blue));
                         tv_qq.setText(ret.getData().getReserveAccount());
-                        et_psw.setText(ret.getData().getReservePwd());
-                        et_psw.setFocusable(false);
-                        et_psw.setClickable(false);
+                        tv_psw.setText(ret.getData().getReservePwd());
+                        tv_psw.setVisibility(View.VISIBLE);
+                        et_psw.setVisibility(View.GONE);
                         tv_province.setText(ret.getData().getOftenLoginProvince());
                         tv_city.setText(ret.getData().getOftenLoginCity());
                         tv_province.setVisibility(View.VISIBLE);
@@ -278,9 +278,9 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                         btn_submit.setText("取消确认");
                         btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.blue_light));
                         tv_qq.setText(ret.getData().getReserveAccount());
-                        et_psw.setText(ret.getData().getReservePwd());
-                        et_psw.setFocusable(false);
-                        et_psw.setClickable(false);
+                        et_psw.setVisibility(View.GONE);
+                        tv_psw.setText(ret.getData().getReservePwd());
+                        tv_psw.setVisibility(View.VISIBLE);
                         tv_province.setText(ret.getData().getOftenLoginProvince());
                         tv_city.setText(ret.getData().getOftenLoginCity());
                         tv_province.setVisibility(View.VISIBLE);
@@ -295,8 +295,8 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                         btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.blue));
                         tv_qq.setText(ret.getData().getReserveAccount());
                         et_psw.setText("");
-                        et_psw.setFocusable(true);
-                        et_psw.setClickable(true);
+                        et_psw.setVisibility(View.VISIBLE);
+                        tv_psw.setVisibility(View.GONE);
                         tv_province.setVisibility(View.GONE);
                         tv_city.setVisibility(View.GONE);
                         sp_province.setVisibility(View.VISIBLE);
@@ -309,8 +309,8 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                         btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.red));
                         tv_qq.setText(ret.getData().getReserveAccount());
                         et_psw.setText("");
-                        et_psw.setFocusable(true);
-                        et_psw.setClickable(true);
+                        et_psw.setVisibility(View.VISIBLE);
+                        tv_psw.setVisibility(View.GONE);
                         tv_province.setVisibility(View.GONE);
                         tv_city.setVisibility(View.GONE);
                         sp_province.setVisibility(View.VISIBLE);
@@ -356,8 +356,11 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                 tv_submit.setText("审核中");
                 btn_submit.setText("放弃申请");
                 btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.blue));
-                et_psw.setClickable(false);
-                et_psw.setFocusable(false);
+                tv_psw.setText(et_psw.getText().toString().trim());
+                tv_psw.setVisibility(View.VISIBLE);
+                et_psw.setText("");
+                et_psw.setVisibility(View.GONE);
+
                 tv_province.setVisibility(View.VISIBLE);
                 tv_city.setVisibility(View.VISIBLE);
                 if(province != null && !"请选择".equals(province.getName())){
@@ -382,8 +385,10 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                 btn_submit.setText("立即申请");
                 btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.red));
                 et_psw.setText("");
-                et_psw.setFocusable(true);
-                et_psw.setClickable(true);
+                et_psw.setVisibility(View.VISIBLE);
+                tv_psw.setText("");
+                tv_psw.setVisibility(View.GONE);
+                sp_province.setSelection(0);
                 tv_province.setVisibility(View.GONE);
                 tv_city.setVisibility(View.GONE);
                 sp_province.setVisibility(View.VISIBLE);
@@ -458,16 +463,37 @@ public class ReviseOrderFragment  extends BaseFragment implements CallbackUtils.
                     btn_submit.setText("确认提交");
                     btn_submit.setBackgroundColor(mContext.getResources().getColor(R.color.blue));
                     et_psw.setText("");
-                    et_psw.setFocusable(true);
-                    et_psw.setClickable(true);
+                    et_psw.setVisibility(View.VISIBLE);
+                    tv_psw.setText("");
+                    tv_psw.setVisibility(View.GONE);
                     tv_province.setVisibility(View.GONE);
                     tv_city.setVisibility(View.GONE);
                     sp_province.setVisibility(View.VISIBLE);
                     sp_city.setVisibility(View.VISIBLE);
 
                 } else if("确认提交".equals(btn_submit.getText().toString())){
+                    if(TextUtils.isEmpty(et_psw.getText().toString())){
+                        Toast.makeText(mContext,"请输入QQ密码",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(province == null){
+                        Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(city == null){
+                        Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(province.getName())){
+                        Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(city.getName())){
+                        Toast.makeText(mContext,"请输入常用登陆地",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                    ApiRequest.agentConfirmApply(orderId,"",province == null?"":province.getName(),city == null?"":city.getName(),"ReviseOrderFragment_agentConfirmApply",pb_loading);
+                    ApiRequest.agentConfirmApply(orderId,et_psw.getText().toString(),province.getName(),city.getName(),"ReviseOrderFragment_agentConfirmApply",pb_loading);
 
                 } else if("取消确认".equals(btn_submit.getText().toString()) || "放弃申请".equals(btn_submit.getText().toString())){
 

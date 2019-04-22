@@ -617,7 +617,7 @@
                     android:background="@drawable/shape_bg_blue_light"
                     android:gravity="center"
                     android:text="取消修改"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue"
                     android:visibility="invisible"/>
 
             </LinearLayout>

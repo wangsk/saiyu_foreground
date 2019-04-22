@@ -20,6 +20,8 @@ import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrd
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetOrderPswFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetPicReviewFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetRemarkFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.ConfirmReceiverFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.RightFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderHistoryFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderManagerFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.GameSelectorFragment;
@@ -121,6 +123,8 @@ public class ContainerActivity extends BaseActivity {
     public static final int PointManagerFragmentTag = 42;//点数管理
     public static final int GuideFragmentTag = 43;//引导页
     public static final int CashDetailFragmentTag = 44;//资金明细
+    public static final int RightFragmentTag = 45;//申请维权
+    public static final int ConfirmReceiverFragmentTag = 46;//确认收货
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -212,6 +216,10 @@ public class ContainerActivity extends BaseActivity {
                 return GuideFragment.newInstance(bundle);
             case CashDetailFragmentTag:
                 return CashDetailFragment.newInstance(bundle);
+            case RightFragmentTag:
+                return RightFragment.newInstance(bundle);
+            case ConfirmReceiverFragmentTag:
+                return ConfirmReceiverFragment.newInstance(bundle);
                 default:
                     return null;
         }
