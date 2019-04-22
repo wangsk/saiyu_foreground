@@ -75,8 +75,8 @@ public class RechargeOrderDetailFragment extends BaseFragment implements Callbac
             tv_completetime.setText(ret.getData().getFinishTime());//完成时间
             tv_rechargetime.setText(ret.getData().getRechargeTime());//充值时间
             tv_autoconfirmtime.setText(ret.getData().getAutoConfirmTime());//自动确认时间
-            tv_ordercount.setText(ret.getData().getReserveQBCount());//接单数量
-            tv_successcount.setText(ret.getData().getSuccQBCount());//成功数量
+            tv_ordercount.setText(ret.getData().getReserveQBCount()+"Q币");//接单数量
+            tv_successcount.setText(ret.getData().getSuccQBCount()+"Q币");//成功数量
             tv_successprice.setText(ret.getData().getSuccMoney()+"元");//成功金额
             tv_confirm_type.setText(ret.getData().getConfirmType());//确认方式
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
@@ -88,7 +88,7 @@ public class RechargeOrderDetailFragment extends BaseFragment implements Callbac
             if(TextUtils.isEmpty(ret.getData().getOrderPwd())){//订单加密
                 tv_orderPsw.setText("否");
             } else {
-                tv_orderPsw.setText("是");
+                tv_orderPsw.setText(ret.getData().getOrderPwd());
             }
             tv_orderlimit.setText(ret.getData().getOnceMinCount());//单次限制
             tv_betweentime.setText(ret.getData().getOrderInterval()+"分钟");//接单间隔时间

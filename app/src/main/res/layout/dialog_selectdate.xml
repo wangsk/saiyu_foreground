@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/line"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
 
@@ -134,12 +134,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/grey"
+                    android:background="@color/blue_light"
                     android:gravity="center"
                     android:paddingTop="7dp"
                     android:paddingBottom="7dp"
                     android:text="取消"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue"
                     android:textSize="18sp" />
 
                 <TextView

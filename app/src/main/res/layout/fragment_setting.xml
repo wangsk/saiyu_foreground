@@ -146,7 +146,10 @@
         <Button
             android:id="@+id/btn_unlogin"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="bottom"
             android:background="@drawable/btn_selector_bg"
             android:gravity="center"
@@ -154,7 +157,8 @@
             android:paddingBottom="8dp"
             android:text="退出登录"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 

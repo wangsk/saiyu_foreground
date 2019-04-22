@@ -39,7 +39,7 @@ public class SellerOrderHistoryAdapter extends RecyclerView.Adapter<SellerOrderH
             return;
         }
 
-        myHolder.tv_deal_1.setText(mItems.get(i).getProductName());
+        myHolder.tv_deal_1.setText(mItems.get(i).getProductName()+"("+mItems.get(i).getUnitName()+")");
 
         myHolder.tv_deal_5.setText(mItems.get(i).getReceiveOrderStatusStr()+"  ");
         myHolder.tv_deal_3.setText(mItems.get(i).getCreateTime());

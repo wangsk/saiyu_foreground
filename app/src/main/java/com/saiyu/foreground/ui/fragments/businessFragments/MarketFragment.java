@@ -120,6 +120,15 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
                     value_aver.put(mItem.get(index).getDate(),mItem.get(index).getAverageDiscount());
                     index++;
                 }
+            } else {
+                int index = 0;
+                //从后向前取
+                while (index < mItem.size()){
+                    dateList.add(mItem.get(index).getDate());
+                    value_max.put(mItem.get(index).getDate(),mItem.get(index).getMaxDiscount());
+                    value_aver.put(mItem.get(index).getDate(),mItem.get(index).getAverageDiscount());
+                    index++;
+                }
             }
 
             if(dateList.size() > 0){

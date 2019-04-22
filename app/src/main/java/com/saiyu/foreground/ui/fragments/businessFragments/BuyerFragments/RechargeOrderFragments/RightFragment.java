@@ -33,6 +33,7 @@ import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragment;
+import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -81,6 +82,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
     private String orderReceiveId,BuyerContactMobile,BuyerContactQQ,BuyerContacTimeBegin,BuyerContacTimeEnd,RefundQBCount,Remarks;
     private String SuccQBCount;
     private boolean isEndActivity;
+    private String url_1,url_2,url_3,url_4;
 
     public static RightFragment newInstance(Bundle bundle) {
         RightFragment_ fragment = new RightFragment_();
@@ -136,25 +138,24 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
             }
             if(ret.getData().isResult()){
                 LogUtils.print("uploadCode=== " + uploadCode);
-                if(TextUtils.isEmpty(Pic)){
-                    Pic = ret.getData().getSrc();
-                } else {
-                    Pic = Pic+"," + ret.getData().getSrc();
-                }
 
                 if(uploadCode == 4){
+                    url_1 = ret.getData().getSrc();
                     iv_2.setVisibility(View.VISIBLE);
                     iv_1.setImageBitmap(bitmap);
                     uploadCode--;
                 } else if(uploadCode == 3){
+                    url_2 = ret.getData().getSrc();
                     iv_3.setVisibility(View.VISIBLE);
                     iv_2.setImageBitmap(bitmap);
                     uploadCode--;
                 } else if(uploadCode == 2){
+                    url_3 = ret.getData().getSrc();
                     iv_4.setVisibility(View.VISIBLE);
                     iv_3.setImageBitmap(bitmap);
                     uploadCode--;
                 } else if(uploadCode == 1){
+                    url_4 = ret.getData().getSrc();
                     iv_4.setImageBitmap(bitmap);
                     uploadCode--;
                 }
@@ -214,6 +215,22 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                     return;
                 }
 
+                switch (uploadCode){
+                    case 3:
+                        Pic = url_1;
+                        break;
+                    case 2:
+                        Pic = url_1 + "," + url_2;
+                        break;
+                    case 1:
+                        Pic = url_1 + "," + url_2 + "," + url_3;
+                        break;
+                    case 0:
+                        Pic = url_1 + "," + url_2 + "," + url_3 + "," + url_4;
+                        break;
+                }
+                LogUtils.print("上传的图片 ==== " + Pic);
+
                 RequestParams requestParams = new RequestParams();
                 requestParams.put("orderReceiveId",orderReceiveId);
                 requestParams.put("BuyerContactMobile",BuyerContactMobile);
@@ -267,21 +284,45 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
             case R.id.iv_1:
                 if(uploadCode == 4){
                     upLoadPic();
+                } else {
+                    if(!TextUtils.isEmpty(url_1)){
+                        PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                        photoViewDialog.setmUrl(url_1);
+                        photoViewDialog.show();
+                    }
                 }
                 break;
             case R.id.iv_2:
                 if(uploadCode == 3){
                     upLoadPic();
+                }else {
+                    if(!TextUtils.isEmpty(url_2)){
+                        PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                        photoViewDialog.setmUrl(url_2);
+                        photoViewDialog.show();
+                    }
                 }
                 break;
             case R.id.iv_3:
                 if(uploadCode == 2){
                     upLoadPic();
+                }else {
+                    if(!TextUtils.isEmpty(url_3)){
+                        PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                        photoViewDialog.setmUrl(url_3);
+                        photoViewDialog.show();
+                    }
                 }
                 break;
             case R.id.iv_4:
                 if(uploadCode == 1){
                     upLoadPic();
+                }else {
+                    if(!TextUtils.isEmpty(url_4)){
+                        PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
+                        photoViewDialog.setmUrl(url_4);
+                        photoViewDialog.show();
+                    }
                 }
                 break;
         }

@@ -398,7 +398,7 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
 
         }
 
-        tv_prompt.setText("当前渠道，最低提现"+mItems.get(pos).getMinApplyMoney()+",最低手续费"+mItems.get(pos).getStartMoney()+"元，封顶手续费"+mItems.get(pos).getTopMoney()+"元");
+        tv_prompt.setText("当前渠道，最低提现"+mItems.get(pos).getMinApplyMoney()+"元,最低手续费"+mItems.get(pos).getStartMoney()+"元，封顶手续费"+mItems.get(pos).getTopMoney()+"元");
     }
 
     @Override

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_title_bar"
-        android:layout_marginBottom="60dp">
+        android:layout_marginBottom="70dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,32 +74,33 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@color/white">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/black_light"
+                    android:layout_centerVertical="true"
                     android:text="产品类型"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_producttype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
+                    android:layout_marginLeft="90dp"
                     android:textSize="15sp" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,7 +136,8 @@
                     android:singleLine="true"
                     android:textCursorDrawable="@drawable/edittext_cursor"
                     android:textSize="15sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:textColor="@color/black_light"/>
 
                 <TextView
                     android:id="@+id/tv_recharge_qqnum"
@@ -256,15 +258,16 @@
                     android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
-                <ImageView
-                    android:id="@+id/iv_onlinetime"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                <TextView
+                    android:id="@+id/tv_onlinetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="40dp"
-                    android:src="@mipmap/xuanzhong"
+                    android:layout_marginRight="30dp"
                     android:layout_centerVertical="true"
-                    android:visibility="invisible"/>
+                    android:text=""
+                    android:textColor="@color/black_light"
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -369,10 +372,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginRight="30dp"
                     android:layout_centerVertical="true"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -651,7 +654,7 @@
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="90dp"
                     android:textSize="15sp" />
             </RelativeLayout>
 
@@ -785,7 +788,7 @@
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="90dp"
                     android:textSize="15sp" />
             </RelativeLayout>
 
@@ -1092,7 +1095,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
@@ -1100,10 +1103,10 @@
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/shape_bg_blue"
             android:gravity="center"
@@ -1115,11 +1118,11 @@
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/shape_bg_blue_light"
             android:gravity="center"

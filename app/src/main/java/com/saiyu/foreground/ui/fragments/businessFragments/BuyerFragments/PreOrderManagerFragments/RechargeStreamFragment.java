@@ -224,9 +224,9 @@ public class RechargeStreamFragment extends BaseFragment implements CallbackUtil
         tv_5_1.setText("充值时间");
         tv_5_2.setText(itemsBean.getRechargeTime());
         tv_6_1.setText("接单数量");
-        tv_6_2.setText(itemsBean.getReserveQBCount());
+        tv_6_2.setText(itemsBean.getReserveQBCount()+"Q币");
         tv_7_1.setText("成功数量");
-        tv_7_2.setText(itemsBean.getSuccQBCount());
+        tv_7_2.setText(itemsBean.getSuccQBCount()+"Q币");
         tv_8_1.setText("成功金额");
         tv_8_2.setText(itemsBean.getSuccMoney()+"元");
     }

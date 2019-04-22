@@ -12,6 +12,7 @@
         <include layout="@layout/titlebar_layout" />
 
         <LinearLayout
+            android:id="@+id/ll_onlineTime"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="0dp"
@@ -49,7 +50,7 @@
             android:layout_marginRight="10dp"
             android:text="合理的设置在线时间，快速确认订单，降低平均确认时间，提升买家等级，快速高效完成预定订单！"
             android:textColor="@color/black_light"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/btn_confirm"

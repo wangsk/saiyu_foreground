@@ -51,6 +51,15 @@ public class SellerOrderHistoryRet extends BaseRet{
             private int ReceiveOrderStatus;
             private String ReceiveOrderStatusStr;
             private String OrderCancelRemarks;
+            private String UnitName;
+
+            public String getUnitName() {
+                return UnitName;
+            }
+
+            public void setUnitName(String unitName) {
+                UnitName = unitName;
+            }
 
             public String getId() {
                 return Id;

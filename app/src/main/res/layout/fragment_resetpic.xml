@@ -333,32 +333,33 @@
                     android:layout_marginRight="10dp"
                     android:textSize="15sp" />
             </LinearLayout>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:background="@color/white">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
                     android:text="产品类型"
                     android:textColor="@color/black_light"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_product_type"
+                    android:id="@+id/tv_producttype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
+                    android:layout_marginLeft="90dp"
                     android:textSize="15sp" />
-            </LinearLayout>
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -462,7 +463,7 @@
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="90dp"
                     android:textSize="15sp" />
             </RelativeLayout>
 
@@ -516,7 +517,7 @@
                     android:text=""
                     android:textColor="@color/black_light"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="90dp"
                     android:textSize="15sp" />
             </RelativeLayout>
             <RelativeLayout
@@ -542,7 +543,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="90dp"
                     android:layout_centerVertical="true"
                     android:text=""
                     android:textColor="@color/black_light"
@@ -652,7 +653,7 @@
                     android:layout_height="46dp"
                     android:layout_centerInParent="true"
                     android:src="@mipmap/paizhaoshangchuan"
-                    android:scaleType="fitXY" />
+                     />
 
                 <TextView
                     android:id="@+id/tv_success_upload"
@@ -701,7 +702,7 @@
                     android:layout_height="46dp"
                     android:layout_centerInParent="true"
                     android:src="@mipmap/paizhaoshangchuan"
-                    android:scaleType="fitXY" />
+                     />
 
                 <TextView
                     android:id="@+id/tv_info_upload"
@@ -750,7 +751,7 @@
                     android:layout_height="46dp"
                     android:layout_centerInParent="true"
                     android:src="@mipmap/paizhaoshangchuan"
-                    android:scaleType="fitXY"/>
+                    />
 
                 <TextView
                     android:id="@+id/tv_record_upload"

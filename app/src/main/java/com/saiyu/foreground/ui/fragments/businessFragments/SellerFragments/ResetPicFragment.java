@@ -79,7 +79,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
     @ViewById
     TextView tv_ordernum,tv_creattime,tv_completetime,tv_recharge_time,tv_autoconfirmtime,tv_ordercount,tv_successcount,
             tv_successprice,tv_money,iv_serviceprice,tv_total,tv_recharge_product,
-            tv_product_type,tv_recharge_num,tv_once_limit,tv_pic,tv_confirm_type,tv_averagetime,
+            tv_producttype,tv_recharge_num,tv_once_limit,tv_pic,tv_confirm_type,tv_averagetime,
             tv_contacttype,tv_rechargeremark;
     @ViewById
     ImageView iv_recharge_success_show,iv_recharge_info_show,iv_record_show,iv_success_del,iv_info_del,iv_record_del;
@@ -134,14 +134,14 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
             tv_completetime.setText(ret.getData().getFinishTime());//完成时间
             tv_recharge_time.setText(ret.getData().getRechargeTime());//充值时间
             tv_autoconfirmtime.setText(ret.getData().getAutoConfirmTime());//自动确认时间
-            tv_ordercount.setText(ret.getData().getReserveQBCount());//接单数量
-            tv_successcount.setText(ret.getData().getSuccQBCount());//成功数量
+            tv_ordercount.setText(ret.getData().getReserveQBCount()+"Q币");//接单数量
+            tv_successcount.setText(ret.getData().getSuccQBCount()+"Q币");//成功数量
             tv_successprice.setText(ret.getData().getSuccMoney()+"元");//成功金额
             tv_money.setText(ret.getData().getLiquidatedMoney()+"元");//违约金
             iv_serviceprice.setText(ret.getData().getServiceMoney()+"元");//服务费
             tv_total.setText(ret.getData().getTotalMoney());//贷款金额
             tv_recharge_product.setText(ret.getData().getProductName());
-            tv_product_type.setText(ret.getData().getProductTypeName());
+            tv_producttype.setText(ret.getData().getProductTypeName());
             tv_recharge_num.setText(ret.getData().getReserveAccount());
 
             if(ret.getData().getIsPicConfirm() == 0){//支持验图确认

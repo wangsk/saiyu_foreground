@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.https.response.RechargeRecordRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
@@ -42,8 +43,8 @@ public class RechargeRecordAdapter  extends RecyclerView.Adapter<RechargeRecordA
         }
 
         myHolder.tv_deal_1.setText(mItems.get(i).getPayTypeName());
-        myHolder.tv_deal_2.setText(mItems.get(i).getCreateTime());
-        myHolder.tv_deal_3.setText("余额: "+mItems.get(i).getCurrentMoney() + "元");
+        myHolder.tv_deal_4.setText(mItems.get(i).getCreateTime());
+        myHolder.tv_deal_3.setText("余额:"+mItems.get(i).getCurrentMoney() + "元");
         int status = mItems.get(i).getStatus();//0充值中 1成功 2失败
         String money = "";
         switch (status){
@@ -58,7 +59,7 @@ public class RechargeRecordAdapter  extends RecyclerView.Adapter<RechargeRecordA
                 break;
         }
 
-        myHolder.tv_deal_4.setText(Html.fromHtml(money));
+        myHolder.tv_deal_2.setText(Html.fromHtml(money));
 
         myHolder.ll_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +101,8 @@ public class RechargeRecordAdapter  extends RecyclerView.Adapter<RechargeRecordA
             super(itemView);
             ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
+            tv_deal_1.setTextColor(App.getApp().getResources().getColor(R.color.black));
+            tv_deal_1.setTextSize(16);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);

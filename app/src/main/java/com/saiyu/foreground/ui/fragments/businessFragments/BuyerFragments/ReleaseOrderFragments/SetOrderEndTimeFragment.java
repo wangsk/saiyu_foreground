@@ -53,7 +53,7 @@ public class SetOrderEndTimeFragment extends BaseFragment {
 
     }
 
-    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.tv_onlingtime,R.id.btn_cancel})
+    @Click({R.id.btn_title_back,R.id.btn_confirm,R.id.ll_onlineTime,R.id.btn_cancel})
     void onClick(View view) {
         Intent intent = null;
         Bundle bundle = null;
@@ -81,7 +81,7 @@ public class SetOrderEndTimeFragment extends BaseFragment {
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
                 break;
-            case R.id.tv_onlingtime:
+            case R.id.ll_onlineTime:
                 SelectDateDialog selectDateDialog = new SelectDateDialog(getActivity(), TimeParseUtils.DateToCalendar(new Date(System.currentTimeMillis())));
                 selectDateDialog.setDialogOnClickListener(new SelectDateDialog.DialogOnClickListener() {
 

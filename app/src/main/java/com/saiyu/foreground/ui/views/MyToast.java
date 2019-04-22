@@ -40,21 +40,21 @@ public class MyToast extends Toast {
         LinearLayout linearLayout = new LinearLayout(App.getApp());
         linearLayout.setLayoutParams(layoutParamsRoot);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setBackgroundColor(Color.parseColor("#cccccc"));
+        linearLayout.setBackground(App.getApp().getResources().getDrawable(R.drawable.shape_bg_white));
 
         if(!TextUtils.isEmpty(text_2)){
             TextView textView_2 = new TextView(App.getApp());
             textView_2.setGravity(Gravity.CENTER_HORIZONTAL);
             textView_2.setTextColor(Color.BLUE);
             textView_2.setText(text_2);
-            textView_2.setPadding(70, 50, 70, 0);
+            textView_2.setPadding(80, 50, 80, 0);
             linearLayout.addView(textView_2);
         }
         TextView textView = new TextView(App.getApp());
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
         textView.setTextColor(Color.parseColor("#666666"));
         textView.setText(text);
-        textView.setPadding(70, 50, 70, 50);
+        textView.setPadding(80, 50, 80, 50);
         linearLayout.addView(textView);
 
         this.setGravity(Gravity.CENTER, 0, 0);
@@ -77,13 +77,13 @@ public class MyToast extends Toast {
             @Override
             public void onViewDetachedFromWindow(View v) {
                 LogUtils.print("onViewDetachedFromWindow");
-//                Utils.backgroundAlpha(activity,1f);
+                Utils.backgroundAlpha(activity,1f);
             }
 
             @Override
             public void onViewAttachedToWindow(View v) {
                 LogUtils.print("onViewAttachedToWindow");
-//                Utils.backgroundAlpha(activity,0.7f);
+                Utils.backgroundAlpha(activity,0.7f);
             }
 
         });

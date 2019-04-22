@@ -56,6 +56,8 @@ public class BuyerOrderInfoRet extends BaseRet{
         private String IsAllowShowContactStr;
         private String ContactQQ;
         private String ContactMobile;
+        private String OnlineTimeBegin;
+        private String OnlineTimeEnd;
         private List<String> PostScriptList;
 
         public List<String> getPostScriptList() {
@@ -64,6 +66,22 @@ public class BuyerOrderInfoRet extends BaseRet{
 
         public void setPostScriptList(List<String> postScriptList) {
             PostScriptList = postScriptList;
+        }
+
+        public String getOnlineTimeBegin() {
+            return OnlineTimeBegin;
+        }
+
+        public void setOnlineTimeBegin(String onlineTimeBegin) {
+            OnlineTimeBegin = onlineTimeBegin;
+        }
+
+        public String getOnlineTimeEnd() {
+            return OnlineTimeEnd;
+        }
+
+        public void setOnlineTimeEnd(String onlineTimeEnd) {
+            OnlineTimeEnd = onlineTimeEnd;
         }
 
         public String getReservePwd() {

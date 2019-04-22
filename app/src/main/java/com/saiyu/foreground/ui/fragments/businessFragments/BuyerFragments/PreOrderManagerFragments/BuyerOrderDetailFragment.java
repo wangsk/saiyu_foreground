@@ -76,11 +76,16 @@ public class BuyerOrderDetailFragment extends BaseFragment implements CallbackUt
             tv_recharge_product.setText(ret.getData().getProductName());//充值产品
             tv_producttype.setText(ret.getData().getProductType());//产品类型
             tv_rechargenum.setText(ret.getData().getReserveAccount());//充值号码
-            tv_ordercount.setText(ret.getData().getReserveQBCount());//预定数量
+            tv_ordercount.setText(ret.getData().getReserveQBCount()+"Q币");//预定数量
             tv_orderprice.setText(ret.getData().getReservePrice() + "元");//预定出价
             tv_orderremark.setText(ret.getData().getReserveTitle());//预定附言
             tv_time_online.setText(ret.getData().getOnlineTime());//在线时间
-            tv_orderPsw.setText(ret.getData().getOrderPwd());//订单加密
+            if(TextUtils.isEmpty(ret.getData().getOrderPwd())){
+                tv_orderPsw.setText("无");//订单加密
+            } else {
+                tv_orderPsw.setText(ret.getData().getOrderPwd());//订单加密
+            }
+
             //单次限制
             float LessChargeDiscount = ret.getData().getLessChargeDiscount();
             float OnceMinCount = ret.getData().getOnceMinCount();
@@ -107,7 +112,7 @@ public class BuyerOrderDetailFragment extends BaseFragment implements CallbackUt
             tv_rechargeremark.setText(ret.getData().getRemarks());//充值留言
             tv_releasetime.setText(ret.getData().getCreateTime());//发布时间
             tv_latertime.setText(ret.getData().getOrderExpiryTime());//到期时间
-            tv_completnum.setText(ret.getData().getSuccQBCount());//完成数量
+            tv_completnum.setText(ret.getData().getSuccQBCount()+"Q币");//完成数量
             tv_confirm_type.setText(ret.getData().getConfirmStr());//确认方式
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
             tv_orderstatus.setText(ret.getData().getOrderStatusType());//订单状态

@@ -91,10 +91,11 @@ public class PreOrderManagerAdapter extends RecyclerView.Adapter<PreOrderManager
             tv_deal_1.setTextColor(App.getApp().getResources().getColor(R.color.black));
             tv_deal_1.setTextSize(16);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
-            tv_deal_2.setTextColor(App.getApp().getResources().getColor(R.color.black));
             tv_deal_2.setTextSize(16);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
+            tv_deal_3.setTextSize(13);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);
+            tv_deal_4.setTextSize(13);
         }
 
     }
