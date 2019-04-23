@@ -226,6 +226,8 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
                     break;
         }
 
+        CallbackUtils.doPositionCallback_2(position);
+
     }
 
     @Override

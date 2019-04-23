@@ -15,6 +15,7 @@ import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.https.response.FaceStatusRet;
 import com.saiyu.foreground.https.response.GetImgProcessRet;
+import com.saiyu.foreground.https.response.GetTopOrderListRet;
 import com.saiyu.foreground.https.response.HallDetailReceiveRet;
 import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.HallRet;
@@ -443,6 +444,10 @@ public interface ApiService {
     //获取图片服务器
     @POST("Tool/GetImgProcess")
     Observable<GetImgProcessRet> getImgProcess(@Body RequestBody body);
+
+    //获取指定日期折扣TOP3列表
+    @POST("Home/GetTopOrderList")
+    Observable<GetTopOrderListRet> getTopOrderList(@Body RequestBody body);
 
 //    @GET("orderAudit/history")
 //    Observable<HistoryRet> historyOrder(@Query("page") String page

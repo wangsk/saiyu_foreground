@@ -23,6 +23,7 @@ import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.ui.views.MyToast;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.LogUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;

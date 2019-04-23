@@ -62,6 +62,7 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
     private String Mobile,RealName;
     private int RiskLevel;
     private boolean IsMobileVerification;
+    private String totalMoney = "0.00";
 
     public static CashFragment newInstance(Bundle bundle) {
         CashFragment_ fragment = new CashFragment_();
@@ -111,6 +112,8 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
             }
 
             IsMobileVerification = ret.getData().isMobileVerification();
+            totalMoney = ret.getData().getTotalMoney();
+            tv_able.setText(totalMoney + "元");
 
             mItems.clear();
             mItems.addAll(ret.getData().getWithdrawWayAccountList());
@@ -274,7 +277,7 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
                     if(curItem == null){
                         return;
                     }
-                    et_count.setText(curItem.getTotalMoney());
+                    et_count.setText(totalMoney);
                     break;
             }
         }
@@ -373,7 +376,6 @@ public class CashFragment extends BaseFragment implements CallbackUtils.OnPositi
 
         curItem = mItems.get(pos);
 
-        tv_able.setText(curItem.getTotalMoney()+"元");
         String count = et_count.getText().toString();
         if(!TextUtils.isEmpty(curItem.getCharge())&& !TextUtils.isEmpty(count) && !TextUtils.isEmpty(curItem.getMinApplyMoney())){
             BigDecimal bigDecimal_1 = new BigDecimal(curItem.getCharge());

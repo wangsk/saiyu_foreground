@@ -2,6 +2,7 @@ package com.saiyu.foreground.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,8 @@ public class SellerWebUrlAdapter extends RecyclerView.Adapter<SellerWebUrlAdapte
             super(itemView);
             ll_item_layout = itemView.findViewById(R.id.ll_item_layout);
             tv_deal_1 = itemView.findViewById(R.id.tv_deal_1);
+            tv_deal_1.setSingleLine(true);
+            tv_deal_1.setEllipsize(TextUtils.TruncateAt.END);
             tv_deal_2 = itemView.findViewById(R.id.tv_deal_2);
             tv_deal_3 = itemView.findViewById(R.id.tv_deal_3);
             tv_deal_4 = itemView.findViewById(R.id.tv_deal_4);

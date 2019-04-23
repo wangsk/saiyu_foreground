@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.MarketAdapter;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
+import com.saiyu.foreground.https.response.GetTopOrderListRet;
 import com.saiyu.foreground.https.response.StatisticsListRet;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
@@ -20,6 +22,7 @@ import com.saiyu.foreground.ui.views.BarGraphView;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.LogUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -34,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 @EFragment(R.layout.fragment_market)
-public class MarketFragment extends BaseFragment implements CallbackUtils.ResponseCallback {
+public class MarketFragment extends BaseFragment implements CallbackUtils.ResponseCallback,CallbackUtils.OnPositionListener,CallbackUtils.OnPositionListener_2{
 
     @ViewById
     ProgressBar pb_loading;
@@ -43,11 +46,15 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
     @ViewById
     TextView tv_top_1,tv_top_2,tv_top_3;
     @ViewById
+    LinearLayout ll_top_1,ll_top_2,ll_top_3;
+    @ViewById
     SwipeMenuRecyclerView recyclerView;
     private MarketAdapter marketAdapter;
 
     private List<StatisticsListRet.DatasBean.ItemsBean> mItem = new ArrayList<>();//当天最高折扣列表
-    private List<StatisticsListRet.DatasBean.ItemsBean_2> mItem_2 = new ArrayList<>();//行情列表
+    private List<GetTopOrderListRet.DatasBean.ItemsBean> mItem_2 = new ArrayList<>();//行情列表
+
+    private List<String> dateList;
 
     public static MarketFragment newInstance(Bundle bundle) {
         MarketFragment_ fragment = new MarketFragment_();
@@ -58,12 +65,23 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
+        CallbackUtils.setOnPositionListener_2(this);
+        CallbackUtils.setOnPositionListener(this);
         CallbackUtils.setCallback(this);
-        ApiRequest.statisticsList("MarketFragment_statisticsList",pb_loading);
+
+    }
+
+    @Override
+    public void setOnPositionListener_2(int position) {
+        LogUtils.print("setOnPositionListener_2 position === " + position);
+        if(position == 0){
+            ApiRequest.statisticsList("MarketFragment_statisticsList",pb_loading);
+        }
     }
 
     @AfterViews
     void afterView() {
+        CallbackUtils.setOnPositionListener_2(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(1));
@@ -80,26 +98,6 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             if(ret.getData() == null){
                 return;
             }
-            if(mItem_2 == null){
-                mItem_2 = new ArrayList<>();
-            }
-            mItem_2.clear();
-            mItem_2.addAll(ret.getData().getTopOrderList());
-            if(mItem_2.size() > 0){
-                for(int i = 0; i < mItem_2.size(); i++){
-                    switch (i){
-                        case 0:
-                            tv_top_1.setText(mItem_2.get(0).getOrderTitle());
-                            break;
-                        case 1:
-                            tv_top_2.setText(mItem_2.get(1).getOrderTitle());
-                            break;
-                        case 2:
-                            tv_top_3.setText(mItem_2.get(2).getOrderTitle());
-                            break;
-                    }
-                }
-            }
 
             if(mItem == null){
                 mItem = new ArrayList<>();
@@ -107,7 +105,7 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             mItem.clear();
             mItem.addAll(ret.getData().getList());
 
-            List<String> dateList = new ArrayList<>();//日期
+            dateList = new ArrayList<>();//日期
             Map<String, Integer> value_max = new HashMap<>();//最高折扣列表
             Map<String, Integer> value_aver = new HashMap<>();//平均折扣列表
 
@@ -132,6 +130,10 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             }
 
             if(dateList.size() > 0){
+                if(!TextUtils.isEmpty(dateList.get((dateList.size() - 1)))){
+                    ApiRequest.getTopOrderList(dateList.get((dateList.size() - 1)),"MarketFragment_getTopOrderList",pb_loading);
+                }
+
                 bar_view.setValue(value_aver,value_max, dateList, 250);
                 bar_view.setCurrentMonth(dateList.size());
             }
@@ -143,6 +145,38 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             recyclerView.setAdapter(marketAdapter);
             marketAdapter.notifyDataSetChanged();
 
+        } else if(method.equals("MarketFragment_getTopOrderList")){
+            GetTopOrderListRet ret = (GetTopOrderListRet)baseRet;
+            if(ret.getData() == null || ret.getData().getTopOrderList() == null || ret.getData().getTopOrderList().size() <= 0){
+                LogUtils.print("当天没有TOP3");
+                ll_top_1.setVisibility(View.GONE);
+                ll_top_2.setVisibility(View.GONE);
+                ll_top_3.setVisibility(View.GONE);
+                return;
+            }
+            if(mItem_2 == null){
+                mItem_2 = new ArrayList<>();
+            }
+            mItem_2.clear();
+            mItem_2.addAll(ret.getData().getTopOrderList());
+            if(mItem_2.size() > 0){
+                for(int i = 0; i < mItem_2.size(); i++){
+                    switch (i){
+                        case 0:
+                            tv_top_1.setText(mItem_2.get(0).getOrderTitle());
+                            ll_top_1.setVisibility(View.VISIBLE);
+                            break;
+                        case 1:
+                            tv_top_2.setText(mItem_2.get(1).getOrderTitle());
+                            ll_top_2.setVisibility(View.VISIBLE);
+                            break;
+                        case 2:
+                            tv_top_3.setText(mItem_2.get(2).getOrderTitle());
+                            ll_top_3.setVisibility(View.VISIBLE);
+                            break;
+                    }
+                }
+            }
         }
     }
 
@@ -180,4 +214,14 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
         }
     }
 
+    @Override
+    public void setOnPositionListener(int position) {
+        LogUtils.print("position === " + position);
+        if(dateList == null || dateList.size() <= position || TextUtils.isEmpty(dateList.get(position))){
+            return;
+        }
+        LogUtils.print("日期 " + dateList.get(position));
+        ApiRequest.getTopOrderList(dateList.get(position),"MarketFragment_getTopOrderList",pb_loading);
+
+    }
 }

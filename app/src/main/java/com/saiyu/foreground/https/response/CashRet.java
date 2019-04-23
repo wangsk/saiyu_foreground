@@ -16,6 +16,15 @@ public class CashRet extends BaseRet {
 
     public static class DatasBean {
         private boolean IsMobileVerification;
+        private String TotalMoney;
+
+        public String getTotalMoney() {
+            return TotalMoney;
+        }
+
+        public void setTotalMoney(String totalMoney) {
+            TotalMoney = totalMoney;
+        }
 
         public boolean isMobileVerification() {
             return IsMobileVerification;
@@ -46,7 +55,7 @@ public class CashRet extends BaseRet {
             private String Remarks;
             private String Account;
             private String Charge;
-            private String TotalMoney;
+
             private String Name;
             private String PayDateStr;
 
@@ -144,14 +153,6 @@ public class CashRet extends BaseRet {
 
             public void setCharge(String charge) {
                 Charge = charge;
-            }
-
-            public String getTotalMoney() {
-                return TotalMoney;
-            }
-
-            public void setTotalMoney(String totalMoney) {
-                TotalMoney = totalMoney;
             }
         }
     }

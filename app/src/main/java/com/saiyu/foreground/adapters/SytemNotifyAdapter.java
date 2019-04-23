@@ -2,6 +2,7 @@ package com.saiyu.foreground.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,14 @@ public class SytemNotifyAdapter extends RecyclerView.Adapter<SytemNotifyAdapter.
             return;
         }
 
-        myHolder.tv_deal_1.setText(mItems.get(i).getNewsDetailTitle());
+        String param = mItems.get(i).getNewsDetailTitle();
+        if(!TextUtils.isEmpty(param)){
+            if(param.length()> 14){
+                param = param.substring(0,14)+"...";
+            }
+        }
+
+        myHolder.tv_deal_1.setText(param);
         myHolder.tv_deal_2.setText(mItems.get(i).getReleaseTime());
         LogUtils.print(mItems.get(i).getNewsDetailTitle() + "  " + mItems.get(i).getReleaseTime());
 

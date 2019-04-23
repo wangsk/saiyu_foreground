@@ -25,6 +25,7 @@ import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.https.response.FaceStatusRet;
 import com.saiyu.foreground.https.response.GetImgProcessRet;
+import com.saiyu.foreground.https.response.GetTopOrderListRet;
 import com.saiyu.foreground.https.response.HallDetailReceiveRet;
 import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.HallRet;
@@ -2515,6 +2516,54 @@ public class ApiRequest {
 
                     @Override
                     public void onNext(StatisticsListRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1) {
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void getTopOrderList(String date,final String callBackKey, final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("date",date);
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.getTopOrderList(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GetTopOrderListRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1) {
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(GetTopOrderListRet ret) {
                         try {
                             pb_loading.setVisibility(View.GONE);
                         } catch (Exception e1) {

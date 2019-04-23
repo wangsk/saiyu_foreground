@@ -21,6 +21,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -574,6 +575,7 @@ public class BarGraphView extends View {
 //            float y = yOri - yOri * value.get(xValue.get(i)) / yValue;
             if (eventX >= x - dp25 && eventX <= x + dp25 && selectIndex != i + 1) {//每个节点所在的柱状图内都是可点击区域
                 if (i + 1 <= posMonth) {
+                    CallbackUtils.doPositionCallback(i);
                     selectIndex = i + 1;
                     invalidate();
                 }
