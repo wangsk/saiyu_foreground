@@ -24,6 +24,7 @@ import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.https.response.FaceStatusRet;
+import com.saiyu.foreground.https.response.GetImgProcessRet;
 import com.saiyu.foreground.https.response.HallDetailReceiveRet;
 import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.HallRet;
@@ -220,7 +221,6 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
                         SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
                         SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
                         SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
@@ -239,7 +239,6 @@ public class ApiRequest {
 
                     @Override
                     public void onNext(BooleanRet ret) {
-                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, false);
                         SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
                         SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
                         SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
@@ -2185,6 +2184,53 @@ public class ApiRequest {
                         }
                         if (ret.getCode() != 200) {
                             Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        CallbackUtils.doResponseCallBackMethod(callBackKey, ret);
+
+                    }
+                });
+    }
+
+    public static void getImgProcess(final String callBackKey, final ProgressBar pb_loading) {
+        pb_loading.setVisibility(View.VISIBLE);
+        RequestParams requestParams = new RequestParams();
+
+        ApiService apiService = ApiRetrofit.getRetrofit().getApiService();
+
+        apiService.getImgProcess(requestParams.getBody())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GetImgProcessRet>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.print("onError == " + e.toString());
+//                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1) {
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(GetImgProcessRet ret) {
+                        try {
+                            pb_loading.setVisibility(View.GONE);
+                        } catch (Exception e1) {
+                            LogUtils.print("pb_loading close Exception");
+                        }
+                        if (ret == null) {
+                            return;
+                        }
+                        if (ret.getCode() != 200) {
+//                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -4961,7 +5007,6 @@ public class ApiRequest {
                         }
 
                         SPUtils.putString("accessToken", ret.getData().getAccessToken());
-                        SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
                         boolean UserInfoStatus = ret.getData().isUserInfoStatus();
                         if(UserInfoStatus){

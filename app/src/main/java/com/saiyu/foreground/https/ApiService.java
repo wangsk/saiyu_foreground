@@ -14,6 +14,7 @@ import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.CashRecordRet;
 import com.saiyu.foreground.https.response.CashRet;
 import com.saiyu.foreground.https.response.FaceStatusRet;
+import com.saiyu.foreground.https.response.GetImgProcessRet;
 import com.saiyu.foreground.https.response.HallDetailReceiveRet;
 import com.saiyu.foreground.https.response.HallDetailRet;
 import com.saiyu.foreground.https.response.HallRet;
@@ -438,6 +439,10 @@ public interface ApiService {
     //点数充值历史
     @POST("Seller/ReceivePointHistory")
     Observable<RechargePointHistoryRet> receivePointHistory(@Body RequestBody body);
+
+    //获取图片服务器
+    @POST("Tool/GetImgProcess")
+    Observable<GetImgProcessRet> getImgProcess(@Body RequestBody body);
 
 //    @GET("orderAudit/history")
 //    Observable<HistoryRet> historyOrder(@Query("page") String page

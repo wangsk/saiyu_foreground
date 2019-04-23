@@ -131,8 +131,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
         CallbackUtils.setCallback(this);
 
         String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
-        boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
-        if(autologinflag && !TextUtils.isEmpty(accessToken)){
+        if(!TextUtils.isEmpty(accessToken)){
 
             if (!TextUtils.isEmpty(orderId)) {
                 //登录状态下，先请求该订单的状态（正常状态 / 已经被自己接单，但是未充值状态）
@@ -665,7 +664,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
             if(TextUtils.isEmpty(rechargeNum)){
                 rechargeNum = "0";
             }
-            tv_count_prompt.setText("请登录");
+            tv_count_prompt.setText("请登录后开始出售Q币");
             tv_orderPoint.setText(rechargeNum+"点");
             return;
         }
@@ -725,8 +724,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         String accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
-        boolean autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
-        if(autologinflag && !TextUtils.isEmpty(accessToken)){
+        if(!TextUtils.isEmpty(accessToken)){
 
             if (!TextUtils.isEmpty(orderId)) {
                 //登录状态下，先请求该订单的状态（正常状态 / 已经被自己接单，但是未充值状态）

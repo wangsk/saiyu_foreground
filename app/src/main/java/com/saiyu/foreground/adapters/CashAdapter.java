@@ -71,15 +71,25 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.MyHolder> {
         }
 
         myHolder.tv_bankname.setText(mItems.get(i).getName());
-        String text = "尾号";
-        if(!TextUtils.isEmpty(mItems.get(i).getAccount())){
-            if(mItems.get(i).getAccount().length() > 4){
-                text = text + mItems.get(i).getAccount().substring(mItems.get(i).getAccount().length() -4);
+
+        String text = "";
+        if(!TextUtils.isEmpty(mItems.get(i).getName())){
+            if(mItems.get(i).getName().contains("支付宝")){
+                text = "免手续费 到账时间" + mItems.get(i).getPayDateStr();
+            } else if(mItems.get(i).getName().contains("微信")){
+                text = "手续费 " + mItems.get(i).getCharge() + "% 到账时间" + mItems.get(i).getPayDateStr();
             } else {
-                text = text +mItems.get(i).getAccount();
+                if(!TextUtils.isEmpty(mItems.get(i).getAccount())){
+                    if(mItems.get(i).getAccount().length() > 4){
+                        text = "尾号" + mItems.get(i).getAccount().substring(mItems.get(i).getAccount().length() -4)+"储蓄卡";
+                    } else {
+                        text = "尾号" +mItems.get(i).getAccount()+"储蓄卡";
+                    }
+                }
+                text = text + " 手续费" + mItems.get(i).getCharge() + "% 到账时间" + mItems.get(i).getPayDateStr();
             }
         }
-        text = text + " 手续费: " + mItems.get(i).getCharge() + "%,到账时间:" + mItems.get(i).getPayDateStr();
+
         myHolder.tv_text.setText(text);
 
         myHolder.rl_item_layout.setOnClickListener(new View.OnClickListener() {

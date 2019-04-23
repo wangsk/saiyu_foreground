@@ -36,6 +36,7 @@ import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.SPUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;
 import com.saiyu.foreground.utils.Utils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -82,6 +83,7 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
     private String ReceiveQBCount = "0";//0代表无效
     private String orderId,orderNum;
     private String ConfirmType = "0";
+    private String OrderImgServerProcess;
 
     public static OrderSubmitChildFragment newInstance(Bundle bundle) {
         OrderSubmitChildFragment_ fragment = new OrderSubmitChildFragment_();
@@ -95,6 +97,8 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
         CallbackUtils.setOnActivityCallBack(this);
         CallbackUtils.setCallback(this);
         CallbackUtils.setOnContentListener(this);
+        OrderImgServerProcess = SPUtils.getString(ConstValue.OrderImgServerProcess,"");
+        LogUtils.print("OrderImgServerProcess === " + OrderImgServerProcess);
     }
 
     @Override
@@ -297,7 +301,7 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
             case R.id.iv_recharge_info_show:
                 if(!TextUtils.isEmpty(infoUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(infoUrl);
+                    photoViewDialog.setmUrl(infoUrl + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 } else {
                     uploadCode = 1;
@@ -307,7 +311,7 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
             case R.id.iv_recharge_success_show:
                 if(!TextUtils.isEmpty(successUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(successUrl);
+                    photoViewDialog.setmUrl(successUrl + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }else {
                     uploadCode = 0;
@@ -317,7 +321,7 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
             case R.id.iv_record_show:
                 if(!TextUtils.isEmpty(recordUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(recordUrl);
+                    photoViewDialog.setmUrl(recordUrl + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }else {
                     uploadCode = 2;

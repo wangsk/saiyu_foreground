@@ -116,7 +116,6 @@ public class LoginFragment extends BaseFragment implements CallbackUtils.Respons
             }
 
             SPUtils.putString(ConstValue.ACCESS_TOKEN, ret.getData().getAccessToken());
-            SPUtils.putBoolean(ConstValue.AUTO_LOGIN_FLAG, true);
 
             boolean UserInfoStatus = ret.getData().isUserInfoStatus();
             if(UserInfoStatus){

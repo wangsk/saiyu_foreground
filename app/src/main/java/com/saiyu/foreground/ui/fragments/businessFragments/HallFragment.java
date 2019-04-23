@@ -18,8 +18,10 @@ import android.widget.Toast;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.adapters.HallAdapter;
 import com.saiyu.foreground.adapters.MyTagAdapter;
+import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
+import com.saiyu.foreground.https.response.GetImgProcessRet;
 import com.saiyu.foreground.https.response.HallRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
 import com.saiyu.foreground.interfaces.OnListCallbackListener;
@@ -30,6 +32,7 @@ import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.PopWindowUtils;
+import com.saiyu.foreground.utils.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -71,6 +74,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     private int pageSize = 30;
     private int totalPage;
     private String rQBCount = "", rDiscount = "", pId = "", extend = "", sort = "";
+    private String helpListUrl;
 
     public static HallFragment newInstance(Bundle bundle) {
         HallFragment_ fragment = new HallFragment_();
@@ -94,6 +98,9 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
 
+        CallbackUtils.setCallback(this);
+        ApiRequest.getImgProcess("HallFragment_getImgProcess",pb_loading);
+
     }
 
     @Override
@@ -108,6 +115,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
             }
             tv_total_order.setText(ret.getData().getOrderCount() + "");
             tv_total_qcount.setText(ret.getData().getTotalCount() + "");
+            helpListUrl = ret.getData().getHelpListUrl();
 
             int totalCount = ret.getData().getOrderCount();
 
@@ -141,6 +149,18 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
             productItemsBeans.addAll(ret.getData().getProductList());
 
+        } else if(method.equals("HallFragment_getImgProcess")){
+            GetImgProcessRet ret = (GetImgProcessRet)baseRet;
+            if(ret.getData() != null){
+                String OrderImgServerProcess = ret.getData().getOrderImgServerProcess();
+                String UserImgServerProcess = ret.getData().getUserImgServerProcess();
+                if(!TextUtils.isEmpty(OrderImgServerProcess)){
+                    SPUtils.putString(ConstValue.OrderImgServerProcess,OrderImgServerProcess);
+                }
+                if(!TextUtils.isEmpty(UserImgServerProcess)){
+                    SPUtils.putString(ConstValue.UserImgServerProcess,UserImgServerProcess);
+                }
+            }
         }
     }
 
@@ -190,13 +210,16 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_hall_question:
-                Bundle bundle = new Bundle();
-                Intent intent = new Intent(mContext, ContainerActivity_.class);
-                bundle.putString("url", "https://www.saiyu.com/help/m.html");
-                bundle.putString("type", "帮助文档");//
-                bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                if(!TextUtils.isEmpty(helpListUrl)){
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext, ContainerActivity_.class);
+                    bundle.putString("url", helpListUrl);
+                    bundle.putString("type", "帮助文档");//
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                }
+
                 break;
             case R.id.ll_recharge_game:
                 PopWindowUtils.initPopWindow_2(getActivity(), productItemsBeans, ll_recharge_game, iv_jiantou_1,new OnListCallbackListener() {

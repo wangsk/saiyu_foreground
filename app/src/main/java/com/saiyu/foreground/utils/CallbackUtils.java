@@ -100,4 +100,21 @@ public class CallbackUtils {
             mOnContentListener.setOnContentListener(content);
         }
     }
+
+    public interface OnExitListener {
+        void setOnExitListener();
+    }
+
+    public static OnExitListener mOnExitListener;
+
+    public static void setOnExitListener(OnExitListener onExitListener){
+        mOnExitListener = onExitListener;
+    }
+
+    public static void doExitCallback(){
+        if(mOnExitListener != null){
+            mOnExitListener.setOnExitListener();
+        }
+    }
+
 }

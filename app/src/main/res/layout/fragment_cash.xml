@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text=""
+                    android:text="0.00元"
                     android:textColor="@color/black_light"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -199,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:text="当前渠道，最低提现100.00元，最低手续费7.00元，封顶手续费30.00元"
+                    android:text=""
                     android:textColor="@color/black_light"
                     android:textSize="12sp" />
 

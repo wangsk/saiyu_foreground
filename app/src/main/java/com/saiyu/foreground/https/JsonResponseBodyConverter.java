@@ -1,9 +1,16 @@
 package com.saiyu.foreground.https;
 
+import android.content.Intent;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.saiyu.foreground.App;
+import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.utils.GsonUtils;
+import com.saiyu.foreground.ui.activitys.SplashActivity;
+import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.SPUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -39,6 +46,17 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             String msg = (String) datamap.get("msg");
             String code = String.valueOf((Double) datamap.get("code"));
             if (!"200.0".equals(code)) {
+                LogUtils.print("code === " + code);
+                if("411.0".equals(code)){//重新登录
+                    SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
+                    SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
+                    SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
+
+                    CallbackUtils.doExitCallback();
+
+                    return null;
+                }
+
                 try {
                     Map hashMap = new HashMap();
                     hashMap.put("code", code);

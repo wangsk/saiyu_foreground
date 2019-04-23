@@ -1,20 +1,27 @@
 package com.saiyu.foreground.ui.activitys;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.utils.ButtonUtils;
+import com.saiyu.foreground.utils.CallbackUtils;
 
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class BaseActivity extends SupportActivity{
+public class BaseActivity extends SupportActivity implements CallbackUtils.OnExitListener {
 
     protected Activity mContext = this;
     private boolean isForegroud = false;
@@ -58,6 +65,7 @@ public class BaseActivity extends SupportActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        CallbackUtils.setOnExitListener(this);
         isForegroud = true;
     }
 
@@ -115,4 +123,33 @@ public class BaseActivity extends SupportActivity{
         }
         return false;
     }
+
+    @Override
+    public void setOnExitListener() {
+        handler.sendEmptyMessage(1);
+        handler.sendEmptyMessageDelayed(2,2000);
+    }
+
+    public void restartApplication(Context context) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    Toast.makeText(BaseActivity.this,"您的账号已退出，请重新登录",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    restartApplication(BaseActivity.this);
+                    break;
+            }
+        }
+    };
+
 }

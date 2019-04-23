@@ -4,17 +4,16 @@ public class ConstValue {
 
     public static boolean flag = true;//是否打开log打印
 
-//    public static final String SERVR_URL = "http://192.168.1.147:66/";//测试地址
-    public static final String SERVR_URL = "http://192.168.1.147:88/";//测试断点地址
+    public static final String SERVR_URL = "http://192.168.1.147:66/";//测试地址
+//    public static final String SERVR_URL = "http://192.168.1.147:88/";//测试断点地址
 //    public static final String SERVR_URL = "https://api.saiyu.com/";//线上地址
     public static String MetaTypeJson = "application/json; charset=utf-8";
     public static final String APPID = "SaiyuAndroidApp";
     public static final String APPSecret = "ammLYNXrC822OoEDqWyIt8Twf9czIqsl";
     public static String UserSecret;
     public static final String ACCESS_TOKEN = "accessToken";
-    public static final String USER_KEY = "userKey";
-    //自动登录的标记
-    public static final String AUTO_LOGIN_FLAG = "autologinflag";
+    public static final String OrderImgServerProcess = "OrderImgServerProcess";
+    public static final String UserImgServerProcess = "UserImgServerProcess";
 
     public static final String ISFIRSTRUNNING = "isFirstRunning";
 

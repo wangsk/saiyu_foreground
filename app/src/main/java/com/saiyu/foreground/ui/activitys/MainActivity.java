@@ -53,7 +53,6 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
     ProgressBar pb_loading;
     private int curPosition;
     private String accessToken;
-    private boolean autologinflag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,9 +115,7 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
         CallbackUtils.setOnBottomSelectListener(this);
 
         accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
-        autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
-        if(autologinflag && !TextUtils.isEmpty(accessToken)){
-
+        if(!TextUtils.isEmpty(accessToken)){
             //产品要求，一旦买家或者卖家有一个被激活，主页面不再显示卖家或者买家（产品的意思是一个用户可能很长时间只是买家或者卖家，那么就把他另外一个身份页面（买家/卖家）隐藏）
             int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
             switch (type){
@@ -164,8 +161,7 @@ public class MainActivity extends BaseActivity implements BottomBar.OnTabSelecte
             case 3://买家
             case 4://我的
                 accessToken = SPUtils.getString(ConstValue.ACCESS_TOKEN,"");
-                autologinflag = SPUtils.getBoolean(ConstValue.AUTO_LOGIN_FLAG,false);
-                if(autologinflag && !TextUtils.isEmpty(accessToken)){
+                if(!TextUtils.isEmpty(accessToken)){
                     int type = SPUtils.getInt(ConstValue.MainBottomVisibleType,0);
                     LogUtils.print("type === " + type);
                     Bundle bundle = new Bundle();

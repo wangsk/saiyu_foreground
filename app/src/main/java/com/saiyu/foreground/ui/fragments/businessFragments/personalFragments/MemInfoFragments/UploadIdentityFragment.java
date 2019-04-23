@@ -20,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
@@ -30,6 +32,7 @@ import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.SPUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.vondear.rxtool.RxPhotoTool;
 
@@ -70,6 +73,7 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
     private int uploadCode = -1;//区别身份证正反面
     private String identity_front,identity_bg;
     private boolean IsModify;
+    private String UserImgServerProcess;
 
     public static UploadIdentityFragment newInstance(Bundle bundle) {
         UploadIdentityFragment_ fragment = new UploadIdentityFragment_();
@@ -82,6 +86,8 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
         super.onSupportVisible();
         CallbackUtils.setOnActivityCallBack(this);
         CallbackUtils.setCallback(this);
+        UserImgServerProcess = SPUtils.getString(ConstValue.UserImgServerProcess,"");
+        LogUtils.print("UserImgServerProcess === " + UserImgServerProcess);
 
     }
 
@@ -157,9 +163,23 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
                 if(uploadCode == 0){
                     identity_front = ret.getData().getSrc();
                     LogUtils.print("identity_front=== " + identity_front);
+//                    if(!TextUtils.isEmpty(identity_front)){
+//                        Glide.with(App.getApp())
+//                                .load(identity_front + "?" + UserImgServerProcess)
+//                                .error(R.mipmap.ic_launcher)
+//                                .into(iv_identity_front);
+//                        ll_identity_front.setVisibility(View.GONE);
+//                    }
                 } else if(uploadCode == 1){
                     identity_bg = ret.getData().getSrc();
                     LogUtils.print("identity_bg=== " + identity_bg);
+//                    if(!TextUtils.isEmpty(identity_bg)){
+//                        Glide.with(App.getApp())
+//                                .load(identity_bg + "?" + UserImgServerProcess)
+//                                .error(R.mipmap.ic_launcher)
+//                                .into(iv_identity_bg);
+//                        ll_identity_bg.setVisibility(View.GONE);
+//                    }
                 }
             }
         } else if(method.equals("UploadIdentityFragment_realNameSubmit")){

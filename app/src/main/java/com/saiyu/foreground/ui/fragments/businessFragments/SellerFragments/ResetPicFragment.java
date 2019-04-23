@@ -38,6 +38,7 @@ import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.SPUtils;
 import com.saiyu.foreground.utils.Utils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.vondear.rxtool.RxPhotoTool;
@@ -93,6 +94,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
     private String rechargeNum;//出售Q币数量
     private String ReceiveQBCount,ReserveDiscount, ServiceRate,LiquidatedMoney;
     private float LessChargeDiscount,OnceMinCount;
+    private String OrderImgServerProcess;
 
     public static ResetPicFragment newInstance(Bundle bundle) {
         ResetPicFragment_ fragment = new ResetPicFragment_();
@@ -112,6 +114,8 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
         if(!TextUtils.isEmpty(orderId)){
             ApiRequest.orderReceiveInfoSeller(orderId,"SellerOrderDetailFragment_orderReceiveInfoSeller",pb_loading);
         }
+        OrderImgServerProcess = SPUtils.getString(ConstValue.OrderImgServerProcess,"");
+        LogUtils.print("OrderImgServerProcess === " + OrderImgServerProcess);
     }
 
     @AfterViews
@@ -179,7 +183,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                 iv_record_del.setVisibility(View.VISIBLE);
                 tv_record_upload.setVisibility(View.GONE);
                 Glide.with(App.getApp())
-                        .load(recordUrl)
+                        .load(recordUrl + "?" + OrderImgServerProcess)
                         .error(R.mipmap.ic_launcher)
                         .into(iv_record_show);
             }
@@ -189,7 +193,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                 iv_success_del.setVisibility(View.VISIBLE);
                 tv_success_upload.setVisibility(View.GONE);
                 Glide.with(App.getApp())
-                        .load(successUrl)
+                        .load(successUrl + "?" + OrderImgServerProcess)
                         .error(R.mipmap.ic_launcher)
                         .into(iv_recharge_success_show);
             }
@@ -199,7 +203,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
                 iv_info_del.setVisibility(View.VISIBLE);
                 tv_info_upload.setVisibility(View.GONE);
                 Glide.with(App.getApp())
-                        .load(infoUrl)
+                        .load(infoUrl + "?" + OrderImgServerProcess)
                         .error(R.mipmap.ic_launcher)
                         .into(iv_recharge_info_show);
             }
@@ -288,7 +292,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
             case R.id.iv_recharge_info_show:
                 if(!TextUtils.isEmpty(infoUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(infoUrl);
+                    photoViewDialog.setmUrl(infoUrl + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 } else {
                     uploadCode = 1;
@@ -298,7 +302,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
             case R.id.iv_recharge_success_show:
                 if(!TextUtils.isEmpty(successUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(successUrl);
+                    photoViewDialog.setmUrl(successUrl + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }else {
                     uploadCode = 0;
@@ -308,7 +312,7 @@ public class ResetPicFragment extends BaseFragment implements CallbackUtils.Resp
             case R.id.iv_record_show:
                 if(!TextUtils.isEmpty(recordUrl)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(recordUrl);
+                    photoViewDialog.setmUrl(recordUrl + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }else {
                     uploadCode = 2;

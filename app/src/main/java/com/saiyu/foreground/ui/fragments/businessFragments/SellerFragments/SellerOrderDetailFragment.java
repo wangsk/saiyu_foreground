@@ -11,12 +11,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
+import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.https.ApiRequest;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.SellerOrderReceiveInfoRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.SPUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -40,6 +43,7 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
     ImageView iv_success,iv_info,iv_record;
     private String orderId;
     private String pic_success,pic_info,pic_record;
+    private String OrderImgServerProcess;
 
     public static SellerOrderDetailFragment newInstance(Bundle bundle) {
         SellerOrderDetailFragment_ fragment = new SellerOrderDetailFragment_();
@@ -58,6 +62,8 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
         if(!TextUtils.isEmpty(orderId)){
             ApiRequest.orderReceiveInfoSeller(orderId,"SellerOrderDetailFragment_orderReceiveInfoSeller",pb_loading);
         }
+        OrderImgServerProcess = SPUtils.getString(ConstValue.OrderImgServerProcess,"");
+        LogUtils.print("OrderImgServerProcess === " + OrderImgServerProcess);
     }
 
     @AfterViews
@@ -117,19 +123,19 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
             pic_record = ret.getData().getPic_BillRecord();
             if(!TextUtils.isEmpty(pic_success)){
                 Glide.with(App.getApp())
-                        .load(pic_success)
+                        .load(pic_success + "?" + OrderImgServerProcess)
                         .error(R.mipmap.ic_launcher)
                         .into(iv_success);
             }
             if(!TextUtils.isEmpty(pic_record)){
                 Glide.with(App.getApp())
-                        .load(pic_record)
+                        .load(pic_record + "?" + OrderImgServerProcess)
                         .error(R.mipmap.ic_launcher)
                         .into(iv_record);
             }
             if(!TextUtils.isEmpty(pic_info)){
                 Glide.with(App.getApp())
-                        .load(pic_info)
+                        .load(pic_info + "?" + OrderImgServerProcess)
                         .error(R.mipmap.ic_launcher)
                         .into(iv_info);
             }
@@ -147,21 +153,21 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
             case R.id.iv_success:
                 if(!TextUtils.isEmpty(pic_success)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(pic_success);
+                    photoViewDialog.setmUrl(pic_success + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }
                 break;
             case R.id.iv_info:
                 if(!TextUtils.isEmpty(pic_info)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(pic_info);
+                    photoViewDialog.setmUrl(pic_info + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }
                 break;
             case R.id.iv_record:
                 if(!TextUtils.isEmpty(pic_record)){
                     PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                    photoViewDialog.setmUrl(pic_record);
+                    photoViewDialog.setmUrl(pic_record + "?" + OrderImgServerProcess);
                     photoViewDialog.show();
                 }
                 break;

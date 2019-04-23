@@ -37,6 +37,7 @@ import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.LogUtils;
+import com.saiyu.foreground.utils.SPUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.vondear.rxtool.RxPhotoTool;
@@ -83,6 +84,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
     private String SuccQBCount;
     private boolean isEndActivity;
     private String url_1,url_2,url_3,url_4;
+    private String OrderImgServerProcess;
 
     public static RightFragment newInstance(Bundle bundle) {
         RightFragment_ fragment = new RightFragment_();
@@ -101,6 +103,9 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
         CallbackUtils.setOnActivityCallBack(this);
         CallbackUtils.setCallback(this);
         ApiRequest.orderReceiveInfo(orderReceiveId,"RightFragment_orderReceiveInfo",pb_loading);
+
+        OrderImgServerProcess = SPUtils.getString(ConstValue.OrderImgServerProcess,"");
+        LogUtils.print("OrderImgServerProcess === " + OrderImgServerProcess);
     }
 
     @Override
@@ -287,7 +292,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                 } else {
                     if(!TextUtils.isEmpty(url_1)){
                         PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                        photoViewDialog.setmUrl(url_1);
+                        photoViewDialog.setmUrl(url_1 + "?" + OrderImgServerProcess);
                         photoViewDialog.show();
                     }
                 }
@@ -298,7 +303,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                 }else {
                     if(!TextUtils.isEmpty(url_2)){
                         PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                        photoViewDialog.setmUrl(url_2);
+                        photoViewDialog.setmUrl(url_2 + "?" + OrderImgServerProcess);
                         photoViewDialog.show();
                     }
                 }
@@ -309,7 +314,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                 }else {
                     if(!TextUtils.isEmpty(url_3)){
                         PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                        photoViewDialog.setmUrl(url_3);
+                        photoViewDialog.setmUrl(url_3 + "?" + OrderImgServerProcess);
                         photoViewDialog.show();
                     }
                 }
@@ -320,7 +325,7 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                 }else {
                     if(!TextUtils.isEmpty(url_4)){
                         PhotoViewDialog photoViewDialog = new PhotoViewDialog(getActivity());
-                        photoViewDialog.setmUrl(url_4);
+                        photoViewDialog.setmUrl(url_4 + "?" + OrderImgServerProcess);
                         photoViewDialog.show();
                     }
                 }

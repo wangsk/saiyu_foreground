@@ -4,14 +4,14 @@
     <!-- 必须使用此id,drawable为 未选中 状态的图片 -->
     <item
         android:id="@android:id/background"
-        android:drawable="@drawable/star2"/>
+        android:drawable="@mipmap/star3"/>
     <!-- 必须使用此id,drawable为 半选中 状态的图片 -->
     <item
         android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/star3"/>
+        android:drawable="@mipmap/star2"/>
     <!-- 必须使用此id,drawable为 全选中 状态的图片 -->
     <item
         android:id="@android:id/progress"
-        android:drawable="@drawable/star"/>
+        android:drawable="@mipmap/star"/>
 
 </layer-list>

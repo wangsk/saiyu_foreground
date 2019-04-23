@@ -18,12 +18,21 @@ public class HallRet extends BaseRet {
         private String ProductTypeNameAlias;
         private int OrderCount;
         private int TotalCount;
+        private String HelpListUrl;
         private QueryBean Query;
         private List<ItemsBean> OrderList;
         private List<ProductItemsBean> ProductList;
 
         public List<ProductItemsBean> getProductList() {
             return ProductList;
+        }
+
+        public String getHelpListUrl() {
+            return HelpListUrl;
+        }
+
+        public void setHelpListUrl(String helpListUrl) {
+            HelpListUrl = helpListUrl;
         }
 
         public void setProductList(List<ProductItemsBean> productList) {
