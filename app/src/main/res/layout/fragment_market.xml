@@ -17,9 +17,10 @@
             <com.saiyu.foreground.ui.views.BarGraphView
                 android:id="@+id/bar_view"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="220dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                app:textSize="12sp"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -82,6 +82,8 @@ public class BarGraphView extends View {
     private boolean ischangeFirst = true;//防止onlayout两次改变数据
     private int valueSize = 7;//正常分割为7份
 
+    private int textSize;
+
     //速度检测器
     private VelocityTracker velocityTracker;
 
@@ -114,8 +116,8 @@ public class BarGraphView extends View {
                     break;
                 case R.styleable.MyChartView_textSize:
                     //xml的属性可以在这里设置
-//                    textSize = array.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-//                            TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                    textSize = array.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
                     break;
                 case R.styleable.MyChartView_textColor:
 //                    textColor = array.getColor(attr, Color.YELLOW);
@@ -207,7 +209,7 @@ public class BarGraphView extends View {
             mSize = getWidth() / valueSize;
             linearStartX = mSize / 2;
             xOri = 0;
-            yOri = getHeight() + 400;
+            yOri = getHeight() + getHeight()/2;
             minXInit = getWidth() - mSize * (valueSize - 1) - mSize / 2;//计算最小的长度
             minZxInit = getWidth() - mSize * (valueSize);
             maxXInit = linearStartX;
@@ -253,7 +255,7 @@ public class BarGraphView extends View {
             rectF.left = rectX;
             rectF.right = rectX + mSize;
             rectF.bottom = mHeight;
-            rectF.top = mHeight - 390;
+            rectF.top = mHeight - mHeight*1/2;
             if (i % 2 != 0) {
                 canvas.drawRect(rectF, bg);
             } else {
@@ -286,7 +288,7 @@ public class BarGraphView extends View {
                 mPaint.setTextSize(32);
                 mPaint.setColor(context.getResources().getColor(R.color.grey_white));
             }
-            canvas.drawText(text, tx, mHeight - 40, mPaint);
+            canvas.drawText(text, tx, mHeight*14/15, mPaint);
         }
     }
 
@@ -431,16 +433,16 @@ public class BarGraphView extends View {
     private void drawFloatTextBox(Canvas canvas, float x, float y, String text,int pos) {
         //p1
         Path path = new Path();
-        float left = x - 150;
-        float top = y - 150;
-        float right = x + 150;
-        float bottom = y - 20;
+        float left = x - mSize;
+        float top = y - mSize;
+        float right = x + mSize;
+        float bottom = y - mSize/6;
         if (pos == 0) {
             left = x - mSize / 2;
-            right = 150 * 2 + x - mSize / 2;
+            right = x + mSize * 3 / 2;
         }
         if (pos == value.size() - 1) {
-            left = x + mSize / 2 - 150 * 2;
+            left = x - mSize * 3 / 2;
             right = x + mSize / 2;
         }
         RectF oval3 = new RectF(left, top, right, bottom);// 设置个新的长方形
@@ -460,13 +462,13 @@ public class BarGraphView extends View {
         mPaint.setColor(context.getResources().getColor(R.color.white));
         canvas.drawPath(path1, mPaint);
 
-        mPaint.setTextSize(40);
+        mPaint.setTextSize(textSize);
         mPaint.setTextAlign(Paint.Align.CENTER);
         mPaint.setColor(context.getResources().getColor(R.color.blue));//要写在draw里面不然画不出来
         mPaint.getTextBounds(text, 0, text.length(), mBound);
-        float y_1 = y - 95;
+        float y_1 = bottom - (bottom - top)/2;
         if (pos == value.size() - 1) {
-            float x_1 = x - 70;
+            float x_1 = x - mSize/3;
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
@@ -474,12 +476,12 @@ public class BarGraphView extends View {
                 } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.white));
                 }
-                canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
+                canvas.drawCircle(x - mSize * 9 / 8, y_1 - y_1/20, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
         } else if (pos == 0) {
-            float x_1 = x + 80;
+            float x_1 = x + mSize/2;
             String[] arg = text.split("\n");
             for(int i = 0; i < arg.length; i++){
                 if(i == 0){
@@ -487,7 +489,7 @@ public class BarGraphView extends View {
                 } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.white));
                 }
-                canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
+                canvas.drawCircle(x - mSize * 2 / 7, y_1 - y_1/20, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
@@ -500,7 +502,7 @@ public class BarGraphView extends View {
                 } else if(i == 1){
                     dotPain.setColor(context.getResources().getColor(R.color.white));
                 }
-                canvas.drawCircle(x_1 - 130, y_1 - 15, 6, dotPain);
+                canvas.drawCircle(x - mSize * 4 / 5, y_1 - y_1/20, 6, dotPain);
                 canvas.drawText(arg[i], x_1, y_1, mPaint);
                 y_1 += mPaint.descent() - mPaint.ascent();
             }
