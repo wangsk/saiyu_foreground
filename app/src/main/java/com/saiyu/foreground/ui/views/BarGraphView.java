@@ -207,7 +207,7 @@ public class BarGraphView extends View {
             mSize = getWidth() / valueSize;
             linearStartX = mSize / 2;
             xOri = 0;
-            yOri = getHeight();
+            yOri = getHeight() + 400;
             minXInit = getWidth() - mSize * (valueSize - 1) - mSize / 2;//计算最小的长度
             minZxInit = getWidth() - mSize * (valueSize);
             maxXInit = linearStartX;

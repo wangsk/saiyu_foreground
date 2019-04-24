@@ -2554,7 +2554,7 @@ public class ApiRequest {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.print("onError == " + e.toString());
-                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(App.getApp(), "请求失败", Toast.LENGTH_SHORT).show();
                         try {
                             pb_loading.setVisibility(View.GONE);
                         } catch (Exception e1) {
@@ -2573,7 +2573,7 @@ public class ApiRequest {
                             return;
                         }
                         if (ret.getCode() != 200) {
-                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(App.getApp(), ret.getMsg(), Toast.LENGTH_SHORT).show();
                             return;
                         }
 

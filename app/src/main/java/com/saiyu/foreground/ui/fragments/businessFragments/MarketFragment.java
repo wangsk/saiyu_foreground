@@ -134,7 +134,7 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
                     ApiRequest.getTopOrderList(dateList.get((dateList.size() - 1)),"MarketFragment_getTopOrderList",pb_loading);
                 }
 
-                bar_view.setValue(value_aver,value_max, dateList, 250);
+                bar_view.setValue(value_aver,value_max, dateList, 150);
                 bar_view.setCurrentMonth(dateList.size());
             }
 
