@@ -265,7 +265,7 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
                 tv_count_prompt.setText("输入您要出售的Q币数量，最大不超过"+ maxQBcount + "Q币");
 
                 rb_mark.setRating(ret.getData().getVipLevel()/2);
-                tv_orderCount.setText("成交" + ret.getData().getOrderRSettleTotalCount() + "笔" + ret.getData().getOrderRSettleTotalMoney() + "元");
+                tv_orderCount.setText("成交" + ret.getData().getOrderRSettleTotalCount() + "笔");
                 tv_orderTime.setText(ret.getData().getAverageConfirmTime());
                 tv_discount.setText(ret.getData().getReserveDiscount() + "折");
 

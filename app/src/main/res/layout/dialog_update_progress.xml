@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20.7dp"
+        android:text="正在下载最新版"
+        android:textColor="@color/blue"
+        android:textSize="16.5sp" />
+
+    <com.saiyu.foreground.ui.views.NumberProgressBar
+        android:id="@+id/numberbar"
+        style="@style/shipping_popup_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        custom:progress_current="0" />
+
+</LinearLayout>

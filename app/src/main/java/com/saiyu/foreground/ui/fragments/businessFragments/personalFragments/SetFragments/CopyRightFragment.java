@@ -1,6 +1,8 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.personalFragments.SetFragments;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -23,6 +25,7 @@ import com.saiyu.foreground.https.response.AppVersionRet;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.interfaces.OnClickListener;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
+import com.saiyu.foreground.ui.views.NumberProgressBar;
 import com.saiyu.foreground.utils.CallbackUtils;
 import com.saiyu.foreground.utils.DialogUtils;
 import com.saiyu.foreground.utils.LogUtils;
@@ -94,7 +97,6 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
                 return;
             }
             if(ret.getData().isResult() && ret.getData().getSysTerminalEntity() != null && !TextUtils.isEmpty(ret.getData().getSysTerminalEntity().getVersion())){
-
                 serverVersion = Utils.getintVerName(ret.getData().getSysTerminalEntity().getVersion());
                 curVersion = Utils.getintVerName(mContext.getResources().getString(R.string.app_versionName));
                 LogUtils.print("服务器版本号 ： " + serverVersion + "  本地版本号 : " + curVersion);
@@ -121,6 +123,7 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
                     @Override
                     public void onNext(Boolean aBoolean) {
                         if (aBoolean) {
+                            showUpdateProgressDialog();
                             downloadAndInstallAPK(url);
                         } else {
                             Toast.makeText(mContext,"请开启存储权限",Toast.LENGTH_SHORT).show();
@@ -140,24 +143,27 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
     protected static void downloadAndInstallAPK(String versonurl) {
         //下载的apk的文件
         if (TextUtils.isEmpty(versonurl)) {
-            Toast.makeText(mContext,"服务器忙请稍后重试",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext,"下载地址出错",Toast.LENGTH_SHORT).show();
+            if (dialogProgress.isShowing()) {
+                dialogProgress.dismiss();
+            }
             return;
         }
 
         OkHttpUtils.get().url(versonurl).build().execute(new FileCallBack(SdLocal.getDownloadFolder(mContext), "syforeground.apk") {
             @Override
             public void onError(Call call, Exception e, int i) {
-                Toast.makeText(mContext,"服务器忙请稍后重试",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"下载失败",Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
                 // 下载失败时，
-//                if (dialogProgress.isShowing()) {
-//                    dialogProgress.dismiss();
-//                }
+                if (dialogProgress.isShowing()) {
+                    dialogProgress.dismiss();
+                }
             }
 
             @Override
             public void onResponse(File file, int i) {
-//                dialogProgress.dismiss();
+                dialogProgress.dismiss();
                 File newApk = file;
                 LogUtils.print("apkqqwer" + "下载的地址=?????" + file.toString());
                 installApk(newApk);
@@ -168,7 +174,7 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
                 String number = progress * 100 + "";
                 number = number.substring(0, number.indexOf("."));
                 LogUtils.print("下载进度 ： " + Integer.valueOf(number));
-//                bnp.setProgress(Integer.valueOf(number));
+                bnp.setProgress(Integer.valueOf(number));
             }
 
             @Override
@@ -213,7 +219,7 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
                 if(serverVersion <= curVersion){
                     return;
                 }
-                DialogUtils.showDialog(getActivity(), "提示", "有新版本更新，请下载体验", "取消", "体验", new OnClickListener() {
+                DialogUtils.showDialog(getActivity(), "提示", "有新版本更新,请下载体验", "取消", "体验", new OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         LogUtils.print("下载地址 ： " + downloadUrl);
@@ -230,4 +236,25 @@ public class CopyRightFragment extends BaseFragment implements CallbackUtils.Res
                 break;
         }
     }
+
+    /**
+     * 弹出更新进度
+     */
+    private static Dialog dialogProgress;
+    //进度条组件
+    private static NumberProgressBar bnp;
+
+    public static void showUpdateProgressDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);//注意这里的参数要是dialog依赖的acitivity的引用;
+
+        View view = View.inflate(mContext, R.layout.dialog_update_progress, null);
+        bnp = (NumberProgressBar) view.findViewById(R.id.numberbar);
+
+        builder.setView(view);
+        dialogProgress = builder.create();
+        dialogProgress.setCanceledOnTouchOutside(false);
+        dialogProgress.show();
+    }
+
+
 }
