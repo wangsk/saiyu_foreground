@@ -154,8 +154,12 @@ public class OrderSubmitChildFragment extends BaseFragment implements CallbackUt
             }
             if(bundle.getBoolean("IsCustomerConfirmation",false)){
                 ll_selector_3.setVisibility(View.VISIBLE);
+                iv_1.setVisibility(View.INVISIBLE);
+                ConfirmType = "1";//客服代理确认
             } else {
                 ll_selector_3.setVisibility(View.GONE);
+                iv_1.setVisibility(View.VISIBLE);
+                ConfirmType = "0";
             }
         }
     }
