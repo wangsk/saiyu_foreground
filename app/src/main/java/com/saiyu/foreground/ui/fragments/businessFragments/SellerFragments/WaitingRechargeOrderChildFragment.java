@@ -118,4 +118,17 @@ public class WaitingRechargeOrderChildFragment extends BaseFragment {
         }
     };
 
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        try {
+            if(timer != null){
+                timer.cancel();
+                timer = null;
+            }
+        }catch (Exception e){
+
+        }
+    }
+
 }

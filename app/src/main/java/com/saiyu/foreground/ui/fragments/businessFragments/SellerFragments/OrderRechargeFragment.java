@@ -111,6 +111,8 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
 
     private boolean isDetail;
 
+    private int tabPosition = 0;
+
     public static OrderRechargeFragment newInstance(Bundle bundle) {
         OrderRechargeFragment_ fragment = new OrderRechargeFragment_();
         fragment.setArguments(bundle);
@@ -191,13 +193,28 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
                 }
             }
 
-            if(orderTitleAdapter == null){
-                //加载两个子fragment (OrderInfoChildFragment/OrderSubmitChildFragment)
-                orderTitleAdapter = new OrderTitleAdapter(getChildFragmentManager(),ret);
-            }
+            //加载两个子fragment (OrderInfoChildFragment/OrderSubmitChildFragment)
+            orderTitleAdapter = new OrderTitleAdapter(getChildFragmentManager(),ret);
 
             view_pager.setAdapter(orderTitleAdapter);
             layout_tab.setupWithViewPager(view_pager);
+            layout_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    tabPosition = tab.getPosition();
+                    LogUtils.print("tabPosition ==== " + tabPosition);
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
 
             receiveId = ret.getData().getReceiveId();
 
@@ -527,13 +544,15 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
     @Override
     public void onSupportInvisible() {
         super.onSupportInvisible();
-        try {
-            if(timer != null){
-                timer.cancel();
-                timer = null;
-            }
-        }catch (Exception e){
+        if(tabPosition == 0){
+            try {
+                if(timer != null){
+                    timer.cancel();
+                    timer = null;
+                }
+            }catch (Exception e){
 
+            }
         }
     }
 

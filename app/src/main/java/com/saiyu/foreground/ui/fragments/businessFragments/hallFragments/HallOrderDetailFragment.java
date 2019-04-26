@@ -119,6 +119,9 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
     private String rechargeNum = "0";//出售Q币数量
 
+
+    private int tabPosition = 0;
+
     public static HallOrderDetailFragment newInstance(Bundle bundle) {
         HallOrderDetailFragment_ fragment = new HallOrderDetailFragment_();
         fragment.setArguments(bundle);
@@ -219,6 +222,23 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
 
             view_pager.setAdapter(orderTitleAdapter);
             layout_tab.setupWithViewPager(view_pager);
+            layout_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    tabPosition = tab.getPosition();
+                    LogUtils.print("tabPosition ==== " + tabPosition);
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
 
             receiveId = ret.getData().getReceiveId();
 
@@ -569,14 +589,17 @@ public class HallOrderDetailFragment extends BaseFragment implements CallbackUti
     @Override
     public void onSupportInvisible() {
         super.onSupportInvisible();
-        try {
-            if(timer != null){
-                timer.cancel();
-                timer = null;
-            }
-        }catch (Exception e){
+        if(tabPosition == 0){
+            try {
+                if(timer != null){
+                    timer.cancel();
+                    timer = null;
+                }
+            }catch (Exception e){
 
+            }
         }
+
     }
 
     @Override
