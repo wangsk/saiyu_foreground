@@ -52,7 +52,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 @EFragment(R.layout.fragment_hall)
-public class HallFragment extends BaseFragment implements CallbackUtils.ResponseCallback, OnRefreshListener, OnLoadmoreListener, OnItemClickListener {
+public class HallFragment extends BaseFragment implements CallbackUtils.ResponseCallback, OnRefreshListener, OnLoadmoreListener, OnItemClickListener{
     @ViewById
     ProgressBar pb_loading;
     @ViewById
@@ -76,6 +76,8 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     private String rQBCount = "", rDiscount = "", pId = "", extend = "", sort = "";
     private String helpListUrl;
 
+    private boolean isRefresh = true;
+
     public static HallFragment newInstance(Bundle bundle) {
         HallFragment_ fragment = new HallFragment_();
         fragment.setArguments(bundle);
@@ -86,7 +88,15 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
     public void onSupportVisible() {
         super.onSupportVisible();
         CallbackUtils.setCallback(this);
-        ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
+        if(isRefresh){
+            rQBCount = "";
+            rDiscount = "";
+            pId = "";
+            extend = "";
+            sort = "";
+            ApiRequest.hallIndex("g", page + "", pageSize + "", rQBCount, rDiscount, pId, extend, sort, "HallFragment_hallIndex", pb_loading);
+        }
+        isRefresh = true;
 
     }
 
@@ -171,6 +181,8 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
             return;
         }
 
+        isRefresh = false;
+
         Intent intent = new Intent(mContext, ContainerActivity_.class);
         Bundle bundle = new Bundle();
         bundle.putString("orderId", mItems.get(position).getId());
@@ -211,6 +223,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
         switch (view.getId()) {
             case R.id.iv_hall_question:
                 if(!TextUtils.isEmpty(helpListUrl)){
+                    isRefresh = false;
                     Bundle bundle = new Bundle();
                     Intent intent = new Intent(mContext, ContainerActivity_.class);
                     bundle.putString("url", helpListUrl);
@@ -279,6 +292,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
                             @Override
                             public void onNext(Boolean aBoolean) {
                                 if (aBoolean) {
+                                    isRefresh = false;
                                     String phone = "0373-3030977";
                                     //这里"tel:"+电话号码 是固定格式，系统一看是以"tel:"开头的，就知道后面应该是电话号码。
                                     Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone.trim()));
@@ -300,6 +314,7 @@ public class HallFragment extends BaseFragment implements CallbackUtils.Response
 
                 break;
             case R.id.iv_hall_mobile:
+                isRefresh = false;
                 joinQQ();
                 break;
         }

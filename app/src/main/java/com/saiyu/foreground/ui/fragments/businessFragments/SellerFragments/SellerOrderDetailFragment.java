@@ -115,7 +115,7 @@ public class SellerOrderDetailFragment extends BaseFragment implements CallbackU
             }
             tv_confirm_type.setText(ret.getData().getConfirmStr());
             tv_averagetime.setText(ret.getData().getAverageConfirmTime());//平均确认时间
-            tv_contacttype.setText("手机"+ret.getData().getContactMobile()+";qq"+ret.getData().getContactQQ()+";\n"+ret.getData().getIsAllowShowContactStr());//联系方式
+            tv_contacttype.setText(ret.getData().getContactType());//联系方式
             tv_rechargeremark.setText(ret.getData().getRemarks());//充值留言
 
             pic_success = ret.getData().getPic_RechargeSucc();

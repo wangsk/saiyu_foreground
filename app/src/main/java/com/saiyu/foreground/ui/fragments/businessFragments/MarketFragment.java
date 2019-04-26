@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 @EFragment(R.layout.fragment_market)
-public class MarketFragment extends BaseFragment implements CallbackUtils.ResponseCallback,CallbackUtils.OnPositionListener,CallbackUtils.OnPositionListener_2{
+public class MarketFragment extends BaseFragment implements CallbackUtils.ResponseCallback,CallbackUtils.OnPositionListener{
 
     @ViewById
     ProgressBar pb_loading;
@@ -56,6 +56,8 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
 
     private List<String> dateList;
 
+    private boolean isRefresh = true;
+
     public static MarketFragment newInstance(Bundle bundle) {
         MarketFragment_ fragment = new MarketFragment_();
         fragment.setArguments(bundle);
@@ -65,23 +67,18 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
-        CallbackUtils.setOnPositionListener_2(this);
         CallbackUtils.setOnPositionListener(this);
         CallbackUtils.setCallback(this);
-
-    }
-
-    @Override
-    public void setOnPositionListener_2(int position) {
-        LogUtils.print("setOnPositionListener_2 position === " + position);
-        if(position == 0){
+        if(isRefresh){
             ApiRequest.statisticsList("MarketFragment_statisticsList",pb_loading);
         }
+        isRefresh = true;
+
     }
 
     @AfterViews
     void afterView() {
-        CallbackUtils.setOnPositionListener_2(this);
+        CallbackUtils.setCallback(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
         recyclerView.addItemDecoration(new DashlineItemDivider(1));
@@ -188,6 +185,9 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             switch (view.getId()) {
                 case R.id.ll_top_1:
                     if(mItem_2.size() > 0 && mItem_2.get(0) != null){
+
+                        isRefresh = false;
+
                         bundle.putString("orderId",mItem_2.get(0).getId());
                         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.HallOrderDetailFragmentTag);
                         intent.putExtras(bundle);
@@ -196,6 +196,9 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
                     break;
                 case R.id.ll_top_2:
                     if(mItem_2.size() > 1 && mItem_2.get(1) != null){
+
+                        isRefresh = false;
+
                         bundle.putString("orderId",mItem_2.get(1).getId());
                         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.HallOrderDetailFragmentTag);
                         intent.putExtras(bundle);
@@ -204,6 +207,9 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
                     break;
                 case R.id.ll_top_3:
                     if(mItem_2.size() > 2 && mItem_2.get(2) != null){
+
+                        isRefresh = false;
+
                         bundle.putString("orderId",mItem_2.get(2).getId());
                         bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.HallOrderDetailFragmentTag);
                         intent.putExtras(bundle);

@@ -1,17 +1,12 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.SellerFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.saiyu.foreground.R;
-import com.saiyu.foreground.ui.activitys.ContainerActivity;
-import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;

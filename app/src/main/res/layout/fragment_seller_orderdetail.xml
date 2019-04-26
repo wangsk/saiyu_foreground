@@ -294,7 +294,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/black_light"
                     android:layout_marginLeft="10dp"
-                    android:text="贷款总额"
+                    android:text="货款总额"
                     android:textSize="15sp" />
 
                 <TextView

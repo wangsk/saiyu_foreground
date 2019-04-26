@@ -86,7 +86,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
 
     private boolean IsCustomerConfirmation, IsImgConfirmation, IsLessThanOriginalPrice, IsOrderPwd, IsFriendLimit;
 
-    private final Timer timer = new Timer();
+    private Timer timer = null;
     private long surplusTime_20,surplusTime_40;
 
     private int isLock;
@@ -451,11 +451,15 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
 
     //计时器
     private void setTime(String createTime) {
+        LogUtils.print("createTime？ ==== " + createTime);
         long time = TimeParseUtils.TeamTimeStringToMills(createTime);
         long betweenTime_20 = 20 * 60 * 1000;//20分钟
         long betweenTime_40 = 40 * 60 * 1000;//40分钟
         surplusTime_20 = (betweenTime_20 - (System.currentTimeMillis() - time))/1000;
         surplusTime_40 = (betweenTime_40 - (System.currentTimeMillis() - time))/1000;
+        if(timer == null){
+            timer = new Timer();
+        }
         timer.schedule(new TimerTask() {
             public void run() {
                 if(surplusTime_20 > 0){
@@ -469,7 +473,6 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
                     msg.arg1 = mm;
                     msg.arg2 = ss;
                     handler.sendMessage(msg);
-//                    LogUtils.print("还剩" + hh + "小时" + mm + "分钟" + ss + "秒");
                 } else {
                     if(surplusTime_40 > 0 ){
                         surplusTime_40--;
@@ -503,7 +506,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
                         tv_time.setText(msg.arg1 + "分" + msg.arg2 + "秒");
                         tv_prompt_1.setText("后将强制取消订单");
                         tv_prompt_2.setText("已扣除");
-                        int money = (20 - msg.arg1)*10;
+                        int money = (19 - msg.arg1)*10;
                         tv_prompt_3.setText(money+"");
                         tv_prompt_4.setText("接单点数,");
                     }
@@ -522,10 +525,24 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
     };
 
     @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        try {
+            if(timer != null){
+                timer.cancel();
+                timer = null;
+            }
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
     public boolean onBackPressedSupport() {
         try {
             if(timer != null){
                 timer.cancel();
+                timer = null;
             }
         }catch (Exception e){
 
