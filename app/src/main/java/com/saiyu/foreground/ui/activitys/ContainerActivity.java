@@ -13,6 +13,7 @@ import com.saiyu.foreground.ui.fragments.GuideFragment;
 import com.saiyu.foreground.ui.fragments.LoginFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistFragment;
 import com.saiyu.foreground.ui.fragments.RegistFragments.RegistUnionIdFragment;
+import com.saiyu.foreground.ui.fragments.SystemMaintenanceFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderHistoryFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragments.SetBetweenTimeFragment;
@@ -125,6 +126,7 @@ public class ContainerActivity extends BaseActivity {
     public static final int CashDetailFragmentTag = 44;//资金明细
     public static final int RightFragmentTag = 45;//申请维权
     public static final int ConfirmReceiverFragmentTag = 46;//确认收货
+    public static final int SystemMaintenanceFragmentTag = 47;//系统维护
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -220,6 +222,8 @@ public class ContainerActivity extends BaseActivity {
                 return RightFragment.newInstance(bundle);
             case ConfirmReceiverFragmentTag:
                 return ConfirmReceiverFragment.newInstance(bundle);
+            case SystemMaintenanceFragmentTag:
+                return SystemMaintenanceFragment.newInstance(bundle);
                 default:
                     return null;
         }

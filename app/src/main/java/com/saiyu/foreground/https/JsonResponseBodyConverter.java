@@ -47,12 +47,9 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             String code = String.valueOf((Double) datamap.get("code"));
             if (!"200.0".equals(code)) {
                 LogUtils.print("code === " + code);
-                if("411.0".equals(code)){//重新登录
-                    SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
-                    SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
-                    SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
+                if("411.0".equals(code) || "413.0".equals(code)){//重新登录
 
-                    CallbackUtils.doExitCallback();
+                    CallbackUtils.doExitCallback(code);
 
                     return null;
                 }

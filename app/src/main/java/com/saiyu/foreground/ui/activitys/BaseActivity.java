@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,8 +15,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.saiyu.foreground.App;
+import com.saiyu.foreground.consts.ConstValue;
 import com.saiyu.foreground.utils.ButtonUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.SPUtils;
 
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
@@ -125,9 +128,24 @@ public class BaseActivity extends SupportActivity implements CallbackUtils.OnExi
     }
 
     @Override
-    public void setOnExitListener() {
-        handler.sendEmptyMessage(1);
-        handler.sendEmptyMessageDelayed(2,2000);
+    public void setOnExitListener(String code) {
+        if(TextUtils.isEmpty(code)){
+            return;
+        }
+        if("411.0".equals(code)){//账号在其他端退出登录，需要将用户退出登录
+            SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
+            SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
+            SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
+            handler.sendEmptyMessage(1);
+            handler.sendEmptyMessageDelayed(2,2000);
+        } else if("413.0".equals(code)){//服务器维护(数据出错什么的异常，需要用户暂时不能登录操作)
+            SPUtils.putString(ConstValue.ACCESS_TOKEN, "");
+            SPUtils.putInt(ConstValue.MainBottomVisibleType,0);//卖家、买家激活状态清空
+            SPUtils.putInt(ConstValue.IdentifyInfo,0);//补填身份信息清空
+            handler.sendEmptyMessage(3);
+
+        }
+
     }
 
     public void restartApplication(Context context) {
@@ -144,6 +162,15 @@ public class BaseActivity extends SupportActivity implements CallbackUtils.OnExi
             switch (msg.what){
                 case 1:
                     Toast.makeText(BaseActivity.this,"您的账号已退出，请重新登录",Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(BaseActivity.this,"系统维护，给您带来不便，敬请谅解",Toast.LENGTH_SHORT).show();
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext,ContainerActivity_.class);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.SystemMaintenanceFragmentTag);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mContext.startActivity(intent);
                     break;
                 case 2:
                     restartApplication(BaseActivity.this);

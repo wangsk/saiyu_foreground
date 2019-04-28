@@ -102,7 +102,7 @@ public class CallbackUtils {
     }
 
     public interface OnExitListener {
-        void setOnExitListener();
+        void setOnExitListener(String code);
     }
 
     public static OnExitListener mOnExitListener;
@@ -111,9 +111,9 @@ public class CallbackUtils {
         mOnExitListener = onExitListener;
     }
 
-    public static void doExitCallback(){
+    public static void doExitCallback(String code){
         if(mOnExitListener != null){
-            mOnExitListener.setOnExitListener();
+            mOnExitListener.setOnExitListener(code);
         }
     }
 

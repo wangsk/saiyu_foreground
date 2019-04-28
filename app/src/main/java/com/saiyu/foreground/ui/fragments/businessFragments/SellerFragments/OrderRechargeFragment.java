@@ -280,7 +280,7 @@ public class OrderRechargeFragment extends BaseFragment implements CallbackUtils
         Intent intent = new Intent(mContext, ContainerActivity_.class);
         switch (view.getId()) {
             case R.id.btn_prompt:
-                bundle.putString("url", "https://www.saiyu.com/help/");
+                bundle.putString("url", "https://www.saiyu.com/news-142.html");
                 bundle.putString("type","帮助文档");//
                 bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.WebFragmentTag);
                 intent.putExtras(bundle);

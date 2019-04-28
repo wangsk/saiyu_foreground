@@ -81,6 +81,7 @@ public class RechargeRecordFragment extends BaseFragment implements CallbackUtil
     void afterView() {
         tv_title_content.setText("充值记录");
         tv_title_right.setText("资金明细");
+        tv_title_right.setTextSize(14);
         tv_title_right.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //分割线的颜色
