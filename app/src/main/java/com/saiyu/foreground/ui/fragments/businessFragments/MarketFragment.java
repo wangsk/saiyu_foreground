@@ -156,23 +156,24 @@ public class MarketFragment extends BaseFragment implements CallbackUtils.Respon
             }
             mItem_2.clear();
             mItem_2.addAll(ret.getData().getTopOrderList());
-            if(mItem_2.size() > 0){
-                for(int i = 0; i < mItem_2.size(); i++){
-                    switch (i){
-                        case 0:
-                            tv_top_1.setText(mItem_2.get(0).getOrderTitle());
-                            ll_top_1.setVisibility(View.VISIBLE);
-                            break;
-                        case 1:
-                            tv_top_2.setText(mItem_2.get(1).getOrderTitle());
-                            ll_top_2.setVisibility(View.VISIBLE);
-                            break;
-                        case 2:
-                            tv_top_3.setText(mItem_2.get(2).getOrderTitle());
-                            ll_top_3.setVisibility(View.VISIBLE);
-                            break;
-                    }
-                }
+            if(mItem_2.size() == 1){
+                tv_top_1.setText(mItem_2.get(0).getOrderTitle());
+                ll_top_1.setVisibility(View.VISIBLE);
+                ll_top_2.setVisibility(View.GONE);
+                ll_top_3.setVisibility(View.GONE);
+            } else if(mItem_2.size() == 2){
+                tv_top_1.setText(mItem_2.get(0).getOrderTitle());
+                ll_top_1.setVisibility(View.VISIBLE);
+                tv_top_2.setText(mItem_2.get(1).getOrderTitle());
+                ll_top_2.setVisibility(View.VISIBLE);
+                ll_top_3.setVisibility(View.GONE);
+            } else if(mItem_2.size() >= 3){
+                tv_top_1.setText(mItem_2.get(0).getOrderTitle());
+                ll_top_1.setVisibility(View.VISIBLE);
+                tv_top_2.setText(mItem_2.get(1).getOrderTitle());
+                ll_top_2.setVisibility(View.VISIBLE);
+                tv_top_3.setText(mItem_2.get(2).getOrderTitle());
+                ll_top_3.setVisibility(View.VISIBLE);
             }
         }
     }
