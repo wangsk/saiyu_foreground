@@ -2,7 +2,7 @@ package com.saiyu.foreground.consts;
 
 public class ConstValue {
 
-    public static boolean flag = true;//是否打开log打印
+    public static boolean flag = false;//是否打开log打印
 
 //    public static final String SERVR_URL = "http://192.168.1.147:66/";//测试地址
 //    public static final String SERVR_URL = "http://192.168.1.147:88/";//测试断点地址
