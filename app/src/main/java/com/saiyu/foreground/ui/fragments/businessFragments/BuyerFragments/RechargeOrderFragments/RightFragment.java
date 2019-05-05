@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.saiyu.foreground.App;
 import com.saiyu.foreground.R;
 import com.saiyu.foreground.calenderview.SelectTimeDialog;
 import com.saiyu.foreground.consts.ConstValue;
@@ -35,7 +37,9 @@ import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.PreOrderManagerFragment;
 import com.saiyu.foreground.ui.views.PhotoViewDialog;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
+import com.saiyu.foreground.utils.BitmapUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.GetPathFromUri;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
 import com.saiyu.foreground.utils.TimeParseUtils;
@@ -147,21 +151,41 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
                 if(uploadCode == 4){
                     url_1 = ret.getData().getSrc();
                     iv_2.setVisibility(View.VISIBLE);
-                    iv_1.setImageBitmap(bitmap);
+
+                    Glide.with(App.getApp())
+                            .load(url_1 + "?" + OrderImgServerProcess)
+                            .error(R.mipmap.ic_launcher)
+                            .into(iv_1);
+
                     uploadCode--;
                 } else if(uploadCode == 3){
                     url_2 = ret.getData().getSrc();
                     iv_3.setVisibility(View.VISIBLE);
-                    iv_2.setImageBitmap(bitmap);
+
+                    Glide.with(App.getApp())
+                            .load(url_2 + "?" + OrderImgServerProcess)
+                            .error(R.mipmap.ic_launcher)
+                            .into(iv_2);
+
                     uploadCode--;
                 } else if(uploadCode == 2){
                     url_3 = ret.getData().getSrc();
                     iv_4.setVisibility(View.VISIBLE);
-                    iv_3.setImageBitmap(bitmap);
+
+                    Glide.with(App.getApp())
+                            .load(url_3 + "?" + OrderImgServerProcess)
+                            .error(R.mipmap.ic_launcher)
+                            .into(iv_3);
+
                     uploadCode--;
                 } else if(uploadCode == 1){
                     url_4 = ret.getData().getSrc();
-                    iv_4.setImageBitmap(bitmap);
+
+                    Glide.with(App.getApp())
+                            .load(url_4 + "?" + OrderImgServerProcess)
+                            .error(R.mipmap.ic_launcher)
+                            .into(iv_4);
+
                     uploadCode--;
                 }
 
@@ -376,93 +400,39 @@ public class RightFragment extends BaseFragment implements CallbackUtils.Respons
             switch (requestCode){
                 case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                     LogUtils.print("选择相册之后的处理");
-                    trimImage(data.getData(), ConstValue.ACTION_TRIM_IMAGE);
+                    String path = GetPathFromUri.getPath(mContext,data.getData());
+                    if(!TextUtils.isEmpty(path)){
+                        ApiRequest.uploadIdentity(new File(path),"RightFragment_uploadIdentity",pb_loading);
+                    } else {
+                        LogUtils.print("选择相册照片异常");
+                    }
                     break;
                 case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                     LogUtils.print("选择照相机之后的处理");
-                    trimImage(RxPhotoTool.imageUriFromCamera, ConstValue.ACTION_TRIM_IMAGE);
-                    break;
-                case ConstValue.ACTION_TRIM_IMAGE:
-                    LogUtils.print("普通裁剪后的处理");
-                    Bundle bundle = data.getExtras();
-                    if(bundle == null){
-                        return;
-                    }
-                    try {
-                        bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(outputUri));
+                    String pathFromCamera = GetPathFromUri.getPath(mContext,RxPhotoTool.imageUriFromCamera);
+                    if(!TextUtils.isEmpty(pathFromCamera)){
 
-                        File file = new File(getActivity().getExternalCacheDir() + syUser_crop);
-                        File oldFile = new File(getActivity().getExternalCacheDir() + syUser_crop);
-                        File newFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                                String.valueOf(System.currentTimeMillis()) + ".png");
+                        File output = new File(getActivity().getExternalCacheDir(), "/" + System.currentTimeMillis() + ".png");
                         try {
-                            copyFileUsingFileChannels(oldFile, newFile);
+                            if (output.exists()) {
+                                output.delete();
+                            }
+                            output.createNewFile();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        LogUtils.print("file === " + file.length());
-                        ApiRequest.uploadIdentity(file,"RightFragment_uploadIdentity",pb_loading);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
 
+                        BitmapUtils.compressBitmap(pathFromCamera,output.getPath(),2000);
+
+                        ApiRequest.uploadIdentity(output,"RightFragment_uploadIdentity",pb_loading);
+                    } else {
+                        LogUtils.print("选择相册照片异常");
+                    }
                     break;
 
                 default:
                     break;
             }
-        }
-    }
-
-    private Uri outputUri;
-    String syUser_crop = "/" + System.currentTimeMillis() + ".png";
-
-    // 修剪图片
-    public void trimImage(Uri uri, int requestCode) {
-        File output = new File(getActivity().getExternalCacheDir(), syUser_crop);
-        try {
-            if (output.exists()) {
-                output.delete();
-            }
-            output.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        outputUri = Uri.fromFile(output);
-
-        Intent intent = new Intent("com.android.camera.action.CROP");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        }
-
-        intent.setDataAndType(uri, "image/*");// mUri是已经选择的图片Uri
-        intent.putExtra("crop", "true");
-        //裁剪框比例
-        intent.putExtra("aspectX", 0.1);
-        intent.putExtra("aspectY", 0.1);
-        intent.putExtra("outputX", 400);
-        intent.putExtra("outputY", 280);
-        intent.putExtra("scale", true);
-        intent.putExtra("scaleUpIfNeeded", true);//黑边
-        intent.putExtra("outputFormat", "PNG");
-        intent.putExtra("noFaceDetection", true);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
-        intent.putExtra("return-data", false);// true:不返回uri，false：返回uri
-        mContext.startActivityForResult(intent, requestCode);
-    }
-
-    private static void copyFileUsingFileChannels(File source, File dest)
-            throws IOException {
-        FileChannel inputChannel = null;
-        FileChannel outputChannel = null;
-        try {
-            inputChannel = new FileInputStream(source).getChannel();
-            outputChannel = new FileOutputStream(dest).getChannel();
-            outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
-        } finally {
-            inputChannel.close();
-            outputChannel.close();
         }
     }
 

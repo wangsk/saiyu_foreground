@@ -150,7 +150,7 @@ public class RequestParams {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         String name = file.getName();
         String prefix = name.substring(name.lastIndexOf(".") + 1);
-        return MultipartBody.Part.createFormData("FilePath", "userHead." + prefix, requestBody);
+        return MultipartBody.Part.createFormData("FilePath", "upload." + prefix, requestBody);
     }
 
 

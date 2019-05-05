@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.yanzhenjie:recyclerview-swipe-1.0.4">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-swipe-1.0.4.aar/4fe2c8c7d3292217fe9685caae017780/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-swipe-1.0.4.aar/81ac48d66c3dac0cfdcd303c0700d36e/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-swipe-1.0.4.aar/4fe2c8c7d3292217fe9685caae017780/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-swipe-1.0.4.aar/4fe2c8c7d3292217fe9685caae017780/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-swipe-1.0.4.aar/81ac48d66c3dac0cfdcd303c0700d36e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/recyclerview-swipe-1.0.4.aar/81ac48d66c3dac0cfdcd303c0700d36e/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

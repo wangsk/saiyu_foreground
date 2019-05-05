@@ -122,6 +122,11 @@
             android:exported="true"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <!--百度统计上传carsh-->
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.hyman:flowlayout-lib-1.1.2">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/flowlayout-lib-1.1.2.aar/6dce18c43447411bf7a63771a9985bb3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/flowlayout-lib-1.1.2.aar/6dce18c43447411bf7a63771a9985bb3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/flowlayout-lib-1.1.2.aar/0894743bdfa6af9dbc6b8c922fe207d6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/flowlayout-lib-1.1.2.aar/0894743bdfa6af9dbc6b8c922fe207d6/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

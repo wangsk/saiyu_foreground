@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,9 @@ import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.vondear.rxtool.RxPhotoTool;
+import com.vondear.rxtool.RxSPTool;
+import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCropActivity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -47,6 +51,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -163,23 +170,23 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
                 if(uploadCode == 0){
                     identity_front = ret.getData().getSrc();
                     LogUtils.print("identity_front=== " + identity_front);
-//                    if(!TextUtils.isEmpty(identity_front)){
-//                        Glide.with(App.getApp())
-//                                .load(identity_front + "?" + UserImgServerProcess)
-//                                .error(R.mipmap.ic_launcher)
-//                                .into(iv_identity_front);
-//                        ll_identity_front.setVisibility(View.GONE);
-//                    }
+                    if(!TextUtils.isEmpty(identity_front)){
+                        Glide.with(App.getApp())
+                                .load(identity_front + "?" + UserImgServerProcess)
+                                .error(R.mipmap.ic_launcher)
+                                .into(iv_identity_front);
+                        ll_identity_front.setVisibility(View.GONE);
+                    }
                 } else if(uploadCode == 1){
                     identity_bg = ret.getData().getSrc();
                     LogUtils.print("identity_bg=== " + identity_bg);
-//                    if(!TextUtils.isEmpty(identity_bg)){
-//                        Glide.with(App.getApp())
-//                                .load(identity_bg + "?" + UserImgServerProcess)
-//                                .error(R.mipmap.ic_launcher)
-//                                .into(iv_identity_bg);
-//                        ll_identity_bg.setVisibility(View.GONE);
-//                    }
+                    if(!TextUtils.isEmpty(identity_bg)){
+                        Glide.with(App.getApp())
+                                .load(identity_bg + "?" + UserImgServerProcess)
+                                .error(R.mipmap.ic_launcher)
+                                .into(iv_identity_bg);
+                        ll_identity_bg.setVisibility(View.GONE);
+                    }
                 }
             }
         } else if(method.equals("UploadIdentityFragment_realNameSubmit")){
@@ -237,102 +244,66 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
             switch (requestCode){
                 case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                     LogUtils.print("选择相册之后的处理");
-                    trimImage(data.getData(), ConstValue.ACTION_TRIM_IMAGE);
+                    initUCrop(data.getData());
                     break;
                 case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                     LogUtils.print("选择照相机之后的处理");
-                    trimImage(RxPhotoTool.imageUriFromCamera, ConstValue.ACTION_TRIM_IMAGE);
+                    initUCrop(RxPhotoTool.imageUriFromCamera);
                     break;
-                case ConstValue.ACTION_TRIM_IMAGE:
-                    LogUtils.print("普通裁剪后的处理");
-                    Bundle bundle = data.getExtras();
-                    if(bundle == null){
-                        return;
-                    }
-                    try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(outputUri));
-
-                        if(uploadCode == 0){
-                            iv_identity_front.setImageBitmap(bitmap);
-                            ll_identity_front.setVisibility(View.GONE);
-                        } else if(uploadCode == 1){
-                            iv_identity_bg.setImageBitmap(bitmap);
-                            ll_identity_bg.setVisibility(View.GONE);
-                        }
-
-                        File file = new File(getActivity().getExternalCacheDir() + syUser_crop);
-                        File oldFile = new File(getActivity().getExternalCacheDir() + syUser_crop);
-                        File newFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                                String.valueOf(System.currentTimeMillis()) + ".png");
-                        try {
-                            copyFileUsingFileChannels(oldFile, newFile);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        LogUtils.print("file === " + file.length());
-                        ApiRequest.uploadIdentity(file,"UploadIdentityFragment_uploadIdentity",pb_loading);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
+                case UCrop.REQUEST_CROP://UCrop裁剪之后的处理
+                    LogUtils.print("UCrop裁剪之后的处理");
+                    Uri resultUri = UCrop.getOutput(data);
+                    File file = new File(RxPhotoTool.getImageAbsolutePath(mContext, resultUri));
+                    RxSPTool.putContent(mContext, "AVATAR", resultUri.toString());
+                    ApiRequest.uploadIdentity(file,"UploadIdentityFragment_uploadIdentity",pb_loading);
                     break;
-
                 default:
                     break;
             }
         }
     }
 
-    private Uri outputUri;
-    String syUser_crop = "/" + System.currentTimeMillis() + ".png";
+    private void initUCrop(Uri uri) {
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);
+        long time = System.currentTimeMillis();
+        String imageName = timeFormatter.format(new Date(time));
 
-    // 修剪图片
-    public void trimImage(Uri uri, int requestCode) {
-        File output = new File(getActivity().getExternalCacheDir(), syUser_crop);
-        try {
-            if (output.exists()) {
-                output.delete();
-            }
-            output.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        outputUri = Uri.fromFile(output);
+        Uri destinationUri = Uri.fromFile(new File(mContext.getCacheDir(), imageName + ".png"));
 
-        Intent intent = new Intent("com.android.camera.action.CROP");
+        UCrop.Options options = new UCrop.Options();
+        //设置裁剪图片可操作的手势
+        options.setAllowedGestures(UCropActivity.NONE, UCropActivity.NONE, UCropActivity.ALL);
+        //设置隐藏底部容器，默认显示
+        //options.setHideBottomControls(true);
+        //设置toolbar颜色
+        options.setToolbarColor(ActivityCompat.getColor(mContext, R.color.blue));
+        //设置状态栏颜色
+        options.setStatusBarColor(ActivityCompat.getColor(mContext, R.color.blue));
+        options.setHideBottomControls(true);
+        //开始设置
+        //设置最大缩放比例
+        options.setMaxScaleMultiplier(5);
+        //设置图片在切换比例时的动画
+        options.setImageToCropBoundsAnimDuration(666);
+        //设置裁剪窗口是否为椭圆
+        //options.setCircleDimmedLayer(true);
+        //设置是否展示矩形裁剪框
+        options.setShowCropFrame(true);
+        //设置裁剪框横竖线的宽度
+        //options.setCropGridStrokeWidth(20);
+        //设置裁剪框横竖线的颜色
+        //options.setCropGridColor(Color.GREEN);
+        //设置竖线的数量
+        options.setCropGridColumnCount(2);
+        //设置横线的数量
+        options.setCropGridRowCount(2);
+        options.setFreeStyleCropEnabled(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        }
-
-        intent.setDataAndType(uri, "image/*");// mUri是已经选择的图片Uri
-        intent.putExtra("crop", "true");
-        //裁剪框比例
-        intent.putExtra("aspectX", 0.1);
-        intent.putExtra("aspectY", 0.1);
-        intent.putExtra("outputX", 400);
-        intent.putExtra("outputY", 280);
-        intent.putExtra("scale", true);
-        intent.putExtra("scaleUpIfNeeded", true);//黑边
-        intent.putExtra("outputFormat", "PNG");
-        intent.putExtra("noFaceDetection", true);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
-        intent.putExtra("return-data", false);// true:不返回uri，false：返回uri
-        mContext.startActivityForResult(intent, requestCode);
-    }
-
-    private static void copyFileUsingFileChannels(File source, File dest)
-            throws IOException {
-        FileChannel inputChannel = null;
-        FileChannel outputChannel = null;
-        try {
-            inputChannel = new FileInputStream(source).getChannel();
-            outputChannel = new FileOutputStream(dest).getChannel();
-            outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
-        } finally {
-            inputChannel.close();
-            outputChannel.close();
-        }
+        UCrop.of(uri, destinationUri)
+                .withAspectRatio(16, 9)
+                .withMaxResultSize(1000, 1000)
+                .withOptions(options)
+                .start(mContext);
     }
 
 
