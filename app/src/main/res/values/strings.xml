@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">赛鱼</string>
     <!--//版本更新 ,需要更改这里和 versionCode-->
-    <string name="app_versionName">1.0.0</string>
+    <string name="app_versionName">1.0.2</string>
 
     <string name="zhifubao_prompt">
         1.支付宝必须通过实名认证或者已绑定银行卡\n
