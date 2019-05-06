@@ -1,5 +1,6 @@
 package com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -16,6 +17,8 @@ import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.CashDetailRet;
 import com.saiyu.foreground.https.response.ProductPropertyRet;
 import com.saiyu.foreground.interfaces.OnItemClickListener;
+import com.saiyu.foreground.ui.activitys.ContainerActivity;
+import com.saiyu.foreground.ui.activitys.ContainerActivity_;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.DashlineItemDivider;
 import com.saiyu.foreground.utils.CallbackUtils;
@@ -47,6 +50,7 @@ public class GamePlaceSelectorFragment extends BaseFragment implements CallbackU
     private String name,qbCount,unitName,convertCount,productId,place,ProductProperty1,ProductProperty2,ProductProperty3;
     private int isRole;
     private int index;
+    private boolean isSelectAgain = false;
 
     public static GamePlaceSelectorFragment newInstance(Bundle bundle) {
         GamePlaceSelectorFragment_ fragment = new GamePlaceSelectorFragment_();
@@ -72,6 +76,8 @@ public class GamePlaceSelectorFragment extends BaseFragment implements CallbackU
 
         Bundle bundle = getArguments();
         if(bundle != null){
+
+            isSelectAgain = bundle.getBoolean("isSelectAgain",false);
 
             name = bundle.getString("name");
             productId = bundle.getString("ProductId");
@@ -129,8 +135,18 @@ public class GamePlaceSelectorFragment extends BaseFragment implements CallbackU
                         bundle.putString("ProductProperty3",place);
                         break;
                 }
-                ReleaseOrderFragment releaseOrderFragment = ReleaseOrderFragment.newInstance(bundle);
-                start(releaseOrderFragment);
+                if(isSelectAgain){
+                    Intent intent = new Intent();
+                    intent.putExtras(bundle);
+                    getActivity().setResult(RESULT_OK, intent);
+                } else {
+                    Intent intent = new Intent(mContext, ContainerActivity_.class);
+                    bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.ReleaseOrderFragmentTag);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+                getActivity().finish();
+
 
             } else {
                 Bundle bundle = new Bundle();
@@ -156,6 +172,8 @@ public class GamePlaceSelectorFragment extends BaseFragment implements CallbackU
                         break;
                 }
 
+                bundle.putBoolean("isSelectAgain",isSelectAgain);
+
                 bundle.putInt("index",(index+1));
                 GamePlaceSelectorFragment gamePlaceSelectorFragment = GamePlaceSelectorFragment.newInstance(bundle);
                 start(gamePlaceSelectorFragment);
@@ -177,7 +195,12 @@ public class GamePlaceSelectorFragment extends BaseFragment implements CallbackU
     void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_title_back:
-                getFragmentManager().popBackStack();
+                if(index == 0){
+                    getActivity().onBackPressed();
+                } else {
+                    getFragmentManager().popBackStack();
+                }
+
                 break;
         }
     }

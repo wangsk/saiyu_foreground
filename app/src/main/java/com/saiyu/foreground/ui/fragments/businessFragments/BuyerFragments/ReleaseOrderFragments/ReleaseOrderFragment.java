@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -28,6 +30,7 @@ import com.saiyu.foreground.https.request.RequestParams;
 import com.saiyu.foreground.https.response.BaseRet;
 import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.OrderNumRet;
+import com.saiyu.foreground.https.response.ProductPropertyRet;
 import com.saiyu.foreground.interfaces.OnClickListener;
 import com.saiyu.foreground.ui.activitys.ContainerActivity;
 import com.saiyu.foreground.ui.activitys.ContainerActivity_;
@@ -51,9 +54,9 @@ import java.util.List;
 @EFragment(R.layout.fragment_release_order)
 public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.ResponseCallback, CallbackUtils.OnActivityCallBack {
     @ViewById
-    TextView tv_title_content, tv_orderName, tv_release_count_prompt, tv_time_online, tv_function, tv_sw, tv_rechargeGame, tv_gamePlace;
+    TextView tv_title_content, tv_orderName, tv_release_count_prompt, tv_time_online, tv_function, tv_sw, tv_rechargeGame, tv_gamePlace,tv_model;
     @ViewById
-    Button btn_title_back;
+    Button btn_title_back,btn_model;
     @ViewById
     ProgressBar pb_loading;
     @ViewById
@@ -69,13 +72,18 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
     @ViewById
     Spinner sp_selector;
     @ViewById
-    EditText et_recharge_qqnum, et_release_count, et_release_price, et_release_discount, et_qq, et_role,et_mobile;
+    EditText et_recharge_qqnum, et_release_count, et_release_price, et_release_discount, et_qq, et_role,et_mobile,et_model;
     @ViewById
     Switch sw;
+    @ViewById
+    RadioButton rb_no,rb_yes;
+    @ViewById
+    RadioGroup rg_selector;
     private boolean IsNeedMobile;
     private List<String> postScriptList;
     private String name, unitName, ReserveAccount, mobile, orderNum, convertCount, productId, reserveTitle, onLineStartTime, onLineStopTime, orderEndTime, orderPsw,
-             orderInterval = "3", IsAgentConfirm, ReservePwd, OftenLoginProvince, OftenLoginCity, IsPicConfirm, Remarks, IsAllowShowContact, ProductProperty1, ProductProperty2, ProductProperty3, RoleName;
+             orderInterval = "3", IsAgentConfirm, ReservePwd, OftenLoginProvince, OftenLoginCity, IsPicConfirm, Remarks, IsAllowShowContact, ProductProperty1, ProductProperty2, ProductProperty3, RoleName
+            ,qbConvertCount;
     private int isRole;
     private float LessChargeDiscount = 1f,OnceMinCount = 0f;
 
@@ -107,7 +115,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             productId = bundle.getString("ProductId");
             unitName = bundle.getString("unitName");
             convertCount = bundle.getString("convertCount");
-            String qbConvertCount = bundle.getString("qbCount");
+            qbConvertCount = bundle.getString("qbCount");
             if(!TextUtils.isEmpty(qbConvertCount)){
                 qbConvertCountBig = new BigDecimal(qbConvertCount);
             }
@@ -152,6 +160,26 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             }
         });
 
+        rg_selector.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rb_no:
+                        et_model.setVisibility(View.GONE);
+                        tv_model.setVisibility(View.GONE);
+                        btn_model.setVisibility(View.GONE);
+                        break;
+                    case R.id.rb_yes:
+                        et_model.setVisibility(View.VISIBLE);
+                        et_model.setText("");
+                        tv_model.setVisibility(View.GONE);
+                        btn_model.setVisibility(View.VISIBLE);
+                        btn_model.setText("保存");
+                        break;
+                }
+            }
+        });
+
         ApiRequest.getOrderNum("ReleaseOrderFragment_getOrderNum", pb_loading);
     }
 
@@ -160,6 +188,7 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
         if (baseRet == null || TextUtils.isEmpty(method)) {
             return;
         }
+
         if (method.equals("ReleaseOrderFragment_orderPublish")) {
             BooleanRet ret = (BooleanRet) baseRet;
             if (ret.getData() == null) {
@@ -201,90 +230,108 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
             }
         } else if (method.equals("ReleaseOrderFragment_checkLimitQQ")) {
             BooleanRet ret = (BooleanRet) baseRet;
-            if (ret.getData() == null) {
+            if (ret.getData() == null || !ret.getData().isResult()) {
                 return;
             }
-            if (ret.getData().isResult()) {
-                initPopWindow_9(name, new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (IsNeedMobile) {
-                            Bundle bundle = new Bundle();
-                            bundle.putString("OrderNum", orderNum);
-                            bundle.putString("ProductId", productId);
-                            bundle.putString("ProductName", name);
-                            bundle.putString("ProductProperty1", ProductProperty1);
-                            bundle.putString("ProductProperty2", ProductProperty2);
-                            bundle.putString("ProductProperty3", ProductProperty3);
-                            bundle.putString("ReserveAccount", ReserveAccount);
-                            bundle.putString("ReserveQBCount", qbCount.toString());
-                            bundle.putString("ReserveUnitCount", et_release_count_str);
-                            bundle.putString("ReservePrice", et_release_price_str);
-                            bundle.putString("ReserveDiscount", et_release_discount_str);
-                            bundle.putString("ReserveTitle", reserveTitle);
-                            bundle.putString("OnlineTimeBegin", onLineStartTime);
-                            bundle.putString("OnlineTimeEnd", onLineStopTime);
-                            bundle.putString("OrderExpiryTime", orderEndTime);
-                            bundle.putString("OrderPwd", orderPsw);
-                            bundle.putFloat("OnceMinCount", OnceMinCount);
-                            bundle.putFloat("LessChargeDiscount", LessChargeDiscount);
-                            bundle.putString("OrderInterval", orderInterval);
-                            bundle.putString("IsAgentConfirm", IsAgentConfirm);
-                            bundle.putString("ReservePwd", ReservePwd);
-                            bundle.putString("OftenLoginProvince", OftenLoginProvince);
-                            bundle.putString("OftenLoginCity", OftenLoginCity);
-                            bundle.putString("IsPicConfirm", IsPicConfirm);
-                            bundle.putString("Remarks", Remarks);
-                            bundle.putString("ContactMobile", mobile);
-                            bundle.putString("ContactQQ", et_qq.getText().toString());
-                            bundle.putString("RoleName", RoleName);
-                            bundle.putString("IsAllowShowContact",IsAllowShowContact);
-                            OrderSubmitCheckMsgFragment orderSubmitCheckMsgFragment = OrderSubmitCheckMsgFragment.newInstance(bundle);
-                            start(orderSubmitCheckMsgFragment);
-                        } else {
-                            RequestParams requestParams = new RequestParams();
-                            requestParams.put("OrderNum", orderNum);
-                            requestParams.put("ProductId", productId);
-                            requestParams.put("ProductName", name);
-                            requestParams.put("ProductProperty1", ProductProperty1);
-                            requestParams.put("ProductProperty2", ProductProperty2);
-                            requestParams.put("ProductProperty3", ProductProperty3);
-                            requestParams.put("ReserveAccount", ReserveAccount);
-                            requestParams.put("ReserveQBCount", qbCount.toString());
-                            requestParams.put("ReserveUnitCount", et_release_count_str);
-                            requestParams.put("ReservePrice", et_release_price_str);
-                            requestParams.put("ReserveDiscount", et_release_discount_str);
-                            requestParams.put("ReserveTitle", reserveTitle);
-                            requestParams.put("OnlineTimeBegin", onLineStartTime);
-                            requestParams.put("OnlineTimeEnd", onLineStopTime);
-                            requestParams.put("OrderExpiryTime", orderEndTime);
-                            requestParams.put("OrderPwd", orderPsw);
-                            requestParams.put("OnceMinCount", OnceMinCount);
-                            requestParams.put("LessChargeDiscount", LessChargeDiscount);
-                            requestParams.put("OrderInterval", orderInterval);
-                            requestParams.put("IsAgentConfirm", IsAgentConfirm);
-                            requestParams.put("ReservePwd", ReservePwd);
-                            requestParams.put("OftenLoginProvince", OftenLoginProvince);
-                            requestParams.put("OftenLoginCity", OftenLoginCity);
-                            requestParams.put("IsPicConfirm", IsPicConfirm);
-                            requestParams.put("Remarks", Remarks);
-                            requestParams.put("ContactMobile", mobile);
-                            requestParams.put("ContactQQ", et_qq.getText().toString());
-                            requestParams.put("code", "");
-                            requestParams.put("RoleName", RoleName);
-                            requestParams.put("IsAllowShowContact", IsAllowShowContact);
-                            LogUtils.print("发布订单信息 ： " + requestParams.toString());
-                            ApiRequest.orderPublish(requestParams, "ReleaseOrderFragment_orderPublish", pb_loading);
-                        }
+
+            initPopWindow_9(name, new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (IsNeedMobile) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("OrderNum", orderNum);
+                        bundle.putString("ProductId", productId);
+                        bundle.putString("ProductName", name);
+                        bundle.putString("ProductProperty1", ProductProperty1);
+                        bundle.putString("ProductProperty2", ProductProperty2);
+                        bundle.putString("ProductProperty3", ProductProperty3);
+                        bundle.putString("ReserveAccount", ReserveAccount);
+                        bundle.putString("ReserveQBCount", qbCount.toString());
+                        bundle.putString("ReserveUnitCount", et_release_count_str);
+                        bundle.putString("ReservePrice", et_release_price_str);
+                        bundle.putString("ReserveDiscount", et_release_discount_str);
+                        bundle.putString("ReserveTitle", reserveTitle);
+                        bundle.putString("OnlineTimeBegin", onLineStartTime);
+                        bundle.putString("OnlineTimeEnd", onLineStopTime);
+                        bundle.putString("OrderExpiryTime", orderEndTime);
+                        bundle.putString("OrderPwd", orderPsw);
+                        bundle.putFloat("OnceMinCount", OnceMinCount);
+                        bundle.putFloat("LessChargeDiscount", LessChargeDiscount);
+                        bundle.putString("OrderInterval", orderInterval);
+                        bundle.putString("IsAgentConfirm", IsAgentConfirm);
+                        bundle.putString("ReservePwd", ReservePwd);
+                        bundle.putString("OftenLoginProvince", OftenLoginProvince);
+                        bundle.putString("OftenLoginCity", OftenLoginCity);
+                        bundle.putString("IsPicConfirm", IsPicConfirm);
+                        bundle.putString("Remarks", Remarks);
+                        bundle.putString("ContactMobile", mobile);
+                        bundle.putString("ContactQQ", et_qq.getText().toString());
+                        bundle.putString("RoleName", RoleName);
+                        bundle.putString("IsAllowShowContact",IsAllowShowContact);
+                        OrderSubmitCheckMsgFragment orderSubmitCheckMsgFragment = OrderSubmitCheckMsgFragment.newInstance(bundle);
+                        start(orderSubmitCheckMsgFragment);
+                    } else {
+                        RequestParams requestParams = new RequestParams();
+                        requestParams.put("OrderNum", orderNum);
+                        requestParams.put("ProductId", productId);
+                        requestParams.put("ProductName", name);
+                        requestParams.put("ProductProperty1", ProductProperty1);
+                        requestParams.put("ProductProperty2", ProductProperty2);
+                        requestParams.put("ProductProperty3", ProductProperty3);
+                        requestParams.put("ReserveAccount", ReserveAccount);
+                        requestParams.put("ReserveQBCount", qbCount.toString());
+                        requestParams.put("ReserveUnitCount", et_release_count_str);
+                        requestParams.put("ReservePrice", et_release_price_str);
+                        requestParams.put("ReserveDiscount", et_release_discount_str);
+                        requestParams.put("ReserveTitle", reserveTitle);
+                        requestParams.put("OnlineTimeBegin", onLineStartTime);
+                        requestParams.put("OnlineTimeEnd", onLineStopTime);
+                        requestParams.put("OrderExpiryTime", orderEndTime);
+                        requestParams.put("OrderPwd", orderPsw);
+                        requestParams.put("OnceMinCount", OnceMinCount);
+                        requestParams.put("LessChargeDiscount", LessChargeDiscount);
+                        requestParams.put("OrderInterval", orderInterval);
+                        requestParams.put("IsAgentConfirm", IsAgentConfirm);
+                        requestParams.put("ReservePwd", ReservePwd);
+                        requestParams.put("OftenLoginProvince", OftenLoginProvince);
+                        requestParams.put("OftenLoginCity", OftenLoginCity);
+                        requestParams.put("IsPicConfirm", IsPicConfirm);
+                        requestParams.put("Remarks", Remarks);
+                        requestParams.put("ContactMobile", mobile);
+                        requestParams.put("ContactQQ", et_qq.getText().toString());
+                        requestParams.put("code", "");
+                        requestParams.put("RoleName", RoleName);
+                        requestParams.put("IsAllowShowContact", IsAllowShowContact);
+                        LogUtils.print("发布订单信息 ： " + requestParams.toString());
+                        ApiRequest.orderPublish(requestParams, "ReleaseOrderFragment_orderPublish", pb_loading);
                     }
-                });
-            } else {
-                Toast.makeText(mContext, ret.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else  if(method.equals("ReleaseOrderFragment_getProductProperty1")){
+            ProductPropertyRet ret = (ProductPropertyRet)baseRet;
+            if (ret.getData() == null || ret.getData().size() <= 0) {
+                //没有区服
+                return;
             }
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("gamePlaceList",ret.getData());
+            bundle.putString("name",name);
+            bundle.putString("ProductId",productId);
+            bundle.putString("qbCount",qbConvertCount);
+            bundle.putString("unitName",unitName);
+            bundle.putString("convertCount",convertCount);
+            bundle.putInt("isRole",isRole);
+            bundle.putInt("index",0);
+            bundle.putBoolean("isSelectAgain",true);
+            Intent intent = new Intent(mContext, ContainerActivity_.class);
+            bundle.putInt(ContainerActivity.FragmentTag, ContainerActivity.GamePlaceSelectorFragmentTag);
+            intent.putExtras(bundle);
+            getActivity().startActivityForResult(intent, ContainerActivity.GamePlaceSelectorFragmentTag);
+
         }
     }
 
-    @Click({R.id.btn_confirm, R.id.top_bar, R.id.rl_remark, R.id.btn_title_back, R.id.ll_gamePlace, R.id.ll_onlineTime, R.id.rl_orderEndTime, R.id.rl_replace, R.id.rl_orderPsw, R.id.rl_order_min, R.id.rl_order_between, R.id.rl_pic})
+    @Click({R.id.btn_model,R.id.btn_confirm, R.id.top_bar, R.id.rl_remark, R.id.btn_title_back, R.id.ll_gamePlace, R.id.ll_onlineTime, R.id.rl_orderEndTime, R.id.rl_replace, R.id.rl_orderPsw, R.id.rl_order_min, R.id.rl_order_between, R.id.rl_pic})
     void onClick(View view) {
         Intent intent = new Intent(mContext, ContainerActivity_.class);
         Bundle bundle = new Bundle();
@@ -300,8 +347,32 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
 
                 break;
             case R.id.btn_title_back:
+                getActivity().onBackPressed();
+                break;
+            case R.id.btn_model:
+                String text = btn_model.getText().toString();
+                if(TextUtils.equals("保存",text)){
+                    String modelName = et_model.getText().toString();
+                    if(TextUtils.isEmpty(modelName)){
+                        Toast.makeText(mContext,"请输入模板名称",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(modelName.length() > 6){
+                        modelName = modelName.substring(0,6)+"...";
+                    }
+                    tv_model.setText(modelName);
+                    tv_model.setVisibility(View.VISIBLE);
+                    et_model.setVisibility(View.GONE);
+                    btn_model.setText("取消");
+                } else if(TextUtils.equals("取消",text)){
+                    tv_model.setVisibility(View.GONE);
+                    et_model.setVisibility(View.VISIBLE);
+                    et_model.setText("");
+                    btn_model.setText("保存");
+                }
+                break;
             case R.id.ll_gamePlace:
-                getFragmentManager().popBackStack();
+                ApiRequest.getProductProperty1(name,"ReleaseOrderFragment_getProductProperty1",pb_loading);
                 break;
             case R.id.ll_onlineTime:
                 bundle.putString("onLineStartTime", onLineStartTime);
@@ -545,6 +616,22 @@ public class ReleaseOrderFragment extends BaseFragment implements CallbackUtils.
                 } catch (Exception e) {
 
                 }
+                break;
+            case ContainerActivity.GamePlaceSelectorFragmentTag:
+                if (data == null || data.getExtras() == null) {
+                    return;
+                }
+
+                ProductProperty1 = data.getExtras().getString("ProductProperty1", "");
+                ProductProperty2 = data.getExtras().getString("ProductProperty2", "");
+                ProductProperty3 = data.getExtras().getString("ProductProperty3", "");
+                if(TextUtils.isEmpty(ProductProperty1)){
+                    ll_gamePlace.setVisibility(View.GONE);
+                } else {
+                    tv_gamePlace.setText(ProductProperty1 + " " + ProductProperty2 + " " + ProductProperty3);
+                    ll_gamePlace.setVisibility(View.VISIBLE);
+                }
+
                 break;
         }
     }

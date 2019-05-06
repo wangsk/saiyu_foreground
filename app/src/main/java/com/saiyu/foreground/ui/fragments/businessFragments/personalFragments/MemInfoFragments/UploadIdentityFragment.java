@@ -31,7 +31,9 @@ import com.saiyu.foreground.https.response.BooleanRet;
 import com.saiyu.foreground.https.response.UploadIdentityRet;
 import com.saiyu.foreground.ui.fragments.BaseFragment;
 import com.saiyu.foreground.ui.views.RxDialogChooseImage;
+import com.saiyu.foreground.utils.BitmapUtils;
 import com.saiyu.foreground.utils.CallbackUtils;
+import com.saiyu.foreground.utils.GetPathFromUri;
 import com.saiyu.foreground.utils.LogUtils;
 import com.saiyu.foreground.utils.SPUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -244,11 +246,36 @@ public class UploadIdentityFragment extends BaseFragment implements CallbackUtil
             switch (requestCode){
                 case RxPhotoTool.GET_IMAGE_FROM_PHONE://选择相册之后的处理
                     LogUtils.print("选择相册之后的处理");
-                    initUCrop(data.getData());
+//                    initUCrop(data.getData());
+                    String path = GetPathFromUri.getPath(mContext,data.getData());
+                    if(!TextUtils.isEmpty(path)){
+                        ApiRequest.uploadIdentity(new File(path),"UploadIdentityFragment_uploadIdentity",pb_loading);
+                    } else {
+                        LogUtils.print("选择相册照片异常");
+                    }
                     break;
                 case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                     LogUtils.print("选择照相机之后的处理");
-                    initUCrop(RxPhotoTool.imageUriFromCamera);
+//                    initUCrop(RxPhotoTool.imageUriFromCamera);
+                    String pathFromCamera = GetPathFromUri.getPath(mContext,RxPhotoTool.imageUriFromCamera);
+                    if(!TextUtils.isEmpty(pathFromCamera)){
+
+                        File output = new File(getActivity().getExternalCacheDir(), "/" + System.currentTimeMillis() + ".png");
+                        try {
+                            if (output.exists()) {
+                                output.delete();
+                            }
+                            output.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        BitmapUtils.compressBitmap(pathFromCamera,output.getPath(),2000);
+
+                        ApiRequest.uploadIdentity(output,"UploadIdentityFragment_uploadIdentity",pb_loading);
+                    } else {
+                        LogUtils.print("选择相册照片异常");
+                    }
                     break;
                 case UCrop.REQUEST_CROP://UCrop裁剪之后的处理
                     LogUtils.print("UCrop裁剪之后的处理");

@@ -25,7 +25,9 @@ import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.Rechar
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderFragments.RightFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderHistoryFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.RechargeOrderManagerFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.GamePlaceSelectorFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.GameSelectorFragment;
+import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.ReleaseOrderFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.SetMinRechargeFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.SetOrderEndTimeFragment;
 import com.saiyu.foreground.ui.fragments.businessFragments.BuyerFragments.ReleaseOrderFragments.SetOrderReplaceConfirmFragment;
@@ -127,6 +129,8 @@ public class ContainerActivity extends BaseActivity {
     public static final int RightFragmentTag = 45;//申请维权
     public static final int ConfirmReceiverFragmentTag = 46;//确认收货
     public static final int SystemMaintenanceFragmentTag = 47;//系统维护
+    public static final int GamePlaceSelectorFragmentTag = 48;//选择区服
+    public static final int ReleaseOrderFragmentTag = 49;//发布订单
 
     private BaseFragment getFragment(int tag){
         switch (tag){
@@ -224,6 +228,10 @@ public class ContainerActivity extends BaseActivity {
                 return ConfirmReceiverFragment.newInstance(bundle);
             case SystemMaintenanceFragmentTag:
                 return SystemMaintenanceFragment.newInstance(bundle);
+            case GamePlaceSelectorFragmentTag:
+                return GamePlaceSelectorFragment.newInstance(bundle);
+            case ReleaseOrderFragmentTag:
+                return ReleaseOrderFragment.newInstance(bundle);
                 default:
                     return null;
         }
